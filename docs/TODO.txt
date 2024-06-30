@@ -1,0 +1,36 @@
+/api/v1/aviation
+/api/v1/industry
+
+
+
+http://aviation:18080/api/v1
+http://localhost:18080/aviation/api/v1
+http://localhost:18080/api/v1/aviation
+
+aviation
+industry
+
+ApiService(path)
+ -VITE_AVIATION_API + '/' + path
+
+AviationApiService(path)
+ -VITE_AVIATION_API + '/' + path
+
+IndustryApiService(path)
+ -VITE_INDUSTRY_API + '/' + path
+
+
+1.결정된 사항
+ -dev 기본 셋팅은 local 설정 파일은 상대 경로로 셋팅
+ -dev:gateway로 설정시에 로컬을 개발환경으로 바라보는 셋팅을 구성
+
+
+
+
+0.기준 url의 마지막은 / 없이 처리
+
+1./api ---> /api/v1
+rewrite: (path) => path.replace(/^\/api/, '/api/v1'),
+
+2./api ---> ''
+rewrite: (path) => path.replace(/^\/api/, ''),

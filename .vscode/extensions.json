@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "ms-ceintl.vscode-language-pack-ko",
+        "dsznajder.es7-react-js-snippets",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "christian-kohler.npm-intellisense",
+        "jasonnutter.search-node-modules",
+        "waderyan.gitblame",
+        "donjayamanne.githistory",
+        "huizhou.githd",
+        "xyz.local-history",
+        "xabikos.javascriptsnippets",
+        "simonsiefke.svg-preview"
+    ]
+}

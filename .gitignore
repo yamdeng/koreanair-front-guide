@@ -74,7 +74,7 @@ web_modules/
 
 # dotenv environment variable files
 .env
-.env.development.local
+!docs/.env.development.local
 .env.test.local
 .env.production.local
 .env.local
@@ -129,3 +129,18 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .history
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.history/*
+
+# misc
+.DS_Store
+*.pem

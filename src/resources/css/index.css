@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+}
+
+#root {
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.publish-app.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #d9edfa;
+  margin-bottom: 5px;
+}
+
+.publish-app.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.publish-app.tab button:hover {
+  background-color: #c3deef;
+}
+
+.publish-app.tab button.active {
+  background-color: #9ad8ff;
+}
+
+.publish-app.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.publish-app-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+.publish-app-table th, td {
+  text-align: left;
+  padding: 7px;
+}
+
+.publish-app-table thead tr {
+  background-color: #edf1c5;
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.publish-app-table tbody tr {
+  border-bottom: 1px solid rgb(255, 255, 255);
+  background-color: #dcf0ff;
+}
+
+.publish-app-table .success {
+  background-color: rgb(168, 168, 168);
+}
+
+.publish-table-highlight {
+  font-weight: 700;
+  color: #000;
+  background-color: #f3ff64;
+}
+
+.publish-tooltip-description { 
+  font-weight: bold;
+  color: blue;
+  text-decoration: underline;
+}
+/* 퍼블리싱 페이지 확인용 tab css : end */
+
+
+.leftmenu {
+  height: 100%;
+  width: 210px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  padding-top: 20px;
+  border-right: 1px solid #cdcccc;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.leftmenu a {
+  padding: 10px 6px 3px 7px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  border-bottom: 1px solid #b5b0b0;
+}
+
+.source-raw-view {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  overflow-x: hidden;
+}
+
+.guide-detail-top-common {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #d3cfcf;
+  margin-bottom: 5px;
+}
+
+.guide-detail-top-title {
+  font-weight: bold;
+}
