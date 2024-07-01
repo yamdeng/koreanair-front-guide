@@ -6,6 +6,7 @@ const Config = {
   reactFileExtension: '.tsx',
   hrefBasePath: hrefBasePath,
   defaultGridHeight: 500,
+  defaultGridNoDataMessage: '데이터가 존재하지 않습니다.',
 };
 
 export default Config;

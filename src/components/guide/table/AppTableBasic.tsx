@@ -1,12 +1,27 @@
-import { getAllData } from '@/data/grid/example-data-new';
+import AppTable from '@/components/common/AppTable';
 import { testColumnInfos } from '@/data/grid/table-column';
 import withSourceView from '@/hooks/withSourceView';
-import AppTable from '@/components/common/AppTable';
+import { getAllDataPromise } from '@data/grid/example-data-promise';
+import { useEffect, useState } from 'react';
 
 function AppTableBasic() {
+  const [displayTableLoading, setDisplayTableLoading] = useState(false);
+  const [rowData, setRowData] = useState([]);
+
+  const search = async () => {
+    const data: any = await getAllDataPromise();
+    setDisplayTableLoading(false);
+    setRowData(data);
+  };
+
+  useEffect(() => {
+    setDisplayTableLoading(true);
+    search();
+  }, []);
+
   return (
     <>
-      <AppTable rowData={getAllData()} columns={testColumnInfos} />
+      <AppTable rowData={rowData} columns={testColumnInfos} displayTableLoading={displayTableLoading} />
     </>
   );
 }

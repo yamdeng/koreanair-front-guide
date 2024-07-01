@@ -10,6 +10,8 @@ import TableGuideBasicServerTypeScriptRaw from '@/components/guide/table/TableGu
 
 import AppTableBasic from '@/components/guide/table/AppTableBasic';
 import AppTableBasicRaw from '@/components/guide/table/AppTableBasic?raw';
+import AppTableBasic2 from '@/components/guide/table/AppTableBasic2';
+import AppTableBasic2Raw from '@/components/guide/table/AppTableBasic2?raw';
 
 const TablePageInfo: any = {};
 
@@ -59,6 +61,15 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableBasicRaw,
+  },
+  {
+    title: '공통테이블 컴포넌트 2',
+    Component: AppTableBasic2,
+    path: 'AppTableBasic2',
+    moduleDirectory: 'table',
+    description: '',
+    success: false,
+    fileRawString: AppTableBasic2Raw,
   },
 ];
 
