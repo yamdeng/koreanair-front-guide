@@ -7,9 +7,6 @@ import TemplateUserFormRaw from '@/components/guide/template/TemplateUserForm?ra
 
 const TemplatePageInfo: any = {};
 
-// view route
-// edit route
-
 TemplatePageInfo.list = [
   {
     title: '사용자 목록(예시)',

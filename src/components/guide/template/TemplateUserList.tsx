@@ -6,8 +6,7 @@ import ApiService from '@/services/ApiService';
 export default function TemplateUserList() {
   const gridRef = useRef();
   const [rowData, setRowData] = useState([]);
-  const defaultColumnInfos = userColumnInfos;
-  const [columnInfos] = useState(defaultColumnInfos);
+  const [columnInfos] = useState(userColumnInfos as any);
 
   const search = async () => {
     const response = await ApiService.get('users');

@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Config from '@/config/Config';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 function withSourceView(WrappedComponent) {
   return function ParentComponent(props) {
+    const [searchParams] = useSearchParams();
+    const hideSourceView = searchParams.get('hideSourceView');
+
     const sourceTheme = localStorage.getItem('sourceTheme') || 'dark';
     console.log(`sourceTheme : ${sourceTheme}`);
     const { menuInfo } = props;
@@ -36,7 +40,7 @@ function withSourceView(WrappedComponent) {
 
     return (
       <div style={{ marginRight: viewSource ? '50%' : 0 }}>
-        <div className="guide-detail-top-common">
+        <div className="guide-detail-top-common" style={{ display: hideSourceView === 'true' ? 'none' : '' }}>
           <a href={hrefString}>{menuInfo.title}</a>{' '}
           <input type="checkbox" checked={viewSource} onChange={changeViewSource} /> 소스보기{' '}
           <select
