@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ITest } from '@/types/grid';
+import { ITest, IUser } from '@/types/grid';
 import { ColDef } from '@ag-grid-community/core';
 
 export const testColumnKeyList = [
@@ -85,5 +85,5 @@ export const userColumnInfos = userColumnKeyList.map((keyName) => {
   return {
     field: keyName,
     headerName: _.capitalize(keyName),
-  };
+  } as ColDef<IUser>;
 });

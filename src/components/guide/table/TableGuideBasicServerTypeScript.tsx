@@ -1,14 +1,17 @@
 import withSourceView from '@/hooks/withSourceView';
 import { useState, useEffect, useRef } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+import { AgGridReact } from '@ag-grid-community/react';
 import { userColumnInfos } from '@/data/grid/table-column';
 import ApiService from '@/services/ApiService';
+import { IUser } from '@/types/grid';
+import { ColDef, ModuleRegistry } from '@ag-grid-community/core';
+import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-function TableGuideBasicServer() {
+function TableGuideBasicServerTypeScript() {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState([]);
-  const defaultColumnInfos = userColumnInfos as any;
-  const [columnInfos] = useState(defaultColumnInfos);
+  const [rowData, setRowData] = useState<IUser[]>([]);
+  const [columnInfos] = useState<ColDef<IUser>[]>(userColumnInfos);
 
   const search = async () => {
     const response = await ApiService.get('users');
@@ -27,4 +30,4 @@ function TableGuideBasicServer() {
   );
 }
 
-export default withSourceView(TableGuideBasicServer);
+export default withSourceView(TableGuideBasicServerTypeScript);

@@ -5,6 +5,9 @@ import TableGuideBasicTypeScriptRaw from '@/components/guide/table/TableGuideBas
 
 import TableGuideBasicServer from '@/components/guide/table/TableGuideBasicServer';
 import TableGuideBasicServerRaw from '@/components/guide/table/TableGuideBasicServer?raw';
+import TableGuideBasicServerTypeScript from '@/components/guide/table/TableGuideBasicServerTypeScript';
+import TableGuideBasicServerTypeScriptRaw from '@/components/guide/table/TableGuideBasicServerTypeScript?raw';
+
 import TableGuidePagination from '@/components/guide/table/TableGuidePagination';
 import TableGuidePaginationRaw from '@/components/guide/table/TableGuidePagination?raw';
 
@@ -42,13 +45,13 @@ TablePageInfo.list = [
     url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
-    title: 'table basic : typescript',
-    Component: TableGuideBasic,
-    path: 'TableGuideBasic',
+    title: 'table basic(server) : typescript',
+    Component: TableGuideBasicServerTypeScript,
+    path: 'TableGuideBasicServerTypeScript',
     moduleDirectory: 'table',
     description: '',
     success: false,
-    fileRawString: TableGuideBasicRaw,
+    fileRawString: TableGuideBasicServerTypeScriptRaw,
     url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
