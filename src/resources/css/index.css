@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }
@@ -42,13 +46,21 @@ body {
 
 /* Fade in tabs */
 @-webkit-keyframes fadeEffect {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeEffect {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .publish-app-table {
@@ -58,7 +70,8 @@ body {
   border: 1px solid #ddd;
 }
 
-.publish-app-table th, td {
+.publish-app-table th,
+td {
   text-align: left;
   padding: 7px;
 }
@@ -83,13 +96,12 @@ body {
   background-color: #f3ff64;
 }
 
-.publish-tooltip-description { 
+.publish-tooltip-description {
   font-weight: bold;
   color: blue;
   text-decoration: underline;
 }
 /* 퍼블리싱 페이지 확인용 tab css : end */
-
 
 .leftmenu {
   height: 100%;
@@ -134,4 +146,177 @@ body {
 
 .guide-detail-top-title {
   font-weight: bold;
+}
+
+/* form example css */
+.grid-one-container {
+  display: inline-grid;
+  border: 1px solid #9e9e9e;
+  grid-template-columns: 120px 460px;
+  gap: 5px;
+  padding: 5px;
+  font-size: 21px;
+}
+
+.grid-root-container {
+  display: inline-grid;
+  border: 1px solid #9e9e9e;
+  grid-template-columns: auto auto;
+  gap: 5px;
+  padding: 5px;
+  font-size: 21px;
+}
+
+.grid-root-container > .grid-input-container {
+  display: inline-grid;
+  grid-template-columns: 120px 370px;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.div-label {
+  text-align: right;
+  padding: 8px 5px 8px 0px !important;
+}
+
+.div-input.radio {
+  padding: 7px;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='password'] {
+  width: 100%;
+  padding: 15px;
+  display: inline-block;
+  background-color: #f1f1f1;
+  border: none;
+}
+
+select {
+  width: 120px;
+  padding: 5px;
+}
+
+.select {
+  width: 100%;
+  padding: 12px;
+}
+
+/* switch style start */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+/* list style start */
+.list-form-container {
+  width: 1000px;
+  border: 1px solid #9e9e9e;
+  margin-top: 10px;
+}
+
+.list-input-container {
+  display: inline-grid;
+  padding: 5px;
+  grid-template-columns: 115px 115px 115px 115px 260px 115px 115px;
+  gap: 5px;
+}
+
+.list-input-container .div-input .button {
+  padding: 9px 12px;
+}
+
+.error_message {
+  font-weight: bold;
+  color: red !important;
+}
+
+/* 일반 grid-container 하위에서 수동으로 분류시킴 */
+.grid-container {
+  display: grid;
+  padding: 10px;
+  gap: 5px;
+}
+
+/* 2분할 grid */
+.grid-division-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+  gap: 5px;
 }

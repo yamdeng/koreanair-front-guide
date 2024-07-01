@@ -26,7 +26,9 @@ function withSourceView(WrappedComponent) {
       localStorage.setItem('sourceTheme', value);
     };
 
-    const hrefString = Config.hrefBasePath + menuInfo.moduleDirectory + '/' + menuInfo.path + Config.reactFileExtension;
+    const componentName = menuInfo.fileName || menuInfo.path;
+
+    const hrefString = Config.hrefBasePath + menuInfo.moduleDirectory + '/' + componentName + Config.reactFileExtension;
 
     let urlDescriptionComponent = null;
     if (menuInfo.url) {
