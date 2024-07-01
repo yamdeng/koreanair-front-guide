@@ -6,7 +6,13 @@ import withSourceView from '@/hooks/withSourceView';
 function AppTableBasic3() {
   return (
     <>
-      <AppTable rowData={getAllData()} columns={testColumnInfos} enablePagination />
+      <AppTable
+        rowData={getAllData()}
+        columns={testColumnInfos}
+        enablePagination
+        displayCSVExportButton
+        gridTotalCountTemplate="보고서 {0} 건"
+      />
     </>
   );
 }

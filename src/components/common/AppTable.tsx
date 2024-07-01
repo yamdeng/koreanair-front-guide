@@ -1,6 +1,8 @@
 import Config from '@/config/Config';
+import _ from 'lodash';
 import { AgGridReact } from 'ag-grid-react';
 import { useEffect, useMemo, useRef, useCallback } from 'react';
+import CommonUtil from '@/utils/CommonUtil';
 
 const LoadingComponent = (props) => {
   const { loadingMessage } = props;
@@ -29,13 +31,15 @@ function AppTable(props) {
     columns,
     tableHeight,
     noDataMessage = Config.defaultGridNoDataMessage,
-    displayTableLoading,
+    displayTableLoading = false,
     handleRowDoubleClick,
     handleRowSelect,
     rowSelectMode = 'multiple',
-    enableCheckBox,
+    enableCheckBox = false,
     pageSize = Config.defaultGridPageSize,
     enablePagination = false,
+    displayCSVExportButton = false,
+    gridTotalCountTemplate = Config.defaultGridTotalCountTemplate,
   } = props;
 
   if (enableCheckBox) {
@@ -59,6 +63,18 @@ function AppTable(props) {
     return handleRowSelect(selectedRows);
   }, []);
 
+  const downloadCSVFile = useCallback(() => {
+    // '', '\t', '|'
+    const optionParam = {
+      columnSeparator: '|',
+      suppressQuotes: true, // true인 경우 ""이 제거됨
+      skipColumnGroupHeaders: false,
+      skipColumnHeaders: false,
+      allColumns: false, // column에 설정된 hide는 기본적으로 무시되어서 처리됨
+    };
+    gridRef.current.api.exportDataAsCsv(optionParam);
+  }, []);
+
   useEffect(() => {
     if (gridRef && gridRef.current && gridRef.current.api) {
       if (displayTableLoading) {
@@ -71,6 +87,12 @@ function AppTable(props) {
 
   return (
     <>
+      <div style={{ padding: 3 }}>
+        <span>{CommonUtil.formatString(gridTotalCountTemplate, rowData.length)}</span>
+        <button className="button" onClick={downloadCSVFile} style={{ display: displayCSVExportButton ? '' : 'none' }}>
+          download csv
+        </button>
+      </div>
       <div className="ag-theme-quartz" style={{ height: tableHeight ? tableHeight : Config.defaultGridHeight }}>
         <AgGridReact
           ref={gridRef}
