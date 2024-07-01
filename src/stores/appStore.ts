@@ -5,8 +5,9 @@ const appStore = createStore((set) => ({
   profile: null,
   displayExpandMenu: true,
   toggleLeftMenu: () => set((state) => ({ displayExpandMenu: !state.displayExpandMenu })),
-  getProfile: () => {
-    return getProfile();
+  getProfile: async () => {
+    const data = await getProfile();
+    set(() => ({ profile: data }));
   },
 }));
 
