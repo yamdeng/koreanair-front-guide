@@ -5,6 +5,7 @@ import StorePageInfo from './config/StorePageInfo';
 import TablePageInfo from './config/TablePageInfo';
 import FormPageInfo from './config/FormPageInfo';
 import RouterPageInfo from './config/RouterPageInfo';
+import TemplatePageInfo from './config/TemplatePageInfo';
 
 function GuideHome() {
   const [menuName, setMenuName] = useState('store');
@@ -59,6 +60,15 @@ function GuideHome() {
       <CommonRouteTable
         moduleDirectoryPath="router/"
         pageList={RouterPageInfo.list}
+        keyword={keyword}
+        checkedNewTab={checkedNewTab}
+      />
+    );
+  } else if (menuName === 'template') {
+    contentComponent = (
+      <CommonRouteTable
+        moduleDirectoryPath="template/"
+        pageList={TemplatePageInfo.list.filter((info) => !info.exclude)}
         keyword={keyword}
         checkedNewTab={checkedNewTab}
       />
@@ -120,6 +130,15 @@ function GuideHome() {
           }}
         >
           Router
+        </a>
+        <a
+          href={''}
+          onClick={(event) => {
+            event.preventDefault();
+            changeLeftMenu('template');
+          }}
+        >
+          Template
         </a>
       </div>
       <div style={{ padding: 10, marginBottom: 10, marginLeft: 216 }}>

@@ -21,9 +21,9 @@ function CommonRouteTable({ moduleDirectoryPath, keyword, checkedNewTab, pageLis
         </thead>
         <tbody>
           {list.map((menuInfo) => {
-            const { title, path, description, success } = menuInfo;
-            const fileName = path;
-            const hrefString = Config.hrefBasePath + moduleDirectoryPath + fileName + Config.reactFileExtension;
+            const { title, path, fileName, description, success } = menuInfo;
+            const componentName = fileName || path;
+            const hrefString = Config.hrefBasePath + moduleDirectoryPath + componentName + Config.reactFileExtension;
             const trClassName = success ? 'success' : '';
 
             let descriptionComponent = <div>{description}</div>;
@@ -60,7 +60,7 @@ function CommonRouteTable({ moduleDirectoryPath, keyword, checkedNewTab, pageLis
                   <a
                     href={hrefString}
                     dangerouslySetInnerHTML={{
-                      __html: CommonUtil.replaceHighlightMarkup(fileName, keyword),
+                      __html: CommonUtil.replaceHighlightMarkup(componentName, keyword),
                     }}
                   />
                 </td>

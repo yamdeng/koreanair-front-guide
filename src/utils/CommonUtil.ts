@@ -17,10 +17,10 @@ const replaceHighlightMarkup = function (text, highlightText) {
 const getFilterListByMenuList = (menuList, keyword) => {
   const list = menuList;
   const filtedList = list.filter((menuInfo) => {
-    const { title, path } = menuInfo;
-    const fileName = path;
+    const { title, fileName, path } = menuInfo;
+    const componentName = fileName || path;
     if (keyword) {
-      return title.indexOf(keyword) !== -1 || fileName.indexOf(keyword) !== -1;
+      return title.indexOf(keyword) !== -1 || componentName.indexOf(keyword) !== -1;
     } else {
       return true;
     }
