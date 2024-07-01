@@ -1,8 +1,10 @@
 import Config from '@/config/Config';
 import _ from 'lodash';
 import { AgGridReact } from 'ag-grid-react';
-import { useEffect, useMemo, useRef, useCallback } from 'react';
+import { useEffect, useMemo, useRef, useCallback, useState } from 'react';
 import CommonUtil from '@/utils/CommonUtil';
+import { Modal } from 'antd';
+import { produce } from 'immer';
 
 const LoadingComponent = (props) => {
   const { loadingMessage } = props;
@@ -29,7 +31,7 @@ function AppTable(props) {
   const {
     rowData,
     columns,
-    tableHeight,
+    tableHeight = Config.defaultGridHeight,
     noDataMessage = Config.defaultGridNoDataMessage,
     displayTableLoading = false,
     handleRowDoubleClick,
@@ -40,7 +42,12 @@ function AppTable(props) {
     enablePagination = false,
     displayCSVExportButton = false,
     gridTotalCountTemplate = Config.defaultGridTotalCountTemplate,
+    useColumnDynamicSetting = false,
   } = props;
+
+  // 컬럼 동적 셋팅 모달 open
+  const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
+  const [dynamicApplyColumnList, setDynamicApplyColumnList] = useState([]);
 
   if (enableCheckBox) {
     columns[0].headerCheckboxSelection = true;
@@ -75,6 +82,17 @@ function AppTable(props) {
     gridRef.current.api.exportDataAsCsv(optionParam);
   }, []);
 
+  const saveColumnInfos = useCallback(() => {
+    gridRef.current.api.setGridOption('columnDefs', dynamicApplyColumnList);
+    setIsColumnSettingModalOpen(false);
+    CommonUtil.saveColumnInfos(dynamicApplyColumnList);
+  }, [dynamicApplyColumnList]);
+
+  const cancelColumnInfos = useCallback(() => {
+    setDynamicApplyColumnList(columns);
+    setIsColumnSettingModalOpen(false);
+  }, [dynamicApplyColumnList]);
+
   useEffect(() => {
     if (gridRef && gridRef.current && gridRef.current.api) {
       if (displayTableLoading) {
@@ -85,6 +103,30 @@ function AppTable(props) {
     }
   }, [displayTableLoading]);
 
+  useEffect(() => {
+    setDynamicApplyColumnList(columns);
+  }, [columns]);
+
+  const changeColumnHide = (event, index) => {
+    const checked = event.target.checked;
+    const newDynamicApplyColumnList = produce(dynamicApplyColumnList, (draft) => {
+      if (checked) {
+        draft[index].hide = false;
+      } else {
+        draft[index].hide = true;
+      }
+    });
+    setDynamicApplyColumnList(newDynamicApplyColumnList);
+  };
+
+  const changeColumnWidth = (event, index) => {
+    const width = event.target.value;
+    const newDynamicApplyColumnList = produce(dynamicApplyColumnList, (draft) => {
+      draft[index].width = width;
+    });
+    setDynamicApplyColumnList(newDynamicApplyColumnList);
+  };
+
   return (
     <>
       <div style={{ padding: 3 }}>
@@ -92,8 +134,15 @@ function AppTable(props) {
         <button className="button" onClick={downloadCSVFile} style={{ display: displayCSVExportButton ? '' : 'none' }}>
           download csv
         </button>
+        <button
+          className="button"
+          onClick={() => setIsColumnSettingModalOpen(true)}
+          style={{ display: useColumnDynamicSetting ? '' : 'none' }}
+        >
+          동적 필드 적용
+        </button>
       </div>
-      <div className="ag-theme-quartz" style={{ height: tableHeight ? tableHeight : Config.defaultGridHeight }}>
+      <div className="ag-theme-quartz" style={{ height: tableHeight }}>
         <AgGridReact
           ref={gridRef}
           rowData={rowData}
@@ -110,6 +159,29 @@ function AppTable(props) {
           pagination={enablePagination}
         />
       </div>
+      {useColumnDynamicSetting && (
+        <Modal title="컬럼 변경" open={isColumnSettingModalOpen} onOk={saveColumnInfos} onCancel={cancelColumnInfos}>
+          {dynamicApplyColumnList.map((columnInfo, index) => {
+            const { field, width, hide } = columnInfo;
+            return (
+              <p key={field} style={{ marginBottom: 3, marginTop: 3 }}>
+                <input
+                  type="checkbox"
+                  onChange={(event) => changeColumnHide(event, index)}
+                  checked={hide ? false : true}
+                />{' '}
+                <input
+                  type="text"
+                  style={{ width: 200, padding: 7 }}
+                  value={width}
+                  onChange={(event) => changeColumnWidth(event, index)}
+                />{' '}
+                <span>{field}</span>{' '}
+              </p>
+            );
+          })}
+        </Modal>
+      )}
     </>
   );
 }

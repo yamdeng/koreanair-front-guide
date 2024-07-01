@@ -34,4 +34,47 @@ const formatString = (template, ...args) => {
   });
 };
 
-export default { convertEnterStringToBrTag, replaceHighlightMarkup, getFilterListByMenuList, formatString };
+// 로컬 스토리지에 정보 저장 : json string으로 저장
+const saveInfoToLocalStorage = (key, value) => {
+  if (value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+};
+
+// 로컬 스토리지에 정보 가져오기 : json object로 가져옴
+const getByLocalStorage = (key) => {
+  const jsonString = localStorage.getItem(key);
+  if (jsonString) {
+    return JSON.parse(jsonString);
+  } else {
+    return null;
+  }
+};
+
+const mergeColumnInfosByLocal = (columns) => {
+  const localColumnInfos = getByLocalStorage(location.pathname);
+  if (localColumnInfos && localColumnInfos.length) {
+    columns.forEach((columnInfo) => {
+      const searchLocalInfo = localColumnInfos.find((localInfo) => localInfo.field === columnInfo.field);
+      if (searchLocalInfo) {
+        Object.assign(columnInfo, searchLocalInfo);
+      }
+    });
+  }
+  return columns;
+};
+
+const saveColumnInfos = (columns) => {
+  saveInfoToLocalStorage(location.pathname, columns);
+};
+
+export default {
+  convertEnterStringToBrTag,
+  replaceHighlightMarkup,
+  getFilterListByMenuList,
+  formatString,
+  saveInfoToLocalStorage,
+  getByLocalStorage,
+  mergeColumnInfosByLocal,
+  saveColumnInfos,
+};
