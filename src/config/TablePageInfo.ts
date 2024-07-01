@@ -8,6 +8,9 @@ import TableGuideBasicServerRaw from '@/components/guide/table/TableGuideBasicSe
 import TableGuideBasicServerTypeScript from '@/components/guide/table/TableGuideBasicServerTypeScript';
 import TableGuideBasicServerTypeScriptRaw from '@/components/guide/table/TableGuideBasicServerTypeScript?raw';
 
+import AppTableBasic from '@/components/guide/table/AppTableBasic';
+import AppTableBasicRaw from '@/components/guide/table/AppTableBasic?raw';
+
 const TablePageInfo: any = {};
 
 TablePageInfo.list = [
@@ -47,6 +50,15 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: TableGuideBasicServerTypeScriptRaw,
+  },
+  {
+    title: '공통테이블 컴포넌트',
+    Component: AppTableBasic,
+    path: 'AppTableBasic',
+    moduleDirectory: 'table',
+    description: '',
+    success: false,
+    fileRawString: AppTableBasicRaw,
   },
 ];
 

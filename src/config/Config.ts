@@ -5,6 +5,7 @@ const hrefBasePath = `vscode://file/${profileFolderPath}${baseFilePath}`;
 const Config = {
   reactFileExtension: '.tsx',
   hrefBasePath: hrefBasePath,
+  defaultGridHeight: 500,
 };
 
 export default Config;
