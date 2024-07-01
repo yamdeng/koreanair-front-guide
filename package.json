@@ -8,8 +8,10 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "@ag-grid-community/client-side-row-model": "^31.3.2",
     "@ag-grid-community/core": "^31.3.2",
     "@ag-grid-community/react": "^31.3.2",
+    "@ag-grid-community/styles": "^31.3.2",
     "@faker-js/faker": "^8.4.1",
     "@hookform/resolvers": "^3.6.0",
     "@popperjs/core": "^2.11.8",

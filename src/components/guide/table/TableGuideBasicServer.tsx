@@ -1,9 +1,10 @@
+import withSourceView from '@/hooks/withSourceView';
 import { useState, useEffect, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { userColumnInfos } from '@/data/grid/table-column';
 import ApiService from '@/services/ApiService';
 
-export default function TemplateUserList() {
+function TableGuideBasicServer() {
   const gridRef = useRef();
   const [rowData, setRowData] = useState([]);
   const defaultColumnInfos = userColumnInfos;
@@ -25,3 +26,5 @@ export default function TemplateUserList() {
     </div>
   );
 }
+
+export default withSourceView(TableGuideBasicServer);

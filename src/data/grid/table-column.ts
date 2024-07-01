@@ -1,10 +1,13 @@
 import _ from 'lodash';
+import { ITest } from '@/types/grid';
+import { ColDef } from '@ag-grid-community/core';
 
-const testColumnKeyList = [
+export const testColumnKeyList = [
   'id',
   'sabun',
   'position',
   'name',
+  'nameEn',
   'deptName',
   'sex',
   'createdDate',
@@ -22,7 +25,19 @@ const testColumnKeyList = [
   'userList',
 ];
 
-const userColumnKeyList = [
+export const testSimpleColumnKeyList = ['id', 'sabun', 'position', 'name', 'nameEn', 'deptName'];
+
+export const userSimpleColumnKeyList = [
+  'id',
+  'name',
+  'nameEn',
+  'createDate',
+  'updateDate',
+  'positionTitle',
+  'positionTitleEn',
+];
+
+export const userColumnKeyList = [
   'id',
   'createUserId',
   'updateUserId',
@@ -52,7 +67,21 @@ export const testColumnInfos = testColumnKeyList.map((keyName) => {
   };
 });
 
-export const usersColumnInfos = userColumnKeyList.map((keyName) => {
+export const testSimpleColumnInfos: ColDef<ITest>[] = testSimpleColumnKeyList.map((keyName) => {
+  return {
+    field: keyName,
+    headerName: _.capitalize(keyName),
+  } as ColDef<ITest>;
+});
+
+export const usersSimpleColumnInfos = userSimpleColumnKeyList.map((keyName) => {
+  return {
+    field: keyName,
+    headerName: _.capitalize(keyName),
+  };
+});
+
+export const userColumnInfos = userColumnKeyList.map((keyName) => {
   return {
     field: keyName,
     headerName: _.capitalize(keyName),

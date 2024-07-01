@@ -1,27 +1,6 @@
 import { faker } from '@faker-js/faker';
 import _ from 'lodash';
-
-const columnKeyList = [
-  'id',
-  'sabun',
-  'position',
-  'name',
-  'deptName',
-  'sex',
-  'createdDate',
-  'updatedDate',
-  'email',
-  'age',
-  'jobArea',
-  'phone',
-  'address1',
-  'address2',
-  'startDate',
-  'endDate',
-  'addressInfo',
-  'airlineInfo',
-  'userList',
-];
+import { testColumnKeyList } from './table-column';
 
 const defaultTableRows = 25;
 const defaultTableManyRows = 150;
@@ -36,6 +15,8 @@ const getRandomValueByColumnKey = (columnKey) => {
     return faker.helpers.arrayElement(['대리', '과장', '차장']);
   } else if (columnKey === 'name') {
     return faker.person.middleName();
+  } else if (columnKey === 'nameEn') {
+    return faker.person.lastName();
   } else if (columnKey === 'deptName') {
     return faker.helpers.arrayElement(['항공안전', '산업안전', '운항팀', 'Audit', 'IT']);
   } else if (columnKey === 'sex') {
@@ -86,31 +67,15 @@ const getRandomValueByColumnKey = (columnKey) => {
 
 const getRowData = (): any => {
   const rowDataResult = {};
-  for (let columnIndex = 0; columnIndex < columnKeyList.length; columnIndex++) {
-    const columnKey = columnKeyList[columnIndex];
+  for (let columnIndex = 0; columnIndex < testColumnKeyList.length; columnIndex++) {
+    const columnKey = testColumnKeyList[columnIndex];
     rowDataResult[columnKey] = getRandomValueByColumnKey(columnKey);
   }
   return rowDataResult;
 };
 
-export const getTestData = () => {
-  const result = [];
-  for (let index = 0; index < defaultTableRows; index++) {
-    result.push(getRowData());
-  }
-  return result;
-};
-
-export const getTestManyData = () => {
-  const result = [];
-  for (let index = 0; index < defaultTableManyRows; index++) {
-    result.push(getRowData());
-  }
-  return result;
-};
-
 export const getAgGridColumnListByListIndex = (lastIndex) => {
-  const sliceColumnKeyList = columnKeyList.slice(0, lastIndex);
+  const sliceColumnKeyList = testColumnKeyList.slice(0, lastIndex);
   return sliceColumnKeyList.map((keyName) => {
     return {
       field: keyName,
@@ -128,20 +93,52 @@ export const getAgGridColumnListByManulList = (manualList) => {
   });
 };
 
-export const getPageData = (page, pageSize) => {
-  return manyData.slice((page - 1) * pageSize, page * pageSize);
-};
-
-const simeData = [];
+const simepleData = [];
 for (let index = 0; index < defaultTableRows; index++) {
   const rowData = getRowData();
   rowData.index = index + 1;
-  simeData.push(rowData);
+  simepleData.push(rowData);
 }
 
-const manyData = [];
+const allData = [];
 for (let index = 0; index < defaultTableManyRows; index++) {
   const rowData = getRowData();
   rowData.index = index + 1;
-  manyData.push(rowData);
+  allData.push(rowData);
 }
+
+export const getSimpleData = () => {
+  return simepleData;
+};
+
+export const getAllData = () => {
+  return allData;
+};
+
+// data page 반영
+export const getPageData = (page, pageSize) => {
+  return allData.slice((page - 1) * pageSize, page * pageSize);
+};
+
+// data 추가
+export const addData = (newData) => {
+  allData.push(newData);
+};
+
+// data get
+export const getDetailData = (id) => {
+  return allData.find((info) => info.id === id);
+};
+
+// data 삭제 : id 기준
+export const deleteDataById = (id) => {
+  _.remove(allData, (info) => {
+    return info.id === id;
+  });
+};
+
+// data 수정
+export const updateDataById = (id, newData) => {
+  const searchIndex = allData.findIndex((info) => info.id === id);
+  allData[searchIndex] = newData;
+};

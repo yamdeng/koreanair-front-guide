@@ -1,4 +1,4 @@
-import { getTestData } from './example-data';
+import { getAllData, getPageData } from './example-data-new';
 
 const defaultTimeout = 2000;
 
@@ -11,7 +11,8 @@ const delayLocalData = (data) => {
 };
 
 const result = {
-  getPromiseTestData: () => delayLocalData(getTestData()),
+  getAllDataPromise: () => delayLocalData(getAllData()),
+  getPageDataPromise: (page, pageSize) => delayLocalData(getPageData(page, pageSize)),
 };
 
 export default result;
