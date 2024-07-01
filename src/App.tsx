@@ -6,6 +6,8 @@ import useTableRoute from './components/guide/useTableRoute';
 import useFormRoute from './components/guide/useFormRoute';
 import useRouterRoute from './components/guide/useRouterRoute';
 import useTemplateRoute from './components/guide/useTemplateRoute';
+import { StoreProvider } from './context/StoreContext';
+// import appStore from './stores/appStore';
 
 function App() {
   const storeRoute = useStoreRoute();
@@ -15,17 +17,19 @@ function App() {
   const templateRoute = useTemplateRoute();
 
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<GuideHome />} />
-        {storeRoute}
-        {tableRoute}
-        {formRoute}
-        {routerRoute}
-        {templateRoute}
-      </Routes>
-      <ToastContainer autoClose={3000} hideProgressBar={true} />
-    </div>
+    <StoreProvider>
+      <div>
+        <Routes>
+          <Route path="/" element={<GuideHome />} />
+          {storeRoute}
+          {tableRoute}
+          {formRoute}
+          {routerRoute}
+          {templateRoute}
+        </Routes>
+        <ToastContainer autoClose={3000} hideProgressBar={true} />
+      </div>
+    </StoreProvider>
   );
 }
 
