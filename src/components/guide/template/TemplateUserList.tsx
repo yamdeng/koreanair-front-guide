@@ -1,23 +1,27 @@
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { AgGridReact } from 'ag-grid-react';
+import { usersColumnInfos } from '@/data/grid/table-column';
+import ApiService from '@/services/ApiService';
 
-function TemplateUserList() {
-  const navigate = useNavigate();
+export default function TemplateUserList() {
+  const gridRef = useRef();
+  const [rowData, setRowData] = useState([]);
+  const defaultColumnInfos = usersColumnInfos;
+  const [columnInfos] = useState(defaultColumnInfos);
 
-  const moveDetailPage = () => {
-    navigate('/template/users/3');
+  const search = async () => {
+    const response = await ApiService.get('users');
+    const data = response.data.data;
+    setRowData(data);
   };
-  const moveFormPage = () => {
-    navigate('/template/users/add/form');
-  };
+
+  useEffect(() => {
+    search();
+  }, []);
 
   return (
-    <div>
-      소스 TemplateUserList
-      <br />
-      <button onClick={moveDetailPage}>detail go</button>
-      <button onClick={moveFormPage}>form go</button>
+    <div className="ag-theme-quartz" style={{ height: 500 }}>
+      <AgGridReact ref={gridRef} rowData={rowData} columnDefs={columnInfos} />
     </div>
   );
 }
-
-export default TemplateUserList;

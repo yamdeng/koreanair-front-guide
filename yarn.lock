@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@ag-grid-community/core@^31.3.2":
+  version "31.3.2"
+  resolved "https://registry.yarnpkg.com/@ag-grid-community/core/-/core-31.3.2.tgz#0615e93821ae253b72922061b8e8862e1da20aa3"
+  integrity sha512-iab+xIPCvjzGkIBgo12IQNa9/ZGI4BmjsQz65+aipNXISbtGketkN5iO4OFQgafgf0f9JZVFOZ3EzCnMiVWLiQ==
+  dependencies:
+    tslib "^2.3.0"
+
+"@ag-grid-community/react@^31.3.2":
+  version "31.3.2"
+  resolved "https://registry.yarnpkg.com/@ag-grid-community/react/-/react-31.3.2.tgz#7f08eb81f3c5d3f3871858e939e0e7ad55d0a950"
+  integrity sha512-pGxW60itcWAKNBKOfi5oi0R9z6fEPME7V7vajz6cPafZCJ25ylTWxW4XLO2391tYNqorUbR5U3rOpaXkCtFCRQ==
+  dependencies:
+    prop-types "^15.8.1"
+
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.3.0.tgz#ed441b6fa600072520ce18b43d2c8cc8caecc7f4"
@@ -3328,7 +3342,7 @@ tsconfck@^3.0.3:
   resolved "https://registry.yarnpkg.com/tsconfck/-/tsconfck-3.1.1.tgz#c7284913262c293b43b905b8b034f524de4a3162"
   integrity sha512-00eoI6WY57SvZEVjm13stEVE90VkEdJAFGgpFLTsZbJyW/LwFQ7uQxJHWpZ2hzSWgCPKc9AnBnNP+0X7o3hAmQ==
 
-tslib@^2.6.2:
+tslib@^2.3.0, tslib@^2.6.2:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
   integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==
