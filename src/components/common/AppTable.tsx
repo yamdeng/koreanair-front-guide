@@ -28,12 +28,14 @@ function AppTable(props) {
     rowData,
     columns,
     tableHeight,
-    noDataMessage,
+    noDataMessage = Config.defaultGridNoDataMessage,
     displayTableLoading,
     handleRowDoubleClick,
     handleRowSelect,
-    rowSelectMode,
+    rowSelectMode = 'multiple',
     enableCheckBox,
+    pageSize = Config.defaultGridPageSize,
+    enablePagination = false,
   } = props;
 
   if (enableCheckBox) {
@@ -76,11 +78,14 @@ function AppTable(props) {
           columnDefs={columns}
           loadingOverlayComponent={loadingOverlayComponent}
           loadingOverlayComponentParams={loadingOverlayComponentParams}
-          overlayNoRowsTemplate={noDataMessage || Config.defaultGridNoDataMessage}
+          overlayNoRowsTemplate={noDataMessage}
           onSelectionChanged={onSelectionChanged}
           onRowDoubleClicked={handleRowDoubleClick}
-          rowSelection={rowSelectMode ? rowSelectMode : 'multiple'}
+          rowSelection={rowSelectMode}
           suppressRowClickSelection={true}
+          paginationPageSize={pageSize}
+          paginationPageSizeSelector={Config.defaultPageSizeList}
+          pagination={enablePagination}
         />
       </div>
     </>

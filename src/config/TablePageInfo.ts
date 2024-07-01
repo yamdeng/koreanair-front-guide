@@ -12,6 +12,8 @@ import AppTableBasic from '@/components/guide/table/AppTableBasic';
 import AppTableBasicRaw from '@/components/guide/table/AppTableBasic?raw';
 import AppTableBasic2 from '@/components/guide/table/AppTableBasic2';
 import AppTableBasic2Raw from '@/components/guide/table/AppTableBasic2?raw';
+import AppTableBasic3 from '@/components/guide/table/AppTableBasic3';
+import AppTableBasic3Raw from '@/components/guide/table/AppTableBasic3?raw';
 
 const TablePageInfo: any = {};
 
@@ -70,6 +72,15 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableBasic2Raw,
+  },
+  {
+    title: '공통테이블 컴포넌트 3',
+    Component: AppTableBasic3,
+    path: 'AppTableBasic3',
+    moduleDirectory: 'table',
+    description: '',
+    success: false,
+    fileRawString: AppTableBasic3Raw,
   },
 ];
 
