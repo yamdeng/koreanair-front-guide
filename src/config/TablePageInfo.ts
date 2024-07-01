@@ -8,14 +8,11 @@ import TableGuideBasicServerRaw from '@/components/guide/table/TableGuideBasicSe
 import TableGuideBasicServerTypeScript from '@/components/guide/table/TableGuideBasicServerTypeScript';
 import TableGuideBasicServerTypeScriptRaw from '@/components/guide/table/TableGuideBasicServerTypeScript?raw';
 
-import TableGuidePagination from '@/components/guide/table/TableGuidePagination';
-import TableGuidePaginationRaw from '@/components/guide/table/TableGuidePagination?raw';
-
 const TablePageInfo: any = {};
 
 TablePageInfo.list = [
   {
-    title: 'table basic',
+    title: 'ag-grid',
     Component: TableGuideBasic,
     path: 'TableGuideBasic',
     moduleDirectory: 'table',
@@ -25,43 +22,31 @@ TablePageInfo.list = [
     url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
-    title: 'table basic : typescript',
+    title: 'ag-grid : typescript',
     Component: TableGuideBasicTypeScript,
     path: 'TableGuideBasicTypeScript',
     moduleDirectory: 'table',
     description: '',
     success: false,
     fileRawString: TableGuideBasicTypeScriptRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
-    title: 'table basic(server)',
+    title: 'ag-grid(server)',
     Component: TableGuideBasicServer,
     path: 'TableGuideBasicServer',
     moduleDirectory: 'table',
     description: '',
     success: false,
     fileRawString: TableGuideBasicServerRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
-    title: 'table basic(server) : typescript',
+    title: 'ag-grid(server) : typescript',
     Component: TableGuideBasicServerTypeScript,
     path: 'TableGuideBasicServerTypeScript',
     moduleDirectory: 'table',
     description: '',
     success: false,
     fileRawString: TableGuideBasicServerTypeScriptRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
-  },
-  {
-    title: 'table pagination(client)',
-    Component: TableGuidePagination,
-    path: 'TableGuidePagination',
-    moduleDirectory: 'table',
-    description: '',
-    success: false,
-    fileRawString: TableGuidePaginationRaw,
   },
 ];
 
