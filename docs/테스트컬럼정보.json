@@ -1,0 +1,22 @@
+[
+  { "field": "id", "headerName": "Id" },
+  { "field": "sabun", "headerName": "Sabun" },
+  { "field": "position", "headerName": "Position" },
+  { "field": "name", "headerName": "Name" },
+  { "field": "nameEn", "headerName": "Nameen" },
+  { "field": "deptName", "headerName": "Deptname" },
+  { "field": "sex", "headerName": "Sex" },
+  { "field": "createdDate", "headerName": "Createddate" },
+  { "field": "updatedDate", "headerName": "Updateddate" },
+  { "field": "email", "headerName": "Email" },
+  { "field": "age", "headerName": "Age" },
+  { "field": "jobArea", "headerName": "Jobarea" },
+  { "field": "phone", "headerName": "Phone" },
+  { "field": "address1", "headerName": "Address1" },
+  { "field": "address2", "headerName": "Address2" },
+  { "field": "startDate", "headerName": "Startdate" },
+  { "field": "endDate", "headerName": "Enddate" },
+  { "field": "addressInfo", "headerName": "Addressinfo" },
+  { "field": "airlineInfo", "headerName": "Airlineinfo" },
+  { "field": "userList", "headerName": "Userlist" }
+]

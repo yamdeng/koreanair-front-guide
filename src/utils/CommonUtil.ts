@@ -53,15 +53,16 @@ const getByLocalStorage = (key) => {
 
 const mergeColumnInfosByLocal = (columns) => {
   const localColumnInfos = getByLocalStorage(location.pathname);
+  const applyColumns = _.cloneDeep(columns);
   if (localColumnInfos && localColumnInfos.length) {
-    columns.forEach((columnInfo) => {
+    applyColumns.forEach((columnInfo) => {
       const searchLocalInfo = localColumnInfos.find((localInfo) => localInfo.field === columnInfo.field);
       if (searchLocalInfo) {
         Object.assign(columnInfo, searchLocalInfo);
       }
     });
   }
-  return columns;
+  return applyColumns;
 };
 
 const saveColumnInfos = (columns) => {

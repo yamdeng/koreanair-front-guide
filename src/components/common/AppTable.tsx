@@ -9,7 +9,7 @@ import GridLinkComponent from './GridLinkComponent';
 import GridActionButtonComponent from './GridActionButtonComponent';
 
 const defaultColDef = {
-  sortable: false,
+  sortable: true,
   filter: true,
 };
 
@@ -244,6 +244,10 @@ function AppTable(props) {
           suppressRowTransform={searchRowSpanIndex !== -1 ? true : false}
           onPaginationChanged={onPaginationChanged}
           defaultColDef={defaultColDef}
+          tooltipShowDelay={100}
+          tooltipHideDelay={1000}
+          tooltipMouseTrack={true}
+          enableBrowserTooltips={false}
           {...props}
         />
       </div>

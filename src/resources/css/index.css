@@ -385,3 +385,9 @@ input:checked + .slider:before {
   display: grid;
   align-items: center;
 }
+
+.custom-tooltip {
+  padding: 5px;
+  color: var(--ag-foreground-color);
+  background-color: #5577cc;
+}
