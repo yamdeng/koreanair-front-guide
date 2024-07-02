@@ -11,6 +11,23 @@ function AppTableBasic7() {
 
   const linkColumnInfos = testColumnInfos;
   linkColumnInfos[2].enableRowSpan = true;
+
+  // link 옵션 적용 가능
+  // linkColumnInfos[2].isLink = true;
+  // linkColumnInfos[2].linkPath = '/aviation/reports';
+  // linkColumnInfos[2].detailPath = 'id';
+
+  // custom 컴포넌트 적용
+  linkColumnInfos[2].cellRenderer = (params) => {
+    return (
+      <>
+        <span onClick={() => alert('custom render')}>
+          Value is <b>{params.value}</b>
+        </span>
+      </>
+    );
+  };
+
   linkColumnInfos[3].valueGetter = positionGetter;
   const rowData = CommonUtil.applyGroupingRowSpanByPageSize(getAllData(), linkColumnInfos[2].field, 10);
   return (

@@ -25,7 +25,9 @@ const convertColumns = (columns) => {
         actionButtonListPath: colunmInfo.actionButtonListPath,
         search: colunmInfo.search,
       };
-    } else if (colunmInfo.enableRowSpan) {
+    }
+
+    if (colunmInfo.enableRowSpan) {
       // rowSpan 적용
       colunmInfo.rowSpan = (params) => {
         const rowspanCount = params.data.rowSpanGroupCount ? params.data.rowSpanGroupCount : 1;
