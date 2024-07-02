@@ -5,12 +5,17 @@ import withSourceView from '@/hooks/withSourceView';
 import CommonUtil from '@/utils/CommonUtil';
 
 function AppTableBasic6() {
+  const search = () => {
+    console.log('search call');
+  };
   return (
     <>
       <AppTable
         rowData={getAllData()}
         columns={CommonUtil.mergeColumnInfosByLocal(testColumnInfos)}
-        useColumnDynamicSetting
+        actionButtons={['detail', 'delete']}
+        search={search}
+        useActionButtons
       />
     </>
   );

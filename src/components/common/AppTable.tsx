@@ -6,6 +6,7 @@ import CommonUtil from '@/utils/CommonUtil';
 import { Modal } from 'antd';
 import { produce } from 'immer';
 import GridLinkComponent from './GridLinkComponent';
+import GridActionButtonComponent from './GridActionButtonComponent';
 
 const convertColumns = (columns) => {
   const result = columns.map((colunmInfo) => {
@@ -15,6 +16,14 @@ const convertColumns = (columns) => {
       colunmInfo.cellRendererParams = {
         linkPath: colunmInfo.linkPath,
         detailPath: colunmInfo.detailPath,
+      };
+    } else if (colunmInfo.field === 'actionsByOption') {
+      // action button cell convert
+      colunmInfo.cellRenderer = GridActionButtonComponent;
+      colunmInfo.cellRendererParams = {
+        actionButtons: colunmInfo.actionButtons,
+        actionButtonListPath: colunmInfo.actionButtonListPath,
+        search: colunmInfo.search,
       };
     }
     return colunmInfo;
@@ -59,6 +68,10 @@ function AppTable(props) {
     displayCSVExportButton = false,
     gridTotalCountTemplate = Config.defaultGridTotalCountTemplate,
     useColumnDynamicSetting = false,
+    useActionButtons = false,
+    actionButtons = ['detail', 'delete'],
+    actionButtonListPath = '',
+    search,
   } = props;
 
   // 컬럼 동적 셋팅 모달 open
@@ -69,6 +82,18 @@ function AppTable(props) {
     columns[0].headerCheckboxSelection = true;
     columns[0].checkboxSelection = true;
     columns[0].showDisabledCheckboxes = true;
+  }
+
+  const searchIndex = columns.findIndex((info) => info.field === 'actionsByOption');
+
+  if (useActionButtons && searchIndex === -1) {
+    columns.push({
+      field: 'actionsByOption',
+      headerName: 'Actions',
+      actionButtons: actionButtons,
+      actionButtonListPath: actionButtonListPath,
+      search: search,
+    });
   }
 
   // columns convert 작업 start
