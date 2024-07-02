@@ -5,13 +5,14 @@ import withSourceView from '@/hooks/withSourceView';
 import CommonUtil from '@/utils/CommonUtil';
 
 function AppTableBasic7() {
+  const linkColumnInfos = testColumnInfos;
+  linkColumnInfos[2].enableRowSpan = true;
+
+  const rowData = getAllData();
+  CommonUtil.applyGroupingRowSpanByPageSize(rowData, 'position');
   return (
     <>
-      <AppTable
-        rowData={getAllData()}
-        columns={CommonUtil.mergeColumnInfosByLocal(testColumnInfos)}
-        useColumnDynamicSetting
-      />
+      <AppTable rowData={rowData} columns={CommonUtil.mergeColumnInfosByLocal(linkColumnInfos)} />
     </>
   );
 }

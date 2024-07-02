@@ -25,6 +25,15 @@ const convertColumns = (columns) => {
         actionButtonListPath: colunmInfo.actionButtonListPath,
         search: colunmInfo.search,
       };
+    } else if (colunmInfo.enableRowSpan) {
+      // rowSpan 적용
+      colunmInfo.rowSpan = (params) => {
+        const rowspanCount = params.data.rowSpanGroupCount ? params.data.rowSpanGroupCount : 1;
+        return rowspanCount;
+      };
+      colunmInfo.cellClassRules = {
+        'cell-span': (params) => params.data.rowSpanGroupCount && params.data.rowSpanGroupCount > 1,
+      };
     }
     return colunmInfo;
   });
@@ -84,9 +93,10 @@ function AppTable(props) {
     columns[0].showDisabledCheckboxes = true;
   }
 
-  const searchIndex = columns.findIndex((info) => info.field === 'actionsByOption');
+  const searchRowSpanIndex = columns.findIndex((info) => info.enableRowSpan);
+  const searchActionButtonIndex = columns.findIndex((info) => info.field === 'actionsByOption');
 
-  if (useActionButtons && searchIndex === -1) {
+  if (useActionButtons && searchActionButtonIndex === -1) {
     columns.push({
       field: 'actionsByOption',
       headerName: 'Actions',
@@ -204,6 +214,7 @@ function AppTable(props) {
           paginationPageSize={pageSize}
           paginationPageSizeSelector={Config.defaultPageSizeList}
           pagination={enablePagination}
+          suppressRowTransform={searchRowSpanIndex !== -1 ? true : false}
         />
       </div>
       {useColumnDynamicSetting && (

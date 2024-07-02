@@ -377,3 +377,11 @@ input:checked + .slider:before {
 .button-cancel:hover {
   background-color: #bfbcbc;
 }
+
+.cell-span {
+  background-color: #ffffff;
+  border-bottom: 1px solid color(srgb 0.0941176 0.113725 0.121569 / 0.15);
+  /* text-align: center; */
+  display: grid;
+  align-items: center;
+}
