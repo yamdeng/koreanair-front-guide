@@ -83,6 +83,9 @@ const applyGroupingRowSpanByPageSize = (data, columnName, pageSize = 1000000) =>
     } else {
       if (diffValue === currentValue) {
         rowSpanGroupCount++;
+        if (index === data.length - 1) {
+          data[applyRowIndex].rowSpanGroupCount = rowSpanGroupCount;
+        }
       } else {
         data[applyRowIndex].rowSpanGroupCount = rowSpanGroupCount;
         rowSpanGroupCount = 1;
@@ -91,6 +94,7 @@ const applyGroupingRowSpanByPageSize = (data, columnName, pageSize = 1000000) =>
     }
     diffValue = currentValue;
   }
+  return _.cloneDeep(data);
 };
 
 export default {

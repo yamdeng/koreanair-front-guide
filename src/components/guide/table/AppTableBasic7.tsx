@@ -5,14 +5,23 @@ import withSourceView from '@/hooks/withSourceView';
 import CommonUtil from '@/utils/CommonUtil';
 
 function AppTableBasic7() {
+  const positionGetter = (params) => {
+    return params.data ? params.data.position : '';
+  };
+
   const linkColumnInfos = testColumnInfos;
   linkColumnInfos[2].enableRowSpan = true;
-
-  const rowData = getAllData();
-  CommonUtil.applyGroupingRowSpanByPageSize(rowData, 'position');
+  linkColumnInfos[3].valueGetter = positionGetter;
+  const rowData = CommonUtil.applyGroupingRowSpanByPageSize(getAllData(), linkColumnInfos[2].field, 10);
   return (
     <>
-      <AppTable rowData={rowData} columns={CommonUtil.mergeColumnInfosByLocal(linkColumnInfos)} />
+      <AppTable
+        rowData={rowData}
+        columns={CommonUtil.mergeColumnInfosByLocal(linkColumnInfos)}
+        enablePagination={true}
+        pageSize={10}
+        pageSizeList={[10, 20, 30]}
+      />
     </>
   );
 }

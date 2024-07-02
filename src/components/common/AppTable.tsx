@@ -73,6 +73,7 @@ function AppTable(props) {
     rowSelectMode = 'multiple',
     enableCheckBox = false,
     pageSize = Config.defaultGridPageSize,
+    pageSizeList = Config.defaultPageSizeList,
     enablePagination = false,
     displayCSVExportButton = false,
     gridTotalCountTemplate = Config.defaultGridTotalCountTemplate,
@@ -106,11 +107,8 @@ function AppTable(props) {
     });
   }
 
-  // columns convert 작업 start
-
+  // columns convert 작업
   const applyColumns = convertColumns(columns);
-
-  // columns convert 작업 end
 
   const loadingOverlayComponent = useMemo(() => {
     return LoadingComponent;
@@ -150,20 +148,6 @@ function AppTable(props) {
     setIsColumnSettingModalOpen(false);
   }, [dynamicApplyColumnList]);
 
-  useEffect(() => {
-    if (gridRef && gridRef.current && gridRef.current.api) {
-      if (displayTableLoading) {
-        gridRef.current.api.showLoadingOverlay();
-      } else {
-        gridRef.current.api.hideOverlay();
-      }
-    }
-  }, [displayTableLoading]);
-
-  useEffect(() => {
-    setDynamicApplyColumnList(columns);
-  }, [columns]);
-
   const changeColumnHide = (event, index) => {
     const checked = event.target.checked;
     const newDynamicApplyColumnList = produce(dynamicApplyColumnList, (draft) => {
@@ -183,6 +167,42 @@ function AppTable(props) {
     });
     setDynamicApplyColumnList(newDynamicApplyColumnList);
   };
+
+  const searchEnableRowSpanColumnInfo = columns.find((info) => info.enableRowSpan);
+  const enableRowSpanColumnName = searchEnableRowSpanColumnInfo ? searchEnableRowSpanColumnInfo.field : '';
+  console.log(`enableRowSpanColumnName : ${enableRowSpanColumnName}`);
+
+  const onPaginationChanged = useCallback(
+    (params) => {
+      console.log(params);
+      // pageSize가 변경되었을 경우
+      if (params.newPageSize) {
+        const newPageSize = params.api.paginationGetPageSize();
+        if (newPageSize) {
+          if (enableRowSpanColumnName) {
+            params.api.setRowData(
+              CommonUtil.applyGroupingRowSpanByPageSize(rowData, enableRowSpanColumnName, newPageSize)
+            );
+          }
+        }
+      }
+    },
+    [rowData, enableRowSpanColumnName]
+  );
+
+  useEffect(() => {
+    if (gridRef && gridRef.current && gridRef.current.api) {
+      if (displayTableLoading) {
+        gridRef.current.api.showLoadingOverlay();
+      } else {
+        gridRef.current.api.hideOverlay();
+      }
+    }
+  }, [displayTableLoading]);
+
+  useEffect(() => {
+    setDynamicApplyColumnList(columns);
+  }, [columns]);
 
   return (
     <>
@@ -212,9 +232,10 @@ function AppTable(props) {
           rowSelection={rowSelectMode}
           suppressRowClickSelection={true}
           paginationPageSize={pageSize}
-          paginationPageSizeSelector={Config.defaultPageSizeList}
+          paginationPageSizeSelector={pageSizeList}
           pagination={enablePagination}
           suppressRowTransform={searchRowSpanIndex !== -1 ? true : false}
+          onPaginationChanged={onPaginationChanged}
         />
       </div>
       {useColumnDynamicSetting && (

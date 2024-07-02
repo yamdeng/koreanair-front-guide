@@ -5,7 +5,7 @@ const hrefBasePath = `vscode://file/${profileFolderPath}${baseFilePath}`;
 const Config = {
   reactFileExtension: '.tsx',
   hrefBasePath: hrefBasePath,
-  defaultGridHeight: 500,
+  defaultGridHeight: 700,
   defaultGridNoDataMessage: '데이터가 존재하지 않습니다.',
   defaultGridPageSize: 25,
   defaultPageSizeList: [25, 50, 100],
