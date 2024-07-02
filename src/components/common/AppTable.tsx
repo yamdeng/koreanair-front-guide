@@ -5,6 +5,22 @@ import { useEffect, useMemo, useRef, useCallback, useState } from 'react';
 import CommonUtil from '@/utils/CommonUtil';
 import { Modal } from 'antd';
 import { produce } from 'immer';
+import GridLinkComponent from './GridLinkComponent';
+
+const convertColumns = (columns) => {
+  const result = columns.map((colunmInfo) => {
+    if (colunmInfo.isLink) {
+      // 링크 cell convert
+      colunmInfo.cellRenderer = GridLinkComponent;
+      colunmInfo.cellRendererParams = {
+        linkPath: colunmInfo.linkPath,
+        detailPath: colunmInfo.detailPath,
+      };
+    }
+    return colunmInfo;
+  });
+  return result;
+};
 
 const LoadingComponent = (props) => {
   const { loadingMessage } = props;
@@ -54,6 +70,12 @@ function AppTable(props) {
     columns[0].checkboxSelection = true;
     columns[0].showDisabledCheckboxes = true;
   }
+
+  // columns convert 작업 start
+
+  const applyColumns = convertColumns(columns);
+
+  // columns convert 작업 end
 
   const loadingOverlayComponent = useMemo(() => {
     return LoadingComponent;
@@ -146,7 +168,7 @@ function AppTable(props) {
         <AgGridReact
           ref={gridRef}
           rowData={rowData}
-          columnDefs={columns}
+          columnDefs={applyColumns}
           loadingOverlayComponent={loadingOverlayComponent}
           loadingOverlayComponentParams={loadingOverlayComponentParams}
           overlayNoRowsTemplate={noDataMessage}

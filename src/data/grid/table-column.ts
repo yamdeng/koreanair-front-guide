@@ -60,7 +60,7 @@ export const userColumnKeyList = [
   'status',
 ];
 
-export const testColumnInfos = testColumnKeyList.map((keyName) => {
+export const testColumnInfos: any = testColumnKeyList.map((keyName) => {
   return {
     field: keyName,
     headerName: _.capitalize(keyName),
@@ -74,14 +74,14 @@ export const testSimpleColumnInfos: ColDef<ITest>[] = testSimpleColumnKeyList.ma
   } as ColDef<ITest>;
 });
 
-export const usersSimpleColumnInfos = userSimpleColumnKeyList.map((keyName) => {
+export const usersSimpleColumnInfos: any = userSimpleColumnKeyList.map((keyName) => {
   return {
     field: keyName,
     headerName: _.capitalize(keyName),
   };
 });
 
-export const userColumnInfos = userColumnKeyList.map((keyName) => {
+export const userColumnInfos: any = userColumnKeyList.map((keyName) => {
   return {
     field: keyName,
     headerName: _.capitalize(keyName),
