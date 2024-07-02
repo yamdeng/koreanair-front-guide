@@ -8,6 +8,11 @@ import { produce } from 'immer';
 import GridLinkComponent from './GridLinkComponent';
 import GridActionButtonComponent from './GridActionButtonComponent';
 
+const defaultColDef = {
+  sortable: false,
+  filter: true,
+};
+
 const convertColumns = (columns) => {
   const result = columns.map((colunmInfo) => {
     if (colunmInfo.isLink) {
@@ -238,6 +243,8 @@ function AppTable(props) {
           pagination={enablePagination}
           suppressRowTransform={searchRowSpanIndex !== -1 ? true : false}
           onPaginationChanged={onPaginationChanged}
+          defaultColDef={defaultColDef}
+          {...props}
         />
       </div>
       {useColumnDynamicSetting && (
