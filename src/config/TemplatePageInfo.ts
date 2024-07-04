@@ -11,10 +11,22 @@ import TemplateUserView from '@/components/guide/template/TemplateUserView';
 import TemplateUserViewRaw from '@/components/guide/template/TemplateUserView?raw';
 import TemplateUserForm from '@/components/guide/template/TemplateUserForm';
 import TemplateUserFormRaw from '@/components/guide/template/TemplateUserForm?raw';
+import TemplateTestEdit from '@/components/guide/template/TemplateTestEdit';
+import TemplateTestEditRaw from '@/components/guide/template/TemplateTestEdit?raw';
 
 const TemplatePageInfo: any = {};
 
 TemplatePageInfo.list = [
+  {
+    title: '에디터(예시)',
+    Component: TemplateTestEdit,
+    fileName: 'TemplateTestEditRaw',
+    path: 'edit',
+    moduleDirectory: 'template',
+    description: '',
+    success: false,
+    fileRawString: TemplateTestEditRaw,
+  },
   {
     title: '테스트 목록(예시)',
     Component: TemplateTestList,
