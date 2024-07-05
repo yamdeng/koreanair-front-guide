@@ -10,6 +10,11 @@ const Config = {
   defaultGridPageSize: 25,
   defaultPageSizeList: [25, 50, 100],
   defaultGridTotalCountTemplate: '총 {0} 건 입니다.',
+  defaultDateDisplayFormat: 'yyyy년 MM월 dd일',
+  defaultTimeDisplayFormat: 'HH:mm',
+  defaultDateValueFormat: 'yyyy-MM-DD',
+  defaultTimeValueFormat: 'HH:mm',
+  scrollAnimationTimeout: 500,
 };
 
 export default Config;

@@ -33,6 +33,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-no-target-blank': 'off',
+    'react/display-name': 'off',
     '@typescript-eslint/prefer-regexp-exec': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
