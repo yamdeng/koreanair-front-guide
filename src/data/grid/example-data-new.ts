@@ -107,6 +107,72 @@ for (let index = 0; index < defaultTableManyRows; index++) {
   allData.push(rowData);
 }
 
+export const immerTestObject = {
+  id: 1,
+  isRowSelected: false,
+  name: 'name1',
+  address: {
+    si: '김포시',
+    dong: '오정동',
+    detail: {
+      zipCode: '111',
+      detailAddress: '김포상세1',
+    },
+  },
+  children: [
+    {
+      name: 'child1',
+      description: 'description1',
+    },
+    {
+      name: 'child2',
+      description: 'description2',
+    },
+  ],
+};
+
+export const immerTestList = [
+  {
+    id: 1,
+    isRowSelected: false,
+    name: 'name1',
+    address: {
+      si: '김포시',
+      dong: '오정동',
+      detail: {
+        zipCode: '111',
+        detailAddress: '김포상세1',
+      },
+    },
+  },
+  {
+    id: 2,
+    isRowSelected: false,
+    name: 'name2',
+    address: {
+      si: '김포시2',
+      dong: '오정동2',
+      detail: {
+        zipCode: '222',
+        detailAddress: '김포상세2',
+      },
+    },
+  },
+  {
+    id: 2,
+    isRowSelected: false,
+    name: 'name3',
+    address: {
+      si: '김포시3',
+      dong: '오정동3',
+      detail: {
+        zipCode: '333',
+        detailAddress: '김포상세3',
+      },
+    },
+  },
+];
+
 export const getSimpleData = () => {
   return simepleData;
 };

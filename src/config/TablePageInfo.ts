@@ -53,7 +53,6 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableBasicRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
     title: '로딩바',

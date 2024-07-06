@@ -335,6 +335,11 @@ input:checked + .slider:before {
   cursor: pointer;
 }
 
+.button-small {
+  padding: 7px 5px;
+  color: black;
+}
+
 .button-info {
   background-color: white;
   color: black;

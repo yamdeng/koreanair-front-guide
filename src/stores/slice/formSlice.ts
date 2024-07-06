@@ -17,9 +17,9 @@ const defaultListInitailState = {
 export const createListSlice = (set, get) => ({
   ...defaultListInitailState,
 
-  changeInput: (inputName, inputValue) => {
-    set({ formData: null });
-  },
+  // changeInput: (inputName, inputValue) => {
+  //   set({ formData: null });
+  // },
 
   search: () => {
     const { currentPage, pageSize, searchParam } = get();
@@ -35,7 +35,7 @@ export const createListSlice = (set, get) => ({
   },
 
   validate: () => {
-    const { formData } = get();
+    // const { formData } = get();
     // set({ pageSize: pageSize, currentPage: 1 });
     const success = false;
     return success;

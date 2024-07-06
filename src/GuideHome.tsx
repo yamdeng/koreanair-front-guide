@@ -6,6 +6,8 @@ import TablePageInfo from './config/TablePageInfo';
 import FormPageInfo from './config/FormPageInfo';
 import RouterPageInfo from './config/RouterPageInfo';
 import TemplatePageInfo from './config/TemplatePageInfo';
+import UtilPageInfo from './config/UtilPageInfo';
+import ModalPageInfo from './config/ModalPageInfo';
 
 function GuideHome() {
   const [menuName, setMenuName] = useState('store');
@@ -73,6 +75,24 @@ function GuideHome() {
         checkedNewTab={checkedNewTab}
       />
     );
+  } else if (menuName === 'util') {
+    contentComponent = (
+      <CommonRouteTable
+        moduleDirectoryPath="util/"
+        pageList={UtilPageInfo.list.filter((info) => !info.exclude)}
+        keyword={keyword}
+        checkedNewTab={checkedNewTab}
+      />
+    );
+  } else if (menuName === 'modal') {
+    contentComponent = (
+      <CommonRouteTable
+        moduleDirectoryPath="modal/"
+        pageList={ModalPageInfo.list.filter((info) => !info.exclude)}
+        keyword={keyword}
+        checkedNewTab={checkedNewTab}
+      />
+    );
   }
 
   const changeKeyword = (event) => {
@@ -130,6 +150,24 @@ function GuideHome() {
           }}
         >
           Router
+        </a>
+        <a
+          href={''}
+          onClick={(event) => {
+            event.preventDefault();
+            changeLeftMenu('util');
+          }}
+        >
+          Util
+        </a>
+        <a
+          href={''}
+          onClick={(event) => {
+            event.preventDefault();
+            changeLeftMenu('modal');
+          }}
+        >
+          Modal
         </a>
         <a
           href={''}

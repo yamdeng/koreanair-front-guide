@@ -6,14 +6,17 @@ import useTableRoute from './components/guide/useTableRoute';
 import useFormRoute from './components/guide/useFormRoute';
 import useRouterRoute from './components/guide/useRouterRoute';
 import useTemplateRoute from './components/guide/useTemplateRoute';
+import useUtilRoute from './components/guide/useUtilRoute';
+import useModalRoute from './components/guide/useModalRoute';
 import { StoreProvider } from './context/StoreContext';
-// import appStore from './stores/appStore';
 
 function App() {
   const storeRoute = useStoreRoute();
   const tableRoute = useTableRoute();
   const formRoute = useFormRoute();
   const routerRoute = useRouterRoute();
+  const utilRoute = useUtilRoute();
+  const modalRoute = useModalRoute();
   const templateRoute = useTemplateRoute();
 
   return (
@@ -25,6 +28,8 @@ function App() {
           {tableRoute}
           {formRoute}
           {routerRoute}
+          {utilRoute}
+          {modalRoute}
           {templateRoute}
         </Routes>
         <ToastContainer autoClose={3000} hideProgressBar={true} />
