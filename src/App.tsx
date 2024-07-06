@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import GuideHome from './GuideHome';
-import useStoreRoute from './components/guide/useStoreRoute';
+import useZustandRoute from './components/guide/useZustandRoute';
 import useTableRoute from './components/guide/useTableRoute';
 import useFormRoute from './components/guide/useFormRoute';
 import useRouterRoute from './components/guide/useRouterRoute';
@@ -11,7 +11,7 @@ import useModalRoute from './components/guide/useModalRoute';
 import { StoreProvider } from './context/StoreContext';
 
 function App() {
-  const storeRoute = useStoreRoute();
+  const zustandRoute = useZustandRoute();
   const tableRoute = useTableRoute();
   const formRoute = useFormRoute();
   const routerRoute = useRouterRoute();
@@ -24,7 +24,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<GuideHome />} />
-          {storeRoute}
+          {zustandRoute}
           {tableRoute}
           {formRoute}
           {routerRoute}

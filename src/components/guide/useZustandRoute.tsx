@@ -1,11 +1,11 @@
 import { Route } from 'react-router-dom';
-import StorePageInfo from '@/config/StorePageInfo';
+import ZustandPageInfo from '@/config/ZustandPageInfo';
 import GuideSourceLayout from './GuideSourceLayout';
 
-const useStoreRoute = () => {
+const useZustandRoute = () => {
   const routes = (
     <>
-      {StorePageInfo.list.map((menuInfo, index) => {
+      {ZustandPageInfo.list.map((menuInfo, index) => {
         const { Component, path } = menuInfo;
         return <Route key={index} path={path} element={<Component menuInfo={menuInfo} />} />;
       })}
@@ -13,10 +13,10 @@ const useStoreRoute = () => {
   );
 
   return (
-    <Route path="/store" element={<GuideSourceLayout />}>
+    <Route path="/zustand" element={<GuideSourceLayout />}>
       {routes}
     </Route>
   );
 };
 
-export default useStoreRoute;
+export default useZustandRoute;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import CommonRouteTable from './CommonRouteTable';
-import StorePageInfo from './config/StorePageInfo';
+import ZustandPageInfo from './config/ZustandPageInfo';
 import TablePageInfo from './config/TablePageInfo';
 import FormPageInfo from './config/FormPageInfo';
 import RouterPageInfo from './config/RouterPageInfo';
@@ -10,7 +10,7 @@ import UtilPageInfo from './config/UtilPageInfo';
 import ModalPageInfo from './config/ModalPageInfo';
 
 function GuideHome() {
-  const [menuName, setMenuName] = useState('store');
+  const [menuName, setMenuName] = useState('zustand');
   const [keyword, setKeyword] = useState('');
   const [checkedNewTab, setCheckedNewTab] = useState(false);
   const [searchParams] = useSearchParams();
@@ -24,17 +24,17 @@ function GuideHome() {
 
   let contentComponent = (
     <CommonRouteTable
-      moduleDirectoryPath="store/"
-      pageList={StorePageInfo.list}
+      moduleDirectoryPath="zustand/"
+      pageList={ZustandPageInfo.list}
       keyword={keyword}
       checkedNewTab={checkedNewTab}
     />
   );
-  if (menuName === 'store') {
+  if (menuName === 'zustand') {
     contentComponent = (
       <CommonRouteTable
-        moduleDirectoryPath="store/"
-        pageList={StorePageInfo.list}
+        moduleDirectoryPath="zustand/"
+        pageList={ZustandPageInfo.list}
         keyword={keyword}
         checkedNewTab={checkedNewTab}
       />
@@ -119,10 +119,10 @@ function GuideHome() {
           href={''}
           onClick={(event) => {
             event.preventDefault();
-            changeLeftMenu('store');
+            changeLeftMenu('zustand');
           }}
         >
-          Store
+          Zustand
         </a>
         <a
           href={''}
