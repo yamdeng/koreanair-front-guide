@@ -34,7 +34,7 @@ function GuideHome() {
     contentComponent = (
       <CommonRouteTable
         moduleDirectoryPath="zustand/"
-        pageList={ZustandPageInfo.list}
+        pageList={ZustandPageInfo.list.filter((info) => !info.exclude)}
         keyword={keyword}
         checkedNewTab={checkedNewTab}
       />
@@ -43,7 +43,7 @@ function GuideHome() {
     contentComponent = (
       <CommonRouteTable
         moduleDirectoryPath="table/"
-        pageList={TablePageInfo.list}
+        pageList={TablePageInfo.list.filter((info) => !info.exclude)}
         keyword={keyword}
         checkedNewTab={checkedNewTab}
       />
@@ -52,7 +52,7 @@ function GuideHome() {
     contentComponent = (
       <CommonRouteTable
         moduleDirectoryPath="form/"
-        pageList={FormPageInfo.list}
+        pageList={FormPageInfo.list.filter((info) => !info.exclude)}
         keyword={keyword}
         checkedNewTab={checkedNewTab}
       />
@@ -61,7 +61,7 @@ function GuideHome() {
     contentComponent = (
       <CommonRouteTable
         moduleDirectoryPath="router/"
-        pageList={RouterPageInfo.list}
+        pageList={RouterPageInfo.list.filter((info) => !info.exclude)}
         keyword={keyword}
         checkedNewTab={checkedNewTab}
       />
@@ -119,15 +119,6 @@ function GuideHome() {
           href={''}
           onClick={(event) => {
             event.preventDefault();
-            changeLeftMenu('zustand');
-          }}
-        >
-          Zustand
-        </a>
-        <a
-          href={''}
-          onClick={(event) => {
-            event.preventDefault();
             changeLeftMenu('table');
           }}
         >
@@ -137,10 +128,19 @@ function GuideHome() {
           href={''}
           onClick={(event) => {
             event.preventDefault();
-            changeLeftMenu('form');
+            changeLeftMenu('util');
           }}
         >
-          Form
+          Util
+        </a>
+        <a
+          href={''}
+          onClick={(event) => {
+            event.preventDefault();
+            changeLeftMenu('zustand');
+          }}
+        >
+          Zustand
         </a>
         <a
           href={''}
@@ -155,10 +155,10 @@ function GuideHome() {
           href={''}
           onClick={(event) => {
             event.preventDefault();
-            changeLeftMenu('util');
+            changeLeftMenu('form');
           }}
         >
-          Util
+          Form
         </a>
         <a
           href={''}
