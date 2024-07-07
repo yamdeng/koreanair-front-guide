@@ -14,11 +14,13 @@ import ZustandGuideStoreCommunication from '@/components/guide/zustand/ZustandGu
 import ZustandGuideStoreCommunicationRaw from '@/components/guide/zustand/ZustandGuideStoreCommunication?raw';
 import ZustandGuideImmer from '@/components/guide/zustand/ZustandGuideImmer';
 import ZustandGuideImmerRaw from '@/components/guide/zustand/ZustandGuideImmer?raw';
+import ZustandGuideImmerMiddleware from '@/components/guide/zustand/ZustandGuideImmerMiddleware';
+import ZustandGuideImmerMiddlewareRaw from '@/components/guide/zustand/ZustandGuideImmerMiddleware?raw';
 
 /*
 
   TODO
-   2.immerMiddleware : ZustandGuideImmerMiddleware
+
    3.tarnsaction : ZustandGuideTranscation
    4.tuil : ZustandGuideUtilUse
    5.slice : ZustandGuideSlice
@@ -81,6 +83,15 @@ ZustandPageInfo.list = [
     description: '',
     success: false,
     fileRawString: ZustandGuideImmerRaw,
+  },
+  {
+    title: 'immer middleware 예시',
+    Component: ZustandGuideImmerMiddleware,
+    path: 'ZustandGuideImmerMiddleware',
+    moduleDirectory: 'zustand',
+    description: '',
+    success: false,
+    fileRawString: ZustandGuideImmerMiddlewareRaw,
   },
   {
     title: '전역 store 사용 방법(context)',
