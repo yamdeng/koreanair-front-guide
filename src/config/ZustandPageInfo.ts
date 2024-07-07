@@ -16,16 +16,8 @@ import ZustandGuideImmer from '@/components/guide/zustand/ZustandGuideImmer';
 import ZustandGuideImmerRaw from '@/components/guide/zustand/ZustandGuideImmer?raw';
 import ZustandGuideImmerMiddleware from '@/components/guide/zustand/ZustandGuideImmerMiddleware';
 import ZustandGuideImmerMiddlewareRaw from '@/components/guide/zustand/ZustandGuideImmerMiddleware?raw';
-
-/*
-
-  TODO
-
-   3.tarnsaction : ZustandGuideTranscation
-   4.tuil : ZustandGuideUtilUse
-   5.slice : ZustandGuideSlice
-
-*/
+import ZustandGuideUtilUse from '@/components/guide/zustand/ZustandGuideUtilUse';
+import ZustandGuideUtilUseRaw from '@/components/guide/zustand/ZustandGuideUtilUse?raw';
 
 const ZustandPageInfo: any = {};
 
@@ -92,6 +84,15 @@ ZustandPageInfo.list = [
     description: '',
     success: false,
     fileRawString: ZustandGuideImmerMiddlewareRaw,
+  },
+  {
+    title: 'util, service 레이어에서 zustand store 사용 예시',
+    Component: ZustandGuideUtilUse,
+    path: 'ZustandGuideUtilUse',
+    moduleDirectory: 'zustand',
+    description: '',
+    success: false,
+    fileRawString: ZustandGuideUtilUseRaw,
   },
   {
     title: '전역 store 사용 방법(context)',

@@ -9,7 +9,11 @@ function ZustandGuideAppContext() {
       <p>displayExpandMenu:{displayExpandMenu + ''}</p>
       <br />
       <p>{profile ? JSON.stringify(profile) : 'no login'}</p>
-      <button onClick={toggleLeftMenu}>toggleLeftMenu</button>
+      <p>
+        <button className="button" onClick={toggleLeftMenu}>
+          toggleLeftMenu
+        </button>
+      </p>
     </div>
   );
 }
