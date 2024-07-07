@@ -1,6 +1,11 @@
 import withSourceView from '@/hooks/withSourceView';
 import { create } from 'zustand';
 
+/*
+
+  zustand 내부 속성 변경 예시(여러방법)
+
+*/
 const useTestStore = create<any>((set) => ({
   profile: {
     name: 'ays',

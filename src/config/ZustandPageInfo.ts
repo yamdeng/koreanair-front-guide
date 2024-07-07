@@ -10,11 +10,18 @@ import ZustandGuideUseShallow from '@/components/guide/zustand/ZustandGuideUseSh
 import ZustandGuideUseShallowRaw from '@/components/guide/zustand/ZustandGuideUseShallow?raw';
 import ZustandGuideNestedPropsUpdate from '@/components/guide/zustand/ZustandGuideNestedPropsUpdate';
 import ZustandGuideNestedPropsUpdateRaw from '@/components/guide/zustand/ZustandGuideNestedPropsUpdate?raw';
+import ZustandGuideStoreCommunication from '@/components/guide/zustand/ZustandGuideStoreCommunication';
+import ZustandGuideStoreCommunicationRaw from '@/components/guide/zustand/ZustandGuideStoreCommunication?raw';
+import ZustandGuideImmer from '@/components/guide/zustand/ZustandGuideImmer';
+import ZustandGuideImmerRaw from '@/components/guide/zustand/ZustandGuideImmer?raw';
 
 /*
 
   TODO
-   1.NestedPropsChange : ZustandGuideUseShallow
+   2.immerMiddleware : ZustandGuideImmerMiddleware
+   3.tarnsaction : ZustandGuideTranscation
+   4.tuil : ZustandGuideUtilUse
+   5.slice : ZustandGuideSlice
 
 */
 
@@ -56,6 +63,24 @@ ZustandPageInfo.list = [
     description: '',
     success: false,
     fileRawString: ZustandGuideNestedPropsUpdateRaw,
+  },
+  {
+    title: 'store간의 통신하는 방법',
+    Component: ZustandGuideStoreCommunication,
+    path: 'ZustandGuideStoreCommunication',
+    moduleDirectory: 'zustand',
+    description: '',
+    success: false,
+    fileRawString: ZustandGuideStoreCommunicationRaw,
+  },
+  {
+    title: 'immer 연동 기본 예시',
+    Component: ZustandGuideImmer,
+    path: 'ZustandGuideImmer',
+    moduleDirectory: 'zustand',
+    description: '',
+    success: false,
+    fileRawString: ZustandGuideImmerRaw,
   },
   {
     title: '전역 store 사용 방법(context)',
