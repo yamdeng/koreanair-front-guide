@@ -18,6 +18,10 @@ import ZustandGuideImmerMiddleware from '@/components/guide/zustand/ZustandGuide
 import ZustandGuideImmerMiddlewareRaw from '@/components/guide/zustand/ZustandGuideImmerMiddleware?raw';
 import ZustandGuideUtilUse from '@/components/guide/zustand/ZustandGuideUtilUse';
 import ZustandGuideUtilUseRaw from '@/components/guide/zustand/ZustandGuideUtilUse?raw';
+import ZustandGuideSliceCase1 from '@/components/guide/zustand/ZustandGuideSliceCase1';
+import ZustandGuideSliceCase1Raw from '@/components/guide/zustand/ZustandGuideSliceCase1?raw';
+import ZustandGuideSliceCase2 from '@/components/guide/zustand/ZustandGuideSliceCase2';
+import ZustandGuideSliceCase2Raw from '@/components/guide/zustand/ZustandGuideSliceCase2?raw';
 
 const ZustandPageInfo: any = {};
 
@@ -93,6 +97,24 @@ ZustandPageInfo.list = [
     description: '',
     success: false,
     fileRawString: ZustandGuideUtilUseRaw,
+  },
+  {
+    title: 'zustand slice 예시 1',
+    Component: ZustandGuideSliceCase1,
+    path: 'ZustandGuideSliceCase1',
+    moduleDirectory: 'zustand',
+    description: '',
+    success: false,
+    fileRawString: ZustandGuideSliceCase1Raw,
+  },
+  {
+    title: 'zustand slice 예시 2',
+    Component: ZustandGuideSliceCase2,
+    path: 'ZustandGuideSliceCase2',
+    moduleDirectory: 'zustand',
+    description: '',
+    success: false,
+    fileRawString: ZustandGuideSliceCase2Raw,
   },
   {
     title: '전역 store 사용 방법(context)',
