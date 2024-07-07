@@ -27,7 +27,7 @@ module.exports = {
     'react-refresh/only-export-components': 'off',
     'prettier/prettier': 'error',
     'sonarjs/cognitive-complexity': 'warn',
-    'sonarjs/no-duplicate-string': 'warn',
+    'sonarjs/no-duplicate-string': 'off',
     'sonarjs/no-small-switch': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'react/prop-types': 'off',

@@ -28,7 +28,7 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": false
   },
   "include": [
     "src",

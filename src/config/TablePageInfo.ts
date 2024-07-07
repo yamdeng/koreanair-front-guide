@@ -62,7 +62,6 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableLoadingBarRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
     title: 'totalCount 메시지',
@@ -72,7 +71,6 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableTotalCountMessageRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
     title: 'csv export',
@@ -82,7 +80,6 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableCSVExportRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
     title: 'row 더블 클릭',
@@ -92,7 +89,6 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableDoubleClickRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
     title: '체크박스 적용 및 선택한 정보 가져오기',
@@ -102,7 +98,6 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableCheckBoxRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
 
   {
@@ -113,7 +108,6 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTablePaginationRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
 
   {
@@ -124,7 +118,6 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableCustomColumnRaw,
-    url: 'https://www.ag-grid.com/react-data-grid/getting-started/',
   },
   {
     title: '링크 컬럼 반영 방법',
