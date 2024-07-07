@@ -1,3 +1,4 @@
+import withSourceView from '@/hooks/withSourceView';
 import { memo } from 'react';
 import { useStore } from 'zustand';
 import useGuideTestStore2 from '@/stores/guide/useGuideTestStore2';
@@ -30,7 +31,7 @@ const Profile = memo(function Profile() {
   );
 });
 
-export default function ZustandGuideCreateStoreFunction() {
+function ZustandGuideCreateStoreFunction() {
   console.log('ZustandGuideCreateStoreFunction render');
 
   // 전체 state select : 권한하지 않을 것 같지만 가독성이 좋으므로 가능하면 해당 방법을 사용한다
@@ -43,12 +44,36 @@ export default function ZustandGuideCreateStoreFunction() {
   const clearStore = useStore(useGuideTestStore2, (state) => state.clearStore);
   const clearStore2 = useStore(useGuideTestStore2, (state) => state.clearStore2);
 
+  // 변수에 할당하는 다른 방법 1
+  // const { name, age, changeName, clearStore, clearStore2 } = useStore(useGuideTestStore2, (state) => ({
+  //   name: state.name,
+  //   age: state.age,
+  //   changeName: state.changeName,
+  //   clearStore: state.clearStore,
+  //   clearStore2: state.clearStore2,
+  // }));
+
+  // 변수에 할당하는 다른 방법 2
+  // const [name, age, changeName, clearStore, clearStore2] = useStore(useGuideTestStore2, (state) => [
+  //   state.name,
+  //   state.age,
+  //   state.changeName,
+  //   state.clearStore,
+  //   state.clearStore2,
+  // ]);
+
   // 함수와 변수를 분류해서 사용할 수 있으므로 대충써도 자동으로 분류됨
   const changeProfile = useStore(useGuideTestStore2, (state) => state.changeProfile);
 
+  const setStateExample = () => {
+    useGuideTestStore2.setState({
+      name: 'yamdeng',
+    });
+  };
+
   return (
     <div>
-      <p>age : {age}</p>
+      <p>age1 : {age}</p>
       <p>name : {name}</p>
       <Name name={name} />
       <Profile />
@@ -66,7 +91,12 @@ export default function ZustandGuideCreateStoreFunction() {
         <button className="button" onClick={() => clearStore2()}>
           clearStore2
         </button>
+        <button className="button" onClick={() => setStateExample()}>
+          setStateExample
+        </button>
       </div>
     </div>
   );
 }
+
+export default withSourceView(ZustandGuideCreateStoreFunction);

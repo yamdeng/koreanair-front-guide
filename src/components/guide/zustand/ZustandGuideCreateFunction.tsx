@@ -1,3 +1,4 @@
+import withSourceView from '@/hooks/withSourceView';
 import { memo } from 'react';
 import useGuideTestStore from '@/stores/guide/useGuideTestStore';
 
@@ -29,7 +30,7 @@ const Profile = memo(function Profile() {
   );
 });
 
-export default function ZustandGuideCreateFunction() {
+function ZustandGuideCreateFunction() {
   console.log('ZustandGuideCreateFunction render');
   // 전체 state select : 권한하지 않을 것 같지만 가독성이 좋으므로 가능하면 해당 방법을 사용한다
   // const { name, age, changeName, clearStore } = useGuideTestStore();
@@ -40,12 +41,34 @@ export default function ZustandGuideCreateFunction() {
   const changeName = useGuideTestStore((state) => state.changeName);
   const clearStore = useGuideTestStore((state) => state.clearStore);
 
+  // 변수에 할당하는 다른 방법 1
+  // const { name, age, changeName, clearStore } = useGuideTestStore((state) => ({
+  //   name: state.name,
+  //   age: state.age,
+  //   changeName: state.changeName,
+  //   clearStore: state.clearStore,
+  // }));
+
+  // 변수에 할당하는 다른 방법 2
+  // const [name, age, changeName, clearStore] = useGuideTestStore((state) => [
+  //   state.name,
+  //   state.age,
+  //   state.changeName,
+  //   state.clearStore,
+  // ]);
+
   // 함수와 변수를 분류해서 사용할 수 있으므로 대충써도 자동으로 분류됨
   const changeProfile = useGuideTestStore((state) => state.changeProfile);
 
+  const setStateExample = () => {
+    useGuideTestStore.setState({
+      name: 'yamdeng',
+    });
+  };
+
   return (
     <div>
-      <p>age : {age}</p>
+      <p>age: {age}</p>
       <p>name : {name}</p>
       <Name name={name} />
       <Profile />
@@ -60,7 +83,12 @@ export default function ZustandGuideCreateFunction() {
         <button className="button" onClick={() => clearStore()}>
           clearStore
         </button>
+        <button className="button" onClick={() => setStateExample()}>
+          setStateExample
+        </button>
       </div>
     </div>
   );
 }
+
+export default withSourceView(ZustandGuideCreateFunction);
