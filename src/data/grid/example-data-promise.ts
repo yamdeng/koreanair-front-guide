@@ -1,4 +1,4 @@
-import { getAllData, getPageData } from './example-data-new';
+import { getAllData, getPageData, addData, updateDataById, getDetailData, deleteDataById } from './example-data-new';
 import Constant from '@/config/Constant';
 
 const defaultDealyTimeout = 2000;
@@ -22,3 +22,7 @@ const delayLocalData = (data) => {
 export const getProfile = () => delayLocalData(exampleProfile);
 export const getAllDataPromise = () => delayLocalData(getAllData());
 export const getPageDataPromise = (page, pageSize) => delayLocalData(getPageData(page, pageSize));
+export const addDataPromise = (newData) => delayLocalData(addData(newData));
+export const updateDataByIdPromise = (id, newData) => delayLocalData(updateDataById(id, newData));
+export const getDetailDataPromise = (id) => delayLocalData(getDetailData(id));
+export const deleteDataByIdPromise = (id) => delayLocalData(deleteDataById(id));

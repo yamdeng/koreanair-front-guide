@@ -33,12 +33,14 @@ const getRandomValueByColumnKey = (columnKey) => {
     return faker.location.city();
   } else if (columnKey === 'address2') {
     return faker.location.city();
-  } else if (columnKey === 'startDate' || columnKey === 'createdDate') {
+  } else if (columnKey === 'createdDate' || columnKey === 'updatedDate') {
+    return new Date();
+  } else if (columnKey === 'startDate') {
     return faker.date.between({
       from: '2024-01-01T00:00:00.000Z',
       to: '2024-04-01T00:00:00.000Z',
     });
-  } else if (columnKey === 'endDate' || columnKey === 'updatedDate') {
+  } else if (columnKey === 'endDate') {
     return faker.date.between({
       from: '2024-04-02T00:00:00.000Z',
       to: '2025-01-17T00:00:00.000Z',
@@ -178,7 +180,7 @@ export const getSimpleData = () => {
 };
 
 export const getAllData = () => {
-  return allData;
+  return _.orderBy(allData, ['updatedDate'], ['desc']);
 };
 
 // data page 반영
@@ -188,6 +190,7 @@ export const getPageData = (page, pageSize) => {
 
 // data 추가
 export const addData = (newData) => {
+  newData.createdDate = new Date();
   allData.push(newData);
 };
 
@@ -206,5 +209,6 @@ export const deleteDataById = (id) => {
 // data 수정
 export const updateDataById = (id, newData) => {
   const searchIndex = allData.findIndex((info) => info.id === id);
+  newData.updatedDate = new Date();
   allData[searchIndex] = newData;
 };

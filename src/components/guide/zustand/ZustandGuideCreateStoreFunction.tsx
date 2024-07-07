@@ -44,7 +44,7 @@ function ZustandGuideCreateStoreFunction() {
   const clearStore = useStore(useGuideTestStore2, (state) => state.clearStore);
   const clearStore2 = useStore(useGuideTestStore2, (state) => state.clearStore2);
 
-  // 변수에 할당하는 다른 방법 1
+  // 변수에 할당하는 다른 방법 1 : 전체 selector와 동일함
   // const { name, age, changeName, clearStore, clearStore2 } = useStore(useGuideTestStore2, (state) => ({
   //   name: state.name,
   //   age: state.age,
@@ -53,7 +53,7 @@ function ZustandGuideCreateStoreFunction() {
   //   clearStore2: state.clearStore2,
   // }));
 
-  // 변수에 할당하는 다른 방법 2
+  // 변수에 할당하는 다른 방법 2 : 전체 selector와 동일함
   // const [name, age, changeName, clearStore, clearStore2] = useStore(useGuideTestStore2, (state) => [
   //   state.name,
   //   state.age,
