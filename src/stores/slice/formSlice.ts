@@ -7,7 +7,26 @@ import _ from 'lodash';
 
 */
 
-const defaultFormExcludeKeys = ['requiredFields', 'excludeApiKeys', 'errors', 'isDirty', 'isValid', 'yupFormSchema'];
+/*
+
+  TODO
+   -autoSaveApiPath를 전달받음
+   -formType : 'add', 'update'
+   -getDetail(id) : formType을 'update'로 수정함
+   -save도 자동으로
+
+*/
+
+export const defaultFormExcludeKeys = [
+  'autoSaveApiPath',
+  'requiredFields',
+  'excludeApiKeys',
+  'errors',
+  'isDirty',
+  'isValid',
+  'yupFormSchema',
+];
+
 export const formBaseState = {
   errors: {},
   isDirty: false,
