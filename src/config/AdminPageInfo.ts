@@ -1,13 +1,16 @@
 import PBoardForm from '@/components/admin/publish/PBoardForm';
+import PBoardDetail from '@/components/admin/publish/PBoardDetail';
 
 const AdminPageInfo: any = {};
 
 AdminPageInfo.list = [
   {
-    title: '테스트 목록(예시)',
     Component: PBoardForm,
-    fileName: 'PBoardForm',
-    path: '/template/tests',
+    path: '/publish/PBoardForm',
+  },
+  {
+    Component: PBoardDetail,
+    path: '/publish/PBoardDetail',
   },
 ];
 
