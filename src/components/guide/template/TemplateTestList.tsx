@@ -18,10 +18,16 @@ const useTemplateTesListStore = create<any>((set, get) => ({
   ...initListData,
 
   search: async () => {
-    const data: any = await LocalApiService.list();
+    const data: any = await LocalApiService.list({ disableLoadingBar: true });
     set({
       list: data,
     });
+  },
+
+  deleteById: async (detailId) => {
+    await LocalApiService.delete(detailId);
+    alert('삭제완료');
+    get().search();
   },
 
   clear: () => {
@@ -32,10 +38,26 @@ const useTemplateTesListStore = create<any>((set, get) => ({
 function TemplateTestList() {
   const navigate = useNavigate();
   const [displayTableLoading, setDisplayTableLoading] = useState(false);
-  const { search, list } = useTemplateTesListStore();
+  const { search, list, deleteById } = useTemplateTesListStore();
   const columns = testColumnInfos;
   columns[0].isLink = true;
   columns[0].linkPath = '/template/tests';
+
+  // custom 컴포넌트 적용
+  columns[6].cellRenderer = (params) => {
+    const { data } = params;
+
+    const confirmMessage = () => {
+      if (confirm('삭제하시겠습니까?')) {
+        deleteById(data.id);
+      }
+    };
+    return (
+      <>
+        <span onClick={confirmMessage}>삭제</span>
+      </>
+    );
+  };
 
   useEffect(() => {
     setDisplayTableLoading(true);

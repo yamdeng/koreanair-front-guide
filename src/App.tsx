@@ -10,6 +10,7 @@ import useUtilRoute from './components/guide/useUtilRoute';
 import useModalRoute from './components/guide/useModalRoute';
 import useCommonComponentRoute from './components/guide/useCommonComponentRoute';
 import { StoreProvider } from './context/StoreContext';
+import LoadingBarContainer from './components/layout/LoadingBarContainer';
 
 function App() {
   const zustandRoute = useZustandRoute();
@@ -22,20 +23,23 @@ function App() {
   const templateRoute = useTemplateRoute();
 
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<GuideHome />} />
-        {zustandRoute}
-        {tableRoute}
-        {formRoute}
-        {routerRoute}
-        {utilRoute}
-        {modalRoute}
-        {templateRoute}
-        {commonComponentRoute}
-      </Routes>
-      <ToastContainer autoClose={3000} hideProgressBar={true} />
-    </div>
+    <StoreProvider>
+      <div>
+        <Routes>
+          <Route path="/" element={<GuideHome />} />
+          {zustandRoute}
+          {tableRoute}
+          {formRoute}
+          {routerRoute}
+          {utilRoute}
+          {modalRoute}
+          {templateRoute}
+          {commonComponentRoute}
+        </Routes>
+        <ToastContainer autoClose={3000} hideProgressBar={true} />
+        <LoadingBarContainer />
+      </div>
+    </StoreProvider>
   );
 }
 

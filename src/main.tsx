@@ -14,7 +14,10 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 // import 'tui-color-picker/dist/tui-color-picker.css';
 
 // css import
-import './resources/css/import.css';
+// import './resources/css/import.css';
+
+// scss import
+import './resources/css/import.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Router history={history as any}>

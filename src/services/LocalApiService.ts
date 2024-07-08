@@ -12,8 +12,8 @@ import {
 
 */
 class LocalApiService {
-  list() {
-    return getAllDataPromise();
+  list(option: any = {}) {
+    return getAllDataPromise(option);
   }
 
   getDetail(id) {

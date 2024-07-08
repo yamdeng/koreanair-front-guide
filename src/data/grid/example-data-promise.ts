@@ -1,5 +1,6 @@
 import { getAllData, getPageData, addData, updateDataById, getDetailData, deleteDataById } from './example-data-new';
 import Constant from '@/config/Constant';
+import appStore from '@/stores/appStore';
 
 const defaultDealyTimeout = 2000;
 
@@ -11,16 +12,21 @@ const exampleProfile = {
   authList: [],
 };
 
-const delayLocalData = (data) => {
+const delayLocalData = (data, option: any = {}) => {
+  const { setDisplayLoadingBar } = appStore.getState();
+  if (!option.disableLoadingBar) {
+    setDisplayLoadingBar(true);
+  }
   return new Promise((resolve) =>
     setTimeout(() => {
       resolve(data);
+      setDisplayLoadingBar(false);
     }, defaultDealyTimeout)
   );
 };
 
 export const getProfile = () => delayLocalData(exampleProfile);
-export const getAllDataPromise = () => delayLocalData(getAllData());
+export const getAllDataPromise = (option) => delayLocalData(getAllData(), option);
 export const getPageDataPromise = (page, pageSize) => delayLocalData(getPageData(page, pageSize));
 export const addDataPromise = (newData) => delayLocalData(addData(newData));
 export const updateDataByIdPromise = (id, newData) => delayLocalData(updateDataById(id, newData));
