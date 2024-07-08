@@ -1,5 +1,6 @@
 import withSourceView from '@/hooks/withSourceView';
 import { useNavigate, Link } from 'react-router-dom';
+import { movePage } from '@/utils/TestUtil';
 
 /*
 
@@ -11,6 +12,8 @@ import { useNavigate, Link } from 'react-router-dom';
     }}
 
   2.<Link /> tag 사용
+
+  3.리액트 파일이 아닌 장소에서 네비게이션 사용
 
 */
 function RouterGuideBasic() {
@@ -33,6 +36,16 @@ function RouterGuideBasic() {
         </p>
         <p>
           <a href="/router/test/reports"> 보고서 목록 a tag</a>
+        </p>
+        <p>
+          <button
+            className="button"
+            onClick={() => {
+              movePage('/router/test/reports');
+            }}
+          >
+            history를 이용한 movePage
+          </button>
         </p>
       </div>
     </>

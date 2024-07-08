@@ -106,6 +106,7 @@ const allData = [];
 for (let index = 0; index < defaultTableManyRows; index++) {
   const rowData = getRowData();
   rowData.index = index + 1;
+  rowData.id = index + 1 + '';
   allData.push(rowData);
 }
 
