@@ -13,35 +13,35 @@ const defaultColDef = {
 };
 
 const convertColumns = (columns) => {
-  const result = columns.map((colunmInfo) => {
-    if (colunmInfo.isLink) {
+  const result = columns.map((columnInfo) => {
+    if (columnInfo.isLink) {
       // 링크 cell convert
-      colunmInfo.cellRenderer = GridLinkComponent;
-      colunmInfo.cellRendererParams = {
-        linkPath: colunmInfo.linkPath,
-        detailPath: colunmInfo.detailPath,
+      columnInfo.cellRenderer = GridLinkComponent;
+      columnInfo.cellRendererParams = {
+        linkPath: columnInfo.linkPath,
+        detailPath: columnInfo.detailPath,
       };
-    } else if (colunmInfo.field === 'actionsByOption') {
+    } else if (columnInfo.field === 'actionsByOption') {
       // action button cell convert
-      colunmInfo.cellRenderer = GridActionButtonComponent;
-      colunmInfo.cellRendererParams = {
-        actionButtons: colunmInfo.actionButtons,
-        actionButtonListPath: colunmInfo.actionButtonListPath,
-        search: colunmInfo.search,
+      columnInfo.cellRenderer = GridActionButtonComponent;
+      columnInfo.cellRendererParams = {
+        actionButtons: columnInfo.actionButtons,
+        actionButtonListPath: columnInfo.actionButtonListPath,
+        search: columnInfo.search,
       };
     }
 
-    if (colunmInfo.enableRowSpan) {
+    if (columnInfo.enableRowSpan) {
       // rowSpan 적용
-      colunmInfo.rowSpan = (params) => {
+      columnInfo.rowSpan = (params) => {
         const rowspanCount = params.data.rowSpanGroupCount ? params.data.rowSpanGroupCount : 1;
         return rowspanCount;
       };
-      colunmInfo.cellClassRules = {
+      columnInfo.cellClassRules = {
         'cell-span': (params) => params.data.rowSpanGroupCount && params.data.rowSpanGroupCount > 1,
       };
     }
-    return colunmInfo;
+    return columnInfo;
   });
   return result;
 };

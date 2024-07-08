@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { unstable_HistoryRouter as Router } from 'react-router-dom';
 import App from './App.tsx';
+import history from './utils/history.ts';
 
 // third lib css import
 import 'ag-grid-community/styles/ag-grid.css'; // Mandatory CSS required by the grid
@@ -16,7 +17,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import './resources/css/import.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
+  <Router history={history as any}>
     <App />
-  </BrowserRouter>
+  </Router>
 );

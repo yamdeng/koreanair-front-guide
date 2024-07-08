@@ -1,23 +1,44 @@
 import withSourceView from '@/hooks/withSourceView';
-import { useState, useEffect, useRef } from 'react';
+import AppTable from '@/components/common/AppTable';
+import { testColumnInfos } from '@/data/grid/table-column';
+import LocalApiService from '@/services/LocalApiService';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AgGridReact } from 'ag-grid-react';
-import { userColumnInfos } from '@/data/grid/table-column';
-import ApiService from '@/services/ApiService';
+
+import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
+import { create } from 'zustand';
+
+const initListData = {
+  ...listBaseState,
+};
+
+const useTemplateTesListStore = create<any>((set, get) => ({
+  ...createListSlice(set, get),
+
+  ...initListData,
+
+  search: async () => {
+    const data: any = await LocalApiService.list();
+    set({
+      list: data,
+    });
+  },
+
+  clear: () => {
+    set(initListData);
+  },
+}));
 
 function TemplateTestList() {
-  const gridRef = useRef();
   const navigate = useNavigate();
-  const [rowData, setRowData] = useState([]);
-  const [columnInfos] = useState(userColumnInfos as any);
-
-  const search = async () => {
-    const response = await ApiService.get('users');
-    const data = response.data.data;
-    setRowData(data);
-  };
+  const [displayTableLoading, setDisplayTableLoading] = useState(false);
+  const { search, list } = useTemplateTesListStore();
+  const columns = testColumnInfos;
+  columns[0].isLink = true;
+  columns[0].linkPath = '/template/tests';
 
   useEffect(() => {
+    setDisplayTableLoading(true);
     search();
   }, []);
 
@@ -25,6 +46,7 @@ function TemplateTestList() {
     <>
       <div>
         <button
+          className="button"
           onClick={() => {
             navigate('/template/tests/add/form');
           }}
@@ -33,7 +55,7 @@ function TemplateTestList() {
         </button>
       </div>
       <div className="ag-theme-quartz" style={{ height: 500 }}>
-        <AgGridReact ref={gridRef} rowData={rowData} columnDefs={columnInfos} />
+        <AppTable rowData={list} columns={columns} displayTableLoading={displayTableLoading} />
       </div>
     </>
   );

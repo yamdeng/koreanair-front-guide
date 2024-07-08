@@ -11,9 +11,6 @@ import _ from 'lodash';
 
   TODO
    -autoSaveApiPath를 전달받음
-   -formType : 'add', 'update'
-   -getDetail(id) : formType을 'update'로 수정함
-   -save도 자동으로
 
 */
 
@@ -33,6 +30,8 @@ export const formBaseState = {
   isValid: false,
   requiredFields: [],
   excludeApiKeys: [],
+  formDetailId: null,
+  formType: 'add',
 };
 
 export const createFormSlice = (set, get) => ({

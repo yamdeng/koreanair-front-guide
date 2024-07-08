@@ -22,22 +22,20 @@ function App() {
   const templateRoute = useTemplateRoute();
 
   return (
-    <StoreProvider>
-      <div>
-        <Routes>
-          <Route path="/" element={<GuideHome />} />
-          {zustandRoute}
-          {tableRoute}
-          {formRoute}
-          {routerRoute}
-          {utilRoute}
-          {modalRoute}
-          {templateRoute}
-          {commonComponentRoute}
-        </Routes>
-        <ToastContainer autoClose={3000} hideProgressBar={true} />
-      </div>
-    </StoreProvider>
+    <div>
+      <Routes>
+        <Route path="/" element={<GuideHome />} />
+        {zustandRoute}
+        {tableRoute}
+        {formRoute}
+        {routerRoute}
+        {utilRoute}
+        {modalRoute}
+        {templateRoute}
+        {commonComponentRoute}
+      </Routes>
+      <ToastContainer autoClose={3000} hideProgressBar={true} />
+    </div>
   );
 }
 

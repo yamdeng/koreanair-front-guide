@@ -196,7 +196,8 @@ export const addData = (newData) => {
 
 // data get
 export const getDetailData = (id) => {
-  return allData.find((info) => info.id === id);
+  const result = allData.find((info) => info.id === id);
+  return result;
 };
 
 // data 삭제 : id 기준
