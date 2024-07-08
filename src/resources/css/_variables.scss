@@ -1,0 +1,61 @@
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop-min: 1000px;
+$breakpoint-top-member-min: 1280px;
+$breakpoint-home-noti: 1450px;
+$breakpoint-desktop: 1650px;
+$breakpoint-main-desktop: 1240px;
+
+$col-default-text: #222;
+$col-default-bg: #fff;
+$col-blue: #0847a6;
+$col-red: #ed2129;
+$col-yellow: #f3f70c;
+$col-green: #2dbab6;
+$col-dark-green: #12837f;
+$col-white: #fff;
+$col-black: #000;
+$col-orange: #ffab65;
+$col-dark-orange: #b1703b;
+
+$col-gray: #f5f5f5;
+$col-gray100: #eee;
+$col-gray200: #e0e0e0;
+$col-gray300: #ccc;
+$col-gray350: #aaa;
+$col-gray400: #444;
+$col-gray500: #555;
+$col-gray600: #666;
+
+$col-disabled: #f1f1f1;
+$col-menu-bg: #2cbbb6;
+$col-content-bg: #fafbfb;
+$search-form: #f7f7f7;
+
+$dark-col-default-text: #fff;
+$dark-col-default-bg: #222;
+$dark-col-white: #222;
+
+$col-main-top-txt: #c2f3fe;
+$col-main-txt: #08261b;
+$col-main-txt-over: #00a1ab;
+
+.col_red {
+  color: #{$col-red};
+}
+
+.col_orange {
+  color: #{$col-orange};
+}
+
+.col_orange_bold {
+  color: #{$col-dark-orange};
+}
+
+.col_green {
+  color: #{$col-green};
+}
+
+.col_yellow {
+  color: #{$col-yellow};
+}
