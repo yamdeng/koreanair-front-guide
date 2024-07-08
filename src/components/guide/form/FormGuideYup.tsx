@@ -1,16 +1,16 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 import withSourceView from '@/hooks/withSourceView';
 import { useEffect } from 'react';
-import useReportTestFormStore1 from '@/stores/guide/useReportTestFormStore1';
+import useReportTestFormStore2 from '@/stores/guide/useReportTestFormStore2';
 
 /*
 
-  form 공통 zustand slice 사용 : useReportTestFormStore1.ts 파일 참고
+  form yup 라이브러리 연동 : useReportTestFormStore2.ts 파일 참고
 
 */
-function FormGuideBasic() {
+function FormGuideYup() {
   const { id, name, age, email, password, password2, job, description, errors, changeInput, save, clear } =
-    useReportTestFormStore1();
+    useReportTestFormStore2();
 
   useEffect(() => {
     return clear();
@@ -145,4 +145,4 @@ function FormGuideBasic() {
   );
 }
 
-export default withSourceView(FormGuideBasic);
+export default withSourceView(FormGuideYup);
