@@ -396,3 +396,7 @@ input:checked + .slider:before {
   color: var(--ag-foreground-color);
   background-color: #5577cc;
 }
+
+.input-not-valid {
+  border: 3px solid red !important;
+}

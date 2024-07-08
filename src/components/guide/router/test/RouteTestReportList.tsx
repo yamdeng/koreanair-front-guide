@@ -9,6 +9,8 @@ function RouteTestReportList() {
   return (
     <>
       <div>RouteTestReportList</div>
+      <p>pageSize : {pageSize}</p>
+      <p>currentPage : {currentPage}</p>
     </>
   );
 }
