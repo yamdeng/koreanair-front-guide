@@ -8,6 +8,7 @@ import useRouterRoute from './components/guide/useRouterRoute';
 import useTemplateRoute from './components/guide/useTemplateRoute';
 import useUtilRoute from './components/guide/useUtilRoute';
 import useModalRoute from './components/guide/useModalRoute';
+import useCommonComponentRoute from './components/guide/useCommonComponentRoute';
 import { StoreProvider } from './context/StoreContext';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   const routerRoute = useRouterRoute();
   const utilRoute = useUtilRoute();
   const modalRoute = useModalRoute();
+  const commonComponentRoute = useCommonComponentRoute();
   const templateRoute = useTemplateRoute();
 
   return (
@@ -31,6 +33,7 @@ function App() {
           {utilRoute}
           {modalRoute}
           {templateRoute}
+          {commonComponentRoute}
         </Routes>
         <ToastContainer autoClose={3000} hideProgressBar={true} />
       </div>

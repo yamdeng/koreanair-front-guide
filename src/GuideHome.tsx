@@ -8,6 +8,7 @@ import RouterPageInfo from './config/RouterPageInfo';
 import TemplatePageInfo from './config/TemplatePageInfo';
 import UtilPageInfo from './config/UtilPageInfo';
 import ModalPageInfo from './config/ModalPageInfo';
+import CommonComponentPageInfo from './config/CommonComponentPageInfo';
 
 function GuideHome() {
   const [menuName, setMenuName] = useState('zustand');
@@ -93,6 +94,15 @@ function GuideHome() {
         checkedNewTab={checkedNewTab}
       />
     );
+  } else if (menuName === 'component') {
+    contentComponent = (
+      <CommonRouteTable
+        moduleDirectoryPath="component/"
+        pageList={CommonComponentPageInfo.list.filter((info) => !info.exclude)}
+        keyword={keyword}
+        checkedNewTab={checkedNewTab}
+      />
+    );
   }
 
   const changeKeyword = (event) => {
@@ -159,6 +169,15 @@ function GuideHome() {
           }}
         >
           Form
+        </a>
+        <a
+          href={''}
+          onClick={(event) => {
+            event.preventDefault();
+            changeLeftMenu('component');
+          }}
+        >
+          기타 컴포넌트
         </a>
         <a
           href={''}

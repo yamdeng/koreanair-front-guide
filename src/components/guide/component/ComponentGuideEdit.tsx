@@ -3,7 +3,7 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import { Editor } from '@toast-ui/react-editor';
 import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 
-function TemplateTestEdit() {
+function ComponentGuideEdit() {
   return (
     <div>
       <p>editor test</p>
@@ -37,4 +37,4 @@ function TemplateTestEdit() {
   );
 }
 
-export default withSourceView(TemplateTestEdit);
+export default withSourceView(ComponentGuideEdit);
