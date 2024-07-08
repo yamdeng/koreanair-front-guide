@@ -23,6 +23,10 @@ const AdminMenuList = [
         name: 'PBoardDetail',
         routeUrl: '/publish/PBoardDetail',
       },
+      {
+        name: 'PDocContentCheckArround',
+        routeUrl: '/publish/PDocContentCheckArround',
+      },
     ],
   },
 ];
