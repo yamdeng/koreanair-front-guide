@@ -12,7 +12,7 @@ import 'tui-color-picker/dist/tui-color-picker.css';
 
 // css import
 import AdminApp from './AdminApp.tsx';
-import './resources/css/import.css';
+import './resources/css/import.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>

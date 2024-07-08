@@ -1,12 +1,15 @@
 import update from 'immutability-helper';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import logo from 'resources/images/logo.svg';
-import PROFILE from 'resources/images/profile.jpeg';
+import logo from '@resources/images/logo.svg';
+import PROFILE from '@resources/images/profile.jpeg';
+import AdminMenuList from '@/config/AdminMenuList';
 
 function SideBar() {
+  const navigate = useNavigate();
   const [displaySideMenu, setDisplaySideMenu] = useState(true);
-  const [menuList, setMenuList] = useState([]);
+  const [menuList, setMenuList] = useState(AdminMenuList);
 
   const toggleSideMenu = () => {
     setDisplaySideMenu(!displaySideMenu);
@@ -27,7 +30,7 @@ function SideBar() {
 
   const selectMenu = (menuInfo) => {
     const { routeUrl } = menuInfo;
-    // TODO : goPage route url
+    navigate(routeUrl);
   };
 
   const hideMenu = () => {
