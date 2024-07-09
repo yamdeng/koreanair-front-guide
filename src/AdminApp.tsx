@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import SideBar from './components/layout/SideBar';
 import AdminPageInfo from './config/AdminPageInfo';
 import AdminHome from './components/admin/AdminHome';
+import LoadingBarContainer from './components/layout/LoadingBarContainer';
 
 function AdminApp() {
   const pageList = AdminPageInfo.list;
@@ -17,6 +18,7 @@ function AdminApp() {
           })}
         </Routes>
       </div>
+      <LoadingBarContainer />
     </div>
   );
 }
