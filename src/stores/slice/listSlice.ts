@@ -1,4 +1,4 @@
-export const defaultListExcludeKeys = ['list', 'excludeApiKeys'];
+export const defaultListExcludeKeys = ['list', 'excludeApiKeys', 'displayTableLoading'];
 
 export const listBaseState = {
   displayTableLoading: false,
