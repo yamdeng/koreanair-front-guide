@@ -27,6 +27,34 @@ const AdminMenuList = [
         name: 'PDocContentCheckArround',
         routeUrl: '/publish/PDocContentCheckArround',
       },
+      {
+        name: 'PCheckItemList1',
+        routeUrl: '/publish/PCheckItemList1',
+      },
+      {
+        name: 'PCheckItemList2',
+        routeUrl: '/publish/PCheckItemList2',
+      },
+      {
+        name: 'PCheckResultForm',
+        routeUrl: '/publish/PCheckResultForm',
+      },
+      {
+        name: 'PCheckResultList',
+        routeUrl: '/publish/PCheckResultList',
+      },
+      {
+        name: 'PConfinedSpaceForm1',
+        routeUrl: '/publish/PConfinedSpaceForm1',
+      },
+      {
+        name: 'PConfinedSpaceForm2',
+        routeUrl: '/publish/PConfinedSpaceForm2',
+      },
+      {
+        name: 'PConfinedSpaceForm3',
+        routeUrl: '/publish/PConfinedSpaceForm3',
+      },
     ],
   },
 ];
