@@ -26,7 +26,7 @@ const delayLocalData = (data, option: any = {}) => {
 };
 
 export const getProfile = () => delayLocalData(exampleProfile);
-export const getAllDataPromise = (option) => delayLocalData(getAllData(), option);
+export const getAllDataPromise = (option = {}) => delayLocalData(getAllData(), option);
 export const getPageDataPromise = (page, pageSize) => delayLocalData(getPageData(page, pageSize));
 export const addDataPromise = (newData) => delayLocalData(addData(newData));
 export const updateDataByIdPromise = (id, newData) => delayLocalData(updateDataById(id, newData));

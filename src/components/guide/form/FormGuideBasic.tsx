@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 import withSourceView from '@/hooks/withSourceView';
 import { useEffect } from 'react';
 import useReportTestFormStore1 from '@/stores/guide/useReportTestFormStore1';

@@ -5,7 +5,6 @@ import { testColumnKeyList } from './table-column';
 const defaultTableRows = 25;
 const defaultTableManyRows = 150;
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 const getRandomValueByColumnKey = (columnKey) => {
   if (columnKey === 'id') {
     return faker.string.uuid();

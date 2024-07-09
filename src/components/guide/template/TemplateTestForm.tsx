@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 import withSourceView from '@/hooks/withSourceView';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,6 +10,7 @@ import useTemplateTestFormStore from '@/stores/guide/useTemplateTestFormStore';
 */
 function TemplateTestForm() {
   const {
+    formType,
     id,
     sabun,
     name,
@@ -49,6 +49,7 @@ function TemplateTestForm() {
             id="id"
             value={id}
             onChange={(event) => changeInput('id', event.target.value)}
+            disabled={formType !== 'add'}
           />
           {errors.id ? <span className="error_message">{errors.id}</span> : null}
         </div>

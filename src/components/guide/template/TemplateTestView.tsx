@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 import withSourceView from '@/hooks/withSourceView';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -10,7 +9,7 @@ import useTemplateTestFormStore from '@/stores/guide/useTemplateTestFormStore';
 
 */
 function TemplateTestView() {
-  const { id, sabun, name, nameEn, position, phone, deptName, description, cancel, getDetail, gorFormPage } =
+  const { id, sabun, name, nameEn, position, phone, deptName, description, cancel, getDetail, gorFormPage, clear } =
     useTemplateTestFormStore();
 
   const { detailId } = useParams();
@@ -19,6 +18,7 @@ function TemplateTestView() {
 
   useEffect(() => {
     getDetail(detailId);
+    return clear();
   }, []);
 
   return (
