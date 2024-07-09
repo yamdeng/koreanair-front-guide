@@ -5,8 +5,8 @@ const AdminMenuList = [
     isExpend: false,
     childs: [
       {
-        name: '게시판 테스트',
-        routeUrl: '/publish/PBoardForm',
+        name: '사용자 목록',
+        routeUrl: '/users',
       },
     ],
   },

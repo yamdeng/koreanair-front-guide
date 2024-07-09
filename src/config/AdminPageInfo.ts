@@ -9,6 +9,11 @@ import PCheckResultList from '@/components/admin/publish/PCheckResultList';
 import PConfinedSpaceForm1 from '@/components/admin/publish/PConfinedSpaceForm1';
 import PConfinedSpaceForm2 from '@/components/admin/publish/PConfinedSpaceForm2';
 import PConfinedSpaceForm3 from '@/components/admin/publish/PConfinedSpaceForm3';
+import UserList from '@/components/admin/user/UserList';
+import UserDetail from '@/components/admin/user/UserDetail';
+import UserForm from '@/components/admin/user/UserForm';
+
+// 사용자(서버 연동)
 
 const AdminPageInfo: any = {};
 
@@ -52,6 +57,18 @@ AdminPageInfo.list = [
   {
     Component: PConfinedSpaceForm3,
     path: '/publish/PConfinedSpaceForm3',
+  },
+  {
+    Component: UserList,
+    path: '/users',
+  },
+  {
+    Component: UserDetail,
+    path: '/users/:detailId',
+  },
+  {
+    Component: UserForm,
+    path: '/users/:detailId/form',
   },
 ];
 
