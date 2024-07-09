@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { unstable_HistoryRouter as Router } from 'react-router-dom';
+import history from './utils/history.ts';
 
 // third lib css import
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
@@ -15,7 +16,7 @@ import AdminApp from './AdminApp.tsx';
 import './resources/css/import.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
+  <Router history={history as any}>
     <AdminApp />
-  </BrowserRouter>
+  </Router>
 );
