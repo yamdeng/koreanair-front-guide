@@ -1,28 +1,37 @@
-const defaultListInitailState = {
-  currentPage: 1,
-  pageSize: 10,
+export const defaultListExcludeKeys = ['list', 'excludeApiKeys', 'displayTableLoading'];
+
+export const listBaseState = {
+  displayTableLoading: false,
   list: [],
-  searchParam: { keyword: 'air' },
+  excludeApiKeys: [],
 };
 
 export const createListSlice = (set, get) => ({
-  ...defaultListInitailState,
+  ...listBaseState,
 
-  changeCurrentPage: (page) => {
-    set({ currentPage: page });
-    get().search();
+  changeSearchInput: (inputName, inputValue) => {
+    set({ [inputName]: inputValue });
   },
 
-  changePageSize: (pageSize) => {
-    set({ pageSize: pageSize, currentPage: 1 });
-    get().search();
+  getSearchParam: () => {
+    const state = get();
+    const stateKeys = Object.keys(state);
+    const excludeFilterKeys = defaultListExcludeKeys;
+    if (state.excludeApiKeys && state.excludeApiKeys.length) {
+      excludeFilterKeys.push(...state.excludeApiKeys);
+    }
+    const applyStateKeys = stateKeys.filter((key) => {
+      if (typeof state[key] === 'function') {
+        return false;
+      } else if (excludeFilterKeys.includes(key)) {
+        return false;
+      }
+      return true;
+    });
+    const apiParam = {};
+    applyStateKeys.forEach((apiRequestKey) => {
+      apiParam[apiRequestKey] = state[apiRequestKey];
+    });
+    return apiParam;
   },
-
-  search: () => {
-    const { currentPage, pageSize, searchParam } = get();
-    const apiParam = { ...searchParam, currentPage, pageSize };
-    console.log(`search call : ${JSON.stringify(apiParam)}`);
-  },
-
-  clearStore: () => set(defaultListInitailState),
 });

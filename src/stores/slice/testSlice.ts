@@ -1,8 +1,10 @@
+import { getPageData } from '@/data/grid/example-data-new';
+
 const defaultListInitailState = {
-  formData: {},
-  errors: {},
-  isDirty: false,
-  isValid: false,
+  currentPage: 1,
+  pageSize: 10,
+  list: [],
+  searchParam: { keyword: 'air' },
 };
 
 export const createListSlice = (set, get) => ({
@@ -14,6 +16,7 @@ export const createListSlice = (set, get) => ({
   },
 
   changePageSize: (pageSize) => {
+    console.log('changePageSize call');
     set({ pageSize: pageSize, currentPage: 1 });
     get().search();
   },
@@ -22,11 +25,8 @@ export const createListSlice = (set, get) => ({
     const { currentPage, pageSize, searchParam } = get();
     const apiParam = { ...searchParam, currentPage, pageSize };
     console.log(`search call : ${JSON.stringify(apiParam)}`);
+    set({ list: getPageData(1, 5) });
   },
-
-  save: () => {},
-
-  validate: () => {},
 
   clearStore: () => set(defaultListInitailState),
 });
