@@ -156,6 +156,26 @@ td {
   gap: 5px;
   padding: 5px;
   font-size: 21px;
+
+  input[type='text'],
+  input[type='number'],
+  input[type='password'] {
+    width: 100%;
+    padding: 15px;
+    display: inline-block;
+    background-color: #f1f1f1;
+    border: none;
+  }
+
+  select {
+    width: 120px;
+    padding: 5px;
+  }
+
+  .select {
+    width: 100%;
+    padding: 12px;
+  }
 }
 
 .grid-root-container {
@@ -189,25 +209,25 @@ td {
   padding: 7px;
 }
 
-input[type='text'],
-input[type='number'],
-input[type='password'] {
-  width: 100%;
-  padding: 15px;
-  display: inline-block;
-  background-color: #f1f1f1;
-  border: none;
-}
+// input[type='text'],
+// input[type='number'],
+// input[type='password'] {
+//   width: 100%;
+//   padding: 15px;
+//   display: inline-block;
+//   background-color: #f1f1f1;
+//   border: none;
+// }
 
-select {
-  width: 120px;
-  padding: 5px;
-}
+// select {
+//   width: 120px;
+//   padding: 5px;
+// }
 
-.select {
-  width: 100%;
-  padding: 12px;
-}
+// .select {
+//   width: 100%;
+//   padding: 12px;
+// }
 
 /* switch style start */
 
