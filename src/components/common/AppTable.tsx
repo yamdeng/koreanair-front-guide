@@ -20,6 +20,7 @@ const convertColumns = (columns) => {
       columnInfo.cellRendererParams = {
         linkPath: columnInfo.linkPath,
         detailPath: columnInfo.detailPath,
+        isWindowOpen: columnInfo.isWindowOpen,
       };
     } else if (columnInfo.field === 'actionsByOption') {
       // action button cell convert

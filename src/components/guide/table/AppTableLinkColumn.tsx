@@ -12,7 +12,9 @@ function AppTableLinkColumn() {
   const rowData = getAllData();
   const columns = testColumnInfos;
   columns[0].isLink = true;
-  columns[0].linkPath = '/aviation/reports';
+  // columns[0].linkPath = '/aviation/reports';
+  columns[0].linkPath = 'https://www.naver.com';
+  columns[0].isWindowOpen = true;
   // columns[0].detailPath = 'child.id'; // 데이터가 1차 depth가 아니여도 반영
   columns[0].detailPath = 'name';
 

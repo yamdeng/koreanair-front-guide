@@ -5,12 +5,16 @@ function GridLinkComponent(props) {
   console.log(props);
   const navigate = useNavigate();
 
-  const { value, data, linkPath, detailPath, column } = props;
+  const { value, data, linkPath, detailPath, isWindowOpen, column } = props;
   const detailId = detailPath ? _.get(data, detailPath) : _.get(data, column.colId);
   const movePagePath = `${linkPath}/${detailId}`;
 
   const onClick = () => {
-    navigate(`${movePagePath}`);
+    if (isWindowOpen) {
+      window.open(`${linkPath}`);
+    } else {
+      navigate(`${movePagePath}`);
+    }
   };
 
   return (
