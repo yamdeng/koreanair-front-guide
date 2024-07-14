@@ -89,6 +89,7 @@ function AppTable(props) {
     actionButtonListPath = '',
     search,
     getGridRef,
+    applyAutoHeight,
   } = props;
 
   // 컬럼 동적 셋팅 모달 open
@@ -219,6 +220,7 @@ function AppTable(props) {
       <div className="ag-theme-quartz" style={{ height: tableHeight }}>
         <AgGridReact
           ref={gridRef}
+          domLayout={applyAutoHeight ? 'autoHeight' : 'normal'}
           rowData={rowData}
           columnDefs={applyColumns}
           loadingOverlayComponent={loadingOverlayComponent}
