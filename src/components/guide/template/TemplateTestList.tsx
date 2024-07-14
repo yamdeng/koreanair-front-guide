@@ -2,7 +2,7 @@ import AppTable from '@/components/common/AppTable';
 import { testColumnInfos } from '@/data/grid/table-column';
 import withSourceView from '@/hooks/withSourceView';
 import LocalApiService from '@/services/LocalApiService';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
@@ -40,10 +40,10 @@ const useTemplateTesListStore = create<any>((set, get) => ({
 function TemplateTestList() {
   const navigate = useNavigate();
   const gridApiRef = useRef<any>(null);
-  const getGridRef = (event) => {
+  const getGridRef = useCallback((event) => {
     // 외부에서 api 인스턴스를 직접 사용하고 싶을 경우에 사용
     gridApiRef.current = event.api;
-  };
+  }, []);
 
   const { search, list, displayTableLoading, deleteById } = useTemplateTesListStore();
   const columns = testColumnInfos;
