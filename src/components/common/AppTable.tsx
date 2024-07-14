@@ -88,6 +88,7 @@ function AppTable(props) {
     actionButtons = ['detail', 'delete'],
     actionButtonListPath = '',
     search,
+    getGridRef,
   } = props;
 
   // 컬럼 동적 셋팅 모달 open
@@ -197,16 +198,6 @@ function AppTable(props) {
   );
 
   useEffect(() => {
-    if (gridRef && gridRef.current && gridRef.current.api) {
-      if (displayTableLoading) {
-        gridRef.current.api.showLoadingOverlay();
-      } else {
-        gridRef.current.api.hideOverlay();
-      }
-    }
-  }, [displayTableLoading]);
-
-  useEffect(() => {
     setDynamicApplyColumnList(columns);
   }, [columns]);
 
@@ -247,6 +238,16 @@ function AppTable(props) {
           tooltipHideDelay={1000}
           tooltipMouseTrack={true}
           enableBrowserTooltips={false}
+          onGridReady={(params) => {
+            if (displayTableLoading) {
+              params.api.showLoadingOverlay();
+            } else {
+              params.api.hideOverlay();
+            }
+            if (getGridRef) {
+              getGridRef(params);
+            }
+          }}
           {...props}
         />
       </div>

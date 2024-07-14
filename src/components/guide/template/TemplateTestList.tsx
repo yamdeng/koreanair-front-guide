@@ -1,8 +1,8 @@
-import withSourceView from '@/hooks/withSourceView';
 import AppTable from '@/components/common/AppTable';
 import { testColumnInfos } from '@/data/grid/table-column';
+import withSourceView from '@/hooks/withSourceView';
 import LocalApiService from '@/services/LocalApiService';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
@@ -18,7 +18,9 @@ const useTemplateTesListStore = create<any>((set, get) => ({
   ...initListData,
 
   search: async () => {
+    get().changeLoading(true);
     const data: any = await LocalApiService.list({ disableLoadingBar: true });
+    get().changeLoading(false);
     set({
       list: data,
     });
@@ -37,8 +39,13 @@ const useTemplateTesListStore = create<any>((set, get) => ({
 
 function TemplateTestList() {
   const navigate = useNavigate();
-  const [displayTableLoading, setDisplayTableLoading] = useState(false);
-  const { search, list, deleteById } = useTemplateTesListStore();
+  const gridApiRef = useRef<any>(null);
+  const getGridRef = (event) => {
+    // 외부에서 api 인스턴스를 직접 사용하고 싶을 경우에 사용
+    gridApiRef.current = event.api;
+  };
+
+  const { search, list, displayTableLoading, deleteById } = useTemplateTesListStore();
   const columns = testColumnInfos;
   columns[0].isLink = true;
   columns[0].linkPath = '/template/tests';
@@ -60,7 +67,6 @@ function TemplateTestList() {
   };
 
   useEffect(() => {
-    setDisplayTableLoading(true);
     search();
   }, []);
 
@@ -77,7 +83,7 @@ function TemplateTestList() {
         </button>
       </div>
       <div className="ag-theme-quartz" style={{ height: 500 }}>
-        <AppTable rowData={list} columns={columns} displayTableLoading={displayTableLoading} />
+        <AppTable rowData={list} columns={columns} displayTableLoading={displayTableLoading} getGridRef={getGridRef} />
       </div>
     </>
   );
