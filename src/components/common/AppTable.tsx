@@ -3,7 +3,7 @@ import CommonUtil from '@/utils/CommonUtil';
 import { AgGridReact } from 'ag-grid-react';
 import { Modal } from 'antd';
 import { produce } from 'immer';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, forwardRef } from 'react';
 import GridActionButtonComponent from './GridActionButtonComponent';
 import GridLinkComponent from './GridLinkComponent';
 
@@ -66,8 +66,8 @@ const LoadingComponent = (props) => {
   );
 };
 
-function AppTable(props) {
-  const gridRef = useRef<any>(null);
+function AppTable(props, ref) {
+  // const gridRef = useRef<any>(null);
   const {
     rowData,
     columns,
@@ -127,7 +127,7 @@ function AppTable(props) {
   }, []);
 
   const onSelectionChanged = useCallback(() => {
-    const selectedRows = gridRef.current.api.getSelectedRows();
+    const selectedRows = ref.current.api.getSelectedRows();
     return handleRowSelect(selectedRows);
   }, []);
 
@@ -140,11 +140,11 @@ function AppTable(props) {
       skipColumnHeaders: false,
       allColumns: false, // column에 설정된 hide는 기본적으로 무시되어서 처리됨
     };
-    gridRef.current.api.exportDataAsCsv(optionParam);
+    ref.current.api.exportDataAsCsv(optionParam);
   }, []);
 
   const saveColumnInfos = useCallback(() => {
-    gridRef.current.api.setGridOption('columnDefs', dynamicApplyColumnList);
+    ref.current.api.setGridOption('columnDefs', dynamicApplyColumnList);
     setIsColumnSettingModalOpen(false);
     CommonUtil.saveColumnInfos(dynamicApplyColumnList);
   }, [dynamicApplyColumnList]);
@@ -196,15 +196,15 @@ function AppTable(props) {
     [rowData, enableRowSpanColumnName]
   );
 
-  useEffect(() => {
-    if (gridRef && gridRef.current && gridRef.current.api) {
-      if (displayTableLoading) {
-        gridRef.current.api.showLoadingOverlay();
-      } else {
-        gridRef.current.api.hideOverlay();
-      }
-    }
-  }, [displayTableLoading]);
+  // useEffect(() => {
+  //   if (ref && ref.current && ref.current.api) {
+  //     if (displayTableLoading) {
+  //       ref.current.api.showLoadingOverlay();
+  //     } else {
+  //       ref.current.api.hideOverlay();
+  //     }
+  //   }
+  // }, [displayTableLoading]);
 
   useEffect(() => {
     setDynamicApplyColumnList(columns);
@@ -227,7 +227,7 @@ function AppTable(props) {
       </div>
       <div className="ag-theme-quartz" style={{ height: tableHeight }}>
         <AgGridReact
-          ref={gridRef}
+          ref={ref}
           rowData={rowData}
           columnDefs={applyColumns}
           loadingOverlayComponent={loadingOverlayComponent}
@@ -247,6 +247,20 @@ function AppTable(props) {
           tooltipHideDelay={1000}
           tooltipMouseTrack={true}
           enableBrowserTooltips={false}
+          onGridReady={(params) => {
+            if (displayTableLoading) {
+              params.api.showLoadingOverlay();
+            } else {
+              params.api.hideOverlay();
+            }
+          }}
+          onFirstDataRendered={(params) => {
+            if (displayTableLoading) {
+              params.api.showLoadingOverlay();
+            } else {
+              params.api.hideOverlay();
+            }
+          }}
           {...props}
         />
       </div>
@@ -277,4 +291,4 @@ function AppTable(props) {
   );
 }
 
-export default AppTable;
+export default forwardRef(AppTable);

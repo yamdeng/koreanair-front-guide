@@ -24,10 +24,10 @@ function AppTableCheckBox() {
   // const rowSelectMode = 'single'; // 체크박스 선택을 하나만 선택 가능
   const rowSelectMode = 'multiple'; // 체크박스 선택을 다수 선택 가능(공통컴포넌트의 기본값)
 
-  const onGridReady = (event) => {
-    // 외부에서 api 인스턴스를 직접 사용하고 싶을 경우에 사용
-    gridApiRef.current = event.api;
-  };
+  // const onGridReady = (event) => {
+  //   // 외부에서 api 인스턴스를 직접 사용하고 싶을 경우에 사용
+  //   gridApiRef.current = event.api;
+  // };
 
   const alertSelectedCountsByApiInstane = () => {
     // api 인스턴스를 이용하여 선택한 값 가져오기
@@ -50,7 +50,7 @@ function AppTableCheckBox() {
         enableCheckBox
         handleRowSelect={handleRowSelect}
         rowSelectMode={rowSelectMode}
-        onGridReady={onGridReady}
+        ref={gridApiRef}
       />
     </>
   );

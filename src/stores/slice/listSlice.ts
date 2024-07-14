@@ -9,6 +9,10 @@ export const listBaseState = {
 export const createListSlice = (set, get) => ({
   ...listBaseState,
 
+  changeDisplayTableLoading: (displayTableLoading) => {
+    set({ displayTableLoading: displayTableLoading });
+  },
+
   changeSearchInput: (inputName, inputValue) => {
     set({ [inputName]: inputValue });
   },
