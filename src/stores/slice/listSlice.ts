@@ -1,13 +1,60 @@
-export const defaultListExcludeKeys = ['list', 'excludeApiKeys', 'displayTableLoading'];
+import ApiService from '@/services/ApiService';
+
+export const defaultListExcludeKeys = [
+  'list',
+  'excludeApiKeys',
+  'displayTableLoading',
+  'listApiPath',
+  'beforeApiParam',
+  'currentPage',
+  'pageSize',
+  'totalCount',
+  'prevPage',
+  'nextPage',
+  'displayPageIndexList',
+];
 
 export const listBaseState = {
+  listApiPath: '',
+  beforeApiParam: {},
   displayTableLoading: false,
   list: [],
   excludeApiKeys: [],
+  currentPage: 1,
+  lastPage: 0,
+  totalCount: 0,
+  prevPage: null,
+  nextPage: null,
+  displayPageIndexList: [],
+  pageSize: 10,
 };
 
 export const createListSlice = (set, get) => ({
   ...listBaseState,
+
+  goFirstPage() {
+    const { prevPage } = get();
+    if (prevPage) {
+      get().changeCurrentPage(1);
+    }
+  },
+
+  goLastPage() {
+    const { nextPage, totalCount, pageSize } = get();
+    if (nextPage) {
+      get().changeCurrentPage(Math.ceil(totalCount / pageSize));
+    }
+  },
+
+  changeCurrentPage(currentPage) {
+    set({ currentPage: currentPage });
+    get().search();
+  },
+
+  changePageSize(pageSize) {
+    set({ pageSize: pageSize, currentPage: 1 });
+    get().search();
+  },
 
   changeLoading: (loading) => {
     set({ displayTableLoading: loading });
@@ -32,10 +79,59 @@ export const createListSlice = (set, get) => ({
       }
       return true;
     });
-    const apiParam = {};
+    const apiParam: any = {};
     applyStateKeys.forEach((apiRequestKey) => {
       apiParam[apiRequestKey] = state[apiRequestKey];
     });
+    apiParam.page = state.currentPage;
+    apiParam.pageSize = state.pageSize;
+    set({ beforeApiParam: apiParam });
     return apiParam;
+  },
+
+  // 검색정보 : list, pageable 추출
+  setTotalCount(totalCount) {
+    const { pageSize, currentPage } = get();
+    // 최대 보여지는 페이징갯수
+    const maxPagingSize = 10;
+    const totalPageSize = Math.ceil(totalCount / pageSize);
+    let currentPageStep = Math.floor(currentPage / maxPagingSize);
+    if (currentPage % maxPagingSize !== 0) {
+      currentPageStep = currentPageStep + 1;
+    }
+    const pageInfoStartIndex = currentPageStep * maxPagingSize - (maxPagingSize - 1);
+    const pageInfoLastIndex =
+      currentPageStep * maxPagingSize <= totalPageSize ? currentPageStep * maxPagingSize : totalPageSize;
+    const displayPageIndexList = [];
+    for (let pageInfoIndex = pageInfoStartIndex; pageInfoIndex <= pageInfoLastIndex; pageInfoIndex++) {
+      displayPageIndexList.push(pageInfoIndex);
+    }
+    const lastPageStep = Math.ceil(totalPageSize / maxPagingSize);
+    const isNextPageStep = currentPageStep < lastPageStep;
+    const nextPage = isNextPageStep ? currentPageStep * maxPagingSize + 1 : null;
+    const isPrevPageStep = currentPageStep > 1;
+    const prevPage = isPrevPageStep ? (currentPageStep - 2) * maxPagingSize + 1 : null;
+    set({
+      displayPageIndexList: displayPageIndexList,
+      prevPage: prevPage,
+      nextPage: nextPage,
+      lastPage: Math.ceil(totalCount / pageSize),
+      totalCount: totalCount,
+    });
+  },
+
+  search: async () => {
+    const { listApiPath, getSearchParam, setTotalCount } = get();
+    const apiParam = getSearchParam();
+    const response: any = await ApiService.get(listApiPath, apiParam, { disableLoadingBar: true });
+    const data = response.data;
+    const rows = data.rows;
+    const totalCount = data.total;
+    setTotalCount(totalCount);
+    set({ list: rows });
+  },
+
+  excelDownload: () => {
+    // TODO : 엑셀 다운로드
   },
 });

@@ -1,9 +1,8 @@
-import withSourceView from '@/hooks/withSourceView';
-import { useEffect } from 'react';
 import AppTable from '@/components/common/AppTable';
-import { create } from 'zustand';
-import ApiService from '@/services/ApiService';
+import withSourceView from '@/hooks/withSourceView';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
+import { useEffect } from 'react';
+import { create } from 'zustand';
 
 /*
 
@@ -21,6 +20,7 @@ const columns: any = [
 
 const initListData = {
   ...listBaseState,
+  listApiPath: 'data',
   columns: columns,
 };
 
@@ -29,22 +29,12 @@ const testStore = create<any>((set, get) => ({
 
   ...initListData,
 
-  search: async () => {
-    const apiParam = get().getSearchParam();
-    const response: any = await ApiService.get('data', apiParam, { disableLoadingBar: true });
-    const data = response.data;
-    const rows = data.rows;
-    const totalCount = data.total;
-    get().setTotalCount(totalCount);
-    set({ list: rows });
-  },
-
   clear: () => {
     set(initListData);
   },
 }));
 
-function AppTableServerPage() {
+function AppTableServerPage2() {
   const state = testStore();
   const { search, list, columns } = state;
 
@@ -59,4 +49,4 @@ function AppTableServerPage() {
   );
 }
 
-export default withSourceView(AppTableServerPage);
+export default withSourceView(AppTableServerPage2);

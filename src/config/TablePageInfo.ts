@@ -43,6 +43,8 @@ import AppTableColumnDynamic from '@/components/guide/table/AppTableColumnDynami
 import AppTableColumnDynamicRaw from '@/components/guide/table/AppTableColumnDynamic?raw';
 import AppTableServerPage from '@/components/guide/table/AppTableServerPage';
 import AppTableServerPageRaw from '@/components/guide/table/AppTableServerPage?raw';
+import AppTableServerPage2 from '@/components/guide/table/AppTableServerPage2';
+import AppTableServerPage2Raw from '@/components/guide/table/AppTableServerPage2?raw';
 
 const TablePageInfo: any = {};
 
@@ -55,6 +57,15 @@ TablePageInfo.list = [
     description: '',
     success: false,
     fileRawString: AppTableServerPageRaw,
+  },
+  {
+    title: '서버페이징2',
+    Component: AppTableServerPage2,
+    path: 'AppTableServerPage2',
+    moduleDirectory: 'table',
+    description: '',
+    success: false,
+    fileRawString: AppTableServerPage2Raw,
   },
   {
     title: '공통컴포넌트 기본',

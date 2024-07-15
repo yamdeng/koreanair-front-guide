@@ -91,7 +91,12 @@ function AppTable(props) {
     search,
     getGridRef,
     applyAutoHeight,
+    store = {},
+    hiddenPagination,
   } = props;
+
+  // store
+  const { currentPage, prevPage, lastPage, nextPage, displayPageIndexList = [] } = store;
 
   // 컬럼 동적 셋팅 모달 open
   const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
@@ -277,6 +282,105 @@ function AppTable(props) {
           })}
         </Modal>
       )}
+
+      <div className="paging_wrap" style={{ display: hiddenPagination ? 'none' : '' }}>
+        <span
+          className="p_web"
+          style={{ display: prevPage ? '' : 'none' }}
+          onClick={() => {
+            store.goFirstPage();
+          }}
+        >
+          {' << '}
+        </span>
+        <span
+          className="p_web p_arr_l"
+          style={{ display: prevPage ? '' : 'none' }}
+          onClick={() => {
+            store.changeCurrentPage(prevPage);
+          }}
+        >
+          {'<'}
+        </span>
+        {/* web paging */}
+        {displayPageIndexList.map((pageIndex) => {
+          let pageComponent = (
+            <span
+              key={pageIndex}
+              className="p_web"
+              onClick={() => {
+                store.changeCurrentPage(pageIndex);
+              }}
+            >
+              {pageIndex}
+            </span>
+          );
+          if (pageIndex === currentPage) {
+            pageComponent = (
+              <span
+                style={{ color: '#2dbab6', textDecoration: 'underline' }}
+                key={pageIndex}
+                className="p_web mbold"
+                onClick={() => {
+                  store.changeCurrentPage(pageIndex);
+                }}
+              >
+                {pageIndex}
+              </span>
+            );
+          }
+          return pageComponent;
+        })}
+        {displayPageIndexList.length === 0 ? (
+          <>
+            <span className="p_arr_l">{'<'}</span>
+            <span className="p_web">1</span>
+            <span className="p_arr_r">{'>'}</span>
+          </>
+        ) : null}
+        {/* mobile pagind */}
+        <span
+          className="p_mobile p_arr_r"
+          style={{ display: currentPage !== 1 ? '' : 'none' }}
+          onClick={() => {
+            store.changeCurrentPage(currentPage - 1);
+          }}
+        >
+          {'<'}
+        </span>
+        <span className="p_mobile mbold" style={{ color: '#2dbab6' }}>
+          {currentPage}
+        </span>
+        <span className="p_mobile">/</span>
+        <span className="p_mobile">{lastPage}</span>
+        <span
+          className="p_mobile p_arr_r"
+          style={{ display: currentPage !== lastPage ? '' : 'none' }}
+          onClick={() => {
+            store.changeCurrentPage(currentPage + 1);
+          }}
+        >
+          {'>'}
+        </span>
+        <span
+          className="p_web p_arr_r"
+          style={{ display: nextPage ? '' : 'none' }}
+          onClick={() => {
+            store.changeCurrentPage(nextPage);
+          }}
+        >
+          {'>'}
+        </span>
+        <span
+          className="p_web"
+          style={{ display: nextPage ? '' : 'none' }}
+          onClick={() => {
+            store.goLastPage();
+          }}
+        >
+          {' >> '}
+        </span>
+      </div>
     </>
   );
 }
