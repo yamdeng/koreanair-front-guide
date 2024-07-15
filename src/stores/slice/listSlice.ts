@@ -13,6 +13,7 @@ export const defaultListExcludeKeys = [
   'prevPage',
   'nextPage',
   'displayPageIndexList',
+  'listApiMethod',
 ];
 
 export const listBaseState = {
@@ -28,6 +29,7 @@ export const listBaseState = {
   nextPage: null,
   displayPageIndexList: [],
   pageSize: 10,
+  listApiMethod: 'get',
 };
 
 export const createListSlice = (set, get) => ({
@@ -122,9 +124,9 @@ export const createListSlice = (set, get) => ({
   },
 
   search: async () => {
-    const { listApiPath, getSearchParam, setTotalCount } = get();
+    const { listApiPath, getSearchParam, setTotalCount, listApiMethod } = get();
     const apiParam = getSearchParam();
-    const response: any = await ApiService.get(listApiPath, apiParam, { disableLoadingBar: true });
+    const response: any = await ApiService[listApiMethod](listApiPath, apiParam, { disableLoadingBar: true });
     const data = response.data;
     const rows = data.rows;
     const totalCount = data.total;
