@@ -36,7 +36,8 @@ const testStore = create<any>((set, get) => ({
 
 function AppTableServerPage2() {
   const state = testStore();
-  const { search, list, columns } = state;
+  const { search, list, getColumns } = state;
+  const columns = getColumns();
 
   useEffect(() => {
     search();
@@ -44,7 +45,7 @@ function AppTableServerPage2() {
 
   return (
     <>
-      <AppTable rowData={list} columns={columns} store={state} />
+      <AppTable rowData={list} columns={columns} store={state} useColumnDynamicSetting />
     </>
   );
 }

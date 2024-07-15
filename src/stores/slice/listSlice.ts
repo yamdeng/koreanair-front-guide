@@ -1,4 +1,5 @@
 import ApiService from '@/services/ApiService';
+import CommonUtil from '@/utils/CommonUtil';
 
 export const defaultListExcludeKeys = [
   'list',
@@ -129,6 +130,11 @@ export const createListSlice = (set, get) => ({
     const totalCount = data.total;
     setTotalCount(totalCount);
     set({ list: rows });
+  },
+
+  getColumns: () => {
+    const { columns } = get();
+    return CommonUtil.mergeColumnInfosByLocal(columns);
   },
 
   excelDownload: () => {
