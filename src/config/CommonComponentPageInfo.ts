@@ -4,6 +4,8 @@ import ComponentGuideDatePicker from '@/components/guide/component/ComponentGuid
 import ComponentGuideDatePickerRaw from '@/components/guide/component/ComponentGuideDatePicker?raw';
 import ComponentGuideTimePicker from '@/components/guide/component/ComponentGuideTimePicker';
 import ComponentGuideTimePickerRaw from '@/components/guide/component/ComponentGuideTimePicker?raw';
+import ComponentGuideTree from '@/components/guide/component/ComponentGuideTree';
+import ComponentGuideTreeRaw from '@/components/guide/component/ComponentGuideTree?raw';
 
 const CommonComponentPageInfo: any = {};
 
@@ -34,6 +36,15 @@ CommonComponentPageInfo.list = [
     description: '',
     success: false,
     fileRawString: ComponentGuideTimePickerRaw,
+  },
+  {
+    title: 'tree',
+    Component: ComponentGuideTree,
+    path: 'ComponentGuideTree',
+    moduleDirectory: 'component',
+    description: '',
+    success: false,
+    fileRawString: ComponentGuideTreeRaw,
   },
 ];
 
