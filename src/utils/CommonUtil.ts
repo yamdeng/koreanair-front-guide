@@ -98,6 +98,32 @@ const applyGroupingRowSpanByPageSize = (data, columnName, pageSize = 1000000) =>
   return _.cloneDeep(data);
 };
 
+// listToTreeData(deptList.result, 'DEPT_ID', 'PRNT_ID', '10073')
+function listToTreeData(items, treeKey, treeParentKey, rootValue) {
+  const rootItems = [];
+  const lookup = {};
+  for (const item of items) {
+    const lookUpTreeValue = item[treeKey];
+    const lookUpTreeParentValue = item[treeParentKey];
+    if (!lookup[lookUpTreeValue]) {
+      lookup[lookUpTreeValue] = { children: [] };
+    }
+    lookup[lookUpTreeValue] = { ...item, children: lookup[lookUpTreeValue].children };
+
+    // if (lookUpTreeParentValue == rootValue) {
+    // if (lookUpTreeValue == rootValue) {
+    if (lookUpTreeValue == rootValue) {
+      rootItems.push(lookup[lookUpTreeValue]);
+    } else {
+      if (!lookup[lookUpTreeParentValue]) {
+        lookup[lookUpTreeParentValue] = { children: [] };
+      }
+      lookup[lookUpTreeParentValue].children.push(lookup[lookUpTreeValue]);
+    }
+  }
+  return rootItems;
+}
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -108,4 +134,5 @@ export default {
   mergeColumnInfosByLocal,
   saveColumnInfos,
   applyGroupingRowSpanByPageSize,
+  listToTreeData,
 };

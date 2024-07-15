@@ -34,3 +34,29 @@ rewrite: (path) => path.replace(/^\/api/, '/api/v1'),
 
 2./api ---> ''
 rewrite: (path) => path.replace(/^\/api/, ''),
+
+
+
+
+// 되는 버전
+function arrayToTree4(items) {
+  const rootItems = [];
+  const lookup = {};
+  for (const item of items) {
+    const { DEPT_ID, PRNT_ID } = item;
+    if (!lookup[DEPT_ID]) {
+      lookup[DEPT_ID] = { children: [] };
+    }
+    lookup[DEPT_ID] = { ...item, children: lookup[DEPT_ID].children };
+    if (DEPT_ID == '10073') {
+      console.log('pass')
+      rootItems.push(lookup[DEPT_ID]);
+    } else {
+      if (!lookup[PRNT_ID]) {
+        lookup[PRNT_ID] = { children: [] };
+      }
+      lookup[PRNT_ID].children.push(lookup[DEPT_ID]);
+    }
+  }
+  return rootItems;
+}
