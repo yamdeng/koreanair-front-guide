@@ -2,8 +2,11 @@ import ReactDOM from 'react-dom/client';
 import { unstable_HistoryRouter as Router } from 'react-router-dom';
 import App from './App.tsx';
 import history from './utils/history.ts';
-import advancedFormat from 'dayjs/plugin/advancedFormat';
 import dayjs from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import quarterOfYear from 'dayjs/plugin/quarterOfYear';
+
+dayjs.extend(quarterOfYear);
 dayjs.extend(advancedFormat);
 
 // third lib css import

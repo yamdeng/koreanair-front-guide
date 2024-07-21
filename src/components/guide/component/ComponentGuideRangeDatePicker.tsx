@@ -1,4 +1,4 @@
-import AppDatePicker from '@/components/common/AppDatePicker';
+import AppRangeDatePicker from '@/components/common/AppRangeDatePicker';
 import {
   DATE_PICKER_TYPE_DATE,
   DATE_PICKER_TYPE_MONTH,
@@ -8,10 +8,11 @@ import {
 import withSourceView from '@/hooks/withSourceView';
 import CommonUtil from '@/utils/CommonUtil';
 import { useState } from 'react';
+import _ from 'lodash';
 
 /*
 
-  <AppDatePicker/> 예시 첫번째
+  <AppRangeDatePicker> 예시 첫번째
    1.value, onChange, showNow
    2.pickerType : date, month, quarter, year
    3.time과 datepicker 같이 사용하기
@@ -19,27 +20,31 @@ import { useState } from 'react';
     -인터벌 주는 방법
 
 */
-function ComponentGuideDatePicker() {
+
+function ComponentGuideRangeDatePicker() {
   // value, onChange, showNow 기본 사용법
-  const [firstDateValue, setFirstDateValue] = useState('2024-08-04');
+  const [firstDateValue, setFirstDateValue] = useState(['2024-08-04', '2024-08-05']);
 
   // 'YYYY-MM-DD' format 유형 사용 방법
-  const [datePickerTypeValue, setDatePickerTypeValue] = useState('2024-08-05');
+  const [datePickerTypeValue, setDatePickerTypeValue] = useState(['2024-08-05', '2024-08-10']);
 
   // 'YYYY-MM-DD HH:mm:ss' format 유형 사용 방법
-  const [dateTimePickerTypeValue, setDateTimePickerTypeValue] = useState('2024-08-05 23:10:15');
+  const [dateTimePickerTypeValue, setDateTimePickerTypeValue] = useState([
+    '2024-08-05 23:10:15',
+    '2024-08-25 23:10:15',
+  ]);
 
   // 'YYYY-MM-DD HH:mm' format 유형 사용 방법
-  const [dateTimePickerType2Value, setDateTimePickerType2Value] = useState('2024-08-05 23:20');
+  const [dateTimePickerType2Value, setDateTimePickerType2Value] = useState(['2024-08-05 23:20', '2024-08-13 23:20']);
 
   // 쿼터 format 유형 사용 방법
-  const [quaterPickerTypeValue, setQuaterPickerTypeValue] = useState('2024-04-01');
+  const [quaterPickerTypeValue, setQuaterPickerTypeValue] = useState(['2024-04-01', '2024-09-01']);
 
   // 'YYYY-MM' format 유형 사용 방법
-  const [monthPickerTypeValue, setMonthPickerTypeValue] = useState('2024-08');
+  const [monthPickerTypeValue, setMonthPickerTypeValue] = useState(['2024-08', '2025-12']);
 
   // 'YYYY' format 유형 사용 방법
-  const [yearPickerTypeValue, setYearPickerTypeValue] = useState('2023');
+  const [yearPickerTypeValue, setYearPickerTypeValue] = useState(['2023', '2025']);
 
   // value, onChange 예시 : 첫번째 값은 '문자열날짜값', 두번째 값은 Date 객체
   const changeFirstDatePickerValue = (valueString, valueDate) => {
@@ -92,54 +97,54 @@ function ComponentGuideDatePicker() {
 
   return (
     <div className="datePickerTest">
-      <h3>value, onChange, showNow : {firstDateValue}</h3>
-      <AppDatePicker onChange={changeFirstDatePickerValue} value={firstDateValue} showNow={false} needConfirm={true} />
+      <h3>value, onChange, showNow : {_.toString(firstDateValue)}</h3>
+      <AppRangeDatePicker onChange={changeFirstDatePickerValue} value={firstDateValue} showNow={false} />
 
-      <h3>picker type date(기본값) : {datePickerTypeValue} </h3>
-      <AppDatePicker onChange={changeDatePickerTypeValue} value={datePickerTypeValue} pickerType="date" />
+      <h3>picker type date(기본값) : {_.toString(datePickerTypeValue)} </h3>
+      <AppRangeDatePicker onChange={changeDatePickerTypeValue} value={datePickerTypeValue} pickerType="date" />
 
-      <h3>picker type : dateTime : {dateTimePickerTypeValue} </h3>
-      <AppDatePicker
+      <h3>picker type : dateTime : {_.toString(dateTimePickerTypeValue)} </h3>
+      <AppRangeDatePicker
         onChange={changeDateTimePickerTypeValue}
         value={dateTimePickerTypeValue}
         showTime
         secondStep={10}
       />
 
-      <h3>picker type : dateTime(분만 표기) : {dateTimePickerType2Value} </h3>
-      <AppDatePicker
+      <h3>picker type : dateTime(분만 표기) : {_.toString(dateTimePickerType2Value)} </h3>
+      <AppRangeDatePicker
         onChange={changeDateTimePickerType2Value}
         value={dateTimePickerType2Value}
         showTime
         excludeSecondsTime
       />
 
-      <h3>picker type date(기본값) : {datePickerTypeValue} </h3>
-      <AppDatePicker
+      <h3>picker type date(기본값) : {_.toString(datePickerTypeValue)} </h3>
+      <AppRangeDatePicker
         onChange={changeDatePickerTypeValue}
         value={datePickerTypeValue}
         pickerType={DATE_PICKER_TYPE_DATE}
       />
 
       <h3>
-        picker type quater : {quaterPickerTypeValue}({CommonUtil.convertDateToQuarterValueString(quaterPickerTypeValue)}
-        ){' '}
+        picker type quater : {_.toString(quaterPickerTypeValue)}(
+        {_.toString(CommonUtil.convertDateToQuarterValueString(quaterPickerTypeValue))}){' '}
       </h3>
-      <AppDatePicker
+      <AppRangeDatePicker
         onChange={changeQuaterPickerTypeValue}
         value={quaterPickerTypeValue}
         pickerType={DATE_PICKER_TYPE_QUARTER}
       />
 
-      <h3>picker type month : {quaterPickerTypeValue}</h3>
-      <AppDatePicker
+      <h3>picker type month : {_.toString(monthPickerTypeValue)}</h3>
+      <AppRangeDatePicker
         onChange={changeMonthPickerTypeValue}
         value={monthPickerTypeValue}
         pickerType={DATE_PICKER_TYPE_MONTH}
       />
 
-      <h3>picker type year : {yearPickerTypeValue}</h3>
-      <AppDatePicker
+      <h3>picker type year : {_.toString(yearPickerTypeValue)}</h3>
+      <AppRangeDatePicker
         onChange={changeYearPickerTypeValue}
         value={yearPickerTypeValue}
         pickerType={DATE_PICKER_TYPE_YEAR}
@@ -148,4 +153,4 @@ function ComponentGuideDatePicker() {
   );
 }
 
-export default withSourceView(ComponentGuideDatePicker);
+export default withSourceView(ComponentGuideRangeDatePicker);

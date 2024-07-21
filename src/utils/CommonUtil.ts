@@ -5,6 +5,7 @@ import {
   DATE_PICKER_TYPE_YEAR,
 } from '@/config/CommonConstant';
 import _ from 'lodash';
+import dayjs from 'dayjs';
 
 const convertEnterStringToBrTag = function (value) {
   return value.replace(/\\r\\n|\r\n|\n|\\n/g, '<br/>');
@@ -150,6 +151,22 @@ const getDateFormatByPickerType = (pickerType, useWithTimePicker, excludeSeconds
   }
 };
 
+// 'YYYY-MM-DD'인 날짜를 분기 문자열로 변환
+const convertDateToQuarterValueString = (dateStringInfo) => {
+  let result = null;
+  if (dateStringInfo) {
+    if (Array.isArray(dateStringInfo)) {
+      if (dateStringInfo.length) {
+        result = dateStringInfo.map((dateString) => dayjs(dateString, 'YYYY-MM-DD').format('YYYY-[Q]Q'));
+      }
+    } else {
+      result = dayjs(dateStringInfo, 'YYYY-MM-DD').format('YYYY-[Q]Q');
+    }
+  }
+
+  return result;
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -162,4 +179,5 @@ export default {
   applyGroupingRowSpanByPageSize,
   listToTreeData,
   getDateFormatByPickerType,
+  convertDateToQuarterValueString,
 };

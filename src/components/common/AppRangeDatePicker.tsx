@@ -2,14 +2,16 @@ import { useCallback } from 'react';
 import { DATE_PICKER_TYPE_QUARTER } from '@/config/CommonConstant';
 import CommonUtil from '@/utils/CommonUtil';
 import { DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
+
 import dayjs from 'dayjs';
 
-const AppDatePicker = (props) => {
+const AppRangeDatePicker = (props) => {
   const {
     id,
     name,
-    defaultValue = null,
-    value = null,
+    defaultValue = [],
+    value = [],
     onChange,
     pickerType = 'date',
     valueFormat,
@@ -32,10 +34,16 @@ const AppDatePicker = (props) => {
   if (valueFormat) {
     applyDateValueFormat = valueFormat;
   }
+
   const applyMinDate = minDate ? dayjs(minDate, applyDateValueFormat) : null;
   const applyMaxDate = maxDate ? dayjs(maxDate, applyDateValueFormat) : null;
 
-  const applyValue = value ? dayjs(value, applyDateValueFormat) : null;
+  let applyValue: any = [];
+  if (value && value.length) {
+    applyValue = value.map((info) => {
+      return info ? dayjs(info, applyDateValueFormat) : null;
+    });
+  }
   let applyTimeFormat = excludeSecondsTime ? 'HH:mm' : 'HH:mm:ss';
   if (timeFormat) {
     applyTimeFormat = timeFormat;
@@ -68,16 +76,25 @@ const AppDatePicker = (props) => {
   );
 
   return (
-    <DatePicker
-      id={id}
+    <RangePicker
+      id={{
+        start: id,
+      }}
       name={name}
-      onChange={(dayjsDate: any) => {
-        let valueString = dayjsDate.format(applyDateValueFormat);
-        // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
-        if (pickerType === DATE_PICKER_TYPE_QUARTER) {
-          valueString = dayjsDate.format('YYYY-MM') + '-01';
+      onChange={(dayjsDateArray: any) => {
+        let valueStringArray = [];
+        let valueDateArray = [];
+        if (dayjsDateArray && dayjsDateArray.length) {
+          valueStringArray = dayjsDateArray.map((dayjsDate) => {
+            // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
+            if (pickerType === DATE_PICKER_TYPE_QUARTER) {
+              return dayjsDate.format('YYYY-MM') + '-01';
+            }
+            return dayjsDate.format(applyDateValueFormat);
+          });
+          valueDateArray = dayjsDateArray.map((dayjsDate) => dayjsDate.toDate);
         }
-        onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
+        onChange(valueStringArray, valueDateArray);
       }}
       picker={pickerType}
       defaultValue={defaultValue}
@@ -97,4 +114,4 @@ const AppDatePicker = (props) => {
     />
   );
 };
-export default AppDatePicker;
+export default AppRangeDatePicker;
