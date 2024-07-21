@@ -1,3 +1,9 @@
+import {
+  DATE_PICKER_TYPE_DATE,
+  DATE_PICKER_TYPE_MONTH,
+  DATE_PICKER_TYPE_QUARTER,
+  DATE_PICKER_TYPE_YEAR,
+} from '@/config/CommonConstant';
 import _ from 'lodash';
 
 const convertEnterStringToBrTag = function (value) {
@@ -124,6 +130,26 @@ function listToTreeData(items, treeKey, treeParentKey, rootValue) {
   return rootItems;
 }
 
+const getDateFormatByPickerType = (pickerType, useWithTimePicker, excludeSecondsTime) => {
+  if (pickerType === DATE_PICKER_TYPE_DATE) {
+    if (useWithTimePicker) {
+      if (excludeSecondsTime) {
+        return 'YYYY-MM-DD HH:mm';
+      } else {
+        return 'YYYY-MM-DD HH:mm:ss';
+      }
+    } else {
+      return 'YYYY-MM-DD';
+    }
+  } else if (pickerType === DATE_PICKER_TYPE_MONTH) {
+    return 'YYYY-MM';
+  } else if (pickerType === DATE_PICKER_TYPE_YEAR) {
+    return 'YYYY';
+  } else if (pickerType === DATE_PICKER_TYPE_QUARTER) {
+    return `YYYY-MM-DD`;
+  }
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -135,4 +161,5 @@ export default {
   saveColumnInfos,
   applyGroupingRowSpanByPageSize,
   listToTreeData,
+  getDateFormatByPickerType,
 };
