@@ -1,76 +1,49 @@
 import withSourceView from '@/hooks/withSourceView';
 import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-
-import { TimePicker } from 'antd';
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-dayjs.extend(customParseFormat);
+import AppTimePikcer from '@/components/common/AppTimePicker';
 
 /*
 
-  react-datepicer : 값 인터페이스는 Date 타입으로 연동됨(time도 date로 인터페이스 됨)
-   -timeIntervals : 표기 분 인터벌
-   -dateFormat : displayFormat
-   -placeholderText : placeholder
-   -isClearable : clear 버튼 나옴
-   X.now 기능은 존재하지 않음
-
-  ant.design : 값 인터페이스는 dayjs로 연동됨
-   -defaultOpenValue
-   -defaultValue
-   -클리어 버튼은 기본으로 있음
-   -needConfirm=false로 지정해서 ok 버튼없이 타임이 적용되게끔 반영
-   O.NOW 존재함
-
-  TODO
-   -react-datepicker : isClearable : clear 버튼 custom
+  <AppTimePicker/> 예시 첫번째
+   1.value, onChange, showNow
+   2.분까지만 적용하기, 인터벌 주기
+    -분만 적용하는 방법
+    -인터벌 주는 방법
 
 */
 function ComponentGuideTimePicker() {
-  const [startDate, setStartDate] = useState(new Date());
+  // value, onChange, showNow 기본 사용법
+  const [firstTimeValue, setFirstTimeValue] = useState('22:25:50');
 
-  const onChange = (time, timeString) => {
-    console.log(time, timeString);
+  // 분까지만 적용하기, 인터벌 주기
+  const [minuteTimeValue, setMinuteTimeValue] = useState('22:30');
+
+  // value, onChange 예시 : 첫번째 값은 '문자열날짜값', 두번째 값은 Date 객체
+  const changeFirstTimePickerValue = (valueString, valueDate) => {
+    console.log(`changeFirstTimePickerValue valueString : ${valueString}`);
+    console.log(`changeFirstTimePickerValue valueDate : ${valueDate}`);
+    setFirstTimeValue(valueString);
   };
 
-  const timeFormat = 'HH:mm';
-  // const timeFormat = 'HH:mm:ss';
-
-  const defaultValue = '05:31';
-  // const defaultValue = '05:00:11';
-
-  const handleKeyDown = (event) => {
-    debugger;
-    if (event.key === 'Enter') {
-      const value = event.target.value;
-      debugger;
-    }
+  // value, onChange 예시 : 첫번째 값은 '문자열날짜값', 두번째 값은 Date 객체
+  const changeMinuteTimePickerValue = (valueString, valueDate) => {
+    console.log(`changeMinuteTimePickerValue valueString : ${valueString}`);
+    console.log(`changeMinuteTimePickerValue valueDate : ${valueDate}`);
+    setMinuteTimeValue(valueString);
   };
+
   return (
     <>
-      <DatePicker
-        selected={startDate}
-        onChange={(date: any) => {
-          console.log(`onChange call : ${date}`);
-          setStartDate(date);
-        }}
-        showTimeSelect
-        showTimeSelectOnly
-        timeIntervals={10}
-        timeCaption="Time"
-        dateFormat="h:mm aa"
-        // isClearable
-      ></DatePicker>
-      <br />
-      <br />
-      {/* <TimePicker
-        onChange={onChange}
-        defaultOpenValue={dayjs(defaultValue, timeFormat)}
-        defaultValue={dayjs(defaultValue, timeFormat)}
-        format={defaultValue}
-      /> */}
-      <TimePicker defaultValue={dayjs('12:15', 'HH:mm')} format={'HH:mm'} onKeyUp={handleKeyDown} needConfirm={false} />
+      <h3>value, onChange, showNow : {firstTimeValue}</h3>
+      <AppTimePikcer onChange={changeFirstTimePickerValue} value={firstTimeValue} showNow={true} needConfirm={true} />
+
+      <h3>interval : {minuteTimeValue}</h3>
+      <AppTimePikcer
+        onChange={changeMinuteTimePickerValue}
+        value={minuteTimeValue}
+        excludeSecondsTime
+        minuteStep={10}
+      />
     </>
   );
 }

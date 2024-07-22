@@ -4,6 +4,33 @@ import CommonUtil from '@/utils/CommonUtil';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 
+/*
+
+  DatePicker
+   -id(string) : 폼에서 사용(포커스)
+   -name(string) : 폼에서 사용(포커스)
+   -defaultValue(string)
+   -value(string)
+   -onChange : (valueString, valueDate) 변경 핸들러
+   -pickerType(string) : date, month, quarter, year
+   -valueFormat(string) : 'YYYY-MM-DD'
+   -displayFormat(string) : valueFormat과 다르게 보여줄 경우에만 사용(현재는 필요없어 보임)
+   -showNow(boolean) : 하단 NOW 버튼 보이게할지 여부
+   -showTime(boolean) : time을 같이 보여줄지 여부
+   -excludeSecondsTime(boolean) : 시간을 보여줄때 분까지만 보여줄지 여부
+   -timeFormat(string) : 타임포맷
+   -hourStep(number) : 시간 interval
+   -minuteStep(number) : 분 interval
+   -secondStep(number) : 초 interval
+   -needConfirm(boolean) : [ok] 버튼을 통해서만 날짜를 선택할지 여부
+   -minDate(string) : 최소날짜
+   -maxDate(string) : 최대날짜
+   -disabled(boolean) : input disable 적용
+   -disabledHoiloday(boolean) : 주말은 선택하지 못하게
+   -disabledDates(string[]) : 선택을 막을 날짜 목록
+
+*/
+
 const AppDatePicker = (props) => {
   const {
     id,
@@ -18,8 +45,8 @@ const AppDatePicker = (props) => {
     showTime = false,
     excludeSecondsTime = false,
     timeFormat,
-    minuteStep = 5,
     hourStep = 1,
+    minuteStep = 5,
     secondStep = 1,
     needConfirm = null,
     minDate,
@@ -42,6 +69,10 @@ const AppDatePicker = (props) => {
   }
 
   let applyDisplayFormat = applyDateValueFormat;
+  if (displayFormat) {
+    applyDisplayFormat = displayFormat;
+  }
+
   // 쿼터일 경우 displayFormat 수동으로 수정 : 분기는 displayFormat이 fix임
   if (pickerType === DATE_PICKER_TYPE_QUARTER) {
     applyDisplayFormat = displayFormat ? displayFormat : `YYYY-[Q]Q`;

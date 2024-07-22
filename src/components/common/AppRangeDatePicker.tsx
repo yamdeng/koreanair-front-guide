@@ -50,6 +50,10 @@ const AppRangeDatePicker = (props) => {
   }
 
   let applyDisplayFormat = applyDateValueFormat;
+  if (displayFormat) {
+    applyDisplayFormat = displayFormat;
+  }
+
   // 쿼터일 경우 displayFormat 수동으로 수정 : 분기는 displayFormat이 fix임
   if (pickerType === DATE_PICKER_TYPE_QUARTER) {
     applyDisplayFormat = displayFormat ? displayFormat : `YYYY-[Q]Q`;
