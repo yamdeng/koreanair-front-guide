@@ -1,0 +1,148 @@
+[
+  {
+    "upperMenuId": null,
+    "nameKor": "ROOT",
+    "nameEng": "ROOT",
+    "menuUrl": null,
+    "children": [
+      {
+        "upperMenuId": "M000000",
+        "nameKor": "공통관리",
+        "nameEng": "공통관리",
+        "menuUrl": null,
+        "children": [
+          {
+            "upperMenuId": "M000001",
+            "nameKor": "메뉴관리",
+            "nameEng": "메뉴관리",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000002"
+          },
+          {
+            "upperMenuId": "M000001",
+            "nameKor": "사용자관리",
+            "nameEng": "사용자관리",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000003"
+          },
+          {
+            "upperMenuId": "M000001",
+            "nameKor": "부서관리",
+            "nameEng": "부서관리",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000004"
+          },
+          {
+            "upperMenuId": "M000001",
+            "nameKor": "공통코드관리",
+            "nameEng": "공통코드관리",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000005"
+          },
+          {
+            "upperMenuId": "M000001",
+            "nameKor": "가상그룹관리",
+            "nameEng": "가상그룹관리",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000006"
+          }
+        ],
+        "treeType": "F",
+        "menuId": "M000001"
+      },
+      {
+        "upperMenuId": "M000000",
+        "nameKor": "기타관리2",
+        "nameEng": "기타관리2",
+        "menuUrl": null,
+        "children": [
+          {
+            "upperMenuId": "M000114",
+            "nameKor": "관리메뉴4",
+            "nameEng": "관리메뉴4",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000115"
+          }
+        ],
+        "treeType": "F",
+        "menuId": "M000114"
+      },
+      {
+        "upperMenuId": "M000000",
+        "nameKor": "기타관리",
+        "nameEng": "기타관리",
+        "menuUrl": null,
+        "children": [
+          {
+            "upperMenuId": "M000100",
+            "nameKor": "관리메뉴1",
+            "nameEng": "관리메뉴1",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000101"
+          },
+          {
+            "upperMenuId": "M000100",
+            "nameKor": "관리메뉴3",
+            "nameEng": "관리메뉴3",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000103"
+          },
+          {
+            "upperMenuId": "M000100",
+            "nameKor": "관리메뉴2",
+            "nameEng": "관리메뉴2",
+            "menuUrl": null,
+            "treeType": "M",
+            "menuId": "M000102"
+          },
+          {
+            "upperMenuId": "M000100",
+            "nameKor": "기타관리-서브",
+            "nameEng": "기타관리-서브",
+            "menuUrl": null,
+            "children": [
+              {
+                "upperMenuId": "M000110",
+                "nameKor": "서브메뉴1",
+                "nameEng": "서브메뉴1",
+                "menuUrl": null,
+                "treeType": "M",
+                "menuId": "M000111"
+              },
+              {
+                "upperMenuId": "M000110",
+                "nameKor": "서브메뉴3",
+                "nameEng": "서브메뉴3",
+                "menuUrl": null,
+                "treeType": "M",
+                "menuId": "M000113"
+              },
+              {
+                "upperMenuId": "M000110",
+                "nameKor": "서브메뉴2",
+                "nameEng": "서브메뉴2",
+                "menuUrl": null,
+                "treeType": "M",
+                "menuId": "M000112"
+              }
+            ],
+            "treeType": "F",
+            "menuId": "M000110"
+          }
+        ],
+        "treeType": "F",
+        "menuId": "M000100"
+      }
+    ],
+    "treeType": "F",
+    "menuId": "M000000"
+  }
+]
