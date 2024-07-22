@@ -75,6 +75,7 @@ web_modules/
 # dotenv environment variable files
 .env
 !docs/.env.development.local
+!generate-server/.env
 .env.test.local
 .env.production.local
 .env.local
@@ -144,3 +145,4 @@ dist
 # misc
 .DS_Store
 *.pem
+build/
