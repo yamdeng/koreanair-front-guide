@@ -218,8 +218,8 @@ app.get("/api/generate/:tableName", async (req, res) => {
       .filter((info) => info.is_nullable !== "YES")
       .map((info) => info.column_name);
 
-    let fileName = _.camelCase(tableName);
-    const applyFileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+    let camelCaseTableName = _.camelCase(tableName);
+    const applyFileName = getApplyFileName(camelCaseTableName);
     const listData = {
       fileName: `${applyFileName}List`,
       storeName: `${applyFileName}ListStore`,
@@ -258,8 +258,8 @@ app.get("/api/generate/:tableName", async (req, res) => {
 // 테이블 목록 파일 생성
 async function createListfile(tableName, columnList) {
   // 템플릿에서 대체할 변수들
-  let fileName = _.camelCase(tableName);
-  const applyFileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+  let camelCaseTableName = _.camelCase(tableName);
+  const applyFileName = getApplyFileName(camelCaseTableName);;
   const data = {
     fileName: `${applyFileName}List`,
     storeName: `${applyFileName}ListStore`,
@@ -273,8 +273,8 @@ async function createListfile(tableName, columnList) {
 // form store 파일 생성
 async function createFormStorefile(tableName, columnList) {
   // 템플릿에서 대체할 변수들
-  let fileName = _.camelCase(tableName);
-  const applyFileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+  let camelCaseTableName = _.camelCase(tableName);
+  const applyFileName = getApplyFileName(camelCaseTableName);;
 
   // yup 가공 start
   columnList.map((info) => {
@@ -311,8 +311,8 @@ async function createFormStorefile(tableName, columnList) {
 // form view 파일 생성
 async function createFormViewfile(tableName, columnList) {
   // 템플릿에서 대체할 변수들
-  let fileName = _.camelCase(tableName);
-  const applyFileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+  let camelCaseTableName = _.camelCase(tableName);
+  const applyFileName = getApplyFileName(camelCaseTableName);
 
   const data = {
     fileName: `${applyFileName}Form`,
@@ -344,3 +344,9 @@ async function createZipArchive(tableName, fileNameList) {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+function getApplyFileName(camelCaseTableName) {
+  // return camelCaseTableName.charAt(0).toUpperCase() + camelCaseTableName.slice(1);
+  // 테이블명이 tb_로 시작해서 앞을 자름
+  return camelCaseTableName.slice(2)
+}
