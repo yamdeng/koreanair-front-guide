@@ -18,11 +18,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
-
-// css import
-// import './resources/css/import.css';
-
-// scss import
 import './resources/css/import.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

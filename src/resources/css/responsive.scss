@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+@media screen and (min-width: 1280px) and (max-width: 1600px){
+  .header .GNB  {display: none;}
+}
+
+
+@media screen and (min-width: 1024px) and (max-width: 1280px){
+  .header .GNB  {display: none;} 
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .header .GNB  {display: none;}
+  .LNB_bg.active {display: block;} 
+}
+
+
+@media screen and (max-width: 767px){
+  .header .GNB  {display: none;}
+  .header .logo {width: 4.0rem;}
+  .header .logo .top-logo {display: none;}
+  .header .util .util-list .btn {display: none;}
+  .LNB {margin-top: 0; max-width: none; z-index: 11;}
+  .LNB .LNB_menu {display: block;}
+  .LNB .LNB_list {padding: 2.4rem;}
+}
+
+
+@media screen and (max-width: 375px) {  
+  .LNB .LNB_menu .m-lnb_top_logo a span {display: none;}
+
+
+}

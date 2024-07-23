@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+/*@font-face {
+  font-family: 'KoreanAirSans-Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../font/KoreanAirSans-Bold.otf');
+  src: url('../font/KoreanAirSans-Bold.otf') format('embedded-opentype'),
+       url('../font/KoreanAirSans-Bold_W.woff') format('woff'),
+       url('../font/KoreanAirSans-Bold_W.woff2') format('woff'),
+       url('../font/KoreanAirSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'KoreanAirSans-Light';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../font/KoreanAirSans-Light.otf');
+  src: url('../font/KoreanAirSans-Light.otf') format('embedded-opentype'),
+       url('../font/KoreanAirSans-Light_W.woff') format('woff'),
+       url('../font/KoreanAirSans-Light_W.woff2') format('woff'),
+       url('../font/KoreanAirSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'KoreanAirSans-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../font/KoreanAirSans-Regular.otf');
+  src: url('../font/KoreanAirSans-Regular.otf') format('embedded-opentype'),
+       url('../font/KoreanAirSans-Regular_W.woff') format('woff'),
+       url('../font/KoreanAirSans-Regular_W.woff2') format('woff'),
+       url('../font/KoreanAirSans-Regular.ttf') format('truetype');
+}*/
+
+@font-face {
+	font-family: 'KoreanAirSans';
+  font-style:normal;
+  font-weight:400;
+		src: url('../fonts/KoreanAirSans-Regular_W.woff') format('woff'),
+		url('../fonts/KoreanAirSans-Regular_W.woff2') format('woff2');  
+}
+@font-face {
+	font-family: 'KoreanAirSans';
+  font-style:normal;
+  font-weight:700;
+		src: url('../fonts/KoreanAirSans-Bold_W.woff') format('woff'),
+		url('../fonts/KoreanAirSans-Bold_W.woff2') format('woff2');  
+}
+@font-face {
+	font-family: 'KoreanAirSans';
+  font-style:normal;
+  font-weight:300;
+		src: url('../fonts/KoreanAirSans-Light_W.woff') format('woff'),
+		url('../fonts/KoreanAirSans-Light_W.woff2') format('woff2');  
+}
