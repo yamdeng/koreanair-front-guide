@@ -209,7 +209,7 @@ app.get("/api/generate/:tableName", async (req, res) => {
         formInitValue = "false";
       }
       info.yupType =
-        yupType + "()" + (info.is_nullable === "YES" ? ".required()" : "");
+        yupType + "()" + (info.is_nullable !== "YES" ? ".required()" : "");
       info.formInitValue = formInitValue;
       return info;
     });
@@ -288,7 +288,7 @@ async function createFormStorefile(tableName, columnList) {
       formInitValue = "false";
     }
     info.yupType =
-      yupType + "()" + (info.is_nullable === "YES" ? ".required()" : "");
+      yupType + "()" + (info.is_nullable !== "YES" ? ".required()" : "");
     info.formInitValue = formInitValue;
     return info;
   });
