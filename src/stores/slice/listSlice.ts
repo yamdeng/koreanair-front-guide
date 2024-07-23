@@ -12,8 +12,10 @@ export const defaultListExcludeKeys = [
   'totalCount',
   'prevPage',
   'nextPage',
+  'lastPage',
   'displayPageIndexList',
   'listApiMethod',
+  'columns',
 ];
 
 export const listBaseState = {
@@ -86,7 +88,7 @@ export const createListSlice = (set, get) => ({
     applyStateKeys.forEach((apiRequestKey) => {
       apiParam[apiRequestKey] = state[apiRequestKey];
     });
-    apiParam.page = state.currentPage;
+    apiParam.pageNum = state.currentPage;
     apiParam.pageSize = state.pageSize;
     set({ beforeApiParam: apiParam });
     return apiParam;
@@ -128,10 +130,10 @@ export const createListSlice = (set, get) => ({
     const apiParam = getSearchParam();
     const response: any = await ApiService[listApiMethod](listApiPath, apiParam, { disableLoadingBar: true });
     const data = response.data;
-    const rows = data.rows;
+    const list = data.list;
     const totalCount = data.total;
     setTotalCount(totalCount);
-    set({ list: rows });
+    set({ list: list });
   },
 
   getColumns: () => {

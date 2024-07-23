@@ -1,15 +1,10 @@
 import _ from 'lodash';
+import ApiService from '@/services/ApiService';
+import history from '@/utils/history';
 
 /*
 
   기본 form slice
-
-*/
-
-/*
-
-  TODO
-   -autoSaveApiPath를 전달받음
 
 */
 
@@ -31,6 +26,8 @@ export const formBaseState = {
   excludeApiKeys: [],
   formDetailId: null,
   formType: 'add',
+  formApiPath: '',
+  baseRoutePath: '',
 };
 
 export const createFormSlice = (set, get) => ({
@@ -176,5 +173,47 @@ export const createFormSliceYup = (set, get) => ({
       errors: errors,
     });
     return success;
+  },
+
+  save: async () => {
+    const { validate, getApiParam, formType, formDetailId, formApiPath, baseRoutePath } = get();
+    const isValid = await validate();
+    if (isValid) {
+      const apiParam = getApiParam();
+      console.log(`apiParam : ${JSON.stringify(apiParam)}`);
+      if (formType === 'add') {
+        await ApiService.post(`${formApiPath}`, apiParam);
+      } else {
+        await ApiService.put(`${formApiPath}/${formDetailId}`, apiParam);
+      }
+      history.push(`${baseRoutePath}`);
+    }
+  },
+
+  remove: async () => {
+    const { formDetailId, formApiPath, baseRoutePath } = get();
+    await ApiService.delete(`${formApiPath}/${formDetailId}`);
+    history.push(`${baseRoutePath}`);
+  },
+
+  getDetail: async (id) => {
+    const { formApiPath } = get();
+    const response: any = await ApiService.get(`${formApiPath}/${id}`);
+    const detailInfo = response.data;
+    set({
+      ...detailInfo,
+      formDetailId: id,
+      formType: 'update',
+    });
+  },
+
+  gorFormPage: () => {
+    const { formDetailId, baseRoutePath } = get();
+    history.push(`${baseRoutePath}/${formDetailId}/edit`);
+  },
+
+  cancel: () => {
+    const { baseRoutePath } = get();
+    history.push(`${baseRoutePath}`);
   },
 });

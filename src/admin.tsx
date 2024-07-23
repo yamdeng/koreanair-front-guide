@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { unstable_HistoryRouter as Router } from 'react-router-dom';
-import App from './App.tsx';
+import AdminApp from './AdminApp.tsx';
 import history from './utils/history.ts';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
@@ -22,6 +22,6 @@ import './resources/css/importadmin.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Router history={history as any}>
-    <App />
+    <AdminApp />
   </Router>
 );

@@ -1,9 +1,8 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import MessageList from './components/admin/message/MessageList';
-import useAdminRoute from './routes/useAdminRoute';
-import { StoreProvider } from './context/StoreContext';
 import LoadingBarContainer from './components/layout/LoadingBarContainer';
+import { StoreProvider } from './context/StoreContext';
+import useAdminRoute from './routes/useAdminRoute';
 
 function AdminApp() {
   const adminRoute = useAdminRoute();
@@ -12,7 +11,7 @@ function AdminApp() {
     <StoreProvider>
       <div>
         <Routes>
-          <Route path="/" element={<MessageList />} />
+          {/* <Route path="/" element={<MessageList />} /> */}
           {adminRoute}
         </Routes>
         <ToastContainer autoClose={3000} hideProgressBar={true} />

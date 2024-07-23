@@ -1,7 +1,7 @@
 import Config from '@/config/Config';
 import CommonUtil from '@/utils/CommonUtil';
 import { AgGridReact } from 'ag-grid-react';
-import { Modal } from 'antd';
+import { Select as AntSelect, Modal } from 'antd';
 import { produce } from 'immer';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import GridActionButtonComponent from './GridActionButtonComponent';
@@ -96,7 +96,7 @@ function AppTable(props) {
   } = props;
 
   // store
-  const { currentPage, prevPage, lastPage, nextPage, displayPageIndexList = [] } = store;
+  const { currentPage, prevPage, nextPage, displayPageIndexList = [] } = store;
 
   // 컬럼 동적 셋팅 모달 open
   const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
@@ -210,7 +210,7 @@ function AppTable(props) {
 
   return (
     <>
-      <div style={{ padding: 3 }}>
+      {/* <div style={{ padding: 3 }}>
         <span>{CommonUtil.formatString(gridTotalCountTemplate, rowData.length)}</span>
         <button className="button" onClick={downloadCSVFile} style={{ display: displayCSVExportButton ? '' : 'none' }}>
           download csv
@@ -222,6 +222,39 @@ function AppTable(props) {
         >
           동적 필드 적용
         </button>
+      </div> */}
+
+      <div className="conts-subTit">
+        <span>{CommonUtil.formatString(gridTotalCountTemplate, rowData.length)}</span>
+        <div className="btn-area">
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
+            신규
+          </button>
+          <span className="ml5 w100">
+            <AntSelect
+              style={{ width: '200px' }}
+              options={[
+                {
+                  value: 'jack',
+                  label: 'Jack',
+                },
+                {
+                  value: 'lucy',
+                  label: 'Lucy',
+                },
+                {
+                  value: 'Yiminghe',
+                  label: 'yiminghe',
+                },
+                {
+                  value: 'disabled',
+                  label: 'Disabled',
+                  disabled: true,
+                },
+              ]}
+            />
+          </span>
+        </div>
       </div>
       <div className="ag-theme-quartz" style={{ height: tableHeight }}>
         <AgGridReact
@@ -283,103 +316,81 @@ function AppTable(props) {
         </Modal>
       )}
 
-      <div className="paging_wrap" style={{ display: hiddenPagination ? 'none' : '' }}>
-        <span
-          className="p_web"
+      <div className="pagination" style={{ display: hiddenPagination ? 'none' : '' }}>
+        <a
+          className="first"
+          href=""
           style={{ display: prevPage ? '' : 'none' }}
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             store.goFirstPage();
           }}
         >
-          {' << '}
-        </span>
-        <span
-          className="p_web p_arr_l"
+          <span className="sr-only">이전</span>
+        </a>
+        <a
+          className="prev"
+          href=""
           style={{ display: prevPage ? '' : 'none' }}
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             store.changeCurrentPage(prevPage);
           }}
         >
-          {'<'}
-        </span>
-        {/* web paging */}
-        {displayPageIndexList.map((pageIndex) => {
-          let pageComponent = (
-            <span
-              key={pageIndex}
-              className="p_web"
-              onClick={() => {
-                store.changeCurrentPage(pageIndex);
-              }}
-            >
-              {pageIndex}
-            </span>
-          );
-          if (pageIndex === currentPage) {
-            pageComponent = (
-              <span
-                style={{ color: '#2dbab6', textDecoration: 'underline' }}
+          <span className="sr-only">이전</span>
+        </a>
+        <span>
+          {displayPageIndexList.map((pageIndex) => {
+            let pageComponent = (
+              <a
+                href=""
                 key={pageIndex}
-                className="p_web mbold"
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   store.changeCurrentPage(pageIndex);
                 }}
               >
                 {pageIndex}
-              </span>
+              </a>
             );
-          }
-          return pageComponent;
-        })}
-        {displayPageIndexList.length === 0 ? (
-          <>
-            <span className="p_arr_l">{'<'}</span>
-            <span className="p_web">1</span>
-            <span className="p_arr_r">{'>'}</span>
-          </>
-        ) : null}
-        {/* mobile pagind */}
-        <span
-          className="p_mobile p_arr_r"
-          style={{ display: currentPage !== 1 ? '' : 'none' }}
-          onClick={() => {
-            store.changeCurrentPage(currentPage - 1);
-          }}
-        >
-          {'<'}
+            if (pageIndex === currentPage) {
+              pageComponent = (
+                <strong
+                  title="현재페이지"
+                  key={pageIndex}
+                  onClick={() => {
+                    store.changeCurrentPage(pageIndex);
+                  }}
+                >
+                  {pageIndex}
+                </strong>
+              );
+            }
+            return pageComponent;
+          })}
         </span>
-        <span className="p_mobile mbold" style={{ color: '#2dbab6' }}>
-          {currentPage}
-        </span>
-        <span className="p_mobile">/</span>
-        <span className="p_mobile">{lastPage}</span>
-        <span
-          className="p_mobile p_arr_r"
-          style={{ display: currentPage !== lastPage ? '' : 'none' }}
-          onClick={() => {
-            store.changeCurrentPage(currentPage + 1);
-          }}
-        >
-          {'>'}
-        </span>
-        <span
-          className="p_web p_arr_r"
+        <a
+          className="next"
+          href=""
           style={{ display: nextPage ? '' : 'none' }}
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             store.changeCurrentPage(nextPage);
           }}
         >
-          {'>'}
-        </span>
-        <span
-          className="p_web"
+          <span className="sr-only">다음</span>
+        </a>
+        <a
+          className="last"
+          href=""
           style={{ display: nextPage ? '' : 'none' }}
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             store.goLastPage();
           }}
         >
-          {' >> '}
-        </span>
+          <span className="sr-only">다음</span>
+        </a>
       </div>
     </>
   );

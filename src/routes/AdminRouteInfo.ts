@@ -11,11 +11,11 @@ AdminRouteInfo.list = [
   },
   {
     Component: MessageDetail,
-    path: 'messages/:id',
+    path: 'messages/:detailId',
   },
   {
     Component: MessageForm,
-    path: 'messages/:id/edit',
+    path: 'messages/:detailId/edit',
   },
 ];
 
