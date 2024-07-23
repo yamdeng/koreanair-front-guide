@@ -1,0 +1,40 @@
+#.프로젝트 설명
+ -git은 배포되는 도메인에 따라 사용자/관리자 2개로 분류
+ -공통 컴포넌트, 공통 유틸은 사용자 git을 기준으로 관리자 git에 수동으로 동기화시킬 예정임
+  : 관리자쪽은 운영시에 공통 컴포넌트, 공통 유틸이 변경되도 동기화를 하지 않아도 될 것 같음
+
+#.기타 브런치 설명
+ -guide : 프론트 개발 방법 및 공통 컴포넌트 가이드 포팅 ===> 사용자 git에만 존재
+  : https://github.com/yamdeng/koreanair-front-guide.git 여기서 가이드한 소스가 guide 브런치로 이동됩니다.
+ -develop, staging, main, release ===> 항공 정책에 따라 브런치명을 따라감
+
+#.vscode 에디터 셋팅
+ -doc 폴더에 있는 settings.json을 copy해서 .vscode 폴더에 복사합니다.
+ -확인 플러그인 설치
+
+#.프로젝트 초기 셋팅
+ -node 설치
+ -yarn 설치 : npm install -g yarn
+
+
+ 
+ 
+
+
+이번 수요일(내일) 오후 4시에 진행할 프론트 개발 관련 공유사항입니다.
+ -퍼블리싱 작업 방법 공유
+ -프론트 프로젝트 구조 설명 : git, 폴더구조
+ -로컬개발방법
+  1.사용자 / 관리자
+  2.라우팅 설정 방법 및 서버 api 호출 방법
+ -공통컴포넌트, 공통개발방법(zustand) 개발진행 사항 공유
+
+#.소스 정보
+ -git url : https://github.com/yamdeng/koreanair-css.git
+
+#.vscode 환경설정 통일시키기
+
+#.로컬환경 개발시 환경변수 사용하는 방법 : yarn dev 실행시
+ -.env.development.local
+
+/api/v1

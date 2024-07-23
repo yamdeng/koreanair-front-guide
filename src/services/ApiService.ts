@@ -1,4 +1,4 @@
-import ApiUtil from '@utils/ApiUtil';
+import ApiUtil from '@/utils/ApiUtil';
 
 /*
 
@@ -6,9 +6,10 @@ import ApiUtil from '@utils/ApiUtil';
 
 */
 
-const VITE_API = import.meta.env.VITE_API;
+const VITE_API_PREFIX = import.meta.env.VITE_API_PREFIX;
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-const prefixUrl = VITE_API + '/';
+const prefixUrl = VITE_API_URL + VITE_API_PREFIX + '/';
 
 class ApiService {
   // http get method 요청

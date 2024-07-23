@@ -1,5 +1,5 @@
 import { createStore } from 'zustand';
-import { getProfile } from '@data/grid/example-data-promise';
+import { getProfile } from '@/data/grid/example-data-promise';
 
 const appStore = createStore<any>((set) => ({
   profile: null,
