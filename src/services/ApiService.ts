@@ -1,4 +1,4 @@
-import ApiUtil from '@utils/ApiUtil';
+import ApiUtil from '@/utils/ApiUtil';
 
 /*
 

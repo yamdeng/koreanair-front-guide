@@ -1,3 +1,4 @@
 **/*.css
 **/*.scss
 generate-server/**
+vite.config.ts
