@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import iconMenuFriesImage from '@/resources/images/icon-menu-fries.svg';
 import koreanairSymbolImage from '@/resources/images/koreanair-symbol.svg';
 import iconSearchImage from '@/resources/images/icon_search.svg';
@@ -8,11 +9,11 @@ import iconSettingImage from '@/resources/images/icon_setting.svg';
 import closeImage from '@/resources/images/close.svg';
 
 export default function OccupationLayout() {
+  const navigate = useNavigate();
   const [displayLeftMenu, setDisplayLeftMenu] = useState(true);
   const toggleLeftMenu = () => {
     setDisplayLeftMenu(!displayLeftMenu);
   };
-
   return (
     <div className="wrap">
       <header className="header">
@@ -25,7 +26,7 @@ export default function OccupationLayout() {
           <div className="top-logo">
             <a href="javascript:void(0);">
               <img src={koreanairSymbolImage} />
-              <span>항공안전</span>
+              <span>산업안전</span>
             </a>
           </div>
         </div>
@@ -79,11 +80,21 @@ export default function OccupationLayout() {
               </ul>
             </li>
             <li className="btn">
-              <a href="javascript:void(0);">
-                <span className="active">항공안전</span>
+              <a
+                href="javascript:void(0);"
+                onClick={() => {
+                  navigate('/aviation');
+                }}
+              >
+                <span>항공안전</span>
               </a>
-              <a href="javascript:void(0);">
-                <span>산업안전</span>
+              <a
+                href="javascript:void(0);"
+                onClick={() => {
+                  navigate('/occupation');
+                }}
+              >
+                <span className="active">산업안전</span>
               </a>
             </li>
           </ul>
@@ -107,7 +118,7 @@ export default function OccupationLayout() {
                 <span>산업</span>
               </a>
             </div>
-            <div className="close">
+            <div className="close" onClick={toggleLeftMenu}>
               <a href="javascript:void(0);">
                 <img src={closeImage} />
               </a>

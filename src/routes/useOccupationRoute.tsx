@@ -1,6 +1,7 @@
+import OccupationLayout from '@/components/layout/OccupationLayout';
+import OccupationPortal from '@/components/occupation/OccupationPortal';
 import { Route } from 'react-router-dom';
 import OccupationRouteInfo from './OccupationRouteInfo';
-import OccupationLayout from '@/components/layout/OccupationLayout';
 
 const useOccupationRoute = () => {
   const routes = (
@@ -13,7 +14,8 @@ const useOccupationRoute = () => {
   );
 
   return (
-    <Route path="/aviation" element={<OccupationLayout />}>
+    <Route path="/occupation" element={<OccupationLayout />}>
+      <Route path="" index element={<OccupationPortal />} />
       {routes}
     </Route>
   );

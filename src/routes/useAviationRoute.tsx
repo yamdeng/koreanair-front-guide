@@ -1,6 +1,7 @@
 import { Route } from 'react-router-dom';
 import AviationRouteInfo from './AviationRouteInfo';
 import AviationLayout from '@/components/layout/AviationLayout';
+import AviationPortal from '@/components/aviation/AviationPortal';
 
 const useAviationRoute = () => {
   const routes = (
@@ -14,6 +15,7 @@ const useAviationRoute = () => {
 
   return (
     <Route path="/aviation" element={<AviationLayout />}>
+      <Route path="" index element={<AviationPortal />} />
       {routes}
     </Route>
   );

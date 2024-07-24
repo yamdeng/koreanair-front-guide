@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import iconMenuFriesImage from '@/resources/images/icon-menu-fries.svg';
 import koreanairSymbolImage from '@/resources/images/koreanair-symbol.svg';
 import iconSearchImage from '@/resources/images/icon_search.svg';
@@ -8,6 +9,7 @@ import iconSettingImage from '@/resources/images/icon_setting.svg';
 import closeImage from '@/resources/images/close.svg';
 
 export default function AviationLayout() {
+  const navigate = useNavigate();
   const [displayLeftMenu, setDisplayLeftMenu] = useState(true);
   const toggleLeftMenu = () => {
     setDisplayLeftMenu(!displayLeftMenu);
@@ -79,10 +81,20 @@ export default function AviationLayout() {
               </ul>
             </li>
             <li className="btn">
-              <a href="javascript:void(0);">
+              <a
+                href="javascript:void(0);"
+                onClick={() => {
+                  navigate('/aviation');
+                }}
+              >
                 <span className="active">항공안전</span>
               </a>
-              <a href="javascript:void(0);">
+              <a
+                href="javascript:void(0);"
+                onClick={() => {
+                  navigate('/occupation');
+                }}
+              >
                 <span>산업안전</span>
               </a>
             </li>
@@ -107,7 +119,7 @@ export default function AviationLayout() {
                 <span>산업</span>
               </a>
             </div>
-            <div className="close">
+            <div className="close" onClick={toggleLeftMenu}>
               <a href="javascript:void(0);">
                 <img src={closeImage} />
               </a>
