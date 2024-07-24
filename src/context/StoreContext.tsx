@@ -1,13 +1,13 @@
 import { useRef, createContext, useContext } from 'react';
 import { useStore } from 'zustand';
-import appStore from '@/stores/appStore';
+import useAdminAppStore from '@/stores/admin/useAdminAppStore';
 
 export const StoreContext = createContext(null);
 
 export const StoreProvider = ({ children }) => {
   const storeRef = useRef();
   if (!storeRef.current) {
-    storeRef.current = appStore as any;
+    storeRef.current = useAdminAppStore as any;
   }
   return <StoreContext.Provider value={storeRef.current}>{children}</StoreContext.Provider>;
 };
