@@ -1,6 +1,12 @@
 import { Outlet } from 'react-router-dom';
+import useAdminAppStore from '@/stores/admin/useAdminAppStore';
+import { useStore } from 'zustand';
 
 export default function AdminLayout() {
+  const { leftMenuList, toggleRootMenuExpand, clickSecondMenu, clickLastMenu } = useStore(
+    useAdminAppStore,
+    (state) => state
+  ) as any;
   return (
     <div>
       {/* <AdminTopMenu /> */}
@@ -10,90 +16,71 @@ export default function AdminLayout() {
         <div className="leftMenu">
           <div className="LNB_side">
             <ul className="LNB_list">
-              <li>
-                <a href="#">안전보고서</a>
-                {/* ul className="mu-2depth">
-                  <li className="active">
-                    <a href="">My Report</a>
-                    <ul className="mu-3depth">
-                      <li className="active">
-                        <a href="">3depth</a>
-                      </li>
-                      <li>
-                        <a href="">3depth</a>
-                      </li>
-                      <li>
-                        <a href="">3depth</a>
-                      </li>
-                      <li>
-                        <a href="">3depth</a>
-                      </li>
-                      <li>
-                        <a href="">3depth</a>
-                      </li>
+              {leftMenuList.map((rootDepthMenuInfo) => {
+                const { treeType, level, nameKor, menuId, isMenuExapand, children } = rootDepthMenuInfo;
+
+                console.log(treeType);
+                console.log(level);
+
+                let childrenMenuComponent = null;
+                if (children && children.length && isMenuExapand) {
+                  childrenMenuComponent = (
+                    <ul className="mu-2depth">
+                      {children.map((secondDepthMenuInfo) => {
+                        const lastMenuChildren = secondDepthMenuInfo.children;
+                        let lastChildrenMenuComponent = null;
+                        if (lastMenuChildren && lastMenuChildren.length) {
+                          lastChildrenMenuComponent = (
+                            <ul className="mu-3depth">
+                              {lastMenuChildren.map((lastDeptMenuInfo) => {
+                                return (
+                                  <li
+                                    key={lastDeptMenuInfo.menuId}
+                                    className={lastDeptMenuInfo.isSelected ? 'active' : ''}
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      clickLastMenu(lastDeptMenuInfo);
+                                    }}
+                                  >
+                                    <a href="javascript:void(0)">{lastDeptMenuInfo.nameKor}</a>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          );
+                        }
+                        return (
+                          <li
+                            key={secondDepthMenuInfo.menuId}
+                            className={secondDepthMenuInfo.isSelected ? 'active' : ''}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              clickSecondMenu(secondDepthMenuInfo);
+                            }}
+                          >
+                            <a href="javascript:void(0)">{secondDepthMenuInfo.nameKor}</a>
+                            {lastChildrenMenuComponent}
+                          </li>
+                        );
+                      })}
                     </ul>
+                  );
+                }
+                return (
+                  <li
+                    key={menuId}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      toggleRootMenuExpand(rootDepthMenuInfo);
+                    }}
+                  >
+                    <a href="javascript:void(0)" className={isMenuExapand ? 'active' : ''}>
+                      {nameKor}
+                    </a>
+                    {childrenMenuComponent}
                   </li>
-                  <li>
-                    <a href="#">Report List</a>
-                  </li>
-                </ul*/}
-              </li>
-              <li>
-                <a href="">안전정책</a>
-              </li>
-              <li>
-                <a href="">안전위험관리</a>
-              </li>
-              <li>
-                <a href="">안전보증</a>
-              </li>
-              <li>
-                <a href="">안전증진</a>
-              </li>
-              <li>
-                <a href="">AUDIT</a>
-              </li>
-              <li>
-                <a href="#" className="active">
-                  관리자
-                </a>
-                <ul className="mu-2depth">
-                  <li className="">
-                    <a href="">HAZARD 관리</a>
-                    {/* ul className="mu-3depth">
-                      <li className="active">
-                        <a href="">Taxonomy</a>
-                      </li>
-                      <li>
-                        <a href="">Potential Consequence</a>
-                      </li>
-                    </ul*/}
-                  </li>
-                  <li>
-                    <a href="#">EVENT TYPE 관리</a>
-                  </li>
-                  <li>
-                    <a href="#">RISK MATRIX 관리</a>
-                  </li>
-                  <li className="active">
-                    <a href="#">RSR 관리</a>
-                    <ul className="mu-3depth">
-                      <li className="active">
-                        <a href="">장비코드 관리</a>
-                      </li>
-                      <li>
-                        <a href="">장비점검 관리</a>
-                      </li>
-                      <li>
-                        <a href="">입력항목 관리</a>
-                      </li>
-                      <li>
-                        <a href="">대시보드 관리</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
+                );
+              })}
             </ul>
           </div>
         </div>
