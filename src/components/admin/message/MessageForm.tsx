@@ -13,6 +13,7 @@ function MessageForm() {
     errors,
     changeInput,
     getDetail,
+    formType,
     save,
     remove,
     cancel,
@@ -22,7 +23,7 @@ function MessageForm() {
   const { detailId } = useParams();
 
   useEffect(() => {
-    if (detailId !== 'add') {
+    if (detailId && detailId !== 'add') {
       getDetail(detailId);
     }
     return clear();
@@ -31,7 +32,7 @@ function MessageForm() {
   return (
     <>
       <div className="conts-title">
-        <h2>메시지 등록</h2>
+        <h2>메시지 폼</h2>
       </div>
       <div className="detail-form">
         <ul className="detail-list">
@@ -51,6 +52,7 @@ function MessageForm() {
                       id="msgKey"
                       value={msgKey}
                       onChange={(event) => changeInput('msgKey', event.target.value)}
+                      disabled={formType !== 'add' ? true : false}
                     />
                     {errors.msgKey ? <span className="errorText">{errors.msgKey}</span> : null}
                   </span>
@@ -171,7 +173,11 @@ function MessageForm() {
         <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
           저장
         </button>
-        <button className="btn_text text_color_darkblue-100 btn_close" onClick={remove}>
+        <button
+          className="btn_text text_color_darkblue-100 btn_close"
+          onClick={remove}
+          style={{ display: formType !== 'add' ? '' : 'none' }}
+        >
           삭제
         </button>
         <button className="btn_text text_color_darkblue-100 btn_close" onClick={cancel}>

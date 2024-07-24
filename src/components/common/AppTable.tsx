@@ -79,7 +79,6 @@ function AppTable(props) {
     handleRowSelect,
     rowSelectMode = 'multiple',
     enableCheckBox = false,
-    pageSize = Config.defaultGridPageSize,
     pageSizeList = Config.defaultPageSizeList,
     enablePagination = false,
     displayCSVExportButton = false,
@@ -96,7 +95,7 @@ function AppTable(props) {
   } = props;
 
   // store
-  const { currentPage, prevPage, nextPage, displayPageIndexList = [] } = store;
+  const { currentPage, prevPage, nextPage, totalCount, pageSize, displayPageIndexList = [], changePageSize } = store;
 
   // 컬럼 동적 셋팅 모달 open
   const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
@@ -224,34 +223,22 @@ function AppTable(props) {
         </button>
       </div> */}
 
-      <div className="conts-subTit">
-        <span>{CommonUtil.formatString(gridTotalCountTemplate, rowData.length)}</span>
+      <div className="table-header">
+        <div className="count">{CommonUtil.formatString(gridTotalCountTemplate, totalCount)}</div>
         <div className="btn-area">
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
+          {/* <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
             신규
-          </button>
-          <span className="ml5 w100">
+          </button> */}
+          <span>
             <AntSelect
-              style={{ width: '200px' }}
-              options={[
-                {
-                  value: 'jack',
-                  label: 'Jack',
-                },
-                {
-                  value: 'lucy',
-                  label: 'Lucy',
-                },
-                {
-                  value: 'Yiminghe',
-                  label: 'yiminghe',
-                },
-                {
-                  value: 'disabled',
-                  label: 'Disabled',
-                  disabled: true,
-                },
-              ]}
+              style={{ width: 150 }}
+              onChange={(size) => {
+                changePageSize(size);
+              }}
+              value={pageSize}
+              options={pageSizeList.map((size) => {
+                return { value: size, label: size };
+              })}
             />
           </span>
         </div>

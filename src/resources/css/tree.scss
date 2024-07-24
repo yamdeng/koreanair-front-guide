@@ -148,6 +148,9 @@
     /*:where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher {
         background: url(../images/icon-plus.svg) center center no-repeat;
     }*/
+    :where(.css-dev-only-do-not-override-98ntnt).ant-tree {
+      background-color: transparent;
+    }
     :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher .ant-tree-switcher-icon svg {
         background: url(../images/arrow-down.svg) center center no-repeat; 
         background-size: cover;
@@ -159,4 +162,6 @@
     :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher:not(.ant-tree-switcher-noop):hover {
         background-color: var(--color-lightblue-10);
     }
+    /*.anticon svg {background: url(../images/folder.svg)center center no-repeat; background-size: cover;}*/
+    .anticon svg path {display: none;}
   }

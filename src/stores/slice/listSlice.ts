@@ -1,5 +1,6 @@
 import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
+import history from '@/utils/history';
 
 export const defaultListExcludeKeys = [
   'list',
@@ -16,6 +17,7 @@ export const defaultListExcludeKeys = [
   'displayPageIndexList',
   'listApiMethod',
   'columns',
+  'baseRoutePath',
 ];
 
 export const listBaseState = {
@@ -32,6 +34,7 @@ export const listBaseState = {
   displayPageIndexList: [],
   pageSize: 10,
   listApiMethod: 'get',
+  baseRoutePath: '',
 };
 
 export const createListSlice = (set, get) => ({
@@ -139,6 +142,16 @@ export const createListSlice = (set, get) => ({
   getColumns: () => {
     const { columns } = get();
     return CommonUtil.mergeColumnInfosByLocal(columns);
+  },
+
+  goDetailPage: (detailId) => {
+    const { baseRoutePath } = get();
+    history.push(`${baseRoutePath}/${detailId}/edit`);
+  },
+
+  goAddPage: () => {
+    const { baseRoutePath } = get();
+    history.push(`${baseRoutePath}/add/edit`);
   },
 
   excelDownload: () => {

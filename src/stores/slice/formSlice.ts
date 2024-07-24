@@ -16,6 +16,8 @@ export const defaultFormExcludeKeys = [
   'isDirty',
   'isValid',
   'yupFormSchema',
+  'formApiPath',
+  'baseRoutePath',
 ];
 
 export const formBaseState = {
