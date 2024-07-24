@@ -28,7 +28,8 @@ const columns: any = [<% tableColumns.forEach((columnInfo)=> { %>
 
 const initListData = {
   ...listBaseState,
-  listApiPath: "목록api패스",
+  listApiPath: "TODO:목록api패스",
+  baseRoutePath: 'TODO:UI라우트패스',
   columns: columns,
 };
 
@@ -38,6 +39,9 @@ const <%= storeName %> = create<any>((set, get) => ({
 
   ...initListData,
 
+  /* TODO : 검색에서 사용할 input 선언 */
+  searchWord: '',
+
   clear: () => {
     set(initListData);
   },
@@ -45,16 +49,52 @@ const <%= storeName %> = create<any>((set, get) => ({
 
 function <%= fileName %>() {
   const state = <%= storeName %>();
-  const { search, list, getColumns } = state;
+  const { search, searchWord, list, getColumns, goAddPage, changeSearchInput, clear } = state;
   const columns = getColumns();
 
   useEffect(() => {
     search();
+    return clear();
   }, []);
 
   return (
     <>
-      {/* 검색 input 영역입니다 */}
+      {/* TODO : 헤더 영역입니다 */}
+      <div className="conts-title">
+        <h2>메시지목록</h2>
+        <div className="btn-area">
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={search}>
+            조회
+          </button>
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={goAddPage}>
+            신규
+          </button>
+        </div>
+      </div>
+      {/* TODO : 검색 input 영역입니다 */}
+      <div className="boxForm">
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <span className="form-group wid100 mr5">
+              <input
+                type="text"
+                className="form-tag"
+                name="title"
+                value={searchWord}
+                onChange={(event) => {
+                  changeSearchInput('searchWord', event.target.value);
+                }}
+                onKeyDown={(event) => {
+                  if (event && event.key === 'Enter') {
+                    search();
+                  }
+                }}
+              />
+              <label className="f-label">이름</label>
+            </span>
+          </div>
+        </div>
+      </div>
       <AppTable
         rowData={list}
         columns={columns}
@@ -81,6 +121,9 @@ const yupFormSchema = yup.object({<% tableColumns.forEach((columnInfo)=> { %>
 const initFormData = {
   ...formBaseState,
 
+  formApiPath: 'TODO : api path',
+  baseRoutePath: 'TODO : UI route path',
+
   requiredFields: [<% requiredFieldList.forEach((fieldName)=> { %>"<%= fieldName %>", <% }) %>],
   <% tableColumns.forEach((columnInfo)=> { %>
   <%= columnInfo.column_name %>: <%- columnInfo.formInitValue %>,<% }) %>
@@ -94,13 +137,6 @@ const <%= fileName %> = create<any>((set, get) => ({
 
   yupFormSchema: yupFormSchema,
 
-  save: () => {
-    const { validate, getApiParam } = get();
-    if (validate()) {
-      const apiParam = getApiParam();
-    }
-  },
-
   clear: () => {
     set(initFormData);
   },
@@ -109,47 +145,84 @@ const <%= fileName %> = create<any>((set, get) => ({
 export default <%= fileName %>`;
 
 const formViewGenerateString = `
-import withSourceView from '@/hooks/withSourceView';
 import { useEffect } from 'react';
-/* store 경로를 변경해주세요. */
+import { useParams } from 'react-router-dom';
+/* TODO : store 경로를 변경해주세요. */
 import <%= storeName %> from '@/stores/guide/<%= storeName %>';
 
+/* TODO : 컴포넌트 이름을 확인해주세요 */
 function <%= fileName %>() {
 
   /* formStore state input 변수 */
-  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> errors, changeInput, save, clear } =
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> errors,
+    changeInput,
+    getDetail,
+    formType,
+    save,
+    remove,
+    cancel,
+    clear } =
     <%= storeName %>();
 
+  const { detailId } = useParams();
+
   useEffect(() => {
+    if (detailId && detailId !== 'add') {
+      getDetail(detailId);
+    }
     return clear();
   }, []);
 
   return (
     <>
-      <div className="grid-one-container">
-        <% tableColumns.forEach((columnInfo)=> { %>        
-        <div className="div-label"><%= columnInfo.column_comment %> <% if (columnInfo.is_nullable !== 'YES') { %> <span className="required">*</span> <% } %>:</div>
-        <div className="div-input">
-          <input
-            type="text"
-            className={errors.<%= columnInfo.column_name %> ? 'input-not-valid' : ''}
-            placeholder="<%= columnInfo.column_comment %>"
-            name="<%= columnInfo.column_name %>"
-            id="<%= columnInfo.column_name %>"
-            value={<%= columnInfo.column_name %>}
-            onChange={(event) => changeInput('<%= columnInfo.column_name %>', event.target.value)}
-          />
-          {errors.<%= columnInfo.column_name %> ? <span className="error_message">{errors.<%= columnInfo.column_name %>}</span> : null}
-        </div>        
-        <% }) %>
-        <div className="right" style={{ width: 580 }}>
-          <button className="button button-cancel" onClick={clear}>
-            취소
-          </button>
-          <button className="button button-info" onClick={save}>
-            저장
-          </button>
-        </div>
+      <div className="conts-title">
+        <h2>TODO : 헤더 타이틀</h2>
+      </div>
+      <div className="detail-form">
+        <ul className="detail-list">
+          <% tableColumns.forEach((columnInfo)=> { %>        
+          <li className="list">
+            <label className="f-label">
+              <%= columnInfo.column_comment %> <% if (columnInfo.is_nullable !== 'YES') { %> <span className="required">*</span> <% } %>
+            </label>
+            <div className="cont">
+              <div className="form-table">
+                <div className="form-cell wid100">
+                  <span className="form-group wid100 mr5">
+                    <input
+                      type="text"
+                      className={errors.<%= columnInfo.column_name %> ? 'form-tag error' : 'form-tag'}
+                      placeholder="<%= columnInfo.column_comment %>"
+                      name="<%= columnInfo.column_name %>"
+                      id="<%= columnInfo.column_name %>"
+                      value={<%= columnInfo.column_name %>}
+                      onChange={(event) => changeInput('<%= columnInfo.column_name %>', event.target.value)}
+                    />
+                    {errors.<%= columnInfo.column_name %> ? <span className="errorText">{errors.<%= columnInfo.column_name %>}</span> : null}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>                
+          <% }) %>
+        </ul>
+      </div>
+
+      {/* 하단 버튼 영역 */}
+      <div className="contents-btns">
+        <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
+          저장
+        </button>
+        <button
+          className="btn_text text_color_darkblue-100 btn_close"
+          onClick={remove}
+          style={{ display: formType !== 'add' ? '' : 'none' }}
+        >
+          삭제
+        </button>
+        <button className="btn_text text_color_darkblue-100 btn_close" onClick={cancel}>
+          취소
+        </button>
       </div>
     </>
   );
