@@ -9,10 +9,10 @@ import { useStore } from 'zustand';
 
 function AdminApp() {
   const adminRoute = useAdminRoute();
-  const { getLeftMenu } = useStore(useAdminAppStore, (state) => state) as any;
+  const { initApp } = useStore(useAdminAppStore, (state) => state) as any;
 
   useEffect(() => {
-    getLeftMenu();
+    initApp();
   }, []);
 
   return (
