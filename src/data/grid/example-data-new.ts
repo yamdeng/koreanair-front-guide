@@ -180,7 +180,7 @@ export const getSimpleData = () => {
 };
 
 export const getAllData = () => {
-  return _.orderBy(allData, ['updatedDate'], ['desc']);
+  return allData;
 };
 
 // data page 반영

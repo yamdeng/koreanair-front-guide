@@ -79,6 +79,7 @@ function AppTable(props) {
     handleRowSelect,
     rowSelectMode = 'multiple',
     enableCheckBox = false,
+    pageSize = Config.defaultGridPageSize,
     pageSizeList = Config.defaultPageSizeList,
     enablePagination = false,
     displayCSVExportButton = false,
@@ -89,21 +90,13 @@ function AppTable(props) {
     actionButtonListPath = '',
     getGridRef,
     applyAutoHeight,
+    search,
     store = null,
     hiddenPagination,
   } = props;
 
   // store
-  const {
-    currentPage,
-    prevPage,
-    nextPage,
-    totalCount,
-    pageSize,
-    displayPageIndexList = [],
-    changePageSize,
-    search,
-  } = store || {};
+  const { currentPage, prevPage, nextPage, totalCount, displayPageIndexList = [], changePageSize } = store || {};
 
   // 컬럼 동적 셋팅 모달 open
   const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
@@ -124,7 +117,7 @@ function AppTable(props) {
       headerName: 'Actions',
       actionButtons: actionButtons,
       actionButtonListPath: actionButtonListPath,
-      search: search,
+      search: store ? store.search : search,
     });
   }
 
@@ -243,11 +236,11 @@ function AppTable(props) {
           </button>
           <span>
             <AntSelect
-              style={{ width: 150 }}
+              style={{ width: 150, display: hiddenPagination || enablePagination ? 'none' : '' }}
               onChange={(size) => {
                 changePageSize(size);
               }}
-              value={pageSize}
+              value={store ? store.pageSize : pageSize}
               options={pageSizeList.map((size) => {
                 return { value: size, label: size };
               })}
@@ -268,7 +261,7 @@ function AppTable(props) {
           onRowDoubleClicked={handleRowDoubleClick}
           rowSelection={rowSelectMode}
           suppressRowClickSelection={true}
-          paginationPageSize={pageSize}
+          paginationPageSize={store ? store.pageSize : pageSize}
           paginationPageSizeSelector={pageSizeList}
           pagination={enablePagination}
           suppressRowTransform={searchRowSpanIndex !== -1 ? true : false}
@@ -315,7 +308,7 @@ function AppTable(props) {
         </Modal>
       )}
 
-      <div className="pagination" style={{ display: hiddenPagination ? 'none' : '' }}>
+      <div className="pagination" style={{ display: hiddenPagination || enablePagination ? 'none' : '' }}>
         <a
           className="first"
           href=""
