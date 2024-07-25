@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { formBaseState, createFormSlice } from '@/stores/slice/formSlice';
+import { formBaseState, createFormSliceRequire } from '@/stores/slice/formSlice';
 
 const initFormData = {
   ...formBaseState,
@@ -16,7 +16,7 @@ const initFormData = {
 };
 
 const useReportTestFormStore1 = create<any>((set, get) => ({
-  ...createFormSlice(set, get),
+  ...createFormSliceRequire(set, get),
 
   ...initFormData,
 

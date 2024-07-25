@@ -1,5 +1,6 @@
 import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
+import history from '@/utils/history';
 
 export const defaultListExcludeKeys = [
   'list',
@@ -12,8 +13,11 @@ export const defaultListExcludeKeys = [
   'totalCount',
   'prevPage',
   'nextPage',
+  'lastPage',
   'displayPageIndexList',
   'listApiMethod',
+  'columns',
+  'baseRoutePath',
 ];
 
 export const listBaseState = {
@@ -30,6 +34,7 @@ export const listBaseState = {
   displayPageIndexList: [],
   pageSize: 10,
   listApiMethod: 'get',
+  baseRoutePath: '',
 };
 
 export const createListSlice = (set, get) => ({
@@ -86,7 +91,7 @@ export const createListSlice = (set, get) => ({
     applyStateKeys.forEach((apiRequestKey) => {
       apiParam[apiRequestKey] = state[apiRequestKey];
     });
-    apiParam.page = state.currentPage;
+    apiParam.pageNum = state.currentPage;
     apiParam.pageSize = state.pageSize;
     set({ beforeApiParam: apiParam });
     return apiParam;
@@ -128,15 +133,25 @@ export const createListSlice = (set, get) => ({
     const apiParam = getSearchParam();
     const response: any = await ApiService[listApiMethod](listApiPath, apiParam, { disableLoadingBar: true });
     const data = response.data;
-    const rows = data.rows;
+    const list = data.list;
     const totalCount = data.total;
     setTotalCount(totalCount);
-    set({ list: rows });
+    set({ list: list });
   },
 
   getColumns: () => {
     const { columns } = get();
     return CommonUtil.mergeColumnInfosByLocal(columns);
+  },
+
+  goDetailPage: (detailId) => {
+    const { baseRoutePath } = get();
+    history.push(`${baseRoutePath}/${detailId}/edit`);
+  },
+
+  goAddPage: () => {
+    const { baseRoutePath } = get();
+    history.push(`${baseRoutePath}/add/edit`);
   },
 
   excelDownload: () => {

@@ -229,6 +229,34 @@ const convertDateToQuarterValueString = (dateStringInfo) => {
 
 // date util end
 
+/**
+ *
+ * @param params : query string으로 변환할 object
+ * 예시) { page:1, pageSize: 10} : ?page=1&pageSize=10
+ * https://developer.mozilla.org/ko/docs/Web/API/URLSearchParams
+ */
+const objectToQueryString = (params: object): string => {
+  const urlSearchParamsInstance = new URLSearchParams(params as Record<string, string>);
+
+  return urlSearchParamsInstance.toString() ? '?' + urlSearchParamsInstance.toString() : '';
+};
+
+const getQueryStringByArray = (parameterName: string, arr: string[]): string => {
+  let result = '';
+  if (arr && arr.length) {
+    for (let arrIndex = 0; arrIndex < arr.length; arrIndex++) {
+      const stringValue = arr[arrIndex];
+      if (arrIndex === 0) {
+        result = result + `?${encodeURIComponent(parameterName)}=` + stringValue;
+      } else {
+        result = result + `&${encodeURIComponent(parameterName)}=` + stringValue;
+      }
+    }
+  }
+
+  return result;
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -242,4 +270,6 @@ export default {
   listToTreeData,
   getDateFormatByPickerType,
   convertDateToQuarterValueString,
+  getQueryStringByArray,
+  objectToQueryString,
 };
