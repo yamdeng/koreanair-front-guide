@@ -205,6 +205,16 @@ function AppTable(props) {
   );
 
   useEffect(() => {
+    if (gridRef && gridRef.current && gridRef.current.api) {
+      if (displayTableLoading) {
+        gridRef.current.api.showLoadingOverlay();
+      } else {
+        gridRef.current.api.hideOverlay();
+      }
+    }
+  }, [displayTableLoading]);
+
+  useEffect(() => {
     setDynamicApplyColumnList(columns);
   }, [columns]);
 
@@ -236,7 +246,7 @@ function AppTable(props) {
           </button>
           <span>
             <AntSelect
-              style={{ width: 150, display: hiddenPagination || enablePagination ? 'none' : '' }}
+              style={{ width: 150, display: hiddenPagination || enablePagination || !store ? 'none' : '' }}
               onChange={(size) => {
                 changePageSize(size);
               }}

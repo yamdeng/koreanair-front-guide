@@ -44,7 +44,7 @@ function CommonRouteTable({ moduleDirectoryPath, keyword, checkedNewTab, pageLis
 
             return (
               <tr key={title} className={trClassName}>
-                <td>
+                <td style={{ padding: 7 }}>
                   <a
                     href={''}
                     onClick={(event) => {

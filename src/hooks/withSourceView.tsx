@@ -58,7 +58,7 @@ function withSourceView(WrappedComponent) {
           </select>{' '}
           {urlDescriptionComponent}
         </div>
-        <div className="source-raw-view" style={{ width: viewSource ? '50%' : 0 }}>
+        <div className="publish-app source-raw-view" style={{ width: viewSource ? '50%' : 0 }}>
           <SyntaxHighlighter
             language="javascript"
             style={viewSourceTheme === 'dark' ? darcula : oneLight}

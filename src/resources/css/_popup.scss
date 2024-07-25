@@ -1,17 +1,8 @@
 .alert-modal-content,
-.confirm-modal-content,
-.org-simple-form-modal-content,
-.safe-doc-template-apply-form-modal-content,
-.member-simple-form-modal-content,
-.subject-organize-modal-content,
-.work-order-reject-modal-content,
-.common-textarea-modal-content,
-.my-goal-form-modal-content,
-.common-editor-modal-content,
-.menu-name-list-modal-content {
-  width: 500px;
+.confirm-modal-content {
+  width: 50.0rem;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: 2.0rem 3.0rem;
   @include mobile {
     width: 90%;
     padding: 0;
@@ -19,9 +10,9 @@
 }
 
 .subj-org-appoint-modal-content {
-  width: 500px;
+  width: 50.0rem;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: 2.0rem 3.0rem;
   overflow: visible !important;
   @include mobile {
     width: 90%;
@@ -29,46 +20,32 @@
   }
 }
 
-.doc-attend-sign-view-modal-content,
-.member-role-form-modal-content,
-.safe-doc-template-form-modal-content,
-.common-sign-view-modal-content,
-.common-sign-modal-content,
 .safe-org-change-code-list-modal-content {
-  width: 600px;
+  width: 60.0rem;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: 2.0rem 3.0rem;
   @include mobile {
     width: 90%;
     padding: 0;
   }
 }
 
-.todo-list-modal-content,
-.doc-attend-sign-modal-content,
-.common-viewer-modal-content,
-.equipment-supply-form-modal-content,
-.safety-equip-search-modal-content,
-.work-order-list-modal-content {
-  width: 900px;
+.test-900-modal {
+  width: 90.0rem;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: 2.0rem 3.0rem;
   @include mobile {
     width: 100%;
     padding: 0;
   }
 }
 
-.check-item-type-form-modal-content,
-.check-item-form-modal-content,
-.check-item-view-modal-content,
-.safe-doc-list-by-schd-modal-content,
-.org-safety-member-modal-content,
-.member-select-modal-content,
+.list-common-modal-content,
+.org-select-modal-content,
 .org-change-modal-content {
-  width: 1100px;
+  width: 110.0rem;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: 2.0rem 3.0rem;
   @include mobile {
     width: 100%;
     padding: 0;
@@ -80,20 +57,10 @@
   }
 }
 
-.unchecked-work-order-modal-content,
-.work-order-search-modal-content,
-.org-select-modal-content,
-.board-comment-list-modal-content,
-.safe-doc-template-form-modal-content,
-.safe-doc-search-modal-content,
-.safe-doc-list-by-subj-modal-content,
-.subject-search-modal-content,
-.board-reply-desc-modal-content,
-.common-map-modal-content,
 .subject-committee-modal-content {
-  width: 900px;
+  width: 90.0rem;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: 2.0rem 3.0rem;
   @include mobile {
     width: 100%;
     padding: 0;
@@ -106,9 +73,9 @@
 }
 
 .subject-search-modal-content {
-  width: 1350px;
+  width: 135.0rem;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: 2.0rem 3.0rem;
   @include mobile {
     width: 100%;
     padding: 0;
@@ -121,35 +88,36 @@
 }
 
 .pop_title {
-  font-size: 16px;
-  font-weight: bold;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #{$col-gray300};
-  padding-right: 40px;
+  font-size: 2.1rem;
+  color:  var(--color-darkblue-100);
+  font-weight: normal;
+  padding-bottom: 1.0rem;
+  /*border-bottom: 1px solid #{$col-gray300};*/
+  padding-right: 4.0rem;
   @include mobile {
-    padding: 20px 40px 20px 0;
-    margin: 0 20px;
+    padding: 2.0rem 4.0rem 2.0rem 0;
+    margin: 0 2.0rem;
   }
 }
 
 .pop_cont_box {
   position: relative;
-  max-height: 900px;
+  max-height: 90.0rem;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-top: 20px;
+  padding-top: 2.0rem;
   padding-bottom: 0;
   @include mobile {
-    padding: 20px 20px 35px;
+    padding: 2.0rem 2.0rem 3.5rem;
     overflow-y: auto;
   }
   .write_form {
     border-bottom: none;
-    margin-bottom: 20px;
+    margin-bottom: 2.0rem;
     padding-bottom: 0 !important;
   }
   .list_form {
-    margin-bottom: 20px;
+    margin-bottom: 2.0rem;
   }
   .box_form {
     margin-bottom: 0;
@@ -157,8 +125,8 @@
     padding: 0;
   }
   + .pop_btns {
-    border-top: 1px solid #{$col-gray350};
-    padding-top: 20px;
+    border-top: 0.1rem solid #{$col-gray350};
+    padding-top: 2.0rem;
     @include mobile {
       border-top: none;
     }
@@ -167,17 +135,18 @@
 
 .pop_full_cont_box {
   position: relative;
-  max-height: 900px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-top: 20px;
+  height:calc(100vh - 18.5rem);
+  overflow: hidden;
+  /*overflow-y: auto;
+  overflow-x: hidden;*/
+  padding-top: 2.0rem;
   .list_form,
   .tb_wrap_scroll {
-    margin-bottom: 30px;
+    margin-bottom: 3.0rem;
   }
   .write_form {
     border-bottom: none;
-    margin-bottom: 20px;
+    margin-bottom: 2.0rem;
     padding-bottom: 0 !important;
   }
   .box_form {
@@ -185,39 +154,52 @@
     border: none;
   }
   + .pop_btns {
-    border-top: 1px solid #{$col-gray350};
-    padding-top: 20px;
+    /*border-top: 1px solid #{$col-gray350};*/
+    padding-top: 2.0rem;
     @include mobile {
       border-top: none;
     }
   }
   @include mobile {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 6.0rem);
     overflow-y: auto;
-    padding: 20px;
-    padding-bottom: 50px;
+    padding: 2.0rem;
+    padding-bottom: 5.0rem;
     box-sizing: border-box;
     .list_form,
     .write_form {
-      margin-bottom: 30px;
+      margin-bottom: 3.0rem;
     }
   }
 }
 
-.andt-tree-container {
-}
-
 .pop_cont {
-  margin-top: 30px;
-  padding-bottom: 30px;
+  margin-top: 1.2rem;
+  padding-bottom: 3.0rem;
   @include mobile {
-    padding: 0 40px 70px 20px;
+    padding: 0 4.0rem 7.0rem 2.0rem;
   }
 }
 
 .pop_btns {
   > button {
-    margin: 0 5px;
+    margin: 0 0.5rem;
+  }
+  .btn_text {
+    font-family: 'KoreanAirSans';
+    font-weight: 400;
+    font-size: 1.6rem;
+  }
+  .btn_close {
+    padding: 0.8rem 4.8rem;
+    /*border: 0.2rem solid var(--color-darkblue-100);*/
+    border-radius: 99.9rem;
+    background: var(--color-neutral-30); 
+  }
+  .btn_confirm {
+    padding: 0.8rem 4.8rem;
+    border-radius: 99.9rem; 
+    background: var(--color-darkblue-100);
   }
   text-align: center;
   @include mobile {
@@ -237,14 +219,45 @@
 
 .pop_close {
   position: absolute;
-  right: 12px;
-  top: 10px;
-  font-size: 20px;
-  color: #{$col-gray600};
+  right: 1.2rem;
+  top: 1.0rem;
+  font-size: 0;
+  color: transparent;
+  /*color:red;*/
+  width: 3.0rem;
+  height: 3.0rem;
+  background: url(../images/close.svg) center center no-repeat;
+  background-size: contain;
+  cursor: pointer;
 }
-
+.text_color_darkblue-100 {
+  color: var(--color-darkblue-100); 
+}
+.text_color_neutral-90 {
+  color: var(--color-neutral-90); 
+}
+.text_color_neutral-40 {
+  color: var(--color-neutral-40); 
+}
+.text_color_neutral-10 {
+  color: var(--color-neutral-10); 
+}
 .pop_flex_group {
   display: flex;
+  height: 100%;
+  ::-webkit-Scrollbar {
+    width:0.3em;
+    height:0.3em
+  }
+  ::-webkit-Scrollbar-thumb {
+    border-radius:1.0rem;
+    background:var(--color-neutral-30);
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::-webkit-Scrollbar Track {
+    border-radius:0rem;
+    background:var(--color-neutral-30)
+  }
   @include mobile {
     display: block;
   }
@@ -255,9 +268,13 @@
     }
   }
   .pop_cont_form {
-    flex-grow: 3;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 3.0rem;
+    padding-right: 0.3rem;
     .box_form {
-      margin-bottom: 20px;
+      margin-bottom: 2.0rem;
       @include mobile {
         padding: 0;
         border: none;
@@ -300,14 +317,14 @@
   background: #fff;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
-  border-radius: 6px;
+  border-radius: 0.6rem;
   outline: none;
-  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3.0rem 6.0rem 0 rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  /*height: calc(100% - 50px);*/
   &::after {
     content: '';
     clear: both;
@@ -332,12 +349,86 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0);
   z-index: 200;
   cursor: pointer;
 }
+.loading-bar
+{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:150.0rem;
+  height:150.0rem;
+  background:transparent;
+  border-radius:50%;
+  text-align:center;
+  font-size: 0;
+  caret-color: #fff;
+}
+.loading-bar:before
+{
+  content:'';
+  caret-color: #fff;
+  position:absolute;
+  top:-0.3rem;
+  left:-0.3rem;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background: url(../images/loading.svg) center center no-repeat;
+  background-size: 14.0rem;
+  animation:animateC 2s linear infinite;
+}
+.loading-bar span
+{
+  display:block;
+  position:absolute;
+  top:calc(50% - 0.2rem);
+  left:50%;
+  width:50%;
+  height:0.4rem;
+  background:transparent;
+  transform-origin:left;
+  animation:animate 2s linear infinite;
+}
+.loading-bar span:before
+{
+  content:'';
+  caret-color: #fff;
+  position:absolute;
+  width:1.6rem;
+  height:1.6rem;
+  border-radius:50%;
+  top:-0.6rem;
+  right:-0.8rem;
+}
 
-.loading-bar {
+@keyframes animateC
+{
+  0%
+  {
+    transform:rotate(0deg);
+  }
+  100%
+  {
+    transform:rotate(360deg);
+  }
+}
+@keyframes animate
+{
+  0%
+  {
+    transform:rotate(45deg);
+  }
+  100%
+  {
+    transform:rotate(405deg);
+  }
+}
+
+
+/*.loading-bar {
   transform: translate(-50%, -50%);
   position: fixed;
   top: 50%;
@@ -374,169 +465,12 @@
       transform: rotate(360deg);
     }
   }
-}
+}*/
 
 .modal_max_height_table {
   overflow-y: auto;
-  max-height: 450px;
+  max-height: 450.0rem;
   @include mobile {
-    max-height: calc(100vh - 240px);
-  }
-}
-
-// picker
-.react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
-.react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {
-  z-index: 100;
-  transform: translate3d(36px, 0px, 0px) !important;
-}
-
-// tree
-
-.tree_wrap {
-  box-sizing: border-box;
-  min-width: 250px;
-  max-height: 540px;
-  padding-right: 20px;
-  overflow: auto;
-  @include mobile {
-    display: none;
-  }
-  .ant-tree-list-holder {
-    overflow: auto;
-  }
-  .tree-wrapper {
-    overflow: auto;
-    padding: 10px;
-  }
-  .tree-btn-controller {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    .btn {
-      border: 1px solid #ddd;
-      color: #000;
-      font-size: 12px;
-    }
-  }
-  .ant-tree-list-scrollbar {
-    width: 3px !important;
-  }
-  .ant-tree-list-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.1) !important;
-  }
-  .ant-tree-title {
-    .folder {
-      background-image: url(../images/icon-tree-closed.png);
-      padding-left: 18px;
-      background-repeat: no-repeat;
-      background-position-x: -27px;
-      background-position-y: 50%;
-      display: inline-block;
-      margin-left: -28px;
-    }
-    .bridge {
-      display: inline-block;
-      margin-left: -28px;
-      padding-left: 18px;
-      background-repeat: no-repeat;
-      background-position-y: 50%;
-      background-position-x: 10px;
-      background-size: 8px 8px;
-      background-image: url(../images/icon-bridge.png);
-    }
-    .current-find {
-      font-style: italic;
-      font-weight: bold;
-    }
-    span {
-      display: block;
-      white-space: nowrap;
-    }
-  }
-  .ant-tree {
-    position: relative;
-    .ant-tree-treenode {
-      width: 100%;
-      padding: 2px 0;
-      // text-indent: 10px;
-      border-radius: 4px;
-      &:last-child {
-        border-bottom: 0;
-      }
-    }
-    .ant-tree-indent {
-      text-indent: -5px;
-    }
-    .ant-tree-node-content-wrapper:hover {
-      background-color: transparent;
-    }
-  }
-  .ant-tree-treenode-selected {
-    color: #{$col-green};
-    font-weight: bold;
-    .ant-tree-switcher {
-      &.ant-tree-switcher_close {
-        .folder {
-          background-image: url(../images/icon-tree-closed.png) no-repeat left
-            top;
-        }
-      }
-      &.ant-tree-switcher_open {
-        .folder {
-          background-image: url(../images/icon-tree-open.png) no-repeat left top;
-        }
-      }
-    }
-  }
-  .ant-tree-node-selected {
-    background-color: transparent !important;
-    color: #{$col-green};
-  }
-  .ant-tree-switcher {
-    width: 10px;
-    height: 20px;
-    .folder {
-      width: 100%;
-      height: 20px;
-      background-position: 0 0;
-      background-repeat: no-repeat;
-    }
-    &.ant-tree-switcher-noop {
-      /* width: 35px; */
-    }
-    &.ant-tree-switcher_close {
-      .folder {
-        background-image: url(../images/icon-tree-closed.png);
-      }
-    }
-    &.ant-tree-switcher_open {
-      .folder {
-        background-image: url(../images/icon-tree-open.png);
-      }
-    }
-  }
-  .check-area {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 260px;
-    width: 320px;
-    transform: translateY(-50%);
-  }
-  .check-item {
-    label {
-      display: inline-block;
-      font-size: 12px;
-      margin-right: 5px;
-      vertical-align: middle;
-      cursor: pointer;
-    }
-    input {
-      display: inline-block;
-      vertical-align: middle;
-      cursor: pointer;
-    }
+    max-height: calc(100vh - 240.0rem);
   }
 }

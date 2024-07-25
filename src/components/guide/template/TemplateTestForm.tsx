@@ -38,7 +38,7 @@ function TemplateTestForm() {
 
   return (
     <>
-      <div className="grid-one-container">
+      <div className="guide-grid-one-container">
         <div className="div-label">ID :</div>
         <div className="div-input">
           <input
