@@ -123,6 +123,7 @@ const initFormData = {
 
   formApiPath: 'TODO : api path',
   baseRoutePath: 'TODO : UI route path',
+  formName: '<%= fileName %>',
 
   requiredFields: [<% requiredFieldList.forEach((fieldName)=> { %>"<%= fieldName %>", <% }) %>],
   <% tableColumns.forEach((columnInfo)=> { %>
@@ -194,7 +195,7 @@ function <%= fileName %>() {
                       className={errors.<%= columnInfo.column_name %> ? 'form-tag error' : 'form-tag'}
                       placeholder="<%= columnInfo.column_comment %>"
                       name="<%= columnInfo.column_name %>"
-                      id="<%= columnInfo.column_name %>"
+                      id="<%= storeName %><%= columnInfo.column_name %>"
                       value={<%= columnInfo.column_name %>}
                       onChange={(event) => changeInput('<%= columnInfo.column_name %>', event.target.value)}
                     />
