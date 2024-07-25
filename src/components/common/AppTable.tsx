@@ -87,15 +87,23 @@ function AppTable(props) {
     useActionButtons = false,
     actionButtons = ['detail', 'delete'],
     actionButtonListPath = '',
-    search,
     getGridRef,
     applyAutoHeight,
-    store = {},
+    store = null,
     hiddenPagination,
   } = props;
 
   // store
-  const { currentPage, prevPage, nextPage, totalCount, pageSize, displayPageIndexList = [], changePageSize } = store;
+  const {
+    currentPage,
+    prevPage,
+    nextPage,
+    totalCount,
+    pageSize,
+    displayPageIndexList = [],
+    changePageSize,
+    search,
+  } = store || {};
 
   // 컬럼 동적 셋팅 모달 open
   const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
@@ -209,26 +217,30 @@ function AppTable(props) {
 
   return (
     <>
-      {/* <div style={{ padding: 3 }}>
-        <span>{CommonUtil.formatString(gridTotalCountTemplate, rowData.length)}</span>
-        <button className="button" onClick={downloadCSVFile} style={{ display: displayCSVExportButton ? '' : 'none' }}>
-          download csv
-        </button>
-        <button
-          className="button"
-          onClick={() => setIsColumnSettingModalOpen(true)}
-          style={{ display: useColumnDynamicSetting ? '' : 'none' }}
-        >
-          동적 필드 적용
-        </button>
-      </div> */}
-
       <div className="table-header">
-        <div className="count">{CommonUtil.formatString(gridTotalCountTemplate, totalCount)}</div>
+        <div className="count">
+          {CommonUtil.formatString(gridTotalCountTemplate, store ? totalCount : rowData.length)}
+        </div>
         <div className="btn-area">
-          {/* <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
             신규
-          </button> */}
+          </button>
+          <button
+            name="button"
+            className="btn-sm btn_text btn-darkblue-line"
+            onClick={downloadCSVFile}
+            style={{ display: displayCSVExportButton ? '' : 'none' }}
+          >
+            download csv
+          </button>
+          <button
+            name="button"
+            className="btn-sm btn_text btn-darkblue-line"
+            onClick={() => setIsColumnSettingModalOpen(true)}
+            style={{ display: useColumnDynamicSetting ? '' : 'none' }}
+          >
+            동적 필드 적용
+          </button>
           <span>
             <AntSelect
               style={{ width: 150 }}

@@ -1,6 +1,6 @@
-import _ from 'lodash';
 import ApiService from '@/services/ApiService';
 import history from '@/utils/history';
+import _ from 'lodash';
 
 /*
 
@@ -32,7 +32,7 @@ export const formBaseState = {
   baseRoutePath: '',
 };
 
-export const createFormSlice = (set, get) => ({
+export const createFormSliceRequire = (set, get) => ({
   changeInput: (inputName, inputValue) => {
     set({ [inputName]: inputValue });
   },
