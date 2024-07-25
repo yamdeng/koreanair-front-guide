@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
-import useAdminAppStore from '@/stores/admin/useAdminAppStore';
+import useAppStore from '@/stores/useAppStore';
 import { useStore } from 'zustand';
 
 export default function AdminLayout() {
   const { leftMenuList, toggleRootMenuExpand, clickSecondMenu, clickLastMenu } = useStore(
-    useAdminAppStore,
+    useAppStore,
     (state) => state
   ) as any;
   return (

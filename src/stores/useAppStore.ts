@@ -3,7 +3,7 @@ import { produce } from 'immer';
 import ApiService from '@/services/ApiService';
 import history from '@/utils/history';
 
-const useAdminAppStore = createStore<any>((set, get) => ({
+const useAppStore = createStore<any>((set, get) => ({
   profile: null,
   displayExpandMenu: true,
   displayLoadingBar: false,
@@ -110,4 +110,4 @@ const useAdminAppStore = createStore<any>((set, get) => ({
   },
 }));
 
-export default useAdminAppStore;
+export default useAppStore;

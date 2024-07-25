@@ -1,6 +1,4 @@
 import _ from 'lodash';
-import { ITest, IUser } from '@/types/grid';
-import { ColDef } from '@ag-grid-community/core';
 
 export const testColumnKeyList = [
   'id',
@@ -67,11 +65,11 @@ export const testColumnInfos: any = testColumnKeyList.map((keyName) => {
   };
 });
 
-export const testSimpleColumnInfos: ColDef<ITest>[] = testSimpleColumnKeyList.map((keyName) => {
+export const testSimpleColumnInfos: any[] = testSimpleColumnKeyList.map((keyName) => {
   return {
     field: keyName,
     headerName: _.capitalize(keyName),
-  } as ColDef<ITest>;
+  };
 });
 
 export const usersSimpleColumnInfos: any = userSimpleColumnKeyList.map((keyName) => {
@@ -85,5 +83,5 @@ export const userColumnInfos: any = userColumnKeyList.map((keyName) => {
   return {
     field: keyName,
     headerName: _.capitalize(keyName),
-  } as ColDef<IUser>;
+  };
 });

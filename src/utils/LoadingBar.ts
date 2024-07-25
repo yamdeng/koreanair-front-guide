@@ -1,4 +1,4 @@
-import useAdminAppStore from '@/stores/admin/useAdminAppStore';
+import useAppStore from '@/stores/useAppStore';
 
 /*
 
@@ -8,13 +8,13 @@ import useAdminAppStore from '@/stores/admin/useAdminAppStore';
 
 // 로딩바 show
 const show = () => {
-  const { setDisplayLoadingBar } = useAdminAppStore.getState();
+  const { setDisplayLoadingBar } = useAppStore.getState();
   setDisplayLoadingBar(true);
 };
 
 // 로딩바 hide
 const hide = () => {
-  const { setDisplayLoadingBar } = useAdminAppStore.getState();
+  const { setDisplayLoadingBar } = useAppStore.getState();
   setDisplayLoadingBar(false);
 };
 

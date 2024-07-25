@@ -4,12 +4,12 @@ import { ToastContainer } from 'react-toastify';
 import LoadingBarContainer from './components/layout/LoadingBarContainer';
 import { StoreProvider } from './context/StoreContext';
 import useAdminRoute from './routes/useAdminRoute';
-import useAdminAppStore from './stores/admin/useAdminAppStore';
+import useAppStore from './stores/useAppStore';
 import { useStore } from 'zustand';
 
 function AdminApp() {
   const adminRoute = useAdminRoute();
-  const { initApp } = useStore(useAdminAppStore, (state) => state) as any;
+  const { initApp } = useStore(useAppStore, (state) => state) as any;
 
   useEffect(() => {
     initApp();
