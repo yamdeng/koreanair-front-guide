@@ -127,7 +127,7 @@ const initailState = {
   commit: () => { }
 };
 
-const databaseStore = create((set, get) => ({
+const databaseStore = create<any>((set, get) => ({
   ...initailState,
   initializeDB: async () => {
     try {
