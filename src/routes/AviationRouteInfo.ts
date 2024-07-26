@@ -1,3 +1,4 @@
+import ASR from '@/components/aviation/report/ASR';
 import RiskForm from '@/components/aviation/report/RiskForm';
 import RiskForm2 from '@/components/aviation/report/RiskForm2';
 
@@ -12,6 +13,10 @@ AviationRouteInfo.list = [
     Component: RiskForm2,
     path: 'risk-form2',
   },
+  {
+    Component: ASR,
+    path: 'report'
+  }
 ];
 
 export default AviationRouteInfo;

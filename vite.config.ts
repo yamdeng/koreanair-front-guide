@@ -3,12 +3,14 @@ import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { resolve } from 'path';
 import basicSsl from '@vitejs/plugin-basic-ssl';
+import path from 'path';
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, resolve(__dirname, './env'), '');
   const enableHttps = env.ENABLE_HTTPS && env.ENABLE_HTTPS === 'true';
   const enableProxyLog = env.ENABLE_PROXY_LOG && env.ENABLE_PROXY_LOG === 'true';
-  const pluginList = [react(), tsconfigPaths()];
+  const pluginList = [react(), tsconfigPaths(), nodePolyfills()];
   if (enableHttps) {
     pluginList.push(basicSsl());
   }
@@ -36,6 +38,13 @@ export default defineConfig(({ mode }) => {
     base: '/',
     envDir: './env',
     plugins: pluginList,
+    resolve: {
+      alias: {
+        fs: 'rollup-plugin-node-polyfills/polyfills/fs',
+        path: 'path-browserify',
+        crypto: 'crypto-browserify',
+      }
+    },
     server: {
       strictPort: false,
       open: true,

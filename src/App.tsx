@@ -5,10 +5,34 @@ import useAviationRoute from './routes/useAviationRoute';
 import useOccupationRoute from './routes/useOccupationRoute';
 import { StoreProvider } from './context/StoreContext';
 import LoadingBarContainer from './components/layout/LoadingBarContainer';
+import localforage from 'localforage';
+import { useEffect, useState } from 'react';
+
+localforage.config({
+  driver: [
+    localforage.INDEXEDDB,
+    localforage.WEBSQL,
+    localforage.LOCALSTORAGE
+  ],
+  name: 'offline-storage'
+});
+
+const isFirstOnline = navigator.onLine;
 
 function App() {
-  const aviationRoute = useAviationRoute();
+  const [isNetworkOnline, setIsNetworkOnline] = useState(isFirstOnline);
+
+  const aviationRoute = useAviationRoute(isNetworkOnline);
   const occupationRoute = useOccupationRoute();
+
+  useEffect(() => {
+    window.addEventListener("online", (event) => {
+      setIsNetworkOnline(true);
+    });
+    window.addEventListener("offline", (event) => {
+      setIsNetworkOnline(false);
+    });
+  }, []);
 
   return (
     <StoreProvider>
