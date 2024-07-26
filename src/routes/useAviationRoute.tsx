@@ -2,6 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import AviationRouteInfo from './AviationRouteInfo';
 import AviationLayout from '@/components/layout/AviationLayout';
 import AviationPortal from '@/components/aviation/AviationPortal';
+import OfflineSplash from '@/components/offline/OfflineSplash';
+import OfflineMain from '@/components/offline/OfflineMain';
 
 const useAviationRoute = (isNetworkOnline: boolean) => {
   const routes = (
@@ -13,24 +15,20 @@ const useAviationRoute = (isNetworkOnline: boolean) => {
     </>
   );
 
-  //MARK: offline으로 가정하고 진행
   if (isNetworkOnline) {
     return (
-      <Route path="/aviation">
-        <Route path="" index element={<div>{isNetworkOnline ? 'Y' : 'N'}</div>} />
+      <Route path="/aviation/offline/">
         {routes}
       </Route>
     );
   } else {
     return (
       <Route path="/aviation" element={<AviationLayout />}>
-        <Route path="" index element={<div>{isNetworkOnline ? 'Y' : 'N'}</div>} />
         <Route path="" index element={<AviationPortal />} />
         {routes}
       </Route>
     );
   }
-
 };
 
 export default useAviationRoute;

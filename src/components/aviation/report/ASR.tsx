@@ -76,6 +76,10 @@ const delay = (time) => {
 }
 
 export class BitShiftHelper {
+  currentBit: any;
+  static instance: any;
+  completionBit: number;
+  callback: () => void;
 
   constructor() {
     if (BitShiftHelper.instance) {
