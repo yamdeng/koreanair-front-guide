@@ -2,56 +2,15 @@
 
 .tree_wrap {
     box-sizing: border-box;
-    min-width: 250px;
+    min-width: 22.0rem;
     max-height: 100dvh;
-    padding-right: 20px;
-    overflow: auto;
+    padding-right: 1.0rem;
+    margin-right: 2.0rem;
+    overflow-y: scroll;
     @include mobile {
       display: none;
     }
-    .ant-tree-list-holder {
-      overflow: auto;
-    }
-    .tree-wrapper {
-      overflow: auto;
-      padding: 10px;
-    }
-    .tree-btn-controller {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      .btn {
-        border: 1px solid #ddd;
-        color: #000;
-        font-size: 12px;
-      }
-    }
-    .ant-tree-list-scrollbar {
-      width: 3px !important;
-    }
-    .ant-tree-list-scrollbar-thumb {
-      border-radius: 10px;
-      background-color: rgba(0, 0, 0, 0.1) !important;
-    }
     .ant-tree-title {
-      .folder {
-        background-image: url(../images/icon-tree-closed.png);
-        padding-left: 18px;
-        background-repeat: no-repeat;
-        background-position-x: -27px;
-        background-position-y: 50%;
-        display: inline-block;
-        margin-left: -28px;
-      }
-      .bridge {
-        display: inline-block;
-        margin-left: -28px;
-        padding-left: 18px;
-        background-repeat: no-repeat;
-        background-position-y: 50%;
-        background-position-x: 10px;
-        background-size: 8px 8px;
-        background-image: url(../images/icon-bridge.png);
-      }
       .current-find {
         font-style: italic;
         font-weight: bold;
@@ -65,15 +24,15 @@
       position: relative;
       .ant-tree-treenode {
         width: 100%;
-        padding: 2px 0;
+        padding: 0.2rem 0;
         // text-indent: 10px;
-        border-radius: 4px;
+        border-radius: 0.4rem;
         &:last-child {
           border-bottom: 0;
         }
       }
       .ant-tree-indent {
-        text-indent: -5px;
+        text-indent: -0.5rem;
       }
       .ant-tree-node-content-wrapper:hover {
         background-color: transparent;
@@ -82,86 +41,23 @@
     .ant-tree-treenode-selected {
       color: #{$col-green};
       font-weight: bold;
-      .ant-tree-switcher {
-        &.ant-tree-switcher_close {
-          .folder {
-            background-image: url(../images/icon-tree-closed.png) no-repeat left top;
-          }
-        }
-        &.ant-tree-switcher_open {
-          .folder {
-            background-image: url(../images/icon-tree-open.png) no-repeat left top;
-          }
-        }
-      }
     }
     .ant-tree-node-selected {
       background-color: transparent !important;
-      color: #{$col-green};
     }
     .ant-tree-switcher {
-      width: 20px;
-      height: 20px;
-      .folder {
-        width: 100%;
-        height: 20px;
-        background-position: 0 0;
-        background-repeat: no-repeat;
-      }
-      &.ant-tree-switcher-noop {
-        /* width: 35px; */
-      }
-      &.ant-tree-switcher_close {
-        .folder {
-          background-image: url(../images/icon-tree-closed.png);
-        }
-      }
-      &.ant-tree-switcher_open {
-        .folder {
-          background-image: url(../images/icon-tree-open.png);
-        }
-      }
+      width: 2.4rem;
+      height: 2.4rem;
     }
-    .check-area {
-      display: flex;
-      align-items: center;
-      position: absolute;
-      top: 50%;
-      left: 260px;
-      width: 320px;
-      transform: translateY(-50%);
+    .pop-btn-box {
+      margin-bottom: 2.0rem;
     }
-    .check-item {
-      label {
-        display: inline-block;
-        font-size: 12px;
-        margin-right: 5px;
-        vertical-align: middle;
-        cursor: pointer;
-      }
-      input {
-        display: inline-block;
-        vertical-align: middle;
-        cursor: pointer;
-      }
-    }
-    /*:where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher {
-        background: url(../images/icon-plus.svg) center center no-repeat;
-    }*/
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree {
-      background-color: transparent;
-    }
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher .ant-tree-switcher-icon svg {
-        background: url(../images/arrow-down.svg) center center no-repeat; 
-        background-size: cover;
-    }
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher_close .ant-tree-switcher-icon svg {
-        
-    }
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher path {display: none;}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher:not(.ant-tree-switcher-noop):hover {
-        background-color: var(--color-lightblue-10);
-    }
-    /*.anticon svg {background: url(../images/folder.svg)center center no-repeat; background-size: cover;}*/
-    .anticon svg path {display: none;}
+
+    
+    :where(.css-dev-only-do-not-override-98ntnt).ant-tree {background-color: transparent; font-family: 'KoreanAirSans';}
+    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher_close .ant-tree-switcher-icon svg, .ant-tree-switcher-icon svg {font-size: 1.0rem; display: inline-flex; align-items: flex-start; justify-content: center;}
+    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher:not(.ant-tree-switcher-noop):hover {background-color: var(--color-lightblue-10);}
+    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-node-content-wrapper:hover, :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-checkbox+span:hover {background-color: rgba(0, 0, 0, 0.04);}
+    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-treenode-draggable .ant-tree-draggable-icon {width: 0; display: none;}
+    .tree_form {margin-bottom: 2.0rem; border-radius: 0.8rem; padding: 0.8rem; border: 0.1rem solid red;}
   }
