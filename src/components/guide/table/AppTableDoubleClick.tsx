@@ -18,9 +18,19 @@ function AppTableDoubleClick() {
     alert(`name : ${selectedInfo.data.name}`);
   };
 
+  const handleRowSingleClick = (selectedInfo) => {
+    // selectedInfo.data 선택한 정보
+    console.log(`handleRowSingleClick selectedInfo : ${selectedInfo}`);
+  };
+
   return (
     <>
-      <AppTable rowData={rowData} columns={columns} handleRowDoubleClick={handleRowDoubleClick} />
+      <AppTable
+        rowData={rowData}
+        columns={columns}
+        handleRowDoubleClick={handleRowDoubleClick}
+        handleRowSingleClick={handleRowSingleClick}
+      />
     </>
   );
 }
