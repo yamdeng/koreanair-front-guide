@@ -1,3 +1,4 @@
+import { produce } from 'immer';
 import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
 import history from '@/utils/history';
@@ -18,6 +19,7 @@ export const defaultListExcludeKeys = [
   'listApiMethod',
   'columns',
   'baseRoutePath',
+  'disablePaging',
 ];
 
 export const listBaseState = {
@@ -97,8 +99,17 @@ export const createListSlice = (set, get) => ({
     return apiParam;
   },
 
+  getPageParam: () => {
+    const state = get();
+    const pageParam = {
+      pageNum: state.currentPage,
+      pageSize: state.pageSize,
+    };
+    return pageParam;
+  },
+
   // 검색정보 : list, pageable 추출
-  setTotalCount(totalCount) {
+  setTotalCount(totalCount = 0) {
     const { pageSize, currentPage } = get();
     // 최대 보여지는 페이징갯수
     const maxPagingSize = 10;
@@ -129,14 +140,14 @@ export const createListSlice = (set, get) => ({
   },
 
   search: async () => {
-    const { listApiPath, getSearchParam, setTotalCount, listApiMethod } = get();
+    const { listApiPath, getSearchParam, setTotalCount, listApiMethod, disablePaging } = get();
     const apiParam = getSearchParam();
     const response: any = await ApiService[listApiMethod](listApiPath, apiParam, { disableLoadingBar: true });
     const data = response.data;
-    const list = data.list;
-    const totalCount = data.total;
+    const list = disablePaging ? data : data.list;
+    const totalCount = disablePaging && list ? list.length : data.total;
     setTotalCount(totalCount);
-    set({ list: list });
+    set({ list: list || [] });
   },
 
   getColumns: () => {
@@ -156,5 +167,20 @@ export const createListSlice = (set, get) => ({
 
   excelDownload: () => {
     // TODO : 엑셀 다운로드
+  },
+
+  addRow: () =>
+    set(
+      produce((state: any) => {
+        state.list.push({});
+      })
+    ),
+
+  deleteAll: () => {
+    set({ list: [] });
+  },
+
+  changeListApiPath: (listApiPath) => {
+    set({ listApiPath: listApiPath });
   },
 });

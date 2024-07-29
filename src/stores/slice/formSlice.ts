@@ -17,9 +17,11 @@ export const defaultFormExcludeKeys = [
   'yupFormSchema',
   'formApiPath',
   'baseRoutePath',
+  'detailInfo',
 ];
 
 export const formBaseState = {
+  detailInfo: null,
   errors: {},
   isDirty: false,
   isValid: false,
@@ -81,11 +83,11 @@ export const createFormSliceYup = (set, get) => ({
       });
     }
 
-    if (formName + firstErrorFieldKey) {
+    if (firstErrorFieldKey) {
       success = false;
       // alert(`firstErrorFieldKey : ${firstErrorFieldKey}`);
-      if (document.getElementById(firstErrorFieldKey)) {
-        document.getElementById(firstErrorFieldKey).focus();
+      if (document.getElementById(formName + firstErrorFieldKey)) {
+        document.getElementById(formName + firstErrorFieldKey).focus();
       }
     }
 
@@ -123,6 +125,7 @@ export const createFormSliceYup = (set, get) => ({
     const response: any = await ApiService.get(`${formApiPath}/${id}`);
     const detailInfo = response.data;
     set({
+      detailInfo: detailInfo,
       ...detailInfo,
       formDetailId: id,
       formType: 'update',
@@ -204,11 +207,11 @@ export const createFormSliceRequire = (set, get) => ({
       });
     }
 
-    if (formName + firstErrorFieldKey) {
+    if (firstErrorFieldKey) {
       success = false;
       // alert(`firstErrorFieldKey : ${firstErrorFieldKey}`);
-      if (document.getElementById(firstErrorFieldKey)) {
-        document.getElementById(firstErrorFieldKey).focus();
+      if (document.getElementById(formName + firstErrorFieldKey)) {
+        document.getElementById(formName + firstErrorFieldKey).focus();
       }
     }
 

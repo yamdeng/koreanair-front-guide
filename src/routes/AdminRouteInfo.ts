@@ -1,9 +1,9 @@
 import MessageList from '@/components/admin/message/MessageList';
 import MessageForm from '@/components/admin/message/MessageForm';
 import MessageDetail from '@/components/admin/message/MessageDetail';
-import CodeList from '@/components/admin/code/CodeList';
-import CodeDetail from '@/components/admin/code/CodeDetail';
-import CodeForm from '@/components/admin/code/CodeForm';
+import CodeGroupList from '@/components/admin/code/CodeGroupList';
+import CodeGroupDetail from '@/components/admin/code/CodeGroupDetail';
+import CodeGroupForm from '@/components/admin/code/CodeGroupForm';
 import MenuForm from '@/components/admin/menu/MenuForm';
 
 const AdminRouteInfo: any = {};
@@ -22,15 +22,15 @@ AdminRouteInfo.list = [
     path: 'messages/:detailId/edit',
   },
   {
-    Component: CodeList,
+    Component: CodeGroupList,
     path: 'codes',
   },
   {
-    Component: CodeDetail,
+    Component: CodeGroupDetail,
     path: 'codes/:detailId',
   },
   {
-    Component: CodeForm,
+    Component: CodeGroupForm,
     path: 'codes/:detailId/edit',
   },
   {

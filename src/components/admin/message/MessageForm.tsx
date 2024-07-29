@@ -26,7 +26,7 @@ function MessageForm() {
     if (detailId && detailId !== 'add') {
       getDetail(detailId);
     }
-    return clear();
+    return clear;
   }, []);
 
   return (

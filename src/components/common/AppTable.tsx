@@ -93,10 +93,16 @@ function AppTable(props) {
     search,
     store = null,
     hiddenPagination,
+    editable = false,
   } = props;
 
   // store
   const { currentPage, prevPage, nextPage, totalCount, displayPageIndexList = [], changePageSize } = store || {};
+
+  let editType = '';
+  if (editable) {
+    editType = 'fullRow';
+  }
 
   // 컬럼 동적 셋팅 모달 open
   const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
@@ -225,9 +231,9 @@ function AppTable(props) {
           {CommonUtil.formatString(gridTotalCountTemplate, store ? totalCount : rowData.length)}
         </div>
         <div className="btn-area">
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
+          {/* <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
             신규
-          </button>
+          </button> */}
           <button
             name="button"
             className="btn-sm btn_text btn-darkblue-line"
@@ -260,6 +266,7 @@ function AppTable(props) {
       </div>
       <div className="ag-theme-quartz" style={{ height: tableHeight }}>
         <AgGridReact
+          {...props}
           ref={gridRef}
           domLayout={applyAutoHeight ? 'autoHeight' : 'normal'}
           rowData={rowData}
@@ -281,6 +288,7 @@ function AppTable(props) {
           tooltipHideDelay={1000}
           tooltipMouseTrack={true}
           enableBrowserTooltips={false}
+          editType={editType}
           onGridReady={(params) => {
             if (displayTableLoading) {
               params.api.showLoadingOverlay();
@@ -291,7 +299,6 @@ function AppTable(props) {
               getGridRef(params);
             }
           }}
-          {...props}
         />
       </div>
       {useColumnDynamicSetting && (

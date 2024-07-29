@@ -10,7 +10,7 @@ function MessageDetail() {
 
   useEffect(() => {
     getDetail(detailId);
-    return clear();
+    return clear;
   }, []);
 
   return (
