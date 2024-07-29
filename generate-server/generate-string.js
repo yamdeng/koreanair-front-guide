@@ -241,13 +241,11 @@ import <%= storeName %> from '@/stores/guide/<%= storeName %>';
 function <%= fileName %>() {
 
   /* formStore state input 변수 */
-  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> errors,
-    changeInput,
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> 
     getDetail,
     formType,
-    save,
-    remove,
     cancel,
+    gorFormPage,
     clear } =
     <%= storeName %>();
 
@@ -271,16 +269,16 @@ function <%= fileName %>() {
               <label className="f-label">
                 <%= columnInfo.column_comment %> <% if (columnInfo.is_nullable !== 'YES') { %> <span className="required">*</span> <% } %>
               </label>
-            </div>            
-            <div className="cont">
-              <div className="form-table">
-                <div className="form-cell wid100">
-                  <span className="form-group wid100">
-                    <%= columnInfo.column_name %>
-                  </span>
+              <div className="cont">
+                <div className="form-table">
+                  <div className="form-cell wid100">
+                    <span className="form-group wid100">
+                      {<%= columnInfo.column_name %>}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </div>                        
           </li>                
           <% }) %>
         </ul>
@@ -288,18 +286,15 @@ function <%= fileName %>() {
 
       {/* 하단 버튼 영역 */}
       <div className="contents-btns">
-        <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
-          저장
+        <button className="btn_text text_color_neutral-10 btn_confirm" onClick={cancel}>
+          목록으로
         </button>
         <button
           className="btn_text text_color_darkblue-100 btn_close"
-          onClick={remove}
+          onClick={gorFormPage}
           style={{ display: formType !== 'add' ? '' : 'none' }}
         >
-          삭제
-        </button>
-        <button className="btn_text text_color_darkblue-100 btn_close" onClick={cancel}>
-          취소
+          수정
         </button>
       </div>
     </>

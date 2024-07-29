@@ -264,11 +264,11 @@ app.get("/api/generate/:tableName", async (req, res) => {
     };
 
     const formViewContent = ejs.render(formViewGenerateString, formViewData);
-    const formDetailContent = ejs.render(formDetailContent, detailViewData);
+    const detailViewContent = ejs.render(detailViewGenerateString, detailViewData);
     result.listComponentContent = listComponentContent;
     result.formStoreContent = formStoreContent;
     result.formViewContent = formViewContent;
-    result.formDetailContent = formDetailContent;
+    result.detailViewContent = detailViewContent;
   } catch (e) {
     console.log(e);
   }
