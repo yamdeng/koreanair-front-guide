@@ -214,6 +214,11 @@ input, select{font-family:'KoreanAirSans'}
 .form-tag:not([value=""]){border:0.1rem solid var(--color-neutral-40)}
 .form-tag.active+.f-label, .form-tag:focus+.f-label{color:var(--color-mblue-100) !important}
 .form-tag-select:disabled + .f-label, .form-tag-select:focus + .f-label, .form-tag-select.active + .f-label, .form-tag-select.isValue + .f-label, .form-tag-select.invalid + .f-label{left:1.0rem;top:-2.0rem;font-size:1.3rem;transition: all 0.3s ease}
+/* ant-select focus, value 존재할때 label 처리 */
+.label-select.ant-select-focused + .f-label, label-picker.selected + f-label {left:1.0rem;top:-2.0rem;font-size:1.3rem;transition: all 0.3s ease}
+
+/* datepicker focus, value 존재할때 label 처리 */
+.label-picker.ant-picker-focused + .f-label, label-picker.selected + f-label {left:1.0rem;top:-2.0rem;font-size:1.3rem;transition: all 0.3s ease}
 
 /*toggle*/
 .info-wrap{padding:0px 2.0rem 2.6rem;border-top:0.1rem solid var(--color-darkblue-100);background-color:var(--color-neutral-10)}
