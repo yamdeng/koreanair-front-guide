@@ -54,14 +54,14 @@ function <%= fileName %>() {
 
   useEffect(() => {
     search();
-    return clear();
+    return clear;
   }, []);
 
   return (
     <>
       {/* TODO : 헤더 영역입니다 */}
       <div className="conts-title">
-        <h2>메시지목록</h2>
+        <h2>TODO: 타이틀</h2>
         <div className="btn-area">
           <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={search}>
             조회
@@ -171,7 +171,7 @@ function <%= fileName %>() {
     if (detailId && detailId !== 'add') {
       getDetail(detailId);
     }
-    return clear();
+    return clear;
   }, []);
 
   return (
