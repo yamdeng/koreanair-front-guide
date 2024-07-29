@@ -8,6 +8,7 @@ const {
   listComponentGenerateString,
   formStoreGenerateString,
   formViewGenerateString,
+  detailViewGenerateString
 } = require("./generate-string");
 
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE, SERVER_PORT } =
@@ -99,12 +100,15 @@ app.get(
         createListfile(tableName, columnList);
         createFormStorefile(tableName, columnList);
         createFormViewfile(tableName, columnList);
+        createDetailViewfile(tableName, columnList);
       } else if (generateType === "list") {
         createListfile(tableName, columnList);
       } else if (generateType === "formStore") {
         createFormStorefile(tableName, columnList);
       } else if (generateType === "formView") {
         createFormViewfile(tableName, columnList);
+      } else if (generateType === "detailView") {
+        createDetailViewfile(tableName, columnList);
       }
       console.log(columnList);
     } catch (e) {
@@ -144,6 +148,7 @@ app.get(
       let listFileName = "";
       let formStoreFileName = "";
       let formViewFileName = "";
+      let detailViewFileName = "";
       if (generateType === "all" || generateType === "list") {
         listFileName = await createListfile(tableName, columnList);
         if (generateType === "list") {
@@ -162,11 +167,19 @@ app.get(
           downloadFileName = formViewFileName;
         }
       }
+
+      if (generateType === "all" || generateType === "detailView") {
+        detailViewFileName = await createDetailViewfile(tableName, columnList);
+        if (generateType === "detailView") {
+          downloadFileName = detailViewFileName;
+        }
+      }
       if (generateType === "all") {
         downloadFileName = await createZipArchive(tableName, [
           listFileName,
           formStoreFileName,
           formViewFileName,
+          detailViewFileName,
         ]);
       }
     } catch (e) {
@@ -244,10 +257,18 @@ app.get("/api/generate/:tableName", async (req, res) => {
       tableColumns: columnList,
     };
 
+    const detailViewData = {
+      fileName: `${applyFileName}Detail`,
+      storeName: `use${applyFileName}FormStore`,
+      tableColumns: columnList,
+    };
+
     const formViewContent = ejs.render(formViewGenerateString, formViewData);
+    const formDetailContent = ejs.render(formDetailContent, detailViewData);
     result.listComponentContent = listComponentContent;
     result.formStoreContent = formStoreContent;
     result.formViewContent = formViewContent;
+    result.formDetailContent = formDetailContent;
   } catch (e) {
     console.log(e);
   }
@@ -323,6 +344,23 @@ async function createFormViewfile(tableName, columnList) {
   fs.writeFileSync(`./result/${applyFileName}Form.tsx`, content);
   return `./result/${applyFileName}Form.tsx`;
 }
+
+// detail view 파일 생성
+async function createDetailViewfile(tableName, columnList) {
+  // 템플릿에서 대체할 변수들
+  let camelCaseTableName = _.camelCase(tableName);
+  const applyFileName = getApplyFileName(camelCaseTableName);
+
+  const data = {
+    fileName: `${applyFileName}Detail`,
+    storeName: `use${applyFileName}FormStore`,
+    tableColumns: columnList,
+  };
+  const content = ejs.render(detailViewGenerateString, data);
+  fs.writeFileSync(`./result/${applyFileName}Detail.tsx`, content);
+  return `./result/${applyFileName}Detail.tsx`;
+}
+
 
 // 파일 압축
 async function createZipArchive(tableName, fileNameList) {

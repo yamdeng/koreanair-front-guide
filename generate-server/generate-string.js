@@ -231,9 +231,87 @@ function <%= fileName %>() {
 export default <%= fileName %>;
 `;
 
+const detailViewGenerateString = `
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+/* TODO : store 경로를 변경해주세요. */
+import <%= storeName %> from '@/stores/guide/<%= storeName %>';
+
+/* TODO : 컴포넌트 이름을 확인해주세요 */
+function <%= fileName %>() {
+
+  /* formStore state input 변수 */
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> errors,
+    changeInput,
+    getDetail,
+    formType,
+    save,
+    remove,
+    cancel,
+    clear } =
+    <%= storeName %>();
+
+  const { detailId } = useParams();
+
+  useEffect(() => {
+    getDetail(detailId);
+    return clear;
+  }, []);
+
+  return (
+    <>
+      <div className="conts-title">
+        <h2>TODO : 헤더 타이틀</h2>
+      </div>
+      <div className="detail-form">
+        <ul className="detail-list">
+          <% tableColumns.forEach((columnInfo)=> { %>        
+          <li className="list">
+            <div className="list-row wid50">
+              <label className="f-label">
+                <%= columnInfo.column_comment %> <% if (columnInfo.is_nullable !== 'YES') { %> <span className="required">*</span> <% } %>
+              </label>
+            </div>            
+            <div className="cont">
+              <div className="form-table">
+                <div className="form-cell wid100">
+                  <span className="form-group wid100">
+                    <%= columnInfo.column_name %>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>                
+          <% }) %>
+        </ul>
+      </div>
+
+      {/* 하단 버튼 영역 */}
+      <div className="contents-btns">
+        <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
+          저장
+        </button>
+        <button
+          className="btn_text text_color_darkblue-100 btn_close"
+          onClick={remove}
+          style={{ display: formType !== 'add' ? '' : 'none' }}
+        >
+          삭제
+        </button>
+        <button className="btn_text text_color_darkblue-100 btn_close" onClick={cancel}>
+          취소
+        </button>
+      </div>
+    </>
+  );
+}
+export default <%= fileName %>;
+`;
+
 module.exports = {
   testGenerateString: testGenerateString,
   listComponentGenerateString: listComponentGenerateString,
   formStoreGenerateString: formStoreGenerateString,
   formViewGenerateString: formViewGenerateString,
+  detailViewGenerateString: detailViewGenerateString,
 };
