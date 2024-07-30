@@ -105,6 +105,7 @@ const applyGroupingRowSpanByPageSize = (data, columnName, pageSize = 1000000) =>
   return _.cloneDeep(data);
 };
 
+// upper_dept_cd = '0'
 // listToTreeData(deptList.result, 'DEPT_ID', 'PRNT_ID', '10073')
 function listToTreeData(items, treeKey, treeParentKey, rootValue) {
   const rootItems = [];
@@ -119,7 +120,7 @@ function listToTreeData(items, treeKey, treeParentKey, rootValue) {
 
     // if (lookUpTreeParentValue == rootValue) {
     // if (lookUpTreeValue == rootValue) {
-    if (lookUpTreeValue == rootValue) {
+    if (lookUpTreeParentValue == rootValue) {
       rootItems.push(lookup[lookUpTreeValue]);
     } else {
       if (!lookup[lookUpTreeParentValue]) {

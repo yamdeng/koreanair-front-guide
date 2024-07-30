@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom';
 import useAppStore from '@/stores/useAppStore';
+import { Outlet } from 'react-router-dom';
 import { useStore } from 'zustand';
 
 export default function AdminLayout() {
@@ -49,6 +49,7 @@ export default function AdminLayout() {
                             </ul>
                           );
                         }
+
                         return (
                           <li
                             key={secondDepthMenuInfo.menuId}
@@ -66,6 +67,19 @@ export default function AdminLayout() {
                     </ul>
                   );
                 }
+                let rootDepthClass = '';
+                if (rootDepthMenuInfo.children && rootDepthMenuInfo.children.length) {
+                  if (isMenuExapand) {
+                    rootDepthClass = 'active down-icon';
+                  } else {
+                    rootDepthClass = 'up-icon';
+                  }
+                } else {
+                  if (rootDepthMenuInfo.isSelected) {
+                    rootDepthClass = 'active';
+                  }
+                }
+
                 return (
                   <li
                     key={menuId}
@@ -74,7 +88,7 @@ export default function AdminLayout() {
                       toggleRootMenuExpand(rootDepthMenuInfo);
                     }}
                   >
-                    <a href="javascript:void(0)" className={isMenuExapand ? 'active' : ''}>
+                    <a href="javascript:void(0)" className={rootDepthClass}>
                       {nameKor}
                     </a>
                     {childrenMenuComponent}

@@ -157,6 +157,11 @@ export const createListSlice = (set, get) => ({
 
   goDetailPage: (detailId) => {
     const { baseRoutePath } = get();
+    history.push(`${baseRoutePath}/${detailId}`);
+  },
+
+  goEditPage: (detailId) => {
+    const { baseRoutePath } = get();
     history.push(`${baseRoutePath}/${detailId}/edit`);
   },
 

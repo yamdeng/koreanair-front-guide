@@ -246,12 +246,12 @@
   flex-shrink: 0;
 }
 .LNB_list li a {
-  width: 100%;
-  background: url(../images/icon-arrow-up.svg) right center no-repeat;
+  width: 100%; 
   color: var(--color-darkblue-100);
 }
+.LNB_list li a.up-icon {background: url(../images/icon-arrow-up.svg) right center no-repeat;}
+.LNB_list li a.down-icon {background: url(../images/icon-arrow-down.svg) right center no-repeat;}
 .LNB_list li a.active {
-  background: url(../images/icon-arrow-down.svg) right center no-repeat;
   font-weight: 700;
 }
 .LNB_list li .mu-2depth {

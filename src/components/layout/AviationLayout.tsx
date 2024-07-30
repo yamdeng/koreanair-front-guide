@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useStore } from 'zustand';
 import iconMenuFriesImage from '@/resources/images/icon-menu-fries.svg';
 import koreanairSymbolImage from '@/resources/images/koreanair-symbol.svg';
 import iconSearchImage from '@/resources/images/icon_search.svg';
 import iconAlarmImage from '@/resources/images/icon_alram.svg';
 import iconSettingImage from '@/resources/images/icon_setting.svg';
 import closeImage from '@/resources/images/close.svg';
+import useAppStore from '@/stores/useAppStore';
 
 export default function AviationLayout() {
   const navigate = useNavigate();
@@ -14,6 +16,15 @@ export default function AviationLayout() {
   const toggleLeftMenu = () => {
     setDisplayLeftMenu(!displayLeftMenu);
   };
+
+  const { leftMenuList, toggleRootMenuExpand, clickSecondMenu, clickLastMenu, expandRootMenuInfo, initApp } = useStore(
+    useAppStore,
+    (state) => state
+  ) as any;
+
+  useEffect(() => {
+    initApp('A');
+  }, []);
 
   return (
     <div className="wrap">
@@ -34,29 +45,20 @@ export default function AviationLayout() {
 
         <div className="GNB">
           <ul className="gnb-list">
-            <li>
-              <a className="active" href="javascript:void(0);">
-                Report
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">Policy</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">SRM</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">Assurance</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">Promotion</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">Admin</a>
-            </li>
+            {leftMenuList.map((rootMenuInfo) => {
+              const { nameKor } = rootMenuInfo;
+              return (
+                <li
+                  key={nameKor}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    expandRootMenuInfo(rootMenuInfo);
+                  }}
+                >
+                  <a href="javascript:void(0);">{nameKor}</a>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="util">
@@ -128,73 +130,85 @@ export default function AviationLayout() {
         </div>
         <div className="LNB_side">
           <ul className="LNB_list">
-            <li>
-              <a className="active" href="javascript:void(0);">
-                안전보고서
-              </a>
-              <ul className="mu-2depth">
-                <li className="active">
-                  <a href="javascript:void(0);">My Report</a>
-                  <ul className="mu-3depth">
-                    <li className="active">
-                      <a href="javascript:void(0);">3depth</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">3depth</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">3depth</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">3depth</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">3depth</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="javascript:void(0);">Report List</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="javascript:void(0);">안전정책</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">안전위험관리</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">안전보증</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">안전증진</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
+            {leftMenuList.map((rootDepthMenuInfo) => {
+              const { treeType, level, nameKor, menuId, isMenuExapand, children } = rootDepthMenuInfo;
 
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">AUDIT</a>
-            </li>
+              console.log(treeType);
+              console.log(level);
+
+              let childrenMenuComponent = null;
+              if (children && children.length && isMenuExapand) {
+                childrenMenuComponent = (
+                  <ul className="mu-2depth">
+                    {children.map((secondDepthMenuInfo) => {
+                      const lastMenuChildren = secondDepthMenuInfo.children;
+                      let lastChildrenMenuComponent = null;
+                      if (lastMenuChildren && lastMenuChildren.length) {
+                        lastChildrenMenuComponent = (
+                          <ul className="mu-3depth">
+                            {lastMenuChildren.map((lastDeptMenuInfo) => {
+                              return (
+                                <li
+                                  key={lastDeptMenuInfo.menuId}
+                                  className={lastDeptMenuInfo.isSelected ? 'active' : ''}
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    clickLastMenu(lastDeptMenuInfo);
+                                  }}
+                                >
+                                  <a href="javascript:void(0)">{lastDeptMenuInfo.nameKor}</a>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        );
+                      }
+
+                      return (
+                        <li
+                          key={secondDepthMenuInfo.menuId}
+                          className={secondDepthMenuInfo.isSelected ? 'active' : ''}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            clickSecondMenu(secondDepthMenuInfo);
+                          }}
+                        >
+                          <a href="javascript:void(0)">{secondDepthMenuInfo.nameKor}</a>
+                          {lastChildrenMenuComponent}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                );
+              }
+              let rootDepthClass = '';
+              if (rootDepthMenuInfo.children && rootDepthMenuInfo.children.length) {
+                if (isMenuExapand) {
+                  rootDepthClass = 'active down-icon';
+                } else {
+                  rootDepthClass = 'up-icon';
+                }
+              } else {
+                if (rootDepthMenuInfo.isSelected) {
+                  rootDepthClass = 'active';
+                }
+              }
+
+              return (
+                <li
+                  key={menuId}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    toggleRootMenuExpand(rootDepthMenuInfo);
+                  }}
+                >
+                  <a href="javascript:void(0)" className={rootDepthClass}>
+                    {nameKor}
+                  </a>
+                  {childrenMenuComponent}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

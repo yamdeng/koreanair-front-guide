@@ -5,6 +5,9 @@ import CodeGroupList from '@/components/admin/code/CodeGroupList';
 import CodeGroupDetail from '@/components/admin/code/CodeGroupDetail';
 import CodeGroupForm from '@/components/admin/code/CodeGroupForm';
 import MenuForm from '@/components/admin/menu/MenuForm';
+import AdminUserList from '@/components/admin/user/AdminUserList';
+import AdminUserDetail from '@/components/admin/user/AdminUserDetail';
+import AdminDeptList from '@/components/admin/dept/AdminDeptList';
 
 const AdminRouteInfo: any = {};
 
@@ -36,6 +39,18 @@ AdminRouteInfo.list = [
   {
     Component: MenuForm,
     path: 'menus',
+  },
+  {
+    Component: AdminUserList,
+    path: 'users',
+  },
+  {
+    Component: AdminUserDetail,
+    path: 'users/:detailId',
+  },
+  {
+    Component: AdminDeptList,
+    path: 'depts',
   },
 ];
 

@@ -49,6 +49,20 @@ Code.useYn = [
   },
 ];
 
+/*
+    메뉴 트리 유형
+*/
+Code.menuTreeType = [
+  {
+    label: '메뉴',
+    value: 'M',
+  },
+  {
+    label: '폴더',
+    value: 'F',
+  },
+];
+
 // 코드명 가져오기 : value 기준
 Code.getCodeLabelByValue = function (codeCategory, codeValue) {
   let codeLabel = null;

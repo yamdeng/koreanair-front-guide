@@ -2,6 +2,7 @@ import AppTable from '@/components/common/AppTable';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
 import { useEffect } from 'react';
 import { create } from 'zustand';
+import OrgTreeSelectModal from '@/components/modal/OrgTreeSelectModal';
 
 /* 컬럼 영역 */
 const columns: any = [
@@ -42,7 +43,7 @@ const columns: any = [
 const initListData = {
   ...listBaseState,
   listApiPath: 'sys/users',
-  baseRoutePath: 'users',
+  baseRoutePath: '/users',
   columns: columns,
 };
 
@@ -52,8 +53,22 @@ const SysUserListStore = create<any>((set, get) => ({
 
   ...initListData,
 
-  /* TODO : 사번, 부서명, 부서ID, 상태(select) */
+  /* TODO : 검색에서 사용할 input 선언 */
+  /* 사번, 이름, 상태, 부서ID, 부서명 */
   searchWord: '',
+
+  /* modal open */
+  isDeptSelectModalOpen: false,
+
+  selectedDeptInfo: null,
+
+  handleSelectTreeModalData: (selectedDeptInfo) => {
+    set({ selectedDeptInfo: selectedDeptInfo, isDeptSelectModalOpen: false });
+  },
+
+  changeModalDisplay: (isOpen) => {
+    set({ isDeptSelectModalOpen: isOpen });
+  },
 
   clear: () => {
     set(initListData);
@@ -62,25 +77,33 @@ const SysUserListStore = create<any>((set, get) => ({
 
 function SysUserList() {
   const state = SysUserListStore();
-  const { search, searchWord, list, getColumns, goAddPage, changeSearchInput, clear } = state;
+  const {
+    search,
+    searchWord,
+    list,
+    getColumns,
+    changeSearchInput,
+    goDetailPage,
+    handleSelectTreeModalData,
+    changeModalDisplay,
+    isDeptSelectModalOpen,
+    selectedDeptInfo,
+    clear,
+  } = state;
   const columns = getColumns();
 
   useEffect(() => {
     search();
-    return clear();
+    return clear;
   }, []);
 
   return (
     <>
-      {/* TODO : 헤더 영역입니다 */}
       <div className="conts-title">
-        <h2>메시지목록</h2>
+        <h2>사용자관리</h2>
         <div className="btn-area">
           <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={search}>
             조회
-          </button>
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={goAddPage}>
-            신규
           </button>
         </div>
       </div>
@@ -106,9 +129,41 @@ function SysUserList() {
               <label className="f-label">이름</label>
             </span>
           </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100 mr5" onClick={() => changeModalDisplay(true)}>
+              <input
+                id="firstInput3"
+                type="text"
+                className="form-tag"
+                name="title"
+                disabled
+                value={selectedDeptInfo ? selectedDeptInfo.nameKor : ''}
+              />
+              <label className="f-label" htmlFor="firstInput3">
+                부서명
+              </label>
+              <button type="button" className="icon-sch"></button>
+            </div>
+          </div>
         </div>
       </div>
-      <AppTable rowData={list} columns={columns} store={state} />
+      <AppTable
+        rowData={list}
+        columns={columns}
+        store={state}
+        handleRowDoubleClick={(rowInfo) => {
+          const data = rowInfo.data;
+          const userId = data.userId;
+          goDetailPage(userId);
+        }}
+      />
+      <OrgTreeSelectModal
+        isOpen={isDeptSelectModalOpen}
+        closeModal={() => {
+          changeModalDisplay(false);
+        }}
+        ok={handleSelectTreeModalData}
+      />
     </>
   );
 }

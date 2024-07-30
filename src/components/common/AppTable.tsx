@@ -76,6 +76,7 @@ function AppTable(props) {
     noDataMessage = Config.defaultGridNoDataMessage,
     displayTableLoading = false,
     handleRowDoubleClick,
+    handleRowSingleClick,
     handleRowSelect,
     rowSelectMode = 'multiple',
     enableCheckBox = false,
@@ -276,6 +277,7 @@ function AppTable(props) {
           overlayNoRowsTemplate={noDataMessage}
           onSelectionChanged={onSelectionChanged}
           onRowDoubleClicked={handleRowDoubleClick}
+          onRowClicked={handleRowSingleClick}
           rowSelection={rowSelectMode}
           suppressRowClickSelection={true}
           paginationPageSize={store ? store.pageSize : pageSize}
