@@ -20,7 +20,38 @@ export const createLeftMenuSlice = (set, get) => ({
       produce((state: any) => {
         const leftMenuList = state.leftMenuList;
         const searchIndex = leftMenuList.findIndex((info) => info.menuId === menuId);
+        state.leftMenuList.forEach((rootMenuInfo) => {
+          rootMenuInfo.isSelected = false;
+          rootMenuInfo.isMenuExapand = false;
+          if (rootMenuInfo.children) {
+            rootMenuInfo.children.forEach((secondMenuInfo) => {
+              // 2번째 depth 선택된 메뉴 초기화
+              secondMenuInfo.isSelected = false;
+              if (secondMenuInfo.children) {
+                // 3번째 depth 선택된 메뉴 초기화
+                secondMenuInfo.children.forEach((lastMenuInfo) => {
+                  lastMenuInfo.isSelected = false;
+                });
+              }
+            });
+          }
+        });
         state.leftMenuList[searchIndex].isMenuExapand = true;
+        const secondMenuList = leftMenuList[searchIndex].children;
+        if (secondMenuList && secondMenuList.length) {
+          const searchSecondMenuIndex = secondMenuList.findIndex((info) => info.treeType === 'M');
+          if (searchSecondMenuIndex !== -1) {
+            history.push(secondMenuList[searchSecondMenuIndex].menuUrl);
+          } else {
+            const lastMenuList = secondMenuList.children;
+            if (lastMenuList && lastMenuList.length) {
+              const searchLastMenuIndex = lastMenuList.findIndex((info) => info.treeType === 'M');
+              if (searchLastMenuIndex !== -1) {
+                history.push(lastMenuList[searchLastMenuIndex].menuUrl);
+              }
+            }
+          }
+        }
       })
     );
   },
