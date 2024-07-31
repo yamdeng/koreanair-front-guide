@@ -18,6 +18,10 @@ function MemberSelectModal(props) {
       const apiParam = { deptCd: selectedKeys[0] };
       const response = await ApiService.get('sys/common/users', apiParam);
       const list = response.data || [];
+      list.forEach((listInfo) => {
+        listInfo.checked = false;
+        listInfo.selectedType = 'U';
+      });
       setUserList(list);
     },
     [isOpen, onlyUserSelect]
@@ -25,7 +29,11 @@ function MemberSelectModal(props) {
 
   const onCheck = useCallback(
     (checkedKeys, treeInfo) => {
-      setCheckedDeptList(treeInfo.checkedNodes);
+      const deptList = treeInfo.checkedNodes || [];
+      deptList.forEach((listInfo) => {
+        listInfo.selectedType = 'D';
+      });
+      setCheckedDeptList(deptList);
     },
     [isOpen, onlyUserSelect]
   );
@@ -35,6 +43,10 @@ function MemberSelectModal(props) {
       const apiParam = { searchWord: userSearchInputValue };
       const response = await ApiService.get('sys/common/users', apiParam);
       const list = response.data || [];
+      list.forEach((listInfo) => {
+        listInfo.checked = false;
+        listInfo.selectedType = 'U';
+      });
       setUserList(list);
     } else {
       alert('검색어를 입력해주세요.');
@@ -60,13 +72,15 @@ function MemberSelectModal(props) {
   }, []);
 
   const moveSelectedArea = useCallback(() => {
-    const selectAllList = [...userList, ...checkedDeptList];
+    const checkedUserList = userList.filter((info) => info.checked);
+    const selectAllList = [...checkedUserList, ...checkedDeptList];
     const filterAllList = selectAllList.filter((info) => {
       const searchFinalInfo = finalSelectList.find((finalInfo) => {
-        if (finalInfo.deptCd === info.deptCd || finalInfo.userId === finalInfo.userId) {
-          return true;
+        if (finalInfo.selectedType === 'U') {
+          return info.userId === finalInfo.userId;
+        } else {
+          return info.deptCd === finalInfo.deptCd;
         }
-        return false;
       });
       if (!searchFinalInfo) {
         return true;
@@ -74,9 +88,7 @@ function MemberSelectModal(props) {
       return false;
     });
 
-    debugger;
-
-    setFinalSelectList([...finalSelectList, filterAllList]);
+    setFinalSelectList([...filterAllList, ...finalSelectList]);
   }, [checkedDeptList, userList]);
 
   const changeUserSearchInputValue = (event) => {
@@ -85,15 +97,7 @@ function MemberSelectModal(props) {
   };
 
   const save = useCallback(() => {
-    const result = finalSelectList.map((info) => {
-      if (info.deptCd) {
-        info.selectedType = 'D';
-      } else {
-        info.selectedType = 'U';
-      }
-      return info;
-    });
-    ok(result);
+    ok(finalSelectList);
   }, [finalSelectList]);
 
   const changeUserListChecked = (event, index) => {
@@ -102,6 +106,19 @@ function MemberSelectModal(props) {
       draft[index].checked = checked;
     });
     setUserList(newUserList);
+  };
+
+  const deleteFinalListByInfo = (deleteInfo) => {
+    let searchIndex = -1;
+    if (deleteInfo.selectedType === 'U') {
+      searchIndex = finalSelectList.findIndex((finalInfo) => finalInfo.userId === deleteInfo.userId);
+    } else {
+      searchIndex = finalSelectList.findIndex((finalInfo) => finalInfo.deptCd === deleteInfo.deptCd);
+    }
+    const newFinalSelectList = produce(finalSelectList, (draft) => {
+      draft.splice(searchIndex, 1);
+    });
+    setFinalSelectList(newFinalSelectList);
   };
 
   useEffect(() => {
@@ -114,11 +131,8 @@ function MemberSelectModal(props) {
 
   const checkedKeys = checkedDeptList.map((info) => info.deptCd);
 
-  const userFinalSelectList = finalSelectList.filter((info) => {
-    debugger;
-    return info.userId ? true : false;
-  });
-  const deptFinalSelectList = finalSelectList.filter((info) => (info.deptCd ? true : false));
+  const userFinalSelectList = finalSelectList.filter((info) => info.selectedType === 'U');
+  const deptFinalSelectList = finalSelectList.filter((info) => info.selectedType === 'D');
 
   return (
     <Modal
@@ -197,18 +211,26 @@ function MemberSelectModal(props) {
           <div className="checkbutton">
             <button onClick={moveSelectedArea}></button>
           </div>
-          <div className="checklist03">
+          <div className="">
             <div className="title">사용자</div>
             {userFinalSelectList.map((info) => {
               const { nameKor } = info;
-              return <div key={nameKor}>{nameKor}</div>;
+              return (
+                <div key={nameKor}>
+                  {nameKor} <span onClick={() => deleteFinalListByInfo(info)}>삭제</span>
+                </div>
+              );
             })}
           </div>
-          <div className="checklist03">
+          <div className="">
             <div className="title">부서</div>
             {deptFinalSelectList.map((info) => {
               const { nameKor } = info;
-              return <div key={nameKor}>{nameKor}</div>;
+              return (
+                <div key={nameKor}>
+                  {nameKor} <span onClick={() => deleteFinalListByInfo(info)}>삭제</span>
+                </div>
+              );
             })}
           </div>
         </div>

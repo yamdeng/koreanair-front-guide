@@ -247,7 +247,7 @@ const useSysGroupFormStore = create<any>((set, get) => ({
 
       set(
         produce((state: any) => {
-          state.selectManagerList = state.selectManagerList.concat(filterMemberList);
+          state.selectMemberList = state.selectMemberList.concat(filterMemberList);
         })
       );
     }
