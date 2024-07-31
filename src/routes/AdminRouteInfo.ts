@@ -8,6 +8,7 @@ import MenuForm from '@/components/admin/menu/MenuForm';
 import AdminUserList from '@/components/admin/user/AdminUserList';
 import AdminUserDetail from '@/components/admin/user/AdminUserDetail';
 import AdminDeptList from '@/components/admin/dept/AdminDeptList';
+import RoleManage from '@/components/admin/role/RoleManage';
 
 const AdminRouteInfo: any = {};
 
@@ -51,6 +52,10 @@ AdminRouteInfo.list = [
   {
     Component: AdminDeptList,
     path: 'depts',
+  },
+  {
+    Component: RoleManage,
+    path: 'roles',
   },
 ];
 

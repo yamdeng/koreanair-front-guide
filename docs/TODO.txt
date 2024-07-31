@@ -1,5 +1,16 @@
 ### TODO ###
 
+#.가상 그룹 fix
+
+#.코드관리 fix
+
+#.다국어 처리
+ 1.menu : 단순함
+ 2.code : CodeSelect, CodeValue
+ 3.message_key
+ 4.yup 기본 validate locale 적용
+
+
  #.CodeList.tsx
   -코드그룹ID, 코드그룹명, 등록자, 등록일
 

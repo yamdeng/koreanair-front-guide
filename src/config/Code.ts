@@ -63,6 +63,20 @@ Code.menuTreeType = [
   },
 ];
 
+/*
+    메뉴 트리 유형
+*/
+Code.groupUsage = [
+  {
+    label: '메뉴',
+    value: 'MENU',
+  },
+  {
+    label: '수동',
+    value: 'ROLE',
+  },
+];
+
 // 코드명 가져오기 : value 기준
 Code.getCodeLabelByValue = function (codeCategory, codeValue) {
   let codeLabel = null;

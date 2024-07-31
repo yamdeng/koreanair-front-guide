@@ -28,18 +28,19 @@
   .LNB {margin-top: 0; max-width: none; z-index: 11;}
   .LNB .LNB_menu {display: block;}
   .LNB .LNB_list {padding: 2.4rem;}
+  .contents {padding: 2.4rem;}
 
   .list-common-modal-content, .org-select-modal-content, .org-change-modal-content {width: 100%; height: 100%; border-radius: 0 !important;}
   .pop_full_cont_box {height: calc(100vh - 12.0rem); padding-bottom: 0;}
   .pop_btns {width: 100%; position: absolute; left: 0; bottom: 0; display: flex;}
   .pop_btns > button {border-radius: 0 !important; margin: 0; flex-basis: auto; flex-grow: 1;}
 
-  /*등록테이블이 2개일경우*/
+  /*등록테이블이 2개일경우
   .detail-form .detail-list .list{display:block;position:relative;width:100%;padding:1.5rem 0;border-bottom:solid 0.1rem var(--color-neutral-40)}
   .detail-list{width:100%}
   .detail-list .list{display:block;width:100%}
   .detail-list .list .list-row{display:inline-block;position:relative;width:100%;margin-left:0}
-  .detail-form .detail-list .list .list-row + .list-row{margin-left:0;margin-top:2.0rem}
+  .detail-form .detail-list .list .list-row + .list-row{margin-left:0;margin-top:2.0rem}*/
 
 
 }
@@ -49,6 +50,16 @@
 @media screen and (max-width: 375px) {  
   .LNB .LNB_menu .m-lnb_top_logo a span {display: none;}
   .pop_full_cont_box {height: calc(100vh - 12.0rem);}
+
+  /*상단타이틀*/
+  .conts-title h2 span{font-size:2rem;color:var(--color-mblue-100)}
+
+  .Report-process li { width: 100%;margin-bottom: 40px; }
+  .Report-process li br{ display: none; }
+  .Report-process li span{ width: 100%;height: auto;border-radius: 0;padding: 20px; }
+  .Report-process li:before{ left: 50%;margin-left: -12px;transform: rotate(90deg);right: auto;bottom: -40px;top: auto;margin-top: 0; }
+
+  .Report-process li span, .Report-process li span:first-child { font-size:18px;width:100%;height: 100px;padding: 0 5px; padding-top: 40px; border-radius:0}
 
 
   
