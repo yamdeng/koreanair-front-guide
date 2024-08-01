@@ -98,6 +98,7 @@ function MemberSelectModal(props) {
 
   const save = useCallback(() => {
     ok(finalSelectList);
+    closeModal();
   }, [finalSelectList]);
 
   const changeUserListChecked = (event, index) => {
@@ -130,7 +131,6 @@ function MemberSelectModal(props) {
   }, [isOpen]);
 
   const checkedKeys = checkedDeptList.map((info) => info.deptCd);
-
   const userFinalSelectList = finalSelectList.filter((info) => info.selectedType === 'U');
   const deptFinalSelectList = finalSelectList.filter((info) => info.selectedType === 'D');
 
@@ -157,7 +157,7 @@ function MemberSelectModal(props) {
                     blockNode
                     checkedKeys={checkedKeys}
                     treeData={treeData}
-                    multiple={onlyUserSelect ? false : true}
+                    multiple={onlyUserSelect ? false : false}
                     checkable={onlyUserSelect ? false : true}
                     checkStrictly
                     onSelect={onSelect}

@@ -80,16 +80,17 @@ const useSysGroupFormStore = create<any>((set, get) => ({
   },
 
   save: async () => {
-    const { validate, getApiParam, formType, formApiPath, menuId, getGroupList } = get();
+    const { validate, getApiParam, formType, formApiPath, menuId, workScope, getGroupList, getMenuTree } = get();
     const isValid = await validate();
     if (isValid) {
       const apiParam = getApiParam();
       if (formType === 'add') {
         await ApiService.post(`${formApiPath}`, apiParam);
+        set({ formType: FORM_TYPE_UPDATE });
+        await getMenuTree(workScope);
       } else {
         await ApiService.put(`${formApiPath}/${menuId}`, apiParam);
       }
-      set({ formType: FORM_TYPE_UPDATE });
       await getGroupList();
     }
   },
@@ -141,10 +142,12 @@ const useSysGroupFormStore = create<any>((set, get) => ({
   },
 
   handleTreeSelect: async (selectedKeys, info) => {
-    const { getDetailListAll } = get();
+    const { getDetailListAll, getMenuTree } = get();
     const groupInfo = info.node;
+    const workScope = groupInfo.workScope;
     set({ ...groupInfo, formType: FORM_TYPE_UPDATE });
     getDetailListAll();
+    getMenuTree(workScope);
   },
 
   getDetailListAll: async () => {
@@ -169,7 +172,7 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     const selectMemberList = [...deptList, ...selectMemberUserList];
 
     set({
-      selectMenuKeyList: menuList.map((info) => info.menuId),
+      selectMenuKeyList: menuList.filter((info) => info.upperMenuId !== '0').map((info) => info.menuId),
       selectMemberList: selectMemberList,
       selectManagerList: selectManagerList,
     });
@@ -187,10 +190,20 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     set({ menuTreeData: treeData });
   },
 
+  handleMenuTreeSelect: async (selectedKeys) => {
+    set({ selectMenuKeyList: selectedKeys });
+  },
+
   changeTreeWorkScope: (workScope) => {
     const { getGroupList } = get();
     set({ treeWorkScope: workScope });
     getGroupList();
+  },
+
+  changeWorkScope: (workScope) => {
+    const { getMenuTree } = get();
+    set({ workScope: workScope, selectMenuKeyList: [] });
+    getMenuTree(workScope);
   },
 
   removeManager: (removeIndex) => {

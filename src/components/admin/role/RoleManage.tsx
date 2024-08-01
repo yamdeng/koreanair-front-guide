@@ -2,7 +2,8 @@ import AppSelect from '@/components/common/AppSelect';
 import Code from '@/config/Code';
 import { FORM_TYPE_UPDATE } from '@/config/CommonConstant';
 import useSysGroupFormStore from '@/stores/admin/useSysGroupFormStore';
-import { Tree } from 'antd';
+import { Tree, TreeSelect } from 'antd';
+const { SHOW_PARENT } = TreeSelect;
 import { useEffect } from 'react';
 import MemberSelectModal from '@/components/modal/MemberSelectModal';
 
@@ -30,7 +31,7 @@ function RoleManage() {
     selectManagerList,
     changeTreeWorkScope,
     save,
-    addRole,
+    addGroup,
     removeMember,
     removeManager,
     okMemberSelect,
@@ -39,6 +40,8 @@ function RoleManage() {
     closeMemberSelectModal,
     onlyUserSelect,
     saveDetail,
+    menuTreeData,
+    handleMenuTreeSelect,
     remove,
     init,
     clear,
@@ -57,7 +60,7 @@ function RoleManage() {
       <div className="boxForm">
         <div className="form-table">
           <div className="form-cell wid50">
-            <button className="btn-sm btn_text btn-lightblue" onClick={addRole}>
+            <button className="btn-sm btn_text btn-lightblue" onClick={addGroup}>
               추가
             </button>
             <div className="tree_wrap">
@@ -325,8 +328,25 @@ function RoleManage() {
 
             <div style={{ display: formType === FORM_TYPE_UPDATE ? '' : 'none' }} className="detail-form">
               <ul className="detail-list">
-                메뉴 선택 영역 : {selectMenuKeyList}
-                <li className="list"></li>
+                <li className="list">
+                  <TreeSelect
+                    style={{
+                      width: '100%',
+                    }}
+                    dropdownStyle={{
+                      maxHeight: 400,
+                      overflow: 'auto',
+                    }}
+                    treeCheckable
+                    showCheckedStrategy={SHOW_PARENT}
+                    treeData={menuTreeData}
+                    fieldNames={{ label: 'nameKor', value: 'menuId' }}
+                    placeholder="Please select"
+                    treeDefaultExpandAll
+                    value={selectMenuKeyList}
+                    onChange={handleMenuTreeSelect}
+                  />
+                </li>
               </ul>
 
               <div style={{ padding: 5, fontWeight: 'bold' }}>

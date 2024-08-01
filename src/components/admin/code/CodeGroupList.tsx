@@ -47,6 +47,12 @@ const CodeGroupListStore = create<any>((set, get) => ({
   searchWord: '',
   workScope: 'A',
 
+  changeWorkScope: (workScope) => {
+    const { search } = get();
+    set({ workScope: workScope, searchWord: '' });
+    search();
+  },
+
   clear: () => {
     set(initListData);
   },
@@ -54,7 +60,8 @@ const CodeGroupListStore = create<any>((set, get) => ({
 
 function CodeGroupList() {
   const state = CodeGroupListStore();
-  const { search, searchWord, list, workScope, getColumns, goAddPage, changeSearchInput, clear } = state;
+  const { search, searchWord, list, workScope, getColumns, goAddPage, changeSearchInput, changeWorkScope, clear } =
+    state;
   const columns = getColumns();
 
   useEffect(() => {
@@ -83,8 +90,7 @@ function CodeGroupList() {
           options={Code.adminWorkScope}
           value={workScope}
           onChange={(appSelectValue) => {
-            changeSearchInput('workScope', appSelectValue);
-            search();
+            changeWorkScope(appSelectValue);
           }}
         />
       </div>
@@ -111,7 +117,7 @@ function CodeGroupList() {
           </div>
         </div>
       </div>
-      <AppTable rowData={list} columns={columns} store={state} />
+      <AppTable rowData={list} columns={columns} store={state} hiddenPagination />
     </>
   );
 }
