@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { formBaseState, createFormSliceYup, defaultFormExcludeKeys } from '@/stores/slice/formSlice';
 import { createListSlice, listBaseState, defaultListExcludeKeys } from '@/stores/slice/listSlice';
 import * as yup from 'yup';
+import { produce } from 'immer';
 
 /* 컬럼 영역 */
 const columns: any = [
@@ -90,6 +91,26 @@ const useSysCodeGroupFormStore = create<any>((set, get) => ({
     const pageParam = getPageParam();
     const searchParam = { ...pageParam, searchWord };
     return searchParam;
+  },
+
+  addRow: () => {
+    set(
+      produce((state: any) => {
+        state.list.push({ updated: true });
+      })
+    );
+  },
+
+  removeByIndex: (removeIndex) => {
+    set(
+      produce((state: any) => {
+        state.list.splice(removeIndex, 1);
+      })
+    );
+  },
+
+  removeAll: () => {
+    set({ list: [] });
   },
 
   clear: () => {
