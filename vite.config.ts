@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
       proxy: {
         '/api/v1': {
           target: VITE_API_LOCAL_URL,
-          changeOrigin: true,
+          changeOrigin: false,
           configure: (proxy: any, _options: any) => {
             proxy.on('error', (err: any, _req: any, _res: any) => {
               if(enableProxyLog) {

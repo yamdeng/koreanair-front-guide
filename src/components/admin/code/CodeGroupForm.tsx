@@ -1,9 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useSysCodeGroupFormStore from '@/stores/admin/useSysCodeGroupFormStore';
 import AppTable from '@/components/common/AppTable';
 import AppSelect from '@/components/common/AppSelect';
 import Code from '@/config/Code';
+
+const DeleteActionButton = (props) => {
+  const { node, onClick } = props;
+  const { rowIndex } = node;
+  const handleClick = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    event.nativeEvent.stopPropagation();
+    onClick(rowIndex);
+  };
+  return <div onClick={handleClick}>삭제2</div>;
+};
 
 function CodeGroupForm() {
   /* formStore state input 변수 */
@@ -21,16 +33,77 @@ function CodeGroupForm() {
     save,
     remove,
     clear,
+    addRow,
+    removeAll,
+    removeByIndex,
   } = useSysCodeGroupFormStore();
 
   const listState = useSysCodeGroupFormStore();
   const { search, list, getColumns, changeListApiPath } = listState;
-  const columns = getColumns();
+  // const columns = getColumns();
+
+  const [columns] = useState([
+    { field: 'codeId', headerName: '코드ID', editable: true },
+    { field: 'codeNameKor', headerName: '코드명(한국어)', editable: true },
+    { field: 'codeNameEng', headerName: '코드명(영어)', editable: true },
+    { field: 'codeField1', headerName: '예비필드 1', editable: true },
+    { field: 'codeField2', headerName: '예비필드 2', editable: true },
+    { field: 'codeField3', headerName: '예비필드 3', editable: true },
+    { field: 'codeField4', headerName: '예비필드 4', editable: true },
+    { field: 'codeField5', headerName: '예비필드 5', editable: true },
+    {
+      field: 'sortOrder',
+      headerName: '정렬순서',
+      editable: true,
+      cellEditor: 'agNumberCellEditor',
+      cellEditorParams: {
+        min: 1,
+        max: 300,
+      },
+    },
+    {
+      field: 'useYn',
+      headerName: '사용여부',
+      editable: true,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: ['Y', 'N'],
+      },
+    },
+    { field: 'remark', headerName: '비고', editable: true },
+    {
+      field: 'action',
+      headerName: 'Action',
+      cellRenderer: 'deleteActionButton',
+      cellRendererParams: {
+        onClick: removeByIndex,
+      },
+    },
+  ]);
 
   const { detailId } = useParams();
 
-  // 추가, 전체 삭제
-  // addRow, deleteAll
+  const customButtons = [
+    {
+      title: '행추가',
+      onClick: () => {
+        addRow();
+      },
+    },
+    {
+      title: '전체삭제',
+      onClick: () => {
+        removeAll();
+      },
+    },
+  ];
+
+  const handleRowSingleClick = (props) => {
+    const { event } = props;
+    if (!event.defaultPrevented) {
+      alert('handleRowSingleClick');
+    }
+  };
 
   useEffect(() => {
     if (detailId && detailId !== 'add') {
@@ -192,7 +265,18 @@ function CodeGroupForm() {
       </div>
 
       {formType !== 'add' ? (
-        <AppTable rowData={list} columns={columns} store={listState} hiddenPagination editable={true} />
+        <AppTable
+          rowData={list}
+          columns={columns}
+          store={listState}
+          hiddenPagination
+          editable={true}
+          customButtons={customButtons}
+          handleRowSingleClick={handleRowSingleClick}
+          components={{
+            deleteActionButton: DeleteActionButton,
+          }}
+        />
       ) : null}
 
       {/* 하단 버튼 영역 */}

@@ -60,8 +60,18 @@ const CodeGroupListStore = create<any>((set, get) => ({
 
 function CodeGroupList() {
   const state = CodeGroupListStore();
-  const { search, searchWord, list, workScope, getColumns, goAddPage, changeSearchInput, changeWorkScope, clear } =
-    state;
+  const {
+    search,
+    searchWord,
+    list,
+    workScope,
+    getColumns,
+    goAddPage,
+    goDetailPage,
+    changeSearchInput,
+    changeWorkScope,
+    clear,
+  } = state;
   const columns = getColumns();
 
   useEffect(() => {
@@ -117,7 +127,17 @@ function CodeGroupList() {
           </div>
         </div>
       </div>
-      <AppTable rowData={list} columns={columns} store={state} hiddenPagination />
+      <AppTable
+        rowData={list}
+        columns={columns}
+        store={state}
+        hiddenPagination
+        handleRowDoubleClick={(rowInfo) => {
+          const data = rowInfo.data;
+          const codeGrpId = data.codeGrpId;
+          goDetailPage(codeGrpId);
+        }}
+      />
     </>
   );
 }

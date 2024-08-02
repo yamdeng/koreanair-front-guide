@@ -166,7 +166,7 @@ export const createLeftMenuSlice = (set, get) => ({
     // sys/left-menus?isTree=N
     const apiParam = { isTree: 'Y', workScope: appWorkScope };
     const response = await ApiService.get('sys/left-menus', apiParam);
-    const data = response.data;
+    const data = response.data.data;
     if (data && data.length) {
       const leftMenuList = data;
       leftMenuList.map((info) => {

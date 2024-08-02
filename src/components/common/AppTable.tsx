@@ -72,6 +72,7 @@ function AppTable(props) {
   const {
     rowData,
     columns,
+    customButtons = [],
     tableHeight = Config.defaultGridHeight,
     noDataMessage = Config.defaultGridNoDataMessage,
     displayTableLoading = false,
@@ -231,13 +232,23 @@ function AppTable(props) {
         <div className="count">
           {CommonUtil.formatString(gridTotalCountTemplate, store ? totalCount : rowData.length)}
         </div>
-        <div className="btn-area">
-          {/* <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
-            신규
-          </button> */}
+        <div className="btns-area">
+          {customButtons.map((info) => {
+            const { title, onClick } = info;
+            return (
+              <button
+                key={title}
+                name="button"
+                className="btn_text btn_confirm text_color_neutral-10"
+                onClick={onClick}
+              >
+                {title}
+              </button>
+            );
+          })}
           <button
             name="button"
-            className="btn-sm btn_text btn-darkblue-line"
+            className="btn_text btn_confirm text_color_neutral-10"
             onClick={downloadCSVFile}
             style={{ display: displayCSVExportButton ? '' : 'none' }}
           >
@@ -245,7 +256,7 @@ function AppTable(props) {
           </button>
           <button
             name="button"
-            className="btn-sm btn_text btn-darkblue-line"
+            className="btn_text btn_confirm text_color_neutral-10"
             onClick={() => setIsColumnSettingModalOpen(true)}
             style={{ display: useColumnDynamicSetting ? '' : 'none' }}
           >
