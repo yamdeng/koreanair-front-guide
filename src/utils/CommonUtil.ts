@@ -6,6 +6,7 @@ import {
 } from '@/config/CommonConstant';
 import _ from 'lodash';
 import dayjs from 'dayjs';
+import { nanoid } from 'nanoid';
 
 const convertEnterStringToBrTag = function (value) {
   return value.replace(/\\r\\n|\r\n|\n|\\n/g, '<br/>');
@@ -105,6 +106,7 @@ const applyGroupingRowSpanByPageSize = (data, columnName, pageSize = 1000000) =>
   return _.cloneDeep(data);
 };
 
+// upper_dept_cd = '0'
 // listToTreeData(deptList.result, 'DEPT_ID', 'PRNT_ID', '10073')
 function listToTreeData(items, treeKey, treeParentKey, rootValue) {
   const rootItems = [];
@@ -119,7 +121,7 @@ function listToTreeData(items, treeKey, treeParentKey, rootValue) {
 
     // if (lookUpTreeParentValue == rootValue) {
     // if (lookUpTreeValue == rootValue) {
-    if (lookUpTreeValue == rootValue) {
+    if (lookUpTreeParentValue == rootValue) {
       rootItems.push(lookup[lookUpTreeValue]);
     } else {
       if (!lookup[lookUpTreeParentValue]) {
@@ -257,6 +259,10 @@ const getQueryStringByArray = (parameterName: string, arr: string[]): string => 
   return result;
 };
 
+const getUUID = () => {
+  return nanoid();
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -272,4 +278,5 @@ export default {
   convertDateToQuarterValueString,
   getQueryStringByArray,
   objectToQueryString,
+  getUUID,
 };
