@@ -6,6 +6,7 @@ import {
 } from '@/config/CommonConstant';
 import _ from 'lodash';
 import dayjs from 'dayjs';
+import { nanoid } from 'nanoid';
 
 const convertEnterStringToBrTag = function (value) {
   return value.replace(/\\r\\n|\r\n|\n|\\n/g, '<br/>');
@@ -258,6 +259,10 @@ const getQueryStringByArray = (parameterName: string, arr: string[]): string => 
   return result;
 };
 
+const getUUID = () => {
+  return nanoid();
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -273,4 +278,5 @@ export default {
   convertDateToQuarterValueString,
   getQueryStringByArray,
   objectToQueryString,
+  getUUID,
 };
