@@ -1,20 +1,76 @@
 import { Select } from 'antd';
+import CommonUtil from '@/utils/CommonUtil';
+import classNames from 'classnames';
 
 /*
 
-    1.value, onChange
-    2.placeholder
-
-
-    99.max count
-    99.다국어를 how?
+    <AppSelect 
+      id={''}
+      name={'id와 동일하기 전달'}
+      label={''}
+      value={value}
+      options={[]}
+      onChange={onChange}
+      placeholder=''
+      required={true}
+      errorMessage=''
+      applyAllSelect={true}
+      allValue=''
+      style={{width: '100%'}}
+      labelOnlyTop={true}
+    />
 
 */
 function AppSelect(props) {
-  const { value, options = [], onChange, placeHolder = '', applyAllSelect = false, allValue = 'all' } = props;
+  const {
+    name = '',
+    id = CommonUtil.getUUID(),
+    label,
+    value,
+    options = [],
+    onChange,
+    placeHolder = '',
+    required = false,
+    errorMessage,
+    applyAllSelect = false,
+    allValue = '',
+    style = { width: '100%' },
+    labelOnlyTop = false,
+  } = props;
   const applyOptions = applyAllSelect ? [{ label: '전체', value: allValue }, ...options] : options;
+  let isSelectedClass = false;
+  if (value) {
+    if (Array.isArray(value)) {
+      if (value.length) {
+        isSelectedClass = true;
+      }
+    } else {
+      isSelectedClass = true;
+    }
+  }
+  const applyClassName = classNames('label-select', {
+    selected: isSelectedClass || labelOnlyTop || applyAllSelect,
+  });
   return (
-    <Select {...props} value={value} options={applyOptions} placeholder={placeHolder} onChange={onChange}></Select>
+    <>
+      <Select
+        {...props}
+        style={style}
+        className={applyClassName}
+        id={id}
+        name={name}
+        value={value}
+        options={applyOptions}
+        placeholder={placeHolder}
+        onChange={onChange}
+      ></Select>
+      <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
+        {label} {required ? <span className="required">*</span> : null}
+      </label>
+      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
+        {errorMessage}
+      </span>
+    </>
   );
 }
 

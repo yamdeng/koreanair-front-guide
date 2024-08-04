@@ -1,7 +1,8 @@
 import Config from '@/config/Config';
 import CommonUtil from '@/utils/CommonUtil';
 import { AgGridReact } from 'ag-grid-react';
-import { Select as AntSelect, Modal } from 'antd';
+import { Modal } from 'antd';
+import AppSelect from './AppSelect';
 import { produce } from 'immer';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import GridActionButtonComponent from './GridActionButtonComponent';
@@ -263,7 +264,7 @@ function AppTable(props) {
             동적 필드 적용
           </button>
           <span>
-            <AntSelect
+            <AppSelect
               style={{ width: 150, display: hiddenPagination || enablePagination || !store ? 'none' : '' }}
               onChange={(size) => {
                 changePageSize(size);
