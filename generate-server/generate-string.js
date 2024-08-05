@@ -4,6 +4,7 @@ import { createListSlice, listBaseState } from "@/stores/slice/listSlice";
 import { useEffect, useState, useCallback } from "react";
 import CommonUtil from '@/utils/CommonUtil';
 import { create } from "zustand";
+import AppSearchInput from '@/components/common/AppSearchnput';
 
 const initListData = {
   ...listBaseState,
@@ -48,35 +49,20 @@ function <%= fileName %>() {
       {/* TODO : 헤더 영역입니다 */}
       <div className="conts-title">
         <h2>TODO: 타이틀</h2>
-        <div className="btn-area">
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={search}>
-            조회
-          </button>
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={goAddPage}>
-            신규
-          </button>
-        </div>
       </div>
       {/* TODO : 검색 input 영역입니다 */}
       <div className="boxForm">
         <div className="form-table">
           <div className="form-cell wid50">
-            <span className="form-group wid100 mr5">
-              <input
-                type="text"
-                className="form-tag"
-                name="title"
+            <span className="form-group wid100">
+              <AppSearchInput 
+                label="이름"
                 value={searchWord}
-                onChange={(event) => {
-                  changeSearchInput('searchWord', event.target.value);
+                onChange={(value) => {
+                  changeSearchInput('searchWord', value);
                 }}
-                onKeyDown={(event) => {
-                  if (event && event.key === 'Enter') {
-                    search();
-                  }
-                }}
+                search={search}
               />
-              <label className="f-label">이름</label>
             </span>
           </div>
         </div>
@@ -88,6 +74,12 @@ function <%= fileName %>() {
         store={state}
         handleRowDoubleClick={handleRowDoubleClick}
       />
+      <div className="contents-btns">
+        {/* TODO : 버튼 목록 정의 */}
+        <button type="button" name="button" className="btn_text text_color_neutral-10 btn_confirm">
+          신규
+        </button>
+      </div>
     </>
   );
 }
