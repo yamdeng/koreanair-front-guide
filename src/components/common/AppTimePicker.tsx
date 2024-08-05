@@ -1,10 +1,16 @@
+import { useState } from 'react';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
+import CommonUtil from '@/utils/CommonUtil';
 
-function AppTimePikcer(props) {
+function AppTimePicker(props) {
   const {
-    id,
+    id = CommonUtil.getUUID(),
     name,
+    label,
+    required,
+    placeholder = '',
+    errorMessage,
     defaultValue = null,
     value = null,
     onChange,
@@ -17,7 +23,18 @@ function AppTimePikcer(props) {
     secondStep = 1,
     needConfirm = null,
     disabled,
+    style = { width: '100%' },
   } = props;
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
 
   let applyDateValueFormat = 'HH:mm:ss';
   if (excludeSecondsTime) {
@@ -35,24 +52,38 @@ function AppTimePikcer(props) {
   const applyValue = value ? dayjs(value, applyDateValueFormat) : null;
 
   return (
-    <TimePicker
-      id={id}
-      name={name}
-      onChange={(dayjsDate: any) => {
-        const valueString = dayjsDate.format(applyDateValueFormat);
-        onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
-      }}
-      defaultValue={defaultValue}
-      value={applyValue}
-      format={applyDisplayFormat}
-      showNow={showNow}
-      needConfirm={needConfirm}
-      disabled={disabled}
-      minuteStep={minuteStep}
-      hourStep={hourStep}
-      secondStep={secondStep}
-    />
+    <>
+      <TimePicker
+        className={value ? 'label-picker selected' : 'label-picker'}
+        status={!isFocused && errorMessage ? 'error' : ''}
+        style={style}
+        id={id}
+        name={name}
+        placeholder={placeholder}
+        onChange={(dayjsDate: any) => {
+          const valueString = dayjsDate.format(applyDateValueFormat);
+          onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
+        }}
+        defaultValue={defaultValue}
+        value={applyValue}
+        format={applyDisplayFormat}
+        showNow={showNow}
+        needConfirm={needConfirm}
+        disabled={disabled}
+        minuteStep={minuteStep}
+        hourStep={hourStep}
+        secondStep={secondStep}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      />
+      <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
+        {label} {required ? <span className="required">*</span> : null}
+      </label>
+      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
+        {errorMessage}
+      </span>
+    </>
   );
 }
 
-export default AppTimePikcer;
+export default AppTimePicker;

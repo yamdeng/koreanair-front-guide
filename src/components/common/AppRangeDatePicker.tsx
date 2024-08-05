@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { DATE_PICKER_TYPE_QUARTER } from '@/config/CommonConstant';
 import CommonUtil from '@/utils/CommonUtil';
 import { DatePicker } from 'antd';
@@ -8,8 +8,11 @@ import dayjs from 'dayjs';
 
 const AppRangeDatePicker = (props) => {
   const {
-    id,
+    id = CommonUtil.getUUID(),
     name,
+    label,
+    required,
+    errorMessage,
     defaultValue = [],
     value = [],
     onChange,
@@ -29,7 +32,20 @@ const AppRangeDatePicker = (props) => {
     disabled,
     disabledHoiloday,
     disabledDates,
+    style = { width: '100%' },
+    placeholder = ['', ''],
   } = props;
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
   let applyDateValueFormat = CommonUtil.getDateFormatByPickerType(pickerType, showTime, excludeSecondsTime);
   if (valueFormat) {
     applyDateValueFormat = valueFormat;
@@ -80,42 +96,56 @@ const AppRangeDatePicker = (props) => {
   );
 
   return (
-    <RangePicker
-      id={{
-        start: id,
-      }}
-      name={name}
-      onChange={(dayjsDateArray: any) => {
-        let valueStringArray = [];
-        let valueDateArray = [];
-        if (dayjsDateArray && dayjsDateArray.length) {
-          valueStringArray = dayjsDateArray.map((dayjsDate) => {
-            // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
-            if (pickerType === DATE_PICKER_TYPE_QUARTER) {
-              return dayjsDate.format('YYYY-MM') + '-01';
-            }
-            return dayjsDate.format(applyDateValueFormat);
-          });
-          valueDateArray = dayjsDateArray.map((dayjsDate) => dayjsDate.toDate);
+    <>
+      <RangePicker
+        className={value ? 'label-picker selected' : 'label-picker'}
+        status={!isFocused && errorMessage ? 'error' : ''}
+        style={style}
+        id={{
+          start: id,
+        }}
+        name={name}
+        placeholder={placeholder}
+        onChange={(dayjsDateArray: any) => {
+          let valueStringArray = [];
+          let valueDateArray = [];
+          if (dayjsDateArray && dayjsDateArray.length) {
+            valueStringArray = dayjsDateArray.map((dayjsDate) => {
+              // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
+              if (pickerType === DATE_PICKER_TYPE_QUARTER) {
+                return dayjsDate.format('YYYY-MM') + '-01';
+              }
+              return dayjsDate.format(applyDateValueFormat);
+            });
+            valueDateArray = dayjsDateArray.map((dayjsDate) => dayjsDate.toDate);
+          }
+          onChange(valueStringArray, valueDateArray);
+        }}
+        picker={pickerType}
+        defaultValue={defaultValue}
+        value={applyValue}
+        format={applyDisplayFormat}
+        showTime={
+          showTime
+            ? { format: applyTimeFormat, hourStep: hourStep, minuteStep: minuteStep, secondStep: secondStep }
+            : false
         }
-        onChange(valueStringArray, valueDateArray);
-      }}
-      picker={pickerType}
-      defaultValue={defaultValue}
-      value={applyValue}
-      format={applyDisplayFormat}
-      showTime={
-        showTime
-          ? { format: applyTimeFormat, hourStep: hourStep, minuteStep: minuteStep, secondStep: secondStep }
-          : false
-      }
-      showNow={showNow}
-      needConfirm={needConfirm}
-      minDate={applyMinDate}
-      maxDate={applyMaxDate}
-      disabled={disabled}
-      disabledDate={disabledDate}
-    />
+        showNow={showNow}
+        needConfirm={needConfirm}
+        minDate={applyMinDate}
+        maxDate={applyMaxDate}
+        disabled={disabled}
+        disabledDate={disabledDate}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      />
+      <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
+        {label} {required ? <span className="required">*</span> : null}
+      </label>
+      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
+        {errorMessage}
+      </span>
+    </>
   );
 };
 export default AppRangeDatePicker;

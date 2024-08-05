@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { DATE_PICKER_TYPE_QUARTER } from '@/config/CommonConstant';
 import CommonUtil from '@/utils/CommonUtil';
 import { DatePicker } from 'antd';
@@ -9,6 +9,9 @@ import dayjs from 'dayjs';
   DatePicker
    -id(string) : 폼에서 사용(포커스)
    -name(string) : 폼에서 사용(포커스)
+   -label
+   -required
+   -errorMessage
    -defaultValue(string)
    -value(string)
    -onChange : (valueString, valueDate) 변경 핸들러
@@ -28,16 +31,22 @@ import dayjs from 'dayjs';
    -disabled(boolean) : input disable 적용
    -disabledHoiloday(boolean) : 주말은 선택하지 못하게
    -disabledDates(string[]) : 선택을 막을 날짜 목록
+   -style={{width: '100%'}}
+
 
 */
 
 const AppDatePicker = (props) => {
   const {
-    id,
+    id = CommonUtil.getUUID(),
     name,
+    label,
+    required,
+    errorMessage,
     defaultValue = null,
     value = null,
     onChange,
+    placeholder = '',
     pickerType = 'date',
     valueFormat,
     displayFormat,
@@ -54,7 +63,19 @@ const AppDatePicker = (props) => {
     disabled,
     disabledHoiloday,
     disabledDates,
+    style = { width: '100%' },
   } = props;
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
   let applyDateValueFormat = CommonUtil.getDateFormatByPickerType(pickerType, showTime, excludeSecondsTime);
   if (valueFormat) {
     applyDateValueFormat = valueFormat;
@@ -99,33 +120,47 @@ const AppDatePicker = (props) => {
   );
 
   return (
-    <DatePicker
-      id={id}
-      name={name}
-      onChange={(dayjsDate: any) => {
-        let valueString = dayjsDate.format(applyDateValueFormat);
-        // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
-        if (pickerType === DATE_PICKER_TYPE_QUARTER) {
-          valueString = dayjsDate.format('YYYY-MM') + '-01';
+    <>
+      <DatePicker
+        className={value ? 'label-picker selected' : 'label-picker'}
+        status={!isFocused && errorMessage ? 'error' : ''}
+        style={style}
+        id={id}
+        name={name}
+        placeholder={placeholder}
+        onChange={(dayjsDate: any) => {
+          let valueString = dayjsDate.format(applyDateValueFormat);
+          // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
+          if (pickerType === DATE_PICKER_TYPE_QUARTER) {
+            valueString = dayjsDate.format('YYYY-MM') + '-01';
+          }
+          onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
+        }}
+        picker={pickerType}
+        defaultValue={defaultValue}
+        value={applyValue}
+        format={applyDisplayFormat}
+        showTime={
+          showTime
+            ? { format: applyTimeFormat, hourStep: hourStep, minuteStep: minuteStep, secondStep: secondStep }
+            : false
         }
-        onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
-      }}
-      picker={pickerType}
-      defaultValue={defaultValue}
-      value={applyValue}
-      format={applyDisplayFormat}
-      showTime={
-        showTime
-          ? { format: applyTimeFormat, hourStep: hourStep, minuteStep: minuteStep, secondStep: secondStep }
-          : false
-      }
-      showNow={showNow}
-      needConfirm={needConfirm}
-      minDate={applyMinDate}
-      maxDate={applyMaxDate}
-      disabled={disabled}
-      disabledDate={disabledDate}
-    />
+        showNow={showNow}
+        needConfirm={needConfirm}
+        minDate={applyMinDate}
+        maxDate={applyMaxDate}
+        disabled={disabled}
+        disabledDate={disabledDate}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      />
+      <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
+        {label} {required ? <span className="required">*</span> : null}
+      </label>
+      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
+        {errorMessage}
+      </span>
+    </>
   );
 };
 export default AppDatePicker;

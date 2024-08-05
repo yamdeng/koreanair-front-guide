@@ -1,7 +1,8 @@
 import Config from '@/config/Config';
 import CommonUtil from '@/utils/CommonUtil';
 import { AgGridReact } from 'ag-grid-react';
-import { Select as AntSelect, Modal } from 'antd';
+import { Modal } from 'antd';
+import AppSelect from './AppSelect';
 import { produce } from 'immer';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import GridActionButtonComponent from './GridActionButtonComponent';
@@ -72,6 +73,7 @@ function AppTable(props) {
   const {
     rowData,
     columns,
+    customButtons = [],
     tableHeight = Config.defaultGridHeight,
     noDataMessage = Config.defaultGridNoDataMessage,
     displayTableLoading = false,
@@ -94,10 +96,16 @@ function AppTable(props) {
     search,
     store = null,
     hiddenPagination,
+    editable = false,
   } = props;
 
   // store
   const { currentPage, prevPage, nextPage, totalCount, displayPageIndexList = [], changePageSize } = store || {};
+
+  let editType = '';
+  if (editable) {
+    editType = 'fullRow';
+  }
 
   // 컬럼 동적 셋팅 모달 open
   const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
@@ -225,13 +233,23 @@ function AppTable(props) {
         <div className="count">
           {CommonUtil.formatString(gridTotalCountTemplate, store ? totalCount : rowData.length)}
         </div>
-        <div className="btn-area">
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
-            신규
-          </button>
+        <div className="btns-area">
+          {customButtons.map((info) => {
+            const { title, onClick } = info;
+            return (
+              <button
+                key={title}
+                name="button"
+                className="btn_text btn_confirm text_color_neutral-10"
+                onClick={onClick}
+              >
+                {title}
+              </button>
+            );
+          })}
           <button
             name="button"
-            className="btn-sm btn_text btn-darkblue-line"
+            className="btn_text btn_confirm text_color_neutral-10"
             onClick={downloadCSVFile}
             style={{ display: displayCSVExportButton ? '' : 'none' }}
           >
@@ -239,14 +257,14 @@ function AppTable(props) {
           </button>
           <button
             name="button"
-            className="btn-sm btn_text btn-darkblue-line"
+            className="btn_text btn_confirm text_color_neutral-10"
             onClick={() => setIsColumnSettingModalOpen(true)}
             style={{ display: useColumnDynamicSetting ? '' : 'none' }}
           >
             동적 필드 적용
           </button>
           <span>
-            <AntSelect
+            <AppSelect
               style={{ width: 150, display: hiddenPagination || enablePagination || !store ? 'none' : '' }}
               onChange={(size) => {
                 changePageSize(size);
@@ -261,6 +279,7 @@ function AppTable(props) {
       </div>
       <div className="ag-theme-quartz" style={{ height: tableHeight }}>
         <AgGridReact
+          {...props}
           ref={gridRef}
           domLayout={applyAutoHeight ? 'autoHeight' : 'normal'}
           rowData={rowData}
@@ -283,6 +302,7 @@ function AppTable(props) {
           tooltipHideDelay={1000}
           tooltipMouseTrack={true}
           enableBrowserTooltips={false}
+          editType={editType}
           onGridReady={(params) => {
             if (displayTableLoading) {
               params.api.showLoadingOverlay();
@@ -293,7 +313,6 @@ function AppTable(props) {
               getGridRef(params);
             }
           }}
-          {...props}
         />
       </div>
       {useColumnDynamicSetting && (
