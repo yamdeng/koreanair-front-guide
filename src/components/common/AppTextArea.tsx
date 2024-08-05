@@ -12,15 +12,14 @@ import CommonUtil from '@/utils/CommonUtil';
     placeholder=''
     errorMessage=''
     requried={true}
-    hiddenClearButton={true}
+    rows=10
     style = {}
   />
 
 */
 
-function AppTextInput(props) {
+function AppTextArea(props) {
   const {
-    inputType = 'text',
     name = '',
     id = CommonUtil.getUUID(),
     label,
@@ -29,15 +28,13 @@ function AppTextInput(props) {
     placeholder = '',
     required = false,
     errorMessage,
-    hiddenClearButton = false,
-    style = {},
+    style = { width: '100%', height: '200px' },
     disabled = false,
   } = props;
   return (
     <>
-      <input
+      <textarea
         id={id}
-        type={inputType}
         style={style}
         className={errorMessage ? 'form-tag error' : 'form-tag'}
         name={name}
@@ -51,9 +48,6 @@ function AppTextInput(props) {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
-      {inputType === 'number' || hiddenClearButton || !value ? null : (
-        <button className="btnClear" onClick={() => onChange('')}></button>
-      )}
       <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
         {errorMessage}
       </span>
@@ -61,4 +55,4 @@ function AppTextInput(props) {
   );
 }
 
-export default AppTextInput;
+export default AppTextArea;

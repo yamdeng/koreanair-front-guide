@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
 import CommonUtil from '@/utils/CommonUtil';
 
-function AppTimePikcer(props) {
+function AppTimePicker(props) {
   const {
     id = CommonUtil.getUUID(),
     name,
@@ -25,6 +26,16 @@ function AppTimePikcer(props) {
     style = { width: '100%' },
   } = props;
 
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
   let applyDateValueFormat = 'HH:mm:ss';
   if (excludeSecondsTime) {
     applyDateValueFormat = 'HH:mm';
@@ -44,7 +55,7 @@ function AppTimePikcer(props) {
     <>
       <TimePicker
         className={value ? 'label-picker selected' : 'label-picker'}
-        status={errorMessage ? 'error' : ''}
+        status={!isFocused && errorMessage ? 'error' : ''}
         style={style}
         id={id}
         name={name}
@@ -62,6 +73,8 @@ function AppTimePikcer(props) {
         minuteStep={minuteStep}
         hourStep={hourStep}
         secondStep={secondStep}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
@@ -73,4 +86,4 @@ function AppTimePikcer(props) {
   );
 }
 
-export default AppTimePikcer;
+export default AppTimePicker;

@@ -27,6 +27,7 @@ function AppSearchnput(props) {
     placeholder = '',
     style = {},
     search,
+    disabled = false,
   } = props;
   return (
     <>
@@ -46,6 +47,7 @@ function AppSearchnput(props) {
           }
         }}
         placeholder={placeholder}
+        disabled={disabled}
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label}

@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Select } from 'antd';
+import { TreeSelect } from 'antd';
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 
 /*
 
-    <AppSelect 
+    <AppTreeSelect 
       id={''}
       name={'id와 동일하기 전달'}
       label={''}
@@ -22,21 +22,22 @@ import classNames from 'classnames';
     />
 
 */
-function AppSelect(props) {
+function AppTreeSelect(props) {
   const {
     name = '',
     id = CommonUtil.getUUID(),
     label,
     value,
-    options = [],
+    treeData = [],
     onChange,
     placeHolder = '',
     required = false,
     errorMessage,
     applyAllSelect = false,
-    allValue = '',
     style = { width: '100%' },
     labelOnlyTop = false,
+    showSearch = false,
+    treeCheckable = true,
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
@@ -49,7 +50,6 @@ function AppSelect(props) {
     setIsFocused(false);
   };
 
-  const applyOptions = applyAllSelect ? [{ label: '전체', value: allValue }, ...options] : options;
   let isSelectedClass = false;
   if (value) {
     if (Array.isArray(value)) {
@@ -65,20 +65,26 @@ function AppSelect(props) {
   });
   return (
     <>
-      <Select
+      <TreeSelect
         {...props}
         status={!isFocused && errorMessage ? 'error' : ''}
         style={style}
         className={applyClassName}
+        dropdownStyle={{
+          maxHeight: 400,
+          overflow: 'auto',
+        }}
         id={id}
         name={name}
         value={value}
-        options={applyOptions}
         placeholder={placeHolder}
         onChange={onChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-      ></Select>
+        treeData={treeData}
+        showSearch={showSearch}
+        treeCheckable={treeCheckable}
+      ></TreeSelect>
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
@@ -89,4 +95,4 @@ function AppSelect(props) {
   );
 }
 
-export default AppSelect;
+export default AppTreeSelect;
