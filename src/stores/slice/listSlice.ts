@@ -37,6 +37,7 @@ export const listBaseState = {
   pageSize: 10,
   listApiMethod: 'get',
   baseRoutePath: '',
+  searchParam: {},
 };
 
 export const createListSlice = (set, get) => ({
@@ -71,28 +72,14 @@ export const createListSlice = (set, get) => ({
   },
 
   changeSearchInput: (inputName, inputValue) => {
-    set({ [inputName]: inputValue });
+    const { searchParam } = get();
+    searchParam[inputName] = inputValue;
+    set({ searchParam: searchParam });
   },
 
   getSearchParam: () => {
     const state = get();
-    const stateKeys = Object.keys(state);
-    const excludeFilterKeys = defaultListExcludeKeys;
-    if (state.excludeApiKeys && state.excludeApiKeys.length) {
-      excludeFilterKeys.push(...state.excludeApiKeys);
-    }
-    const applyStateKeys = stateKeys.filter((key) => {
-      if (typeof state[key] === 'function') {
-        return false;
-      } else if (excludeFilterKeys.includes(key)) {
-        return false;
-      }
-      return true;
-    });
-    const apiParam: any = {};
-    applyStateKeys.forEach((apiRequestKey) => {
-      apiParam[apiRequestKey] = state[apiRequestKey];
-    });
+    const apiParam: any = state.searchParam;
     apiParam.pageNum = state.currentPage;
     apiParam.pageSize = state.pageSize;
     set({ beforeApiParam: apiParam });
@@ -150,7 +137,7 @@ export const createListSlice = (set, get) => ({
     set({ list: list || [] });
   },
 
-  resetSearch: () => {
+  initSearch: () => {
     set({ currentPage: 1 });
     get().search();
   },

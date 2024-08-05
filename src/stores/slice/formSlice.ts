@@ -41,28 +41,10 @@ export const createFormSliceYup = (set, get) => ({
     const { formValue } = get();
     formValue[inputName] = inputValue;
     set({ formValue: formValue });
-    // set({ [inputName]: inputValue });
   },
 
   getApiParam: () => {
     const state = get();
-    // const stateKeys = Object.keys(state);
-    // const excludeFilterKeys = defaultFormExcludeKeys;
-    // if (state.excludeApiKeys && state.excludeApiKeys.length) {
-    //   excludeFilterKeys.push(...state.excludeApiKeys);
-    // }
-    // const applyStateKeys = stateKeys.filter((key) => {
-    //   if (typeof state[key] === 'function') {
-    //     return false;
-    //   } else if (excludeFilterKeys.includes(key)) {
-    //     return false;
-    //   }
-    //   return true;
-    // });
-    // const apiParam = {};
-    // applyStateKeys.forEach((apiRequestKey) => {
-    //   apiParam[apiRequestKey] = state[apiRequestKey];
-    // });
     const apiParam = state.formValue;
     return apiParam;
   },
