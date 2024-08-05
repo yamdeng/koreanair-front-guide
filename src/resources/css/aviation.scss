@@ -1,52 +1,36 @@
 @charset "UTF-8";
 .Report-process{}
-.Report-process-list{display:flex;justify-content: space-between;
-    padding: 4rem 9rem;}
-    .Report-process-item:nth-of-type(1){background-position: top center;
-      background-size: 80px 80px;}
-      .Report-process-item:before {
-        top: 4rem;
-        left: calc(50% + 4rem);
-        width: 100%;
-        height: 1px;
-    }
-    .Report-process-list .Report-process-item + .Report-process-item {
-      margin-top: 0;
-  }
-  .Report-process-list .Report-process-item:nth-of-type(2){background-position: top center;
-    background-size: 80px 80px;}
+.Report-process li{position:relative;float:left;width:25%;text-align:center}
+.Report-process li span:first-child{ width: 150px;height: 150px; border-radius: 50%;display: block;background: #f8f8f8;margin: 0 auto;padding-top: 60px; text-align: center; color:#222}
+.Report-process li:before{content:'';display:block;width:96px; height:96px;background:url(../images/icon--arrow-right.svg) no-repeat; position: absolute; top: 50%; margin-top: -21px; right: -12px; }
+.Report-process li.last:before{display:none}
+@media (max-width:1024px) {
+    .Report-process li span { width: 110px;height: 110px;padding-top: 45px; }
+    .Report-process li:before { width: 20px;height: 38px;background-size: 20px;margin-top: -19px; }
+}
+@media (max-width:768px) {
+    .Report-process{overflow: hidden;float:none}
+    .Report-process li{width:100%;margin-bottom:40px;}
+    .Report-process li span:first-child { width: 100px;height: 100px;padding: 0 5px; padding-top: 40px; }
+    .Report-process li:before { left:50%;margin-left:-12px;transform: rotate(90deg);right: auto;
+        bottom: -40px;
+        top: auto;
+        margin-top: 0;}
+        .Report-process li span, .Report-process li span:first-child {
+            font-size: 18px;
+            width: 100%;
+            height: 100px;
+            padding: 0 5px;
+            padding-top: 40px;
+            border-radius: 0;
+        }
+}
 
-.Report-process-list{display:flex;justify-content: space-between;
-    padding: 4rem 9rem;margin: 1.2rem 0;
-    padding: 2rem;
-    border: 1px solid #d9dbe1;
-    border-radius: 1rem;}
-    .Report-process-list .Report-process-item{display: flex;
-        align-items: center;
-        position: relative;
-        width: 100%;
-        height: 4.8rem;
-        padding-left: 6rem;
-        font-size: 1.4rem;
-        font-weight: 400;
-        color: #000;
-        line-height: 1.58;}
-    .Report-process-item:nth-of-type(1){background-position: top center;background: url(../images/icon--document.svg) no-repeat top left;
-        background-size: 48px 48px;}
-        .Report-process-list .Report-process-item:before {
-            content: "";
-            display: inline-block;
-            position: absolute;
-            /*top: 4.8rem;
-            left: 2.4rem;
-            width: 1px;
-            height: 4rem;*/
-            background: #e7eaf0;
-        }
-        .Report-process-list .Report-process-item + .Report-process-item {
-            margin-top: 4rem;
-        }
-        .Report-process-list .Report-process-item:nth-of-type(2){background: url(../images/icon--search.svg) no-repeat top left;
-            background-size: 48px 48px;
-        }
- 
+@media (max-width:375px){
+    .Report-process li { width: 100%;margin-bottom: 40px; }
+    .Report-process li br{ display: none; }
+    .Report-process li span{ width: 100%;height: auto;border-radius: 0;padding: 20px; }
+    .Report-process li:before{ left: 50%;margin-left: -12px;transform: rotate(90deg);right: auto;bottom: -40px;top: auto;margin-top: 0; }
+
+    .Report-process li span, .Report-process li span:first-child { font-size:18px;width:100%;height: 100px;padding: 0 5px; padding-top: 40px; border-radius:0}
+}

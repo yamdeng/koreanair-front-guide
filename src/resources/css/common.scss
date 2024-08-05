@@ -44,7 +44,7 @@ body * {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family: 'KoreanAirSans';
-  color: var(--color-neutral-70);
+  color: var(--color-neutral-80);
   font-size: 1.6rem;
     /* 1.6 * 10px = 16px */
 }
@@ -59,18 +59,47 @@ body * {
 .mr5{margin-right:0.5rem !important}
 
 button, input, textarea, select, label{font-family:'KoreanAirSans';font-weight:400}
-.df{display:flex}
+.df{display:flex;width:100%}
 .unt{line-height:3.5rem;align-items:center;padding:0 0.2rem}
 button,input{border:none;background:none;vertical-align:middle}
 select{vertical-align:middle}
 input{margin:0;padding:0}
 button{cursor:pointer}
+.hide{display:none !important}
+hr.line{border:none;height:0.1rem;background:var(--color-neutral-40);margin: 0;padding: 0;margin-top:1.5rem}
 
 input[type=checkbox],input[type=radio]{padding:0;vertical-align:middle;margin-top:-0.3rem;*margin-top:-0.2rem}
 
 /* checkbox, radio */
 [class^='radio-wrap'] > label{position:relative;overflow:hidden;cursor:pointer}
 [class^='radio-wrap'] > label > input{position:absolute;top:0;left:0;width:0;height:0;opacity:0}
+
+[class^="chk-wrap"] > label {position:relative;overflow:hidden;cursor:pointer}
+[class^="chk-wrap"] > label > input {position:absolute;top:0;left:0;width:0;height:0;opacity:0}
+
+/* 기본형 */
+.radio-wrap{/*display:inline-block;*/line-height:0}
+.radio-wrap > label {display:inline-block;/*min-height:4.0rem;*/padding:0rem 0.9rem 0.2rem 2.5rem;line-height:2.2rem;margin:1.2rem 0 0 0.2rem}
+.radio-wrap > label > input + span {display:block;color:var(--color-neutral-60);font-size:1.4rem}
+.radio-wrap > label > input:checked + span{color:var(--color-neutral-80);font-size:1.4rem}
+.radio-wrap > label > input + span:before, .radio-wrap > label > input + span:after{content:'';position:absolute;top:50%}
+.radio-wrap > label > input + span:before{left:0;width:1.8rem;height:1.8rem;background:transparent;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
+.radio-wrap > label > input[type="checkbox"] + span:after{left:0.8rem;margin-top:-0.2rem;width:0.8rem;height:0.5rem;border:solid var(--color-neutral-60); border-width:0 0 0.1rem 0.1rem; -webkit-transform:rotate(-45deg) translateY(-50%); transform:rotate(-45deg) translateY(-50%)}
+.radio-wrap > label > input[type="radio"] + span:after{left:0.3rem;width:1.2rem;height:1.2rem;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
+.radio-wrap > label > input:checked + span:before{border-color:var(--color-darkblue-100);background:var(--color-neutral-10)}
+.radio-wrap > label > input:checked + span:after{background:var(--color-darkblue-100)}
+.bottom-area .list-toggle + .radio-wrap{margin:1.0rem 0 3.0rem 1.9rem}
+
+.chk-wrap {display:inline-block;line-height:0}
+.chk-wrap > label {display:inline-block;/*min-height:4.0rem;*/padding:0rem 0.9rem 0.2rem 2.5rem;line-height:2.2rem;margin: 1.2rem 0 0 0.2rem}
+.chk-wrap > label > input + span {display:block;color:var(--color-neutral-60);font-size:1.4rem}
+.chk-wrap > label > input:checked + span{color:var(--color-neutral-80);font-size:1.4rem}
+.chk-wrap > label > input + span:before, .chk-wrap > label > input + span:after{content:'';position:absolute;top:50%}
+.chk-wrap > label > input + span:before{left:0;width:1.8rem;height:1.8rem;background:transparent;border:0.1rem solid var(--color-neutral-60);border-radius:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}
+.chk-wrap > label > input[type="checkbox"] + span:after{left:0.8rem;margin-top:-0.2rem;width:0.8rem;height:0.5rem;border:solid var(--color-neutral-60); border-width:0 0 0.1rem 0.1rem; -webkit-transform:rotate(-45deg) translateY(-50%); transform:rotate(-45deg) translateY(-50%)}
+.chk-wrap > label > input[type="radio"] + span:after{left:0.3rem;width:1.2rem;height:1.2rem;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
+.chk-wrap > label > input:checked + span:before {border-color:var(--color-darkblue-100);background:var(--color-darkblue-100)}
+.chk-wrap > label > input:checked + span:after{border-color:var(--color-neutral-10)}
 
 /*input*/
 input[type=file], input[type=search], input[type=text]{padding:0.4rem 0 0.4rem 0.4rem}
@@ -82,15 +111,74 @@ input,button{vertical-align:middle}
 textarea.textBox{width:100%;line-height:2.0rem !important;padding:0.5rem}
 input, select{font-family:'KoreanAirSans'}
 
+.formGroup-box{
+  display:flex;
+  > button{margin:0 0.5rem}
+  .btnInp-sm{height:4rem;padding:0rem 2.8rem;border-radius:99.9rem;text-align:center;align-items:center}
+  .btn_text{font-family:'KoreanAirSans';font-weight:700;font-size:1.6rem}
+  .btn-darkblue-line{border:solid 0.2rem var(--color-darkblue-100);color:var(--color-darkblue-100)}
+}
+
 /*컨텐츠상단버튼*/
 .btn-area{
-  > button{}
+  > button{margin:0 0.5rem}
   button + button{margin-left:0.5rem}
-  .btn_text{font-family:'KoreanAirSans';font-weight:400;font-size:1.5rem}
-  .btn-darkblue-line{border:solid 0.1rem var(--color-darkblue-100);color:var(--color-darkblue-100)}
+  .btn_text{font-family:'KoreanAirSans';font-weight:700;font-size:1.6rem}
+  .btn-darkblue-line{border:solid 0.2rem var(--color-darkblue-100);color:var(--color-darkblue-100)}
   .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
-  .btn-sm{padding:0.4rem 1.8rem;line-height:2.3rem;border-radius:99.9rem;align-items:center}
-  position:relative;right:0;top:0;float:right;
+  .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
+  /*position:relative;right:0;top:0;float:right;*/text-align:right;padding-top:1.2rem;
+  @include mobile {
+    width:100%;
+    position:absolute;
+    left:0;
+    bottom:0;
+    display:flex;
+    > button {
+      border-radius: 0 !important;
+      margin:0 auto;
+      flex-basis:auto;
+      flex-grow:1;
+    }
+  }
+}
+.text_color_neutral-10{color:var(--color-neutral-10)}
+
+/*그리드 위버튼*/
+.btns-area{
+  > button{margin:0 0.5rem}
+  button + button{margin-left:0.5rem}
+  .btn_text{font-family:'KoreanAirSans';font-weight:700;font-size:1.6rem}
+  .btn-darkblue-line{border:solid 0.2rem var(--color-darkblue-100);color:var(--color-darkblue-100)}
+  .btn_confirm{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-darkblue-100)}
+  .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
+  .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
+  .btn_close{padding:0.6rem 2.8rem;/* border: 0.2rem solid var(--color-darkblue-100); */border-radius:99.9rem;background: var(--color-neutral-30)}
+  position:relative;/*right:0;top:0;float:right;*/text-align:right;
+  @include mobile {
+    width:100%;
+    position:absolute;
+    left:0;
+    bottom:0;
+    display:flex;
+    > button {
+      border-radius: 0 !important;
+      margin:0 auto;
+      flex-basis:auto;
+      flex-grow:1;
+    }
+  }
+}
+.btns-box{
+  > button{margin:0 0.5rem}
+  button + button{margin-left:0.5rem}
+  .btn_text{font-family:'KoreanAirSans';font-weight:700;font-size:1.6rem}
+  .btn-darkblue-line{border:solid 0.2rem var(--color-darkblue-100);color:var(--color-darkblue-100)}
+  .btn_confirm{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-darkblue-100)}
+  .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
+  .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
+  .btn_close{padding:0.6rem 2.8rem;/* border: 0.2rem solid var(--color-darkblue-100); */border-radius:99.9rem;background: var(--color-neutral-30)}
+  position:relative;text-align:right;margin-bottom:2rem;
   @include mobile {
     width:100%;
     position:absolute;
@@ -109,10 +197,10 @@ input, select{font-family:'KoreanAirSans'}
 /*컨텐츠하단버튼*/
 .contents-btns{
   > button{margin:2.0rem 0.2rem}
-  .btn_text{font-family:'KoreanAirSans';font-weight:400;font-size:1.6rem}
-  .btn_confirm{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-darkblue-100)}
-  .btn_close{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
-  .btn_correct{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
+  .btn_text{font-family:'KoreanAirSans';font-weight:700;font-size:1.6rem}
+  .btn_confirm{padding:0.6rem 4.8rem;border-radius:99.9rem;background:var(--color-darkblue-100);align-items:center}
+  .btn_close{padding:0.8rem 4.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
+  .btn_correct{padding:0.8rem 4.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
   text-align:right;
   @include mobile {
     width: 100%;
@@ -129,22 +217,11 @@ input, select{font-family:'KoreanAirSans'}
   }
 }
 /* 상단 타이틀 */
-.conts-title{position:relative;border-bottom:solid 0.1rem var(--color-neutral-40);align-items:center;padding:2.0rem 0 4.0rem 0;margin-bottom:1.0rem}
-.conts-title h2{float:left;font-family:"KoreanAirSans";font-size:3rem;color:var(--color-neutral-80);font-weight:700}
-.conts-title h2 span{font-size:1.8rem;color:var(--color-mblue-100)}
+.conts-title{position:relative;/*border-bottom:solid 0.1rem var(--color-neutral-40);*/align-items:center;padding:2.0rem 0 4.0rem 0;margin-bottom:1.0rem}
+.conts-title h2{float:left;font-family:"KoreanAirSans";font-size:3rem;color:var(--color-neutral-80);font-weight:700;letter-spacing:-0.1rem}
+.conts-title h2 span{font-size:2.5rem;color:var(--color-mblue-100)}
 
-/* 기본형 */
-.radio-wrap{display:inline-block;line-height:0}
-.radio-wrap > label {display:inline-block; min-height:4.0rem;padding:0.9rem 0.9rem 0.9rem 3.0rem;line-height:2.2rem}
-.radio-wrap > label > input + span {display:block;color:var(--color-neutral-60)}
-.radio-wrap > label > input:checked + span{color:var(--color-neutral-80)}
-.radio-wrap > label > input + span:before, .radio-wrap > label > input + span:after{content:'';position:absolute;top:50%}
-.radio-wrap > label > input + span:before {left:0;width:2.0rem;height:2.0rem;background:transparent;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%);}
-.radio-wrap > label > input[type="checkbox"] + span:after{left:0.8rem;margin-top:-0.2rem;width:0.8rem;height:0.5rem;border:solid var(--color-neutral-60); border-width:0 0 0.1rem 0.1rem; -webkit-transform:rotate(-45deg) translateY(-50%); transform:rotate(-45deg) translateY(-50%);}
-.radio-wrap > label > input[type="radio"] + span:after{left:0.3rem;width:1.4rem;height:1.4rem;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%);}
-.radio-wrap > label > input:checked + span:before {border-color:var(--color-darkblue-100);background:var(--color-neutral-10)}
-.radio-wrap > label > input:checked + span:after {background:var(--color-darkblue-100)}
-.bottom-area .list-toggle + .radio-wrap{margin:1.0rem 0 3.0rem 1.9rem}
+
 
 .table-header{display:flex;position:relative;justify-content:end;align-items:center;-webkit-box-align:center;width:100%;line-height:3.5rem;padding-bottom:1.2rem}
 .table-header .count{font-size:1.5rem;margin-right: auto;}
@@ -161,9 +238,25 @@ input, select{font-family:'KoreanAirSans'}
   .detail-list .list .f-label .required{color:var(--color-negative)}
   .detail-list .list .cont{display:inline;margin-left:150px;box-sizing:border-box;width:100%}
   .form-table{display:flex;width:100%}
-  .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;padding-top:0}
+  .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;padding-top:0x}
   .form-table .form-cell:last-child{padding-right:0}
-  margin-bottom:1.0rem;
+
+  .group-box-wrap{
+    position: relative;
+    padding:0 1.0rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.5rem;
+}
+.group-box-wrap .txt {
+  background: #fff;
+  padding: 0 0.5rem;
+  position: absolute;
+  left: 1.0rem;
+  top: -1.2rem;
+  font-size:1.4rem
+}
+  
+  //margin-bottom:1.0rem;
   //@include mobile {
   //  .detail-list{width:100%}
   //  .detail-list .list{display:block;width:100%}
@@ -172,62 +265,162 @@ input, select{font-family:'KoreanAirSans'}
 
   //}
 }
+.detail-form{
+  .detail-list .form-table{display:flex;width:100%}
+  .form-table +.form-table{padding-top:1.5rem}
+}
+
+/*부서검색*/
+.conts-box{position:relative;height: calc(100vh - 18.5rem);overflow:hidden}
+.flex-group {
+  display: flex;
+  height: 100%;
+  ::-webkit-Scrollbar {
+    width:0.3em;
+    height:0.3em
+  }
+  ::-webkit-Scrollbar-thumb {
+    border-radius:1.0rem;
+    background:var(--color-neutral-30);
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::-webkit-Scrollbar Track {
+    border-radius:0rem;
+    background:var(--color-neutral-30)
+  }
+  @include mobile {
+    display: block;
+  }
+  .andt-tree-container {
+    flex-grow: 1;
+    @include mobile {
+      display: none;
+    }
+  }
+  .cont_form {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 3.0rem;
+    padding-right: 0.3rem;
+    .box_form {
+      margin-bottom: 2.0rem;
+      @include mobile {
+        padding: 0;
+        border: none;
+        margin-bottom: 0;
+      }
+    }
+    @include mobile {
+      flex-grow: 1;
+      padding: 0;
+    }
+  }
+}
+
+/*탭*/
+.menu-tab{display:flex;flex-wrap: nowrap;margin:0 0 3.0rem 0;border-radius:0.8rem;overflow: auto hidden;scroll-behavior: smooth;gap: 1.2rem 0px;}
+.menu-tab:after{content:'';display:block;clear:both}
+.menu-tab a:last-child{border-top-right-radius:0.8rem;border-bottom-right-radius:0.8rem}
+.menu-tab a{display:inline-flex;font-size:1.8rem;line-height:1.5;min-width:19rem;min-height:4.4rem;border:1px solid var(--color-neutral-40);background-color:var(--color-neutral-10); color:var(--color-neutral-80);padding:0;align-items:center;justify-content:center;text-align:center}
+.menu-tab a.active{background-color:var(--color-darkblue-100);color:var(--color-neutral-10)}
 
 /*검색영역*/
-.boxForm{position:relative;padding:0px 3rem 3rem;margin-bottom:3.0rem;background-color:var(--color-neutral-20);border-radius:var(--radius-small, 8px)}
+.info-wrap .edit-area > .boxForm{padding:0}
+.boxForm{position:relative;padding:1.5rem 3rem 3rem;margin-bottom:2.0rem;background-color:var(--color-neutral-20);border-radius:var(--radius-small, 8px)}
+.boxForm::after{content:'';clear:both;display:block}
 .boxForm .form-table{display:flex;width:100%}
-.boxForm .form-table:first-child{padding-top:3rem}
-.boxForm .form-table + .form-table{padding-top:1.5rem}
-.boxForm .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;padding-top:0}
+/*.boxForm .form-table:first-child{padding-top:3rem}*/
+.boxForm .form-table + .form-table{/*padding-top:1.5rem*/}
+.boxForm .form-table:last-child{/*padding-bottom:2.0rem*/}
+.boxForm .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;padding-top:1.2rem}
 .boxForm .form-table .form-cell:last-child{padding-right:0}
+.boxForm.tog{margin-bottom:0rem;padding-top:0rem}
 
 .conts-subTit{width:100%;line-height:3.5rem;padding-bottom:1.0rem}
 .conts-subTit span{font-size:1.5rem}
 
 /*검색영역-접기펴기 버튼영역*/
 .TopButton-area{position:relative;/*padding-top:2.0rem*/}
-.TopButton-area .btn-fold{position:absolute;top:-0.5rem;right:0.3rem;z-index:999; font-size:1.4rem;border:0.1rem solid var(--color-neutral-40);padding:0.3rem 1.2rem;background-color:var(--color-neutral-20);border-top-left-radius:var(--radius-small, 0.3rem);border-top-right-radius:var(--radius-small, 0.3rem);color:var(--color-neutral-8)}
-.btn-fold::after{content:'접기';font-weight:400}
-.btn-fold.open::after{content:'펴기';font-weight:400}
+.TopButton-area .btn-fold{position:absolute;left:50%;transform: translate(-50%, -50%);bottom:-5.0rem;z-index:999;width:5rem;height:5rem; background: url(../images/icon-arrow-up.svg) center center no-repeat; background-color: var(--color-neutral-30); background-size:3.5rem; border-radius: 50%;}
+/*.btn-fold::after{content:'접기';font-weight:400}
+.btn-fold.open::after{content:'펴기';font-weight:400}*/
 .TopButton-area .btn-fold.open{border:0.1rem solid var(--color-neutral-40);color:var(--color-neutral-8)}
 
 .form-group{position:relative;display:inline-block;vertical-align:middle}
 .form-group .invalid_txt{position:absolute;left:1.1rem;top:3.6rem;font-size:1rem;color:var(--color-negative)}
-
 .form-group .invalid-txt.textarea{top: 201px}
 
-.form-group .f-label{display:inline-block;position:absolute;left:1.0rem;top:0.8rem;background:var(--color-neutral-10);padding:0.2rem 0.4rem 0.4rem;line-height:1em;font-size:1.4rem !important;transition: all .2s ease}
+.form-group .list{}
+.form-group .list li{position:relative;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.form-group .list li .delete{position:absolute;right:0;background: url(/src/resources/images/delete-text.svg) center center no-repeat;font-size: 0;width: 2rem;height: 2rem}
+
+.form-group .date1, .form-group .date2{position:relative; width: 100%;}
+.form-group .f-label{display:inline-block;position:absolute;left:1.0rem;top:0.9rem;background:var(--color-neutral-10);padding:0 0.4rem;line-height:1.4em;font-size:1.4rem !important;transition: all .2s ease}
 .form-tag{position:relative;height:4rem;border:0.1rem solid var(--color-neutral-40);border-radius:0.5rem;padding:0 1.0rem;width:100%;box-sizing:border-box;color:var(--color-neutral-80);background:var(--color-neutral-10);outline:none!important;text-indent:1.0rem}
 .form-tag:not([value=""]){border:0.1rem solid var(--color-neutral-40)}
 .form-tag.active, .form-tag:focus{border:0.1rem solid var(--color-mblue-100) !important;color:var(--color-mblue-100) !important}
+.form-group .btnClear {
+  position: absolute;
+  top: 0.7rem;
+  right: 1.0rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: url(../images/delete-text.svg) center center no-repeat;
+  background-size: cover;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 
 .form-group .f-label .required{color:var(--color-negative)}
 .form-tag.error{border:solid 0.1rem var(--color-negative)}
 .form-group span.errorText{display:block;color:var(--color-negative);font-size:1.3rem;padding:0.2rem 0.5rem}
 .form-group .icon-sch{position:absolute;top:0.8rem;right:1.2rem;width:2.4rem;height:2.4rem;background:url(../images/icon--search.svg)50% 50% / 2.4rem 2.4rem no-repeat}
-.form-table .form-cell .form-glow{flex: 1 1}
+.form-table .form-cell .form-glow{flex: 1 1; width: 100%;}
 .form-tag-select{position:relative;height:3.5rem;border:0.1rem solid var(--color-neutral-40);border-radius:0.5rem;padding: 0 1.0rem;width:100%;box-sizing: border-box;color:var(--color-neutral-80); outline: none !important;  -webkit-appearance: none; -moz-appearance: none;background:var(--color-neutral-10) url(../images/chevron-down-solid.svg) no-repeat right 1.0rem center;background-size:1.0rem}
 .form-tag-select:focus, .form-tag-select.active {border:0.1rem solid var(--color-mblue-100) !important;color:var(--color-mblue-100) !important}
-.form-tag:disabled + .f-label, .form-tag:focus + .f-label, .form-tag.active + .f-label, .form-tag:not([value=""]) + .f-label, .form-tag.invalid + .f-label{left:1.0rem;top:-0.8rem;font-size:1.3rem;transition: all 0.2s ease}
+.label-select.disabled + .f-label, .ant-picker-disabled + .f-label, .ant-select-disabled + .f-label, .form-tag:disabled + .f-label, .form-tag:focus + .f-label, .form-tag.active + .f-label, .form-tag:not([value=""]) + .f-label, .form-tag.invalid + .f-label{left:1.0rem;top:-0.8rem;font-size:1.3rem;transition: all 0.2s ease}
 .form-tag:not([value=""]) + .f-label{color:var(--color-neutral-80)}
 .form-tag:disabled{background:var(--color-neutral-20)}
 .form-tag:not([value=""]){border:0.1rem solid var(--color-neutral-40)}
 .form-tag.active+.f-label, .form-tag:focus+.f-label{color:var(--color-mblue-100) !important}
 .form-tag-select:disabled + .f-label, .form-tag-select:focus + .f-label, .form-tag-select.active + .f-label, .form-tag-select.isValue + .f-label, .form-tag-select.invalid + .f-label{left:1.0rem;top:-2.0rem;font-size:1.3rem;transition: all 0.3s ease}
-/* ant-select focus, value 존재할때 label 처리 */
-.label-select.ant-select-focused + .f-label, label-picker.selected + f-label {left:1.0rem;top:-2.0rem;font-size:1.3rem;transition: all 0.3s ease}
+.form-group .sch-btnClear {
+  position: absolute;
+  top: 0.7rem;
+  right: 4.0rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: url(../images/delete-text.svg) center center no-repeat;
+  background-size: cover;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 
-/* datepicker focus, value 존재할때 label 처리 */
-.label-picker.ant-picker-focused + .f-label, label-picker.selected + f-label {left:1.0rem;top:-2.0rem;font-size:1.3rem;transition: all 0.3s ease}
+.form-group .df.row1{justify-content: center;}
+.form-group .df.row1 > .btn-area{padding-top:0}
+
+/*상세리스트*/
+.box-view-list{}
+.box-view-list .view-list{display:flex;text-align:left;justify-content:space-between}
+.box-view-list .view-list + .view-list{padding-top:2.0rem}
+.box-view-list .view-list .accumlate-list{position:relative;display:block}
+.box-view-list .view-list .t-label{display:block;color:var(--color-neutral-70);font-weight:400;font-size:1.5rem;white-space:nowrap}
+.box-view-list .view-list .text-desc{display:block;width:100%;margin-top:2rem;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
+.imgBoxWrap{position:relative;border:0.1rem solid var(--color-darkblue-100);background-color:var(--color-neutral-30)}
+.imgBox{position:relative;overflow:hidden;text-align:center;height:100px;width:100px}
+
 
 /*toggle*/
-.info-wrap{padding:0px 2.0rem 2.6rem;border-top:0.1rem solid var(--color-darkblue-100);background-color:var(--color-neutral-10)}
+.info-wrap{padding:0px 2.0rem 0rem;border-top:0rem solid var(--color-darkblue-100);background-color:var(--color-neutral-10)}
 .info-wrap > dl > dt{padding:1.8rem 0 1.7rem}
-.info-wrap > dl > dt .btn-tg{padding:0 6.7rem 0 0;font-family:"KoreanAirSans";font-size:1.8rem;color:var(--color-neutral-80);font-weight:500}
+.info-wrap > dl > dt .btn-tg{padding:0 6.7rem 0 0;font-family:"KoreanAirSans";font-size:2.0rem;color:var(--color-darkblue-100);font-weight:500}
 .info-wrap > dl > dd{margin:0 -2.0rem 1.0rem}
-.info-wrap .edit-area {padding:2.0rem 2.0rem;border-top:0.1rem solid var(--color-neutral-30);border-bottom:0.1rem solid var(--color-neutral-30);background-color:var(--color-neutral-20);color:var(--color-neutral-80);line-height:2.0rem;font-size:1.6rem}
-.toggle .btn-tg{position:relative;font-family:"KoreanAirSans";font-size:1.6rem;color:var(--color-neutral-70);background-color:var(--color-neutral-10);text-align:left;width:100%}
-.toggle .btn-tg:after{position:absolute;top:50%;right:0;content:'';display:inline-block;width:0.7rem;height:0.7rem;margin:0 0 0 1.3rem;border: solid var(--color-neutral-70);border-width: 0 0.1rem 0.1rem 0;-webkit-transform: translateY(-50%) rotate(45deg);transform: translateY(-50%) rotate(45deg);-webkit-transform-origin: center;transform-origin:center}
+.info-wrap .edit-area{padding:2.0rem 2.0rem;border-top:0.1rem solid var(--color-darkblue-100);border-bottom:0.1rem solid var(--color-neutral-30);background-color:var(--color-neutral-20);color:var(--color-neutral-80);line-height:2.0rem;font-size:1.6rem}
+.toggle .btn-tg{position:relative;font-family:"KoreanAirSans";font-size:1.6rem;color:var(--color-darkblue-100);background-color:var(--color-neutral-10);text-align:left;width:100%}
+.toggle .btn-tg:after{position:absolute;top:50%;right:0;content:'';display:inline-block;width:0.7rem;height:0.7rem;margin:0 0 0 1.3rem;border: solid var(--color-darkblue-100);border-width: 0 0.1rem 0.1rem 0;-webkit-transform: translateY(-50%) rotate(45deg);transform: translateY(-50%) rotate(45deg);-webkit-transform-origin: center;transform-origin:center}
 .toggle .active .btn-tg:after{-webkit-transform:translateY(-50%) rotate(-135deg);transform:translateY(-50%) rotate(-135deg)}
 .toggle .active .tg-conts{display:block}
 .toggle .active .tg-conts{display:block}
@@ -265,6 +458,39 @@ input, select{font-family:'KoreanAirSans'}
 :where(.css-dev-only-do-not-override-98ntnt).ant-picker .ant-picker-input >input{line-height:2.5rem}
 :where(.css-dev-only-do-not-override-98ntnt).ant-picker .ant-picker-input{display:flex}
 :where(.css-dev-only-do-not-override-98ntnt).ant-picker-outlined{border:0.1rem solid var(--color-neutral-40)}
-:where(.css-dev-only-do-not-override-98ntnt).ant-select-single .ant-select-selector{line-height:3.5rem}
-:where(.css-dev-only-do-not-override-98ntnt).ant-select-single{height:3.5rem !important}
+:where(.css-dev-only-do-not-override-98ntnt).ant-select-single .ant-select-selector{line-height:4rem}
+:where(.css-dev-only-do-not-override-98ntnt).ant-select-single{height:4rem !important}
 :where(.css-dev-only-do-not-override-98ntnt)[class^="ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-98ntnt)[class*=" ant-select"] [class^="ant-select"]{color:var(--color-mblue-100)}
+.label-select.focused + .f-label, .label-select.ant-select-focused + .f-label, .label-select.selected + .f-label, .label-picker.ant-picker-focused + .f-label, .label-picker.selected + .f-label {left:1rem;top:-1rem}
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker{height:4rem}
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker{padding:4px 20px 4px !important;width: 100%;}
+:where(.css-dev-only-do-not-override-98ntnt).ant-select{min-height:4rem !important}
+.ant-select-selector {
+  min-height:4rem !important
+}
+.label-select .css-13cymwt-control{min-height:4rem !important;height:4rem !important}
+
+/* 에디터 메뉴 툴팁 text override */
+.toastui-editor-tooltip .text {
+  color: white
+}
+
+/* 에디터 유효성 체크 실패시 border red 적용 */
+.editor-in-valid .toastui-editor-defaultUI {
+  border: 1px solid red !important;
+}
+
+/* autocomplete 공통 컴포넌트 유효성 체크 실패시 border red 적용 */
+.select-in-valid {
+  border: 1px solid red !important;
+}
+
+/*폼아이콘변경*/
+:where(.css-dev-only-do-not-override-98ntnt).ant-select .ant-select-arrow .anticon >svg {background: url(../images/arrow-down.svg)center center no-repeat; background-size: cover;}
+:where(.css-dev-only-do-not-override-98ntnt).ant-select .ant-select-arrow .anticon >svg path {display: none;}
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker .ant-picker-suffix .anticon svg {background: url(../images/calendar.svg)center center no-repeat; background-size: cover; width: 2.4rem; height: 2.4rem;}
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker .ant-picker-suffix .anticon svg path {display: none;}
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker .ant-picker-suffix .anticon-clock-circle svg {background: url(../images/arrival-time.svg)center center no-repeat; background-size: cover;}
+:where(.css-dev-only-do-not-override-98ntnt).ant-picker .ant-picker-suffix .anticon-clock-circle svg path {display: none;}
+.css-tj5bde-Svg {background: url(../images/icon-arrow-down.svg)center center no-repeat; background-size: cover;}
+.css-tj5bde-Svg path {display: none;}

@@ -474,3 +474,34 @@
     max-height: calc(100vh - 240.0rem);
   }
 }
+.tree-right-space {padding: 0 !important; margin: 0 !important;}
+.mb20 {margin-bottom: 2.0rem;}
+.mt30 {margin-top: 3.0rem;}
+.pd-10 {padding: 1.0rem;}
+.user-checkbox {display: flex; margin: 3.0rem 0; width: 100%; min-width: 76.7rem; height: 100%; overflow: auto;}
+.checklist {display: flex; width: 70.0rem; height: auto; border: 0.1rem solid var(--color-neutral-40); border-radius: 0.8rem; background-color: var(--color-neutral-20);}
+.checklist .listbox {width: 30.0rem; height: 100%; padding: 2.0rem;}
+.checklist .listbox .title {display: block; width: 100%; height: 5.0rem; line-height: 5.0rem; text-align: center; font-size: 2.1rem; color: var(--color-neutral-70); background-color: var(--color-neutral-40);}
+.search_box {width: 37.0rem; max-height: 100dvh;}
+.checklist .search {width: 100%; height: 100%; padding: 2.0rem 2.0rem 2.0rem 0;}
+.checklist .search .search-list {width: 100%;}
+.checklist .search .search-list .list {height: 30.0rem; overflow: auto;}
+.checklist .search .search-list .list li { background-color: #fff; height: 4.0rem; display: flex; justify-content: left; align-items: center; margin: 0 0 1.0rem 0; padding: 0 1.0rem; border-radius: 0.8rem; }
+.checklist .search .search-list .list li .ck-list {width: 29.0rem; line-height: 4.0rem; overflow: hidden; text-overflow:ellipsis; white-space: nowrap; font-size: 1.4rem;}
+.checkbutton {height: auto; display: flex; align-items: center; justify-content:center; padding: 0 0.5rem;}
+.checkbutton button {background: url(../images/pagination-last.svg) center center no-repeat; width: 4.0rem; height: 4.0rem;}
+.selectlist {width: 35.0rem; height: auto; border: 0rem solid var(--color-neutral-40);}
+.selectlist .title {width: 100%; border-top: 0.1rem solid var(--color-darkblue-100); border-bottom: 0.1rem solid var(--color-neutral-40); margin-bottom: 1.0rem;}
+.selectlist .title p {position: relative; display:flex; justify-content: center; align-items: center; height: 4.0rem; text-align: center;}
+.selectlist .title p .icon {position: absolute; right: 0; width: 4.0rem; height: 4.0rem; background: url(../images/delete.svg)center center no-repeat;}
+.selectlist .uesrlist {width: 100%;}
+.selectlist .uesrlist .stitle {width: 100%; height: 4.0rem; border-radius: 0.8rem; background-color: var(--color-lightblue-10); color: var(--color-darkblue-100); display: flex; align-items: center; justify-content: center;}
+.selectlist .uesrlist .list {margin: 1.0rem 0; position: relative; height: 12.0rem; overflow: auto;}
+.selectlist .uesrlist .list li {width: 28.0rem; height: 3.0rem; margin: 0.3rem 0; text-overflow:ellipsis; white-space: nowrap; overflow: hidden;}
+.selectlist .uesrlist .list .delete {background: url(../images/delete-text.svg)center center no-repeat; font-size: 0; width: 2.0rem; height: 2.0rem;position: absolute; right: 0;}
+.selectlist .departmentlist {width: 100%;}
+.selectlist .departmentlist .stitle {width: 100%; height: 4.0rem; border-radius: 0.8rem; background-color: var(--color-lightblue-10); color: var(--color-darkblue-100); display: flex; align-items: center; justify-content: center;}
+.selectlist .departmentlist .list {margin: 1.0rem 0 0 0; position: relative; height: 12.0rem; overflow: auto;}
+.selectlist .departmentlist .list li {width: 28.0rem; height: 3.0rem; margin: 0.3rem 0; text-overflow:ellipsis; white-space: nowrap; overflow: hidden;}
+.selectlist .departmentlist .delete {background: url(../images/delete-text.svg)center center no-repeat; font-size: 0; width: 2.0rem; height: 2.0rem;position: absolute; right: 0;}
+
