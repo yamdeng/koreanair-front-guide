@@ -2,7 +2,7 @@ import CommonUtil from '@/utils/CommonUtil';
 
 /*
 
-  <AppSearchnput 
+  <AppSearchInput 
     inputType={'number'},
     id={''}
     name={'id와 동일하기 전달'}
@@ -16,7 +16,7 @@ import CommonUtil from '@/utils/CommonUtil';
 
 */
 
-function AppSearchnput(props) {
+function AppSearchInput(props) {
   const {
     inputType = 'text',
     name = '',
@@ -58,4 +58,4 @@ function AppSearchnput(props) {
   );
 }
 
-export default AppSearchnput;
+export default AppSearchInput;
