@@ -261,6 +261,7 @@ app.get("/api/generate/:tableName", async (req, res) => {
       fileName: `${applyFileName}Detail`,
       storeName: `use${applyFileName}FormStore`,
       tableColumns: columnList,
+      tableColumnMultiArray: toMultiArray(columnList)
     };
 
     const formViewContent = ejs.render(formViewGenerateString, formViewData);
@@ -355,6 +356,7 @@ async function createDetailViewfile(tableName, columnList) {
     fileName: `${applyFileName}Detail`,
     storeName: `use${applyFileName}FormStore`,
     tableColumns: columnList,
+    tableColumnMultiArray: toMultiArray(columnList)
   };
   const content = ejs.render(detailViewGenerateString, data);
   fs.writeFileSync(`./result/${applyFileName}Detail.tsx`, content);
@@ -387,4 +389,18 @@ function getApplyFileName(camelCaseTableName) {
   // return camelCaseTableName.charAt(0).toUpperCase() + camelCaseTableName.slice(1);
   // 테이블명이 tb_로 시작해서 앞을 자름
   return camelCaseTableName.slice(2)
+}
+
+function toMultiArray(array, spliceCount = 2) {
+  const originalArray = _.cloneDeep(array)
+  const results = [];
+  // eslint-disable-next-line no-constant-condition
+  while(true) {
+    if(!originalArray.length) {
+      break;
+    }
+    const removeArray = originalArray.splice(0, spliceCount);
+    results.push(removeArray);
+  }
+  return results;
 }
