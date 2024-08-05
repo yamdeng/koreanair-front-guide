@@ -14,6 +14,7 @@
   width: 100%; 
   /*max-width: 1920px;*/
   height: 8.8rem;
+  /*border-bottom: 0.3rem solid var(--color-darkblue-100);*/
   border-bottom: 0.3rem solid var(--color-darkblue-100);
   z-index: 10;
   padding: 0 2.4rem;
@@ -46,10 +47,12 @@
 .header .logo .top-logo a span {
   color: var(--color-darkblue-100);
   font-family: "KoreanAirSans";
-  font-size: 2.0rem;
+  font-size: 2.8rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 150%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.4rem;
 }
 .header .GNB {
   float: left;
@@ -70,10 +73,12 @@
   font-style: normal;
   font-weight: 400;
 }
-.header .GNB .gnb-list li a.active {
+.header .GNB .gnb-list li a:hover{text-decoration-line: underline;}
+.header .GNB .gnb-list li a.active {position: relative;
   font-weight: 700;
   color: var(--color-darkblue-100);
 }
+.header .GNB .gnb-list li a.active:after{content:'';position:absolute;top: 0;right: -10px;width: 5px;height: 5px;border-radius: 50%;background-color:var(--color-darkblue-100);transition: all .3s ease-in-out}
 .header .util {
   float: right;
   display: flex;
@@ -162,10 +167,10 @@
 .LNB_menu .m-lnb_top_logo a span {
   color: var(--color-darkblue-100);
   font-family: "KoreanAirSans";
-  font-size: 2.0rem;
+  font-size: 2.6rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 150%;
+  margin-bottom: 0.4rem;
 }
 .LNB_menu .m-lnb_top_btn {
   display: flex;
@@ -247,13 +252,12 @@
 }
 .LNB_list li a {
   width: 100%; 
-  color: var(--color-darkblue-100);
+  color: var(--color-darkblue-100);text-decoration:none;
 }
+.LNB_list li a:hover{text-decoration-line: underline;}
 .LNB_list li a.up-icon {background: url(../images/icon-arrow-up.svg) right center no-repeat;}
 .LNB_list li a.down-icon {background: url(../images/icon-arrow-down.svg) right center no-repeat;}
-.LNB_list li a.active {
-  font-weight: 700;
-}
+.LNB_list li a.active{position:relative;font-weight:700}
 .LNB_list li .mu-2depth {
   display: flex;
   width: 100%;
@@ -330,3 +334,5 @@
   line-height: 150%;
   background-color: var(--color-neutral-10);
 }
+
+.ag-row .ag-cell {font-weight:400 !important;text-decoration:none !important}

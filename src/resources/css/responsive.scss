@@ -35,6 +35,8 @@
   .pop_btns {width: 100%; position: absolute; left: 0; bottom: 0; display: flex;}
   .pop_btns > button {border-radius: 0 !important; margin: 0; flex-basis: auto; flex-grow: 1;}
 
+  .table-header .btns-area {display: none;}
+
   /*등록테이블이 2개일경우
   .detail-form .detail-list .list{display:block;position:relative;width:100%;padding:1.5rem 0;border-bottom:solid 0.1rem var(--color-neutral-40)}
   .detail-list{width:100%}
