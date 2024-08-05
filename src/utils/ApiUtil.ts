@@ -30,9 +30,12 @@ Api.interceptors.request.use(
 
 // 응답 인터셉터
 Api.interceptors.response.use(
-  function (response) {
+  function (response: any) {
     LoadingBar.hide();
-    return response;
+    if (response.config.applyOriginalResponse) {
+      response;
+    }
+    return response.data;
   },
   function (error) {
     LoadingBar.hide();

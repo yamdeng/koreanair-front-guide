@@ -52,7 +52,7 @@ function AppSearchInput(props) {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label}
       </label>
-      {value ? <button className="sch-btnClear" onClick={() => onChange('')}></button> : null}
+      {!disabled && value ? <button className="sch-btnClear" onClick={() => onChange('')}></button> : null}
       <button type="button" className="icon-sch" onClick={search}></button>
     </>
   );

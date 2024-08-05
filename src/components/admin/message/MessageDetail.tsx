@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 import useSysMessageFormStore from '@/stores/admin/useSysMessageFormStore';
 
 function MessageDetail() {
-  const { msgKey, msgKor, msgEng, msgChn, msgJpn, msgEtc, gorFormPage, getDetail, cancel, clear } =
-    useSysMessageFormStore();
+  /* formStore state input 변수 */
+  const { detailInfo, getDetail, formType, cancel, goFormPage, clear } = useSysMessageFormStore();
+  const { msgKey, msgKor, msgEng, msgChn, msgJpn, msgEtc } = detailInfo;
 
   const { detailId } = useParams();
 
@@ -16,44 +17,108 @@ function MessageDetail() {
   return (
     <>
       <div className="conts-title">
-        <h2>메시지 상세</h2>
+        <h2>메시지 폼</h2>
+      </div>
+      <div className="boxForm">
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">메시지 키</label>
+                    <span className="text-desc">{msgKey}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">설명(한국어)</label>
+                    <span className="text-desc">{msgKor}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr className="line"></hr>
+
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">설명(영어)</label>
+                    <span className="text-desc">{msgEng}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">설명(중국어)</label>
+                    <span className="text-desc">{msgChn}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr className="line"></hr>
+
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">설명(일본어)</label>
+                    <span className="text-desc">{msgJpn}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">설명(기타)</label>
+                    <span className="text-desc">{msgEtc}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr className="line"></hr>
       </div>
 
-      <div className="detail-form">
-        <ul className="detail-list">
-          <li className="list">
-            <label className="f-label">메시지코드</label>
-            <div className="cont">{msgKey}</div>
-          </li>
-          <li className="list">
-            <label className="f-label">한국어(KOR)</label>
-            <div className="cont">{msgKor}</div>
-          </li>
-          <li className="list">
-            <label className="f-label">영어(ENG)</label>
-            <div className="cont">{msgEng}</div>
-          </li>
-          <li className="list">
-            <label className="f-label">중국어(CHN)</label>
-            <div className="cont">{msgChn}</div>
-          </li>
-          <li className="list">
-            <label className="f-label">일어(JPN)</label>
-            <div className="cont">{msgJpn}</div>
-          </li>
-          <li className="list">
-            <label className="f-label">기타</label>
-            <div className="cont">{msgEtc}</div>
-          </li>
-        </ul>
-      </div>
-
+      {/* 하단 버튼 영역 */}
       <div className="contents-btns">
-        <button className="btn_text text_color_darkblue-100 btn_correct" onClick={gorFormPage}>
-          수정
-        </button>
         <button className="btn_text text_color_neutral-10 btn_confirm" onClick={cancel}>
-          목록
+          목록으로
+        </button>
+        <button
+          className="btn_text text_color_darkblue-100 btn_close"
+          onClick={goFormPage}
+          style={{ display: formType !== 'add' ? '' : 'none' }}
+        >
+          수정
         </button>
       </div>
     </>

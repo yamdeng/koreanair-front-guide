@@ -142,12 +142,17 @@ export const createListSlice = (set, get) => ({
   search: async () => {
     const { listApiPath, getSearchParam, setTotalCount, listApiMethod, disablePaging } = get();
     const apiParam = getSearchParam();
-    const response: any = await ApiService[listApiMethod](listApiPath, apiParam, { disableLoadingBar: true });
-    const data = response.data;
+    const apiResult: any = await ApiService[listApiMethod](listApiPath, apiParam, { disableLoadingBar: true });
+    const data = apiResult.data;
     const list = disablePaging ? data : data.list;
     const totalCount = disablePaging && list ? list.length : data.total;
     setTotalCount(totalCount);
     set({ list: list || [] });
+  },
+
+  resetSearch: () => {
+    set({ currentPage: 1 });
+    get().search();
   },
 
   getColumns: () => {

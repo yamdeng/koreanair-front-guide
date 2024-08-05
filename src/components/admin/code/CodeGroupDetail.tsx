@@ -16,7 +16,7 @@ function CodeGroupDetail() {
     getDetail,
     formType,
     cancel,
-    gorFormPage,
+    goFormPage,
     clear,
   } = useSysCodeGroupFormStore();
 
@@ -154,7 +154,7 @@ function CodeGroupDetail() {
         </button>
         <button
           className="btn_text text_color_darkblue-100 btn_close"
-          onClick={gorFormPage}
+          onClick={goFormPage}
           style={{ display: formType !== 'add' ? '' : 'none' }}
         >
           수정

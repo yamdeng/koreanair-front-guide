@@ -18,15 +18,15 @@ const initFormData = {
 
   formApiPath: 'sys/messages',
   baseRoutePath: '/messages',
-
-  requiredFields: ['msgKey', 'msgKor', 'msgEng'],
-
-  msgKey: '',
-  msgKor: '',
-  msgEng: '',
-  msgChn: '',
-  msgJpn: '',
-  msgEtc: '',
+  formName: 'useSysMessageFormStore',
+  formValue: {
+    msgKey: '',
+    msgKor: '',
+    msgEng: '',
+    msgChn: '',
+    msgJpn: '',
+    msgEtc: '',
+  },
 };
 
 /* zustand store 생성 */

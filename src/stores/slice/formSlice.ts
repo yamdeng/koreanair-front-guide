@@ -21,7 +21,7 @@ export const defaultFormExcludeKeys = [
 ];
 
 export const formBaseState = {
-  detailInfo: null,
+  detailInfo: {},
   errors: {},
   isDirty: false,
   isValid: false,
@@ -32,33 +32,38 @@ export const formBaseState = {
   formApiPath: '',
   formName: '',
   baseRoutePath: '',
+  formValue: {},
 };
 
 // yup 연동 공통 slice : 가능하면 yup를 사용하는 방법으로 통일합니다
 export const createFormSliceYup = (set, get) => ({
   changeInput: (inputName, inputValue) => {
-    set({ [inputName]: inputValue });
+    const { formValue } = get();
+    formValue[inputName] = inputValue;
+    set({ formValue: formValue });
+    // set({ [inputName]: inputValue });
   },
 
   getApiParam: () => {
     const state = get();
-    const stateKeys = Object.keys(state);
-    const excludeFilterKeys = defaultFormExcludeKeys;
-    if (state.excludeApiKeys && state.excludeApiKeys.length) {
-      excludeFilterKeys.push(...state.excludeApiKeys);
-    }
-    const applyStateKeys = stateKeys.filter((key) => {
-      if (typeof state[key] === 'function') {
-        return false;
-      } else if (excludeFilterKeys.includes(key)) {
-        return false;
-      }
-      return true;
-    });
-    const apiParam = {};
-    applyStateKeys.forEach((apiRequestKey) => {
-      apiParam[apiRequestKey] = state[apiRequestKey];
-    });
+    // const stateKeys = Object.keys(state);
+    // const excludeFilterKeys = defaultFormExcludeKeys;
+    // if (state.excludeApiKeys && state.excludeApiKeys.length) {
+    //   excludeFilterKeys.push(...state.excludeApiKeys);
+    // }
+    // const applyStateKeys = stateKeys.filter((key) => {
+    //   if (typeof state[key] === 'function') {
+    //     return false;
+    //   } else if (excludeFilterKeys.includes(key)) {
+    //     return false;
+    //   }
+    //   return true;
+    // });
+    // const apiParam = {};
+    // applyStateKeys.forEach((apiRequestKey) => {
+    //   apiParam[apiRequestKey] = state[apiRequestKey];
+    // });
+    const apiParam = state.formValue;
     return apiParam;
   },
 
@@ -126,13 +131,13 @@ export const createFormSliceYup = (set, get) => ({
     const detailInfo = response.data;
     set({
       detailInfo: detailInfo,
-      ...detailInfo,
+      formValue: detailInfo,
       formDetailId: id,
       formType: 'update',
     });
   },
 
-  gorFormPage: () => {
+  goFormPage: () => {
     const { formDetailId, baseRoutePath } = get();
     history.push(`${baseRoutePath}/${formDetailId}/edit`);
   },
@@ -140,86 +145,5 @@ export const createFormSliceYup = (set, get) => ({
   cancel: () => {
     const { baseRoutePath } = get();
     history.push(`${baseRoutePath}`);
-  },
-});
-
-// 필수값만 체크하는 공통 slice
-export const createFormSliceRequire = (set, get) => ({
-  changeInput: (inputName, inputValue) => {
-    set({ [inputName]: inputValue });
-  },
-
-  getApiParam: () => {
-    const state = get();
-    const stateKeys = Object.keys(state);
-    const excludeFilterKeys = defaultFormExcludeKeys;
-    if (state.excludeApiKeys && state.excludeApiKeys.length) {
-      excludeFilterKeys.push(...state.excludeApiKeys);
-    }
-    const applyStateKeys = stateKeys.filter((key) => {
-      if (typeof state[key] === 'function') {
-        return false;
-      } else if (excludeFilterKeys.includes(key)) {
-        return false;
-      }
-      return true;
-    });
-    const apiParam = {};
-    applyStateKeys.forEach((apiRequestKey) => {
-      apiParam[apiRequestKey] = state[apiRequestKey];
-    });
-    return apiParam;
-  },
-
-  validate: () => {
-    let success = true;
-    const errors = {};
-    const state = get();
-    const { formName, requiredFields } = get();
-    let firstErrorFieldKey = '';
-    if (requiredFields && requiredFields.length) {
-      requiredFields.forEach((fieldKey: string) => {
-        const fieldValue = state[fieldKey];
-        if (_.isArray(fieldValue)) {
-          if (!fieldValue.length) {
-            errors[fieldKey] = 'required field';
-            if (!firstErrorFieldKey) {
-              firstErrorFieldKey = fieldKey;
-            }
-          }
-        } else {
-          if (_.isNumber(fieldValue)) {
-            if (fieldValue === null || fieldValue === undefined) {
-              errors[fieldKey] = 'required field';
-              if (!firstErrorFieldKey) {
-                firstErrorFieldKey = fieldKey;
-              }
-            }
-          } else {
-            if (!fieldValue) {
-              errors[fieldKey] = 'required field';
-              if (!firstErrorFieldKey) {
-                firstErrorFieldKey = fieldKey;
-              }
-            }
-          }
-        }
-      });
-    }
-
-    if (firstErrorFieldKey) {
-      success = false;
-      // alert(`firstErrorFieldKey : ${firstErrorFieldKey}`);
-      if (document.getElementById(formName + firstErrorFieldKey)) {
-        document.getElementById(formName + firstErrorFieldKey).focus();
-      }
-    }
-
-    set({
-      isDirty: true,
-      isValid: success,
-      errors: errors,
-    });
-    return success;
   },
 });
