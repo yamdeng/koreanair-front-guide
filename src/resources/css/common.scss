@@ -128,7 +128,7 @@ input, select{font-family:'KoreanAirSans'}
   .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
   .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
   /*position:relative;right:0;top:0;float:right;*/text-align:right;padding-top:1.2rem;
-  @include mobile {
+   /*@include mobile {
     width:100%;
     position:absolute;
     left:0;
@@ -140,7 +140,7 @@ input, select{font-family:'KoreanAirSans'}
       flex-basis:auto;
       flex-grow:1;
     }
-  }
+  }*/
 }
 .text_color_neutral-10{color:var(--color-neutral-10)}
 
@@ -319,16 +319,18 @@ input, select{font-family:'KoreanAirSans'}
 }
 
 /*탭*/
-.menu-tab{display:flex;flex-wrap: nowrap;margin:0 0 3.0rem 0;border-radius:0.8rem;overflow: auto hidden;scroll-behavior: smooth;gap: 1.2rem 0px;}
+.menu-tab{display:flex;flex-wrap:nowrap;margin:0 0 3.0rem 0;border-radius:0.8rem;overflow: auto hidden;scroll-behavior:smooth;gap:1.2rem 0}
 .menu-tab:after{content:'';display:block;clear:both}
 .menu-tab a:last-child{border-top-right-radius:0.8rem;border-bottom-right-radius:0.8rem}
-.menu-tab a{display:inline-flex;font-size:1.8rem;line-height:1.5;min-width:19rem;min-height:4.4rem;border:1px solid var(--color-neutral-40);background-color:var(--color-neutral-10); color:var(--color-neutral-80);padding:0;align-items:center;justify-content:center;text-align:center}
+.menu-tab a{display:inline-flex;font-size:1.8rem;line-height:1.5;min-width:19rem;min-height:4.4rem;border:1px solid var(--color-neutral-40);background-color:var(--color-neutral-10);color:var(--color-neutral-80);padding:0 1.5rem;align-items:center;justify-content:center;text-align:center}
 .menu-tab a.active{background-color:var(--color-darkblue-100);color:var(--color-neutral-10)}
+
+
 
 /*검색영역*/
 .info-wrap .edit-area > .boxForm{padding:0}
-.boxForm{position:relative;padding:1.5rem 3rem 3rem;margin-bottom:2.0rem;background-color:var(--color-neutral-20);border-radius:var(--radius-small, 8px)}
-.boxForm::after{content:'';clear:both;display:block}
+.boxForm{position:relative;padding:1.5rem 3rem 3rem;margin-bottom:2.0rem;background-color:var(--color-neutral-20);border-radius:0.8rem}
+.boxForm::after{content:'';clear:both;display:inline-block}
 .boxForm .form-table{display:flex;width:100%}
 /*.boxForm .form-table:first-child{padding-top:3rem}*/
 .boxForm .form-table + .form-table{/*padding-top:1.5rem*/}

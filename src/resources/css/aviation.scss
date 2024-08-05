@@ -6,31 +6,42 @@
 .Report-process li.last:before{display:none}
 @media (max-width:1024px) {
     .Report-process li span { width: 110px;height: 110px;padding-top: 45px; }
-    .Report-process li:before { width: 20px;height: 38px;background-size: 20px;margin-top: -19px; }
+    .Report-process li:before { width: 20px;height: 38px;background-size: 20px;margin-top:-19px}
 }
 @media (max-width:768px) {
     .Report-process{overflow: hidden;float:none}
-    .Report-process li{width:100%;margin-bottom:40px;}
-    .Report-process li span:first-child { width: 100px;height: 100px;padding: 0 5px; padding-top: 40px; }
-    .Report-process li:before { left:50%;margin-left:-12px;transform: rotate(90deg);right: auto;
-        bottom: -40px;
-        top: auto;
-        margin-top: 0;}
-        .Report-process li span, .Report-process li span:first-child {
-            font-size: 18px;
-            width: 100%;
-            height: 100px;
-            padding: 0 5px;
-            padding-top: 40px;
-            border-radius: 0;
-        }
+    .Report-process li{width:100%;margin-bottom:40px}
+    .Report-process li span:first-child{width:100px;height:100px;padding:0 5px;padding-top:4.0rem}
+    .Report-process li:before{ left:50%;margin-left:-12px;transform: rotate(90deg);right:auto;bottom:-4.0rem;top:auto;margin-top:0}
+    .Report-process li span, .Report-process li span:first-child{font-size:1.8rem;width:100%;height: 100px;padding: 0 5px;padding-top:4.0rem;border-radius:0}
 }
 
 @media (max-width:375px){
-    .Report-process li { width: 100%;margin-bottom: 40px; }
-    .Report-process li br{ display: none; }
-    .Report-process li span{ width: 100%;height: auto;border-radius: 0;padding: 20px; }
-    .Report-process li:before{ left: 50%;margin-left: -12px;transform: rotate(90deg);right: auto;bottom: -40px;top: auto;margin-top: 0; }
-
-    .Report-process li span, .Report-process li span:first-child { font-size:18px;width:100%;height: 100px;padding: 0 5px; padding-top: 40px; border-radius:0}
+    .Report-process li {width:100%;margin-bottom:4.0rem}
+    .Report-process li br{display: none; }
+    .Report-process li span{width: 100%;height: auto;border-radius: 0;padding:2.0rem}
+    .Report-process li:before{left: 50%;margin-left: -12px;transform: rotate(90deg);right: auto;bottom: -40px;top: auto;margin-top: 0; }
+    .Report-process li span, .Report-process li span:first-child {font-size:18px;width:100%;height: 100px;padding: 0 5px; padding-top:4.0rem;border-radius:0}
 }
+html ul {
+    -webkit-padding-start: 0px;
+    list-style: none;
+    margin-bottom: 0;
+}
+.checklist-contents{display:flex;width:100%}
+.checklist-contents::after{content:'';display:block;clear:both}
+.checklist-contents h4 label{position:relative;display:inline-block;width:100%;padding-bottom:1.0rem;border-bottom:0.1rem solid rgb(188, 188, 205);}
+.checklist-contents h4 a{font-size:1.8rem;line-height:2.0;font-weight:700;}
+
+.checklist-contents .checklist-row{position:relative;display:block;width:24%;margin:0 0 0 2rem;overflow:hidden;border:solid 0.1rem var(--color-neutral-40);background-color:var(--color-neutral-20);padding:1.5rem 2.5rem;border-radius:0.8rem}
+
+.checklist-contents .checklist-row:nth-of-type(4n+1){margin-left:0}
+
+.checklist-contents .checklist-row.list ul{display:flex;flex-direction: column;padding: 16px 0px;}
+.checklist-contents .checklist-row.list li.list-space{display:inline-flex;font-size:1.5rem;}
+.checklist-contents .checklist-row.list li.list-space a:hover{text-decoration:underline;}
+.checklist-contents .checklist-row.list li button.editChapter{visibility:hidden;opacity: 0;margin-right:2rem}
+.list-btn{width:32px;height:32px;padding:2.4px 0;font-size:1.6rem;border-radius:2rem;vertical-align:-0.3rem}
+.checklist-col{position:relative}
+.cont-row{display:flex;        flex-wrap: wrap;;row-gap:2.4rem}
+
