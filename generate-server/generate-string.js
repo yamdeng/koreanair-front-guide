@@ -18,8 +18,14 @@ const <%= storeName %> = create<any>((set, get) => ({
 
   ...initListData,
 
-  /* TODO : 검색에서 사용할 input 선언 */
+  /* TODO : 검색에서 사용할 input 선언 및 초기화 반영 */
   searchWord: '',
+
+  resetSearchInput: () => {
+    const { resetSearch } = get();
+    set({ searchWord: '' });
+    resetSearch();
+  },
 
   clear: () => {
     set(initListData);
@@ -33,14 +39,14 @@ function <%= fileName %>() {
       { field: "<%= columnInfo.column_name %>", headerName: "<%= columnInfo.column_comment %>" },<% }) %>
   ])
   );
-  const { search, searchWord, list, goAddPage, changeSearchInput, clear } = state;
+  const { resetSearch, searchWord, list, goAddPage, changeSearchInput, resetSearchInput, clear } = state;
 
   const handleRowDoubleClick = useCallback((selectedInfo) => {
     // TODO : 더블클릭시 상세 페이지 또는 모달 페이지 오픈
   }, []);
 
   useEffect(() => {
-    search();
+    resetSearch();
     return clear;
   }, []);
 
@@ -61,10 +67,18 @@ function <%= fileName %>() {
                 onChange={(value) => {
                   changeSearchInput('searchWord', value);
                 }}
-                search={search}
+                search={resetSearch}
               />
             </span>
           </div>
+        </div>
+        <div className="btn-area">
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={resetSearch}>
+            조회
+          </button>
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={resetSearchInput}>
+            초기화
+          </button>
         </div>
       </div>
       <AppTable
@@ -76,7 +90,7 @@ function <%= fileName %>() {
       />
       <div className="contents-btns">
         {/* TODO : 버튼 목록 정의 */}
-        <button type="button" name="button" className="btn_text text_color_neutral-10 btn_confirm">
+        <button type="button" name="button" className="btn_text text_color_neutral-10 btn_confirm" onClick={goAddPage}>
           신규
         </button>
       </div>
@@ -104,10 +118,10 @@ const initFormData = {
   formApiPath: 'TODO : api path',
   baseRoutePath: 'TODO : UI route path',
   formName: '<%= fileName %>',
-
-  requiredFields: [<% requiredFieldList.forEach((fieldName)=> { %>"<%= fieldName %>", <% }) %>],
+  formValue: {
   <% tableColumns.forEach((columnInfo)=> { %>
   <%= columnInfo.column_name %>: <%- columnInfo.formInitValue %>,<% }) %>
+  }
 };
 
 /* zustand store 생성 */
@@ -136,15 +150,19 @@ import <%= storeName %> from '@/stores/guide/<%= storeName %>';
 function <%= fileName %>() {
 
   /* formStore state input 변수 */
-  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> errors,
+  const {
+    errors,
     changeInput,
     getDetail,
     formType,
+    formValue,
     save,
     remove,
     cancel,
     clear } =
     <%= storeName %>();
+
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = formValue;
 
   const { detailId } = useParams();
 
@@ -162,7 +180,6 @@ function <%= fileName %>() {
       </div>
       <div className="boxForm">
         <% tableColumns.forEach((columnInfo)=> { %>        
-
         <div className="form-table">
           <div className="form-cell wid50">
             <div className="form-group wid100">
@@ -170,19 +187,16 @@ function <%= fileName %>() {
                 id="<%= storeName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
-                onChange={(value) => {
-                  setInputValue(value);
-                }}
                 value={<%= columnInfo.column_name %>}
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 <% if (columnInfo.is_nullable !== 'YES') { %> required <% } %>
+                errorMessage={errors.<%= columnInfo.column_name %>}
               />
             </div>
           </div>
         </div>       
         <% }) %>
       </div>
-
       {/* 하단 버튼 영역 */}
       <div className="contents-btns">
         <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
@@ -215,13 +229,15 @@ import <%= storeName %> from '@/stores/guide/<%= storeName %>';
 function <%= fileName %>() {
 
   /* formStore state input 변수 */
-  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> 
+  const {
+    detailInfo,
     getDetail,
     formType,
     cancel,
-    gorFormPage,
+    goFormPage,
     clear } =
     <%= storeName %>();
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = detailInfo;
 
   const { detailId } = useParams();
 
@@ -238,8 +254,8 @@ function <%= fileName %>() {
       <div className="boxForm">
         <% tableColumnMultiArray.forEach((rootArray)=> { %>
           <div className="form-table">
-            <div className="form-cell wid50">
-              <% rootArray.forEach((columnInfo)=> { %>
+            <% rootArray.forEach((columnInfo)=> { %>
+              <div className="form-cell wid50">
                 <div className="form-group wid100">
                   <div className="box-view-list">
                     <ul className="view-list">
@@ -252,9 +268,10 @@ function <%= fileName %>() {
                     </ul>
                   </div>
                 </div>
-              <% }) %>
-            </div>
+              </div>
+            <% }) %>
           </div>
+          <hr className="line"></hr>
         <% }) %>        
       </div>
 
@@ -265,7 +282,7 @@ function <%= fileName %>() {
         </button>
         <button
           className="btn_text text_color_darkblue-100 btn_close"
-          onClick={gorFormPage}
+          onClick={goFormPage}
           style={{ display: formType !== 'add' ? '' : 'none' }}
         >
           수정
