@@ -19,12 +19,16 @@ const <%= storeName %> = create<any>((set, get) => ({
   ...initListData,
 
   /* TODO : 검색에서 사용할 input 선언 및 초기화 반영 */
-  searchWord: '',
+  searchParam: {
+    searchWord: '',
+  },
 
-  resetSearchInput: () => {
-    const { resetSearch } = get();
-    set({ searchWord: '' });
-    resetSearch();
+  initSearchInput: () => {
+    set({
+      searchParam: {
+        searchWord: '',
+      },
+    });
   },
 
   clear: () => {
@@ -39,14 +43,16 @@ function <%= fileName %>() {
       { field: "<%= columnInfo.column_name %>", headerName: "<%= columnInfo.column_comment %>" },<% }) %>
   ])
   );
-  const { resetSearch, searchWord, list, goAddPage, changeSearchInput, resetSearchInput, clear } = state;
+  const { initSearch, searchParam, list, goAddPage, changeSearchInput, initSearchInput, clear } = state;
+  // TODO : 검색 파라미터 나열
+  const { searchWord } = searchParam;
 
   const handleRowDoubleClick = useCallback((selectedInfo) => {
     // TODO : 더블클릭시 상세 페이지 또는 모달 페이지 오픈
   }, []);
 
   useEffect(() => {
-    resetSearch();
+    initSearch();
     return clear;
   }, []);
 
@@ -67,16 +73,16 @@ function <%= fileName %>() {
                 onChange={(value) => {
                   changeSearchInput('searchWord', value);
                 }}
-                search={resetSearch}
+                search={initSearch}
               />
             </span>
           </div>
         </div>
         <div className="btn-area">
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={resetSearch}>
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={initSearch}>
             조회
           </button>
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={resetSearchInput}>
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={initSearchInput}>
             초기화
           </button>
         </div>
@@ -194,7 +200,8 @@ function <%= fileName %>() {
               />
             </div>
           </div>
-        </div>       
+        </div>  
+        <hr className="line"></hr>     
         <% }) %>
       </div>
       {/* 하단 버튼 영역 */}
