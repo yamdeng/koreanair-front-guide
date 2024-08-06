@@ -1,318 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 import { create } from 'zustand';
-import { AddReportSheetJSX, EventJSX, ReportButtonType1, SheetSettingFilter, SheetSelectReportCategory, SheetSelectReportStatus } from './forms/write';
+import { AddReportSheetJSX, ReportButtonType1, SheetSettingFilter, SheetSelectReportCategory, SheetSelectReportStatus, FilterConditionItem } from './forms/InputForms';
 import { produce } from 'immer';
 import { useEffect, useState } from 'react';
-
-const initailState = {
-  sheetList: [],
-  addSheet: (element) => { },
-  onClose: () => { },
-  addSheetSettingFilter: () => { },
-  addSheetSelectReportCategory: () => { },
-  filterStruct: {
-    reportCategory: 'ALL',
-    dateFrom: '2024-07-01',
-    dateTo: '2024-08-01',
-    reportStatus: 'ALL',
-    subject: 'dfadsf'
-  },
-};
-
-
-let reportStatus = [
-  {
-    name: "반려",
-    path: ""
-  },
-  {
-    name: "이관",
-    path: ""
-  },
-  {
-    name: "작성중",
-    path: ""
-  },
-  {
-    name: "제출완료",
-    path: ""
-  },
-  {
-    name: "접수중",
-    path: ""
-  },
-  {
-    name: "처리중",
-    path: ""
-  },
-  {
-    name: "종결",
-    path: ""
-  }
-]
-
-let reportCategory = [
-  {
-    name: "csr",
-    list: [
-      {
-        name: "HZR",
-        path: "/hazard"
-      },
-      {
-        name: "수검",
-        path: "/inspection"
-      },
-      {
-        name: "승객하기",
-        path: "/pax-deplane"
-      },
-      {
-        name: "승객환자",
-        path: "/pax-patient"
-      },
-      {
-        name: "승객부상",
-        path: "/pax-injury"
-      },
-      {
-        name: "승무원환자",
-        path: "/crew-patient"
-      },
-      {
-        name: "승무원부상",
-        path: "/crew-injury"
-      },
-      {
-        name: "불법방해행위",
-        path: "/act-of-unlawful-interference"
-      },
-      {
-        name: "흡연",
-        path: "/smoking"
-      },
-      {
-        name: "설비/정비",
-        path: "/maintenance"
-      },
-      {
-        name: "Others",
-        path: "/others"
-      }
-    ]
-  }
-]
-
-const myReportListScreen = create<any>((set, get) => ({
-  ...initailState,
-  addSheet: (element) => {
-    const { sheetList } = get()
-    set({ sheetList: [...sheetList, element] })
-    setTimeout(() => {
-      set(
-        produce((state: any) => {
-          state.sheetList.forEach((item) => {
-            item.isShow = true
-          })
-        })
-      )
-    }, 200);
-  },
-  onClose: () => {
-    console.log("CLOSE")
-    const { sheetList } = get()
-    set(
-      produce((state: any) => {
-        const lastIndex = state.sheetList.length - 1
-        if (lastIndex < 0) return
-        state.sheetList[lastIndex].isShow = false
-      })
-    )
-    setTimeout(() => {
-      set({ sheetList: [...sheetList.slice(0, -1)] })
-    }, 400)
-  },
-  addReport: () => {
-    const { addSheet, onClose } = get()
-    // 클릭 이벤트 추가
-    reportCategory = reportCategory.map(category => ({
-      ...category,
-      list: category.list.map(item => ({
-        ...item,
-        onClick: () => alert(`Clicked on ${item.name}`)
-      }))
-    }));
-    addSheet(
-      {
-        isShow: false,
-        jsx: () => {
-          return (
-            <AddReportSheetJSX
-              category={reportCategory.filter((element) => { return element.name == "csr" })[0].list}
-            />
-          )
-        },
-        onClose: onClose
-      }
-    )
-  },
-  addSheetSettingFilter: () => {
-    const {
-      addSheet,
-      onClose,
-      addSheetSelectReportCategory,
-      addSheetSelectReportStatus
-    } = get()
-
-    addSheet(
-      {
-        name: "SettingFilter",
-        isShow: false,
-        jsx: () => {
-
-          const {
-            filterStruct
-          } = get()
-
-          return (
-            <SheetSettingFilter
-              confirmEvent={() => { }}
-              filterStruct={filterStruct}
-              onClickSelectReportCategory={() => {
-                addSheetSelectReportCategory({
-                  finished: (item) => {
-                    set(
-                      produce((state: any) => {
-                        state.filterStruct.reportCategory = item
-                      })
-                    )
-                  }
-                })
-              }}
-              onClickSelectReportStatus={() => {
-                addSheetSelectReportStatus({
-                  finished: (item) => {
-                    set(
-                      produce((state: any) => {
-                        state.filterStruct.reportStatus = item
-                      })
-                    )
-                  }
-                })
-              }}
-            />
-          )
-        },
-        onClose: onClose
-      }
-    )
-  },
-  addSheetSelectReportCategory: (completion) => {
-    const {
-      finished
-    } = completion
-
-    const { addSheet, onClose } = get()
-    // 클릭 이벤트 추가
-    const list = reportCategory.map(category => ({
-      ...category,
-      list: category.list.map(item => ({
-        ...item,
-        onClick: () => {
-          finished(item.name)
-          onClose()
-        }
-      }))
-    }));
-    addSheet(
-      {
-        name: "SelectReport",
-        isShow: false,
-        jsx: () => {
-          return (
-            <SheetSelectReportCategory
-              category={list.filter((element) => { return element.name == "csr" })[0].list}
-            />
-          )
-        },
-        onClose: onClose
-      }
-    )
-  },
-  addSheetSelectReportStatus: (completion) => {
-    const {
-      finished
-    } = completion
-
-    const { addSheet, onClose } = get()
-    const list = reportStatus.map(status => ({
-      ...status,
-      onClick: () => {
-        finished(status.name)
-        onClose()
-      }
-    }));
-
-    addSheet(
-      {
-        name: "SelectStatus",
-        isShow: false,
-        jsx: () => {
-          return (
-            <SheetSelectReportStatus
-              status={list}
-            />
-          )
-        },
-        onClose: onClose
-      }
-    )
-  }
-}))
-
-const BottomSheetLayout = (custom) => {
-  const {
-    isShow,
-    onClose,
-    jsx
-  } = custom
-
-  const open = isShow ? "tw-open" : ""
-  const css = `tw-absolute tw-bottom-0 tw-bottom-sheet ${open} tw-transition tw-transition-transform tw-duration-300 tw-ease-in-out tw-left-0 tw-w-full tw-text-white tw-rounded-t-lg tw-shadow-lg`
-
-  return (
-    <>
-      <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-70 tw-rounded-lg" onClick={() => { onClose() }}></div>
-      <div className={css}>
-        {jsx()}
-      </div>
-    </>
-  )
-}
-
-
-export const TestJSX = (
-  <div className="tw-bg-slate-200 tw-rounded-2xl tw-p-6 tw-mb-4">
-
-    <div className="tw-p-6 tw-bg-white tw-rounded-2xl">
-      dfajskljklfjasljfdlskafj safjaslkfjasklfj alkf ja jfkls
-    </div>
-  </div>
-)
-
+import { BottomSheetLayout } from './forms/BottomSheet';
+import { reportCategory, reportStatus } from './configs/ListScreenConfig';
+import { MyReportListScreenViewModel } from './viewModels/MyReportListScreenViewModel';
 
 export default function MyReportListScreen() {
+
   const navigate = useNavigate();
 
   const {
     sheetList,
-    addSheet,
-    filterStruct,
+    finalFilter,
     addSheetSettingFilter,
     onClose,
     addReport,
-    addSheetSelectReportCategory,
-  } = myReportListScreen()
+    removeFilter
+  } = MyReportListScreenViewModel() as any
 
   useEffect(() => {
     addSheetSettingFilter()
@@ -345,19 +51,56 @@ export default function MyReportListScreen() {
           {/* 검색 키워드 */}
           <div className="tw-px-6 tw-py-4 tw-flex tw-grid-flow-col tw-flex-wrap">
             {
+              // 보고서 종류, 상태, 제목 조건 표시
               (() => {
-                const elements = Array.from({ length: 8 }, (_, index) => (
-                  <div className="tw-border-solid tw-border-[#ffffff] tw-border-[1px] tw-rounded-full tw-m-1">
-                    <div className="tw-flex tw-items-center tw-gap-2 tw-text-white tw-font-light tw-px-4">
-                      <div className="tw-text-white tw-text-[1.3rem]">AMO-{index}</div>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-                        <path d="M1 0.5L12 11.5" stroke="#EEEEEE" stroke-linecap="round" />
-                        <path d="M1 11.5L12 0.5" stroke="#EEEEEE" stroke-linecap="round" />
-                      </svg>
-                    </div>
-                  </div>
-                ));
+                Object.entries(finalFilter).map(([key, value], index) => {
+                  console.log(`key: ${key}, value: ${value}`)
+                })
+
+                const keysToRemove = ['dateFrom', 'dateTo'];
+
+                const filteredfinalFilter = Object.fromEntries(
+                  Object.entries(finalFilter).filter(([key]) => !keysToRemove.includes(key))
+                );
+
+                const elements = Object.entries(filteredfinalFilter).map(([key, value], index) => {
+
+                  if (key === 'reportCategory' && value === '') {
+                    return <></>
+                  }
+
+                  if (key === 'subject' && value === '') {
+                    return <></>
+                  }
+
+                  if (key === 'reportStatus' && value === '') {
+                    return <></>
+                  }
+
+                  return (
+                    <FilterConditionItem
+                      onClick={() => {
+                        removeFilter(key)
+                      }}
+                      text={finalFilter[key]}
+                    />
+                  )
+                })
                 return elements
+              })()
+            }
+
+            {
+              // 날짜 조건 표시
+              (() => {
+                return finalFilter.dateFrom && finalFilter.dateTo && (
+                  <FilterConditionItem
+                    onClick={() => {
+                      removeFilter('date')
+                    }}
+                    text={`${finalFilter.dateFrom} ~ ${finalFilter.dateTo}`}
+                  />
+                )
               })()
             }
           </div>
@@ -455,11 +198,6 @@ export default function MyReportListScreen() {
 
       {
         (() => {
-
-          // useEffect(() => {
-          //   console.log(`filterStruct.reportCategory: ${filterStruct.reportCategory}`)
-          // }, [filterStruct])
-
           return sheetList.map((element, index) => {
             return BottomSheetLayout({ isShow: element.isShow, jsx: element.jsx, onClose: onClose })
           })
