@@ -136,6 +136,18 @@ export const createFormSliceYup = (set, get) => ({
     history.push(`${baseRoutePath}/${formDetailId}/edit`);
   },
 
+  setErrors: (newErrors) => {
+    if (newErrors) {
+      set({ errors: newErrors });
+    }
+  },
+
+  changeErrors: (errorKey, errorMessage) => {
+    const { errors } = get();
+    errors[errorKey] = errorMessage;
+    set({ errors: errors });
+  },
+
   cancel: () => {
     const { baseRoutePath } = get();
     history.push(`${baseRoutePath}`);
