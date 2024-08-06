@@ -1,4 +1,5 @@
 import ApiService from '@/services/ApiService';
+import ModalService from '@/services/ModalService';
 import history from '@/utils/history';
 import _ from 'lodash';
 
@@ -103,8 +104,19 @@ export const createFormSliceYup = (set, get) => ({
 
   remove: async () => {
     const { formDetailId, formApiPath, baseRoutePath } = get();
-    await ApiService.delete(`${formApiPath}/${formDetailId}`);
-    history.push(`${baseRoutePath}`);
+    // ModalService.alert({ body: '삭제하시겠습니까?' });
+    ModalService.confirm({
+      body: '삭제하시겠습니까?',
+      ok: async () => {
+        await ApiService.delete(`${formApiPath}/${formDetailId}`);
+        ModalService.alert({
+          body: '삭제되었습니다.',
+          ok: () => {
+            history.push(`${baseRoutePath}`);
+          },
+        });
+      },
+    });
   },
 
   getDetail: async (id) => {

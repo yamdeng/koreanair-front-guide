@@ -1,5 +1,41 @@
+import Modal from 'react-modal';
+import useModalStore from '@/stores/common/useModalStore';
+import ModalType from '@/config/ModalType';
+import GlobalAlertModal from '../modal/global/GlobalAlertModal';
+
 function ModalContainer() {
-  return <div></div>;
+  let modalComponent = null;
+  let overlayClassName = '';
+  const { modalType, displayModal, modalData, hideModal } = useModalStore();
+
+  let contentClassName = '';
+  overlayClassName = 'alert-modal-overlay';
+  contentClassName = modalType + '-content';
+
+  switch (modalType) {
+    case ModalType.ALERT_MODAL:
+      modalComponent = <GlobalAlertModal modalData={modalData} />;
+      break;
+    case ModalType.CONFRIM_MODAL:
+      modalComponent = <GlobalAlertModal modalData={modalData} />;
+      break;
+    default:
+      break;
+  }
+  return (
+    <Modal
+      shouldCloseOnOverlayClick={false}
+      isOpen={displayModal}
+      ariaHideApp={false}
+      overlayClassName={overlayClassName}
+      className={contentClassName}
+      onRequestClose={() => {
+        hideModal();
+      }}
+    >
+      {modalComponent}
+    </Modal>
+  );
 }
 
 export default ModalContainer;

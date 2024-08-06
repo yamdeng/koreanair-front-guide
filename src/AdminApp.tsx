@@ -6,6 +6,7 @@ import { StoreProvider } from './context/StoreContext';
 import useAdminRoute from './routes/useAdminRoute';
 import useAppStore from './stores/useAppStore';
 import { useStore } from 'zustand';
+import AlertModalContainer from './components/layout/AlertModalContainer';
 
 function AdminApp() {
   const adminRoute = useAdminRoute();
@@ -21,6 +22,7 @@ function AdminApp() {
         <Routes>{adminRoute}</Routes>
         <ToastContainer autoClose={3000} hideProgressBar={true} />
         <LoadingBarContainer />
+        <AlertModalContainer />
       </div>
     </StoreProvider>
   );

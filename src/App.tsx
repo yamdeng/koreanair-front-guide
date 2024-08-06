@@ -5,6 +5,7 @@ import useAviationRoute from './routes/useAviationRoute';
 import useOccupationRoute from './routes/useOccupationRoute';
 import { StoreProvider } from './context/StoreContext';
 import LoadingBarContainer from './components/layout/LoadingBarContainer';
+import AlertModalContainer from './components/layout/AlertModalContainer';
 
 function App() {
   const aviationRoute = useAviationRoute();
@@ -20,6 +21,7 @@ function App() {
         </Routes>
         <ToastContainer autoClose={3000} hideProgressBar={true} />
         <LoadingBarContainer />
+        <AlertModalContainer />
       </div>
     </StoreProvider>
   );

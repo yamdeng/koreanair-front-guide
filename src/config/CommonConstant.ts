@@ -12,3 +12,6 @@ export const DATE_PICKER_TYPE_YEAR = 'year';
 export const WORK_SCOPE_AVIATION = 'A';
 export const WORK_SCOPE_OCCUPATION = 'O';
 export const WORK_SCOPE_SYSTEM = 'S';
+
+export const LABEL_MODAL_OK = '확인';
+export const LABEL_MODAL_CANCEL = '취소';
