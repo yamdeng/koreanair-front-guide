@@ -158,9 +158,27 @@ const useSysMenuFormStore = create<any>((set, get) => ({
   },
 
   init: async () => {
-    const { getMenuTree, getParentMenuTree, treeWorkScope } = get();
+    const { getMenuTree, getParentMenuTree, treeWorkScope, addMenu } = get();
     await getMenuTree();
     await getParentMenuTree(treeWorkScope);
+    await addMenu();
+  },
+
+  remove: async () => {
+    ModalService.confirm({
+      body: '삭제하시겠습니까?',
+      ok: async () => {
+        const { formValue, init } = get();
+        const { menuId } = formValue;
+        await ApiService.delete(`sys/menus/${menuId}`);
+        ModalService.alert({
+          body: '삭제되었습니다.',
+          ok: async () => {
+            await init();
+          },
+        });
+      },
+    });
   },
 
   clear: () => {

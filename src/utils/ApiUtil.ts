@@ -1,5 +1,7 @@
 import axios from 'axios';
 import LoadingBar from '@/utils/LoadingBar';
+import ModalService from '@/services/ModalService';
+
 /*
 
   ajax 구현체 중복 처리 구현
@@ -32,6 +34,11 @@ Api.interceptors.request.use(
 Api.interceptors.response.use(
   function (response: any) {
     LoadingBar.hide();
+    const responseData = response.data;
+    if (responseData.successOrNot !== 'Y') {
+      ModalService.alert({ body: responseData.HeaderMsg });
+      return Promise.reject({ errorType: 'api', errorData: responseData });
+    }
     if (response.config.applyOriginalResponse) {
       response;
     }

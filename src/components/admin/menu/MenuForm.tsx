@@ -82,238 +82,239 @@ function MenuForm() {
             />
           </div>
           <div className="cont_form">
-            <dl className="tg-item">
-              <dd className="tg-conts">
-                <div className="edit-area">
-                  <div className="boxForm tog">
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStoremenuId"
-                            name="menuId"
-                            label="메뉴ID"
-                            value={menuId}
-                            onChange={(value) => changeInput('menuId', value)}
-                            required
-                            disabled={formType === FORM_TYPE_UPDATE}
-                            errorMessage={errors.menuId}
-                          />
+            <div className="info-wrap">
+              <dl className="tg-item">
+                <dd className="tg-conts">
+                  <div className="edit-area">
+                    <div className="boxForm tog">
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysMenuFormStoremenuId"
+                              name="menuId"
+                              label="메뉴ID"
+                              value={menuId}
+                              onChange={(value) => changeInput('menuId', value)}
+                              required
+                              disabled={formType === FORM_TYPE_UPDATE}
+                              errorMessage={errors.menuId}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppSelect
-                            id="useSysMenuFormStoreworkScope"
-                            name="workScope"
-                            label="업무구분"
-                            status=""
-                            className="label-select"
-                            options={Code.adminWorkScope}
-                            value={workScope}
-                            onChange={(appSelectValue) => {
-                              changeWorkScope(appSelectValue);
-                            }}
-                            required
-                            disabled={formType === FORM_TYPE_UPDATE}
-                            errorMessage={errors.workScope}
-                          />
+                      <hr className="line"></hr>
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppSelect
+                              id="useSysMenuFormStoreworkScope"
+                              name="workScope"
+                              label="업무구분"
+                              options={Code.adminWorkScope}
+                              value={workScope}
+                              onChange={(appSelectValue) => {
+                                changeWorkScope(appSelectValue);
+                              }}
+                              required
+                              disabled={formType === FORM_TYPE_UPDATE}
+                              errorMessage={errors.workScope}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTreeSelect
-                            id="useSysMenuFormStoreupperMenuId"
-                            name="upperMenuId"
-                            label="상위메뉴"
-                            onChange={handleParentTreeSelect}
-                            treeDefaultExpandAll
-                            value={upperMenuId}
-                            treeData={parentMenuTreeData}
-                            fieldNames={{ label: 'nameKor', value: 'menuId' }}
-                            errorMessage={errors.upperMenuId}
-                            treeCheckable={false}
-                          />
+                      <hr className="line"></hr>
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTreeSelect
+                              id="useSysMenuFormStoreupperMenuId"
+                              name="upperMenuId"
+                              label="상위메뉴"
+                              onChange={handleParentTreeSelect}
+                              treeDefaultExpandAll
+                              value={upperMenuId}
+                              treeData={parentMenuTreeData}
+                              fieldNames={{ label: 'nameKor', value: 'menuId' }}
+                              errorMessage={errors.upperMenuId}
+                              treeCheckable={false}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStorenameKor"
-                            name="nameKor"
-                            label="명칭(한국어)"
-                            value={nameKor}
-                            onChange={(value) => changeInput('nameKor', value)}
-                            required
-                            errorMessage={errors.nameKor}
-                          />
+                      <hr className="line"></hr>
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysMenuFormStorenameKor"
+                              name="nameKor"
+                              label="명칭(한국어)"
+                              value={nameKor}
+                              onChange={(value) => changeInput('nameKor', value)}
+                              required
+                              errorMessage={errors.nameKor}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
+                      <hr className="line"></hr>
 
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStorenameEng"
-                            name="nameEng"
-                            label="명칭(영어)"
-                            value={nameEng}
-                            onChange={(value) => changeInput('nameEng', value)}
-                            required
-                            errorMessage={errors.nameEng}
-                          />
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysMenuFormStorenameEng"
+                              name="nameEng"
+                              label="명칭(영어)"
+                              value={nameEng}
+                              onChange={(value) => changeInput('nameEng', value)}
+                              required
+                              errorMessage={errors.nameEng}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
+                      <hr className="line"></hr>
 
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStorenameChn"
-                            name="nameChn"
-                            label="명칭(중국어)"
-                            value={nameChn}
-                            onChange={(value) => changeInput('nameChn', value)}
-                            errorMessage={errors.nameChn}
-                          />
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysMenuFormStorenameChn"
+                              name="nameChn"
+                              label="명칭(중국어)"
+                              value={nameChn}
+                              onChange={(value) => changeInput('nameChn', value)}
+                              errorMessage={errors.nameChn}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
+                      <hr className="line"></hr>
 
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStorenameJpn"
-                            name="nameJpn"
-                            label="명칭(일본어)"
-                            value={nameJpn}
-                            onChange={(value) => changeInput('nameJpn', value)}
-                            errorMessage={errors.nameJpn}
-                          />
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysMenuFormStorenameJpn"
+                              name="nameJpn"
+                              label="명칭(일본어)"
+                              value={nameJpn}
+                              onChange={(value) => changeInput('nameJpn', value)}
+                              errorMessage={errors.nameJpn}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
+                      <hr className="line"></hr>
 
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStorenameEtc"
-                            name="nameEtc"
-                            label="명칭(기타)"
-                            value={nameEtc}
-                            onChange={(value) => changeInput('nameEtc', value)}
-                            errorMessage={errors.nameEtc}
-                          />
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysMenuFormStorenameEtc"
+                              name="nameEtc"
+                              label="명칭(기타)"
+                              value={nameEtc}
+                              onChange={(value) => changeInput('nameEtc', value)}
+                              errorMessage={errors.nameEtc}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
+                      <hr className="line"></hr>
 
-                    <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100">
-                          <AppSelect
-                            id="useSysMenuFormStoretreeType"
-                            name="treeType"
-                            label="구분"
-                            options={Code.menuTreeType}
-                            value={treeType}
-                            onChange={(appSelectValue) => {
-                              changeInput('treeType', appSelectValue);
-                            }}
-                            required
-                            errorMessage={errors.treeType}
-                          />
-                        </span>
-                      </div>
-                    </div>
-                    <hr className="line"></hr>
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStoresortOrder"
-                            name="sortOrder"
-                            label="정렬순서"
-                            value={sortOrder}
-                            onChange={(value) => changeInput('sortOrder', value)}
-                            required
-                            errorMessage={errors.sortOrder}
-                          />
+                      <div className="form-table">
+                        <div className="form-cell wid100">
+                          <span className="form-group wid100">
+                            <AppSelect
+                              id="useSysMenuFormStoretreeType"
+                              name="treeType"
+                              label="구분"
+                              options={Code.menuTreeType}
+                              value={treeType}
+                              onChange={(appSelectValue) => {
+                                changeInput('treeType', appSelectValue);
+                              }}
+                              required
+                              errorMessage={errors.treeType}
+                            />
+                          </span>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
+                      <hr className="line"></hr>
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              inputType="number"
+                              id="useSysMenuFormStoresortOrder"
+                              name="sortOrder"
+                              label="정렬순서"
+                              value={sortOrder}
+                              onChange={(value) => changeInput('sortOrder', value)}
+                              required
+                              errorMessage={errors.sortOrder}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <hr className="line"></hr>
 
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStoremenuUrl"
-                            name="menuUrl"
-                            label="메뉴URL"
-                            value={menuUrl}
-                            onChange={(value) => changeInput('menuUrl', value)}
-                            errorMessage={errors.menuUrl}
-                          />
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysMenuFormStoremenuUrl"
+                              name="menuUrl"
+                              label="메뉴URL"
+                              value={menuUrl}
+                              onChange={(value) => changeInput('menuUrl', value)}
+                              errorMessage={errors.menuUrl}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
+                      <hr className="line"></hr>
 
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppSelect
-                            id="useSysMenuFormStoreuseYn"
-                            name="useYn"
-                            options={Code.useYn}
-                            label="사용여부(Y/N)"
-                            value={useYn}
-                            onChange={(value) => changeInput('useYn', value)}
-                            required
-                            errorMessage={errors.useYn}
-                          />
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppSelect
+                              id="useSysMenuFormStoreuseYn"
+                              name="useYn"
+                              options={Code.useYn}
+                              label="사용여부(Y/N)"
+                              value={useYn}
+                              onChange={(value) => changeInput('useYn', value)}
+                              required
+                              errorMessage={errors.useYn}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <hr className="line"></hr>
-                    <div className="form-table">
-                      <div className="form-cell wid50">
-                        <div className="form-group wid100">
-                          <AppTextInput
-                            id="useSysMenuFormStoreremark"
-                            name="remark"
-                            label="비고"
-                            value={remark}
-                            onChange={(value) => changeInput('remark', value)}
-                            errorMessage={errors.remark}
-                          />
+                      <hr className="line"></hr>
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysMenuFormStoreremark"
+                              name="remark"
+                              label="비고"
+                              value={remark}
+                              onChange={(value) => changeInput('remark', value)}
+                              errorMessage={errors.remark}
+                            />
+                          </div>
                         </div>
                       </div>
+                      <hr className="line"></hr>
                     </div>
-                    <hr className="line"></hr>
                   </div>
-                </div>
-              </dd>
-            </dl>
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
       </div>

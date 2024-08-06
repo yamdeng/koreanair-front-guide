@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { Tree } from 'antd';
 import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
+import AppSearchInput from '../common/AppSearchnput';
 
 function MemberSelectModal(props) {
   const [treeData, setTreeData] = useState([]);
@@ -122,6 +123,10 @@ function MemberSelectModal(props) {
     setFinalSelectList(newFinalSelectList);
   };
 
+  const deleteAllFinalList = () => {
+    setFinalSelectList([]);
+  };
+
   useEffect(() => {
     if (isOpen) {
       getOrgTree();
@@ -151,7 +156,7 @@ function MemberSelectModal(props) {
           <div className="checklist">
             <div className="listbox">
               <div className="tree_wrap tree-right-space">
-                <div className="tree_box bg">
+                <div className="tree_box bg" style={{ height: '35rem' }}>
                   <Tree
                     className="draggable-tree"
                     blockNode
@@ -171,21 +176,18 @@ function MemberSelectModal(props) {
               <div className="search">
                 <div className="form-cell mb20">
                   <div className="form-group wid100">
-                    <input
-                      type="text"
-                      className="form-tag"
-                      name="title"
+                    <AppSearchInput
+                      label="사용자 검색"
+                      search={searchUser}
                       value={userSearchInputValue}
                       onChange={changeUserSearchInputValue}
                     />
-                    <label className="f-label">사용자 검색</label>
-                    <button type="button" className="icon-sch" onClick={searchUser}></button>
                   </div>
                 </div>
                 <div className="search-list">
                   <ul className="list">
                     {userList.map((info, index) => {
-                      const { nameKor, userId, checked } = info;
+                      const { nameKor, rankNmKor, deptNmKor, userId, checked } = info;
                       return (
                         <li key={userId}>
                           <div className="form-cell">
@@ -196,7 +198,9 @@ function MemberSelectModal(props) {
                                   onChange={(event) => changeUserListChecked(event, index)}
                                   checked={checked}
                                 />
-                                <span className="ck-list">{nameKor}</span>
+                                <span className="ck-list">
+                                  {nameKor} / {rankNmKor} / {deptNmKor}
+                                </span>
                               </label>
                             </div>
                           </div>
@@ -211,27 +215,57 @@ function MemberSelectModal(props) {
           <div className="checkbutton">
             <button onClick={moveSelectedArea}></button>
           </div>
-          <div className="">
-            <div className="title">사용자</div>
-            {userFinalSelectList.map((info) => {
-              const { nameKor } = info;
-              return (
-                <div key={nameKor}>
-                  {nameKor} <span onClick={() => deleteFinalListByInfo(info)}>삭제</span>
-                </div>
-              );
-            })}
-          </div>
-          <div className="">
-            <div className="title">부서</div>
-            {deptFinalSelectList.map((info) => {
-              const { nameKor } = info;
-              return (
-                <div key={nameKor}>
-                  {nameKor} <span onClick={() => deleteFinalListByInfo(info)}>삭제</span>
-                </div>
-              );
-            })}
+          <div className="selectlist">
+            <div className="title">
+              <p>
+                선택목록
+                <a className="icon" href="javascript:void(0);" onClick={deleteAllFinalList}>
+                  <span></span>
+                </a>
+              </p>
+            </div>
+            <div
+              className="uesrlist"
+              style={{ display: userFinalSelectList && userFinalSelectList.length ? '' : 'none' }}
+            >
+              <p className="stitle">사용자 목록</p>
+              <ul className="list">
+                {userFinalSelectList.map((info) => {
+                  const { nameKor } = info;
+                  return (
+                    <li key={nameKor}>
+                      {nameKor}
+                      <a href="javascript:void(0);">
+                        <span className="delete" onClick={() => deleteFinalListByInfo(info)}>
+                          X
+                        </span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div
+              className="departmentlist"
+              style={{ display: deptFinalSelectList && deptFinalSelectList.length ? '' : 'none' }}
+            >
+              <div className="stitle">부서 목록</div>
+              <ul className="list">
+                {deptFinalSelectList.map((info) => {
+                  const { nameKor } = info;
+                  return (
+                    <li key={nameKor}>
+                      {nameKor}
+                      <a href="javascript:void(0);">
+                        <span className="delete" onClick={() => deleteFinalListByInfo(info)}>
+                          X
+                        </span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
         <div className="pop_btns">
@@ -240,7 +274,7 @@ function MemberSelectModal(props) {
           </button>
         </div>
         <span className="pop_close" onClick={closeModal}>
-          {/* <i className="fas fa-times"></i> */}X
+          X
         </span>
       </div>
     </Modal>

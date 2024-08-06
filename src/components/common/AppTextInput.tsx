@@ -51,7 +51,7 @@ function AppTextInput(props) {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
-      {!disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
+      {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
         <button className="btnClear" onClick={() => onChange('')}></button>
       )}
       <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>

@@ -15,7 +15,6 @@ import classNames from 'classnames';
       placeholder=''
       required={true}
       errorMessage=''
-      applyAllSelect={true}
       allValue=''
       style={{width: '100%'}}
       labelOnlyTop={true}
@@ -33,7 +32,6 @@ function AppTreeSelect(props) {
     placeHolder = '',
     required = false,
     errorMessage,
-    applyAllSelect = false,
     style = { width: '100%' },
     labelOnlyTop = false,
     showSearch = false,
@@ -61,7 +59,7 @@ function AppTreeSelect(props) {
     }
   }
   const applyClassName = classNames('label-select', {
-    selected: isSelectedClass || labelOnlyTop || applyAllSelect,
+    selected: isSelectedClass || labelOnlyTop,
   });
   return (
     <>

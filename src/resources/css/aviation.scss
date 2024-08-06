@@ -23,24 +23,23 @@
     .Report-process li:before{left: 50%;margin-left: -12px;transform: rotate(90deg);right: auto;bottom: -40px;top: auto;margin-top: 0; }
     .Report-process li span, .Report-process li span:first-child {font-size:18px;width:100%;height: 100px;padding: 0 5px; padding-top:4.0rem;border-radius:0}
 }
-html ul {
-    -webkit-padding-start: 0px;
-    list-style: none;
-    margin-bottom: 0;
-}
-.checklist-contents{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:100%;box-sizing:border-box}
+
+/*AUDIT 체크리스트*/
+.checklist-contents{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:100%;box-sizing:border-box;margin-top:1.0rem}
 .checklist-contents::after{content:'';display:block;clear:both}
-.checklist-contents h4 label{position:relative;display:inline-block;width:100%;padding-bottom:1.0rem;border-bottom:0.1rem solid rgb(188, 188, 205)}
-.checklist-contents h4 a{font-size:1.6rem;line-height:2.0;font-weight:700}
-
+.checklist-contents .checklist-row.list h4 label{position:relative;display:inline-block;width:100%;padding-bottom:1.0rem;border-bottom:0.1rem solid rgb(188, 188, 205)}
+.checklist-contents .checklist-row.list h4 label button.btn-list{position:absolute;left:1rem;top:0.5rem;width:2.3rem;height:2rem;font-size:0;background:url(../images/icon-register.svg)center center no-repeat;align-items:center}
+.checklist-contents .checklist-row.list h4 a{display:inline-block;font-size:1.6rem;font-weight:700;padding-left:4.0rem}
+.checklist-contents .checklist-row.list h4 a span{line-height:2.0rem}
 .checklist-contents .checklist-row{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:25%;box-sizing:border-box;overflow:hidden;padding:1rem}
-/*.checklist-contents .checklist-row:first-child{margin-left:0}*/
-.checklist-contents .checklist-row .checklist-col{position:relative;flex: 0 0 100% !important;width:100%;border-radius:0.8rem;padding:0.5rem;border:solid 0.1rem var(--color-neutral-40);background-color:var(--color-neutral-20)}
+.checklist-contents .checklist-row .checklist-col{position:relative;width:100%;border-radius:0.8rem;padding:1rem;border:solid 0.1rem var(--color-neutral-40);background-color:var(--color-neutral-20);height:100%;min-height:22.0rem}
 
-.checklist-contents .checklist-row.list ul{display:flex;flex-direction:column;padding:1.0rem 0}
-.checklist-contents .checklist-row.list li.list-space{display:inline-flex;font-size:1.5rem}
+.checklist-contents .checklist-row.list ul{position:relative;display:flex;flex-direction:column;padding:1.0rem}
+.checklist-contents .checklist-row.list li.list-space{position:relative;display:inline-flex;align-items:center;font-size:1.5rem;line-height:3rem}
+.checklist-contents .checklist-row.list li.list-space a{padding-left:1rem}
 .checklist-contents .checklist-row.list li.list-space a:hover{text-decoration:underline}
-.checklist-contents .checklist-row.list li button.editChapter{visibility:hidden;opacity: 0;margin-right:2rem;border:solid 1px red}
-.list-btn{width:32px;height:32px;padding:2.4px 0;font-size:1.6rem;border-radius:2rem;vertical-align:-0.3rem;border:solid 1px red}
+.checklist-contents .checklist-row.list li.list-space button.btn-list{width:2.3rem;height:2rem;font-size:0;background:url(../images/icon-register.svg)center center no-repeat;align-items:center}
+.checklist-contents .checklist-row.list li.list-space button.btn-list .editChapter{visibility:hidden;opacity:0;margin-right:2rem}
+
 
 
