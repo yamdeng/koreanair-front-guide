@@ -34,7 +34,7 @@ const SysMessageListStore = create<any>((set, get) => ({
   },
 }));
 
-function SysMessageList() {
+function MessageList() {
   const state = SysMessageListStore();
   const [columns, setColumns] = useState(
     CommonUtil.mergeColumnInfosByLocal([
@@ -105,4 +105,4 @@ function SysMessageList() {
   );
 }
 
-export default SysMessageList;
+export default MessageList;

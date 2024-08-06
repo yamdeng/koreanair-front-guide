@@ -1,27 +1,17 @@
-import { useEffect } from 'react';
 import AppSelect from '@/components/common/AppSelect';
+import AppTextInput from '@/components/common/AppTextInput';
+import AppTreeSelect from '@/components/common/AppTreeSelect';
 import Code from '@/config/Code';
-import { Tree, TreeSelect } from 'antd';
-import useSysMenuFormStore from '@/stores/admin/useSysMenuFormStore';
 import { FORM_TYPE_UPDATE } from '@/config/CommonConstant';
+import useSysMenuFormStore from '@/stores/admin/useSysMenuFormStore';
+import { Tree } from 'antd';
+import { useEffect } from 'react';
 
 function MenuForm() {
   /* formStore state input 변수 */
   const {
     treeWorkScope,
-    menuId,
-    workScope,
-    nameKor,
-    nameEng,
-    nameChn,
-    nameJpn,
-    nameEtc,
-    treeType,
-    upperMenuId,
-    sortOrder,
-    menuUrl,
-    useYn,
-    remark,
+    formValue,
     errors,
     changeInput,
     formType,
@@ -38,6 +28,22 @@ function MenuForm() {
     clear,
   } = useSysMenuFormStore();
 
+  const {
+    menuId,
+    workScope,
+    nameKor,
+    nameEng,
+    nameChn,
+    nameJpn,
+    nameEtc,
+    treeType,
+    upperMenuId,
+    sortOrder,
+    menuUrl,
+    useYn,
+    remark,
+  } = formValue;
+
   useEffect(() => {
     init();
     return clear;
@@ -48,350 +54,266 @@ function MenuForm() {
       <div className="conts-title">
         <h2>메뉴 관리</h2>
       </div>
-      <div className="boxForm">
-        <div className="form-table">
-          <div className="form-cell wid50">
-            <button className="btn-sm btn_text btn-lightblue" onClick={addMenu}>
-              추가
-            </button>
-            <div className="tree_wrap">
-              <AppSelect
-                style={{ width: '100%', marginBottom: 10 }}
-                options={Code.adminWorkScope}
-                value={treeWorkScope}
-                onChange={(appSelectValue) => {
-                  changeTreeWorkScope(appSelectValue);
-                }}
-                placeholder=""
-              />
-              <Tree
-                className="draggable-tree"
-                fieldNames={{ title: 'nameKor', key: 'menuId' }}
-                treeData={menuTreeData}
-                onSelect={handleTreeSelect}
-              />
+
+      <div className="conts-box">
+        <div className="flex-group">
+          <div className="tree_wrap Dept">
+            <div className="tree_form">
+              <div className="btns-area">
+                <button name="button" className="btn_text btn_confirm text_color_neutral-10" onClick={addMenu}>
+                  추가
+                </button>
+              </div>
+              <div className="form-group wid100">
+                <AppSelect
+                  options={Code.adminWorkScope}
+                  value={treeWorkScope}
+                  onChange={(appSelectValue) => {
+                    changeTreeWorkScope(appSelectValue);
+                  }}
+                />
+              </div>
             </div>
+            <Tree
+              className="draggable-tree bg"
+              fieldNames={{ title: 'nameKor', key: 'menuId' }}
+              treeData={menuTreeData}
+              onSelect={handleTreeSelect}
+            />
           </div>
-          <div className="form-cell wid50">
-            <div className="detail-form">
-              <ul className="detail-list">
-                <li className="list">
-                  <label className="f-label">
-                    메뉴ID <span className="required">*</span>
-                  </label>
-                  <div className="cont">
+          <div className="cont_form">
+            <dl className="tg-item">
+              <dd className="tg-conts">
+                <div className="edit-area">
+                  <div className="boxForm tog">
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.menuId ? 'form-tag error' : 'form-tag'}
-                            placeholder="메뉴ID"
-                            name="menuId"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStoremenuId"
+                            name="menuId"
+                            label="메뉴ID"
                             value={menuId}
-                            onChange={(event) => changeInput('menuId', event.target.value)}
+                            onChange={(value) => changeInput('menuId', value)}
+                            required
                             disabled={formType === FORM_TYPE_UPDATE}
+                            errorMessage={errors.menuId}
                           />
-                          {errors.menuId ? <span className="errorText">{errors.menuId}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-
-                <li className="list">
-                  <label className="f-label">
-                    상위메뉴 <span className="required">*</span>
-                  </label>
-                  <div className="cont">
+                    <hr className="line"></hr>
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <TreeSelect
-                            style={{
-                              width: '100%',
-                            }}
-                            dropdownStyle={{
-                              maxHeight: 400,
-                              overflow: 'auto',
-                            }}
-                            treeData={parentMenuTreeData}
-                            fieldNames={{ label: 'nameKor', value: 'menuId' }}
-                            placeholder="Please select"
-                            treeDefaultExpandAll
-                            value={upperMenuId}
-                            onChange={handleParentTreeSelect}
-                          />
-                          {errors.menuId ? <span className="errorText">{errors.menuId}</span> : null}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li className="list">
-                  <label className="f-label">
-                    업무구분 <span className="required">*</span>
-                  </label>
-                  <div className="cont">
-                    <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
                           <AppSelect
-                            style={{ width: '100%', marginBottom: 10 }}
                             id="useSysMenuFormStoreworkScope"
                             name="workScope"
+                            label="업무구분"
+                            status=""
+                            className="label-select"
                             options={Code.adminWorkScope}
                             value={workScope}
                             onChange={(appSelectValue) => {
                               changeWorkScope(appSelectValue);
                             }}
-                            placeholder=""
+                            required
                             disabled={formType === FORM_TYPE_UPDATE}
+                            errorMessage={errors.workScope}
                           />
-                          {errors.workScope ? <span className="errorText">{errors.workScope}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-
-                <li className="list">
-                  <label className="f-label">
-                    명칭(한국어) <span className="required">*</span>
-                  </label>
-                  <div className="cont">
+                    <hr className="line"></hr>
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.nameKor ? 'form-tag error' : 'form-tag'}
-                            placeholder="명칭(한국어)"
-                            name="nameKor"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTreeSelect
+                            id="useSysMenuFormStoreupperMenuId"
+                            name="upperMenuId"
+                            label="상위메뉴"
+                            onChange={handleParentTreeSelect}
+                            treeDefaultExpandAll
+                            value={upperMenuId}
+                            treeData={parentMenuTreeData}
+                            fieldNames={{ label: 'nameKor', value: 'menuId' }}
+                            errorMessage={errors.upperMenuId}
+                            treeCheckable={false}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="line"></hr>
+                    <div className="form-table">
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStorenameKor"
+                            name="nameKor"
+                            label="명칭(한국어)"
                             value={nameKor}
-                            onChange={(event) => changeInput('nameKor', event.target.value)}
+                            onChange={(value) => changeInput('nameKor', value)}
+                            required
+                            errorMessage={errors.nameKor}
                           />
-                          {errors.nameKor ? <span className="errorText">{errors.nameKor}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                    <hr className="line"></hr>
 
-                <li className="list">
-                  <label className="f-label">
-                    명칭(영어) <span className="required">*</span>
-                  </label>
-                  <div className="cont">
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.nameEng ? 'form-tag error' : 'form-tag'}
-                            placeholder="명칭(영어)"
-                            name="nameEng"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStorenameEng"
+                            name="nameEng"
+                            label="명칭(영어)"
                             value={nameEng}
-                            onChange={(event) => changeInput('nameEng', event.target.value)}
+                            onChange={(value) => changeInput('nameEng', value)}
+                            required
+                            errorMessage={errors.nameEng}
                           />
-                          {errors.nameEng ? <span className="errorText">{errors.nameEng}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                    <hr className="line"></hr>
 
-                <li className="list">
-                  <label className="f-label">명칭(중국어)</label>
-                  <div className="cont">
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.nameChn ? 'form-tag error' : 'form-tag'}
-                            placeholder="명칭(중국어)"
-                            name="nameChn"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStorenameChn"
+                            name="nameChn"
+                            label="명칭(중국어)"
                             value={nameChn}
-                            onChange={(event) => changeInput('nameChn', event.target.value)}
+                            onChange={(value) => changeInput('nameChn', value)}
+                            errorMessage={errors.nameChn}
                           />
-                          {errors.nameChn ? <span className="errorText">{errors.nameChn}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                    <hr className="line"></hr>
 
-                <li className="list">
-                  <label className="f-label">명칭(일본어)</label>
-                  <div className="cont">
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.nameJpn ? 'form-tag error' : 'form-tag'}
-                            placeholder="명칭(일본어)"
-                            name="nameJpn"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStorenameJpn"
+                            name="nameJpn"
+                            label="명칭(일본어)"
                             value={nameJpn}
-                            onChange={(event) => changeInput('nameJpn', event.target.value)}
+                            onChange={(value) => changeInput('nameJpn', value)}
+                            errorMessage={errors.nameJpn}
                           />
-                          {errors.nameJpn ? <span className="errorText">{errors.nameJpn}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                    <hr className="line"></hr>
 
-                <li className="list">
-                  <label className="f-label">명칭(기타)</label>
-                  <div className="cont">
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.nameEtc ? 'form-tag error' : 'form-tag'}
-                            placeholder="명칭(기타)"
-                            name="nameEtc"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStorenameEtc"
+                            name="nameEtc"
+                            label="명칭(기타)"
                             value={nameEtc}
-                            onChange={(event) => changeInput('nameEtc', event.target.value)}
+                            onChange={(value) => changeInput('nameEtc', value)}
+                            errorMessage={errors.nameEtc}
                           />
-                          {errors.nameEtc ? <span className="errorText">{errors.nameEtc}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                    <hr className="line"></hr>
 
-                <li className="list">
-                  <label className="f-label">
-                    구분 <span className="required">*</span>
-                  </label>
-                  <div className="cont">
                     <div className="form-table">
                       <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
+                        <span className="form-group wid100">
                           <AppSelect
-                            style={{ width: '100%', marginBottom: 10 }}
                             id="useSysMenuFormStoretreeType"
                             name="treeType"
+                            label="구분"
                             options={Code.menuTreeType}
                             value={treeType}
                             onChange={(appSelectValue) => {
                               changeInput('treeType', appSelectValue);
                             }}
-                            placeholder=""
+                            required
+                            errorMessage={errors.treeType}
                           />
-                          {errors.treeType ? <span className="errorText">{errors.treeType}</span> : null}
                         </span>
                       </div>
                     </div>
-                  </div>
-                </li>
-
-                <li className="list">
-                  <label className="f-label">
-                    정렬순서 <span className="required">*</span>
-                  </label>
-                  <div className="cont">
+                    <hr className="line"></hr>
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.sortOrder ? 'form-tag error' : 'form-tag'}
-                            placeholder="정렬순서"
-                            name="sortOrder"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStoresortOrder"
+                            name="sortOrder"
+                            label="정렬순서"
                             value={sortOrder}
-                            onChange={(event) => changeInput('sortOrder', event.target.value)}
+                            onChange={(value) => changeInput('sortOrder', value)}
+                            required
+                            errorMessage={errors.sortOrder}
                           />
-                          {errors.sortOrder ? <span className="errorText">{errors.sortOrder}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                    <hr className="line"></hr>
 
-                <li className="list">
-                  <label className="f-label">메뉴URL</label>
-                  <div className="cont">
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.menuUrl ? 'form-tag error' : 'form-tag'}
-                            placeholder="메뉴URL"
-                            name="menuUrl"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStoremenuUrl"
+                            name="menuUrl"
+                            label="메뉴URL"
                             value={menuUrl}
-                            onChange={(event) => changeInput('menuUrl', event.target.value)}
+                            onChange={(value) => changeInput('menuUrl', value)}
+                            errorMessage={errors.menuUrl}
                           />
-                          {errors.menuUrl ? <span className="errorText">{errors.menuUrl}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                    <hr className="line"></hr>
 
-                <li className="list">
-                  <label className="f-label">
-                    사용여부(Y/N) <span className="required">*</span>
-                  </label>
-                  <div className="cont">
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
                           <AppSelect
-                            style={{ width: '100%', marginBottom: 10 }}
                             id="useSysMenuFormStoreuseYn"
                             name="useYn"
                             options={Code.useYn}
+                            label="사용여부(Y/N)"
                             value={useYn}
-                            onChange={(appSelectValue) => {
-                              changeInput('useYn', appSelectValue);
-                            }}
-                            placeholder=""
+                            onChange={(value) => changeInput('useYn', value)}
+                            required
+                            errorMessage={errors.useYn}
                           />
-                          {errors.useYn ? <span className="errorText">{errors.useYn}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-
-                <li className="list">
-                  <label className="f-label">비고</label>
-                  <div className="cont">
+                    <hr className="line"></hr>
                     <div className="form-table">
-                      <div className="form-cell wid100">
-                        <span className="form-group wid100 mr5">
-                          <input
-                            type="text"
-                            className={errors.remark ? 'form-tag error' : 'form-tag'}
-                            placeholder="비고"
-                            name="remark"
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <AppTextInput
                             id="useSysMenuFormStoreremark"
+                            name="remark"
+                            label="비고"
                             value={remark}
-                            onChange={(event) => changeInput('remark', event.target.value)}
+                            onChange={(value) => changeInput('remark', value)}
+                            errorMessage={errors.remark}
                           />
-                          {errors.remark ? <span className="errorText">{errors.remark}</span> : null}
-                        </span>
+                        </div>
                       </div>
                     </div>
+                    <hr className="line"></hr>
                   </div>
-                </li>
-              </ul>
-            </div>
+                </div>
+              </dd>
+            </dl>
           </div>
         </div>
       </div>

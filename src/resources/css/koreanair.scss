@@ -336,3 +336,28 @@
 }
 
 .ag-row .ag-cell {font-weight:400 !important;text-decoration:none !important}
+
+.notice-board {width: 100%;}
+.notice-board th {
+  background: var(--color-neutral-20); 
+  color: var(--color-darkblue-100); 
+  font-size: 1.6rem; 
+  text-align: center;
+  padding: 1.2rem 0;
+  border-top: 0.1rem solid var(--color-darkblue-100);
+  border-bottom: 0.1rem solid var(--color-neutral-40);
+  }
+  .notice-board td a:hover {text-decoration: underline;}
+  .notice-board td.left {text-align: left;}
+  .notice-board tr.fix-bg {
+    background: var(--color-neutral-10);
+    font-weight: 400;
+    td, td a {color: var(--color-darkblue-100);}
+    .fix {background: url(../images/pin.svg) center center no-repeat; font-size: 0; background-size: 2.4rem; padding: 0;}
+    
+  }
+  .notice-board td {
+    text-align: center;
+    padding: 1.0rem 0;
+    border-bottom: 0.1rem solid var(--color-neutral-40);
+  }

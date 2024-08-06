@@ -3,6 +3,7 @@ import ApiService from '@/services/ApiService';
 import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
 import * as yup from 'yup';
 import { create } from 'zustand';
+import ModalService from '@/services/ModalService';
 
 /* yup validation */
 const yupFormSchema = yup.object({
@@ -21,6 +22,22 @@ const yupFormSchema = yup.object({
   remark: yup.string(),
 });
 
+const initFormValue = {
+  menuId: '',
+  workScope: '',
+  nameKor: '',
+  nameEng: '',
+  nameChn: '',
+  nameJpn: '',
+  nameEtc: '',
+  treeType: '',
+  upperMenuId: '',
+  sortOrder: 999, // number
+  menuUrl: '',
+  useYn: 'Y', // select
+  remark: '',
+};
+
 /* form 초기화 */
 const initFormData = {
   ...formBaseState,
@@ -33,22 +50,9 @@ const initFormData = {
   baseRoutePath: '',
   formName: 'useSysMenuFormStore',
 
-  requiredFields: ['menuId', 'workScope', 'nameKor', 'nameEng', 'treeType', 'sortOrder', 'useYn'],
-
   treeWorkScope: 'A',
 
-  workScope: 'A',
-  nameKor: '',
-  nameEng: '',
-  nameChn: '',
-  nameJpn: '',
-  nameEtc: '',
-  treeType: '', // select
-  upperMenuId: '',
-  sortOrder: 999, // number
-  menuUrl: '',
-  useYn: 'Y', // select
-  remark: '',
+  formValue: initFormValue,
 };
 
 /* zustand store 생성 */
@@ -87,23 +91,24 @@ const useSysMenuFormStore = create<any>((set, get) => ({
   handleTreeSelect: async (selectedKeys, info) => {
     const { getParentMenuTree } = get();
     const menuInfo = info.node;
-    set({ ...menuInfo, formType: FORM_TYPE_UPDATE });
+    set({ formValue: menuInfo, formType: FORM_TYPE_UPDATE, errors: {} });
     await getParentMenuTree(menuInfo.workScope);
   },
 
   handleParentTreeSelect: async (selectedKey, title, extra) => {
-    const { changeInput, menuId } = get();
+    const { changeInput, formValue } = get();
+    const { menuId } = formValue;
     const menuInfo = extra.triggerNode.props;
     if (menuInfo.menuId === menuId) {
-      alert('자기자신입니다.');
+      ModalService.alert({ body: '현재 메뉴와 동일합니다.' });
       return;
     }
     if (menuInfo.treeType === 'M') {
-      alert('선택한 메뉴는 폴더가 아닙니다.');
+      ModalService.alert({ body: '선택한 메뉴는 폴더가 아닙니다.' });
       return;
     }
     if (menuInfo.level > 2) {
-      alert('메뉴는 3depth 메뉴까지만 허용합니다.');
+      ModalService.alert({ body: '메뉴는 3depth 메뉴까지만 허용합니다.' });
       return;
     }
     changeInput('upperMenuId', selectedKey);
@@ -116,44 +121,39 @@ const useSysMenuFormStore = create<any>((set, get) => ({
   },
 
   changeWorkScope: (workScope) => {
-    const { getParentMenuTree } = get();
-    set({ workScope: workScope, upperMenuId: '' });
+    const { changeInput, getParentMenuTree } = get();
+    changeInput('workScope', workScope);
+    changeInput('upperMenuId', '');
     getParentMenuTree(workScope);
   },
 
   addMenu: () => {
     const { treeWorkScope } = get();
-    const initFormData = {
+    const formValue = {
+      ...initFormValue,
       workScope: treeWorkScope,
-      menuId: '',
-      nameKor: '',
-      nameEng: '',
-      nameChn: '',
-      nameJpn: '',
-      nameEtc: '',
-      treeType: '', // select
-      upperMenuId: '',
-      sortOrder: 999, // number
-      menuUrl: '',
-      useYn: 'Y', // select
-      remark: '',
     };
-    set({ ...initFormData, formType: FORM_TYPE_ADD });
+    set({ formValue: formValue, formType: FORM_TYPE_ADD });
   },
 
   save: async () => {
-    const { validate, getApiParam, formType, formApiPath, menuId, getMenuTree, getParentMenuTree } = get();
+    const { validate, getApiParam, formType, formValue, formApiPath, getMenuTree, getParentMenuTree } = get();
+    const { menuId } = formValue;
     const isValid = await validate();
     if (isValid) {
       const apiParam = getApiParam();
-      if (formType === 'add') {
+      if (formType === FORM_TYPE_ADD) {
         await ApiService.post(`${formApiPath}`, apiParam);
       } else {
         await ApiService.put(`${formApiPath}/${menuId}`, apiParam);
       }
-      alert('저장되었습니다.');
-      await getMenuTree();
-      await getParentMenuTree(apiParam.workScope);
+      ModalService.alert({
+        body: '저장되었습니다.',
+        ok: async () => {
+          await getMenuTree();
+          await getParentMenuTree(apiParam.workScope);
+        },
+      });
     }
   },
 

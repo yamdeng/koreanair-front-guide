@@ -28,20 +28,19 @@ html ul {
     list-style: none;
     margin-bottom: 0;
 }
-.checklist-contents{display:flex;width:100%}
+.checklist-contents{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:100%;box-sizing:border-box}
 .checklist-contents::after{content:'';display:block;clear:both}
-.checklist-contents h4 label{position:relative;display:inline-block;width:100%;padding-bottom:1.0rem;border-bottom:0.1rem solid rgb(188, 188, 205);}
-.checklist-contents h4 a{font-size:1.8rem;line-height:2.0;font-weight:700;}
+.checklist-contents h4 label{position:relative;display:inline-block;width:100%;padding-bottom:1.0rem;border-bottom:0.1rem solid rgb(188, 188, 205)}
+.checklist-contents h4 a{font-size:1.6rem;line-height:2.0;font-weight:700}
 
-.checklist-contents .checklist-row{position:relative;display:block;width:24%;margin:0 0 0 2rem;overflow:hidden;border:solid 0.1rem var(--color-neutral-40);background-color:var(--color-neutral-20);padding:1.5rem 2.5rem;border-radius:0.8rem}
+.checklist-contents .checklist-row{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:25%;box-sizing:border-box;overflow:hidden;padding:1rem}
+/*.checklist-contents .checklist-row:first-child{margin-left:0}*/
+.checklist-contents .checklist-row .checklist-col{position:relative;flex: 0 0 100% !important;width:100%;border-radius:0.8rem;padding:0.5rem;border:solid 0.1rem var(--color-neutral-40);background-color:var(--color-neutral-20)}
 
-.checklist-contents .checklist-row:nth-of-type(4n+1){margin-left:0}
+.checklist-contents .checklist-row.list ul{display:flex;flex-direction:column;padding:1.0rem 0}
+.checklist-contents .checklist-row.list li.list-space{display:inline-flex;font-size:1.5rem}
+.checklist-contents .checklist-row.list li.list-space a:hover{text-decoration:underline}
+.checklist-contents .checklist-row.list li button.editChapter{visibility:hidden;opacity: 0;margin-right:2rem;border:solid 1px red}
+.list-btn{width:32px;height:32px;padding:2.4px 0;font-size:1.6rem;border-radius:2rem;vertical-align:-0.3rem;border:solid 1px red}
 
-.checklist-contents .checklist-row.list ul{display:flex;flex-direction: column;padding: 16px 0px;}
-.checklist-contents .checklist-row.list li.list-space{display:inline-flex;font-size:1.5rem;}
-.checklist-contents .checklist-row.list li.list-space a:hover{text-decoration:underline;}
-.checklist-contents .checklist-row.list li button.editChapter{visibility:hidden;opacity: 0;margin-right:2rem}
-.list-btn{width:32px;height:32px;padding:2.4px 0;font-size:1.6rem;border-radius:2rem;vertical-align:-0.3rem}
-.checklist-col{position:relative}
-.cont-row{display:flex;        flex-wrap: wrap;;row-gap:2.4rem}
 
