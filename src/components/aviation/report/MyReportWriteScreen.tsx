@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { create } from 'zustand';
-import { useEffect, useRef } from 'react';
-import classNames from 'classnames';
 import { EventJSX, FlightJSX } from './components/WriteScreenComponent';
 
 const initailState = {
