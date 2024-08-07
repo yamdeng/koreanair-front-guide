@@ -126,7 +126,7 @@ input, select{font-family:'KoreanAirSans'}
   overflow: hidden;
 }
 
-.filebox .f-label{position:absolute;left:0;top:50%;transform:translate(0, -50%);width:130px;text-align:left;color:var(--color-neutral-80);border-right:0.1rem solid var(--color-neutral-40);padding-right:2.0rem;box-sizing:border-box}
+.filebox >.f-label{position:absolute;left:0;top:50%;transform:translate(0, -50%);width:08.0rem;line-height:1.4rem;height:3.0rem;padding:0;font-size: 1.4rem !important;text-align:left;color:var(--color-neutral-80);border-right:0;box-sizing:border-box}
 .filebox label {
   /*display: inline-block;
   padding: 10px 20px;
@@ -170,20 +170,8 @@ input, select{font-family:'KoreanAirSans'}
   .btn-darkblue-line{border:solid 0.2rem var(--color-darkblue-100);color:var(--color-darkblue-100)}
   .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
   .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
+  .btn-big{display:block;width:100%;text-align:center;height:3.5rem;border-radius:0.8rem;align-items:center;box-sizing:border-box}
   text-align:right;padding-top:1.2rem;
-   /*@include mobile {
-    width:100%;
-    position:absolute;
-    left:0;
-    bottom:0;
-    display:flex;
-    > button {
-      border-radius: 0 !important;
-      margin:0 auto;
-      flex-basis:auto;
-      flex-grow:1;
-    }
-  }*/
 }
 .text_color_neutral-10{color:var(--color-neutral-10)}
 
@@ -196,7 +184,7 @@ input, select{font-family:'KoreanAirSans'}
   .btn_confirm{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-darkblue-100)}
   .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
   .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
-  .btn_close{padding:0.6rem 2.8rem;/* border: 0.2rem solid var(--color-darkblue-100); */border-radius:99.9rem;background: var(--color-neutral-30)}
+  .btn_close{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-neutral-30)}
   position:relative;/*right:0;top:0;float:right;*/text-align:right;
   @include mobile {
     width:100%;
@@ -220,7 +208,7 @@ input, select{font-family:'KoreanAirSans'}
   .btn_confirm{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-darkblue-100)}
   .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
   .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
-  .btn_close{padding:0.6rem 2.8rem;/* border: 0.2rem solid var(--color-darkblue-100); */border-radius:99.9rem;background: var(--color-neutral-30)}
+  .btn_close{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-neutral-30)}
   position:relative;text-align:right;margin-bottom:2rem;
   @include mobile {
     width:100%;
@@ -241,27 +229,19 @@ input, select{font-family:'KoreanAirSans'}
 .contents-btns{
   > button{margin:2.0rem 0.2rem}
   .btn_text{font-family:'KoreanAirSans';font-weight:700;font-size:1.6rem}
-  .btn_confirm{padding:0.6rem 4.8rem;border-radius:99.9rem;background:var(--color-darkblue-100);align-items:center}
-  .btn_close{padding:0.8rem 4.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
-  .btn_correct{padding:0.8rem 4.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
+  .btn_confirm{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-darkblue-100);align-items:center}
+  .btn_close{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
+  .btn_correct{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
+  .btn_list{padding:0.6rem 3.8rem;border-radius:99.9rem;border:solid 0.2rem var(--color-neutral-60);color:var(--color-neutral-60)}
+  .btn-del{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30);color:var(--color-neutral-70)}
+  .btn-share {padding:0.8rem 3.2rem 0.8rem 2.2rem ;border-radius:99.9rem;background-color: var(--color-darkblue-100);}
+  .btn-share img {display: inline-block; vertical-align: bottom;}
+  .btn-share span {display: inline-block; color: var(--color-neutral-10); vertical-align: top;}
+  .btn-type01 {}
   text-align:right;
-  /*@include mobile {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    > button {
-      border-radius: 0 !important;
-      margin:0 auto;
-      flex-basis: auto;
-      flex-grow: 1;
-    }
-  }*/
-  .share {background: url(../images/share.svg)left center no-repeat; display: inline-flex; align-items: center; justify-content: left; width: 2.4rem; height: 2.4rem; padding-left: 3.0rem; color: var(--color-neutral-10);}
 }
 /* 상단 타이틀 */
-.conts-title{position:relative;/*border-bottom:solid 0.1rem var(--color-neutral-40);*/align-items:center;padding:2.0rem 0 4.0rem 0;margin-bottom:1.0rem}
+.conts-title{position:relative;align-items:center;padding:2.0rem 0 4.0rem 0;margin-bottom:1.0rem}
 .conts-title h2{float:left;font-family:"KoreanAirSans";font-size:3rem;color:var(--color-neutral-80);font-weight:700;letter-spacing:-0.1rem}
 .conts-title h2 span{font-size:2.5rem;color:var(--color-mblue-100)}
 
@@ -384,9 +364,9 @@ input, select{font-family:'KoreanAirSans'}
 .boxForm .form-table{display:flex;width:100%}
 .boxForm .form-table + .form-table{/*padding-top:1.5rem*/}
 .boxForm .form-table:last-child{padding-bottom:1.5rem}
-.boxForm .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;padding-top:1.2rem}
+.boxForm .form-table .form-cell{position:relative;flex-grow:1;padding:0 0.5rem;padding-top:1.2rem}
 
-.boxForm .form-table .form-cell:last-child{padding-right:0}
+/*.boxForm .form-table .form-cell:last-child{padding-right:0}*/
 .boxForm.tog{margin-bottom:0rem;padding-top:0rem}
 
 .conts-subTit{width:100%;line-height:3.5rem;padding-bottom:1.0rem}
@@ -523,9 +503,7 @@ input, select{font-family:'KoreanAirSans'}
 .label-select .css-13cymwt-control{min-height:4rem !important;height:4rem !important}
 
 /* 에디터 메뉴 툴팁 text override */
-.toastui-editor-tooltip .text {
-  color: white
-}
+.toastui-editor-tooltip .text{color:var(--color-neutral-10)}
 
 /* 에디터 유효성 체크 실패시 border red 적용 */
 .editor-in-valid .toastui-editor-defaultUI {
@@ -549,3 +527,12 @@ input, select{font-family:'KoreanAirSans'}
 
 /*공통컴포넌트 달력 숫자 센터정렬*/
 .ant-picker-dropdown .ant-picker-cell .ant-picker-cell-inner{text-align:center !important}
+/*공통컴포넌트 멀티 첨부파일*/
+.ant-upload-wrapper .ant-upload-drag{background-color:var(--color-neutral-10)!important}
+.ant-upload-wrapper .ant-upload-drag p.ant-upload-text{color:var(--color-neutral-60)!important}
+/*공통컴포넌트 업로드버튼*/
+.ant-upload-wrapper .ant-upload-select{display:inline}
+.ant-upload-wrapper .ant-upload-select .ant-upload span button{width:100%;border:solid 0.1rem var(--color-darkblue-100);padding:0.8rem 3.8rem}
+/*공통컴포넌트 멀티 첨부파일 삭제버튼*/
+.ant-upload-wrapper .ant-upload-list .ant-upload-list-item .ant-upload-list-item-actions .ant-btn-icon .anticon >svg{background:url(/src/resources/images/delete-text.svg) center center no-repeat;font-size:0;width:2rem;height:2rem;background-size: cover;}
+.ant-upload-wrapper .ant-upload-list .ant-upload-list-item .ant-upload-list-item-actions .ant-btn-icon .anticon >svg path{display:none}
