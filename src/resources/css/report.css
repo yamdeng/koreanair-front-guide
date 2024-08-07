@@ -588,6 +588,14 @@ video {
   }
 }
 
+.tw-pointer-events-none {
+  pointer-events: none;
+}
+
+.tw-fixed {
+  position: fixed;
+}
+
 .tw-absolute {
   position: absolute;
 }
@@ -606,6 +614,14 @@ video {
 
 .tw-left-0 {
   left: 0px;
+}
+
+.tw-z-20 {
+  z-index: 20;
+}
+
+.tw-z-50 {
+  z-index: 50;
 }
 
 .tw-col-span-2 {
@@ -645,6 +661,11 @@ video {
 .tw-mx-6 {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
+}
+
+.tw-mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tw-my-2 {
@@ -692,10 +713,6 @@ video {
   display: none;
 }
 
-.tw-h-16 {
-  height: 4rem;
-}
-
 .tw-h-4 {
   height: 1rem;
 }
@@ -706,6 +723,103 @@ video {
 
 .tw-h-\[1px\] {
   height: 1px;
+}
+
+.tw-h-full {
+  height: 100%;
+}
+
+.tw-h-\[300px\] {
+  height: 300px;
+}
+
+.tw-h-\[200px\] {
+  height: 200px;
+}
+
+.tw-h-\[100px\] {
+  height: 100px;
+}
+
+.tw-h-\[100\%\] {
+  height: 100%;
+}
+
+.tw-h-max {
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.tw-h-20 {
+  height: 5rem;
+}
+
+.tw-h-10 {
+  height: 2.5rem;
+}
+
+.tw-h-min {
+  height: -moz-min-content;
+  height: min-content;
+}
+
+.tw-h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.tw-h-1 {
+  height: 0.25rem;
+}
+
+.tw-h-screen {
+  height: 100vh;
+}
+
+.tw-h-3 {
+  height: 0.75rem;
+}
+
+.tw-h-\[150px\] {
+  height: 150px;
+}
+
+.tw-h-\[100\] {
+  height: 100;
+}
+
+.tw-h-\[50px\] {
+  height: 50px;
+}
+
+.tw-h-\[400px\] {
+  height: 400px;
+}
+
+.tw-h-\[10\%\] {
+  height: 10%;
+}
+
+.tw-h-\[90\%\] {
+  height: 90%;
+}
+
+.tw-h-0 {
+  height: 0px;
+}
+
+.tw-max-h-max {
+  max-height: -moz-max-content;
+  max-height: max-content;
+}
+
+.tw-max-h-full {
+  max-height: 100%;
+}
+
+.tw-max-h-fit {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
 }
 
 .tw-w-full {
@@ -728,6 +842,26 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.tw-grid-cols-\[1fr\,1fr\] {
+  grid-template-columns: 1fr 1fr;
+}
+
+.tw-grid-rows-\[1fr\,1fr\] {
+  grid-template-rows: 1fr 1fr;
+}
+
+.tw-grid-rows-\[1fr\,4h\] {
+  grid-template-rows: 1fr 4h;
+}
+
+.tw-grid-rows-\[100px\,1fr\] {
+  grid-template-rows: 100px 1fr;
+}
+
+.tw-grid-rows-\[80\%\,20\%\] {
+  grid-template-rows: 80% 20%;
+}
+
 .tw-flex-col {
   flex-direction: column;
 }
@@ -736,8 +870,20 @@ video {
   flex-wrap: wrap;
 }
 
+.tw-items-end {
+  align-items: flex-end;
+}
+
 .tw-items-center {
   align-items: center;
+}
+
+.tw-items-stretch {
+  align-items: stretch;
+}
+
+.tw-justify-end {
+  justify-content: flex-end;
 }
 
 .tw-justify-center {
@@ -773,6 +919,26 @@ video {
 
 .tw-overflow-hidden {
   overflow: hidden;
+}
+
+.tw-overflow-scroll {
+  overflow: scroll;
+}
+
+.tw-overflow-y-auto {
+  overflow-y: auto;
+}
+
+.tw-overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.tw-overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.tw-overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .tw-rounded-2xl {
@@ -941,6 +1107,19 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.tw-bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.tw-bg-opacity-40 {
+  --tw-bg-opacity: 0.4;
+}
+
+.tw-bg-opacity-70 {
+  --tw-bg-opacity: 0.7;
+}
+
 .\!tw-p-4 {
   padding: 1rem !important;
 }
@@ -967,6 +1146,10 @@ video {
 
 .tw-p-6 {
   padding: 1.5rem;
+}
+
+.tw-p-8 {
+  padding: 2rem;
 }
 
 .tw-px-2 {
@@ -1050,6 +1233,11 @@ video {
   font-size: 2.5rem;
 }
 
+.tw-text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .tw-font-bold {
   font-weight: 700;
 }
@@ -1086,8 +1274,12 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.tw-opacity-40 {
-  opacity: 0.4;
+.tw-opacity-0 {
+  opacity: 0;
+}
+
+.tw-opacity-100 {
+  opacity: 1;
 }
 
 .tw-opacity-70 {
@@ -1108,6 +1300,12 @@ video {
   transition-duration: 150ms;
 }
 
+.tw-transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .tw-transition-transform {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1120,6 +1318,10 @@ video {
 
 .tw-ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wrap .contents {
+  z-index: 100;
 }
 
 .av-input-1 {

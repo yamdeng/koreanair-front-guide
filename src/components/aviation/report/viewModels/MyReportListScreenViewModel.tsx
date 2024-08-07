@@ -2,7 +2,10 @@
 import { produce } from "immer";
 import { reportCategory, reportStatus } from "../configs/ListScreenConfig";
 import { create } from "zustand";
-import { AddReportSheetJSX, SheetSelectReportCategory, SheetSelectReportStatus, SheetSettingFilter } from "../forms/BottomSheet";
+import { SheetAddReport, SheetSelectReportCategory, SheetSelectReportStatus, SheetSettingFilter } from "../forms/BottomSheet";
+import { useNavigate } from "react-router-dom";
+import MyReportWriteScreen, { MyReportWriteScreenViewModel } from "../MyReportWriteScreen";
+import { ReportConfig } from "../configs/WriteScreenConfig";
 
 const initailState = {
   sheetList: [],
@@ -19,7 +22,12 @@ const initailState = {
   },
   finalFilter: {},
   confirmFilter: () => { },
-  updateSubject: () => { }
+  updateSubject: () => { },
+  modalPage: {
+    isShow: false,
+    jsx: () => {}
+  },
+  showModal: () => {}
 };
 
 export const MyReportListScreenViewModel = create<any>((set, get) => ({
@@ -58,13 +66,16 @@ export const MyReportListScreenViewModel = create<any>((set, get) => ({
   },
   // 보고서 추가 BottomSheet
   addReport: () => {
-    const { addSheet, onClose } = get()
+    const { addSheet, onClose, goWriteReport } = get()
     // 클릭 이벤트 추가
     const list = reportCategory.map(category => ({
       ...category,
       list: category.list.map(item => ({
         ...item,
-        onClick: () => alert(`Clicked on ${item.name}`)
+        onClick: () => {
+          goWriteReport(item)
+          onClose()
+        }
       }))
     }));
     addSheet(
@@ -72,7 +83,7 @@ export const MyReportListScreenViewModel = create<any>((set, get) => ({
         isShow: false,
         jsx: () => {
           return (
-            <AddReportSheetJSX
+            <SheetAddReport
               category={list.filter((element) => { return element.name == "csr" })[0].list}
             />
           )
@@ -80,6 +91,18 @@ export const MyReportListScreenViewModel = create<any>((set, get) => ({
         onClose: onClose
       }
     )
+  },
+  // 보고서 추가 버튼 클릭시 액션
+  goWriteReport: (params) => {
+    const { showModal } = get()
+
+    const reportInfo = ReportConfig.filter((element) => { return element.category === 'csr' })[0]
+
+    showModal({ 
+      jsx: () => {
+        return (<MyReportWriteScreen info={reportInfo} />)
+      } 
+    })
   },
   // 검색 필터 BottomSheet
   addSheetSettingFilter: () => {
@@ -226,6 +249,20 @@ export const MyReportListScreenViewModel = create<any>((set, get) => ({
           state.filterStruct[key] = ''
         }
         state.finalFilter = state.filterStruct
+      })
+    )
+  },
+  // Modal Screen 생성
+  showModal: (params) => {
+    
+    const {
+      jsx
+    } = params
+
+    set(
+      produce((state: any) => {
+        state.modalPage.isShow = true
+        state.modalPage.jsx = jsx
       })
     )
   }

@@ -89,7 +89,7 @@ export const SheetSettingFilter = (custom) => {
   )
 }
 
-export const AddReportSheetJSX = (custom) => {
+export const SheetAddReport = (custom) => {
 
   const {
     category

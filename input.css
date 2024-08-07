@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.wrap .contents {
+    z-index: 100;
+}
+
 .av-input-1 {
     @apply tw-p-3 tw-bg-white tw-border-solid tw-border tw-border-slate-400 tw-w-full !tw-p-4
 }

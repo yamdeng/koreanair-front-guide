@@ -4,6 +4,10 @@ import { BottomSheetLayout } from './forms/BottomSheet';
 import { MyReportListScreenViewModel } from './viewModels/MyReportListScreenViewModel';
 import { FilterConditionItem } from './components/ListScreenComponent';
 import { ReportButtonType1 } from './forms/InputForms';
+import { truncate } from 'fs';
+import { ModalDimmedScreen } from './forms/ModalScreen';
+import MyReportWriteScreen, { MyReportWriteScreenViewModel } from './MyReportWriteScreen';
+import { useStore } from 'zustand';
 
 export default function MyReportListScreen() {
 
@@ -15,11 +19,30 @@ export default function MyReportListScreen() {
     addSheetSettingFilter,
     onClose,
     addReport,
-    removeFilter
+    removeFilter,
+    modalPage,
+    showModal,
+    goWriteReport
   } = MyReportListScreenViewModel() as any
 
+  //const _ = MyReportWriteScreenViewModel() as any
+
+  //MyReportWriteScreenViewModel()
+
+  // {
+  //   finished: (path) => {
+
+  //     const screen = MyReportWriteScreen()
+
+  //     // showModal({ contents: screen })
+  //   }
+  // }
   useEffect(() => {
-    addSheetSettingFilter()
+    addReport()
+
+    setTimeout(() => {
+      goWriteReport()
+    }, 400)
   }, [])
 
   return (
@@ -201,6 +224,16 @@ export default function MyReportListScreen() {
           })
         })()
 
+      }
+
+      {
+        (() => {
+          if (modalPage.isShow) {
+            return (
+              <ModalDimmedScreen contents={modalPage.jsx} />
+            )
+          }
+        })()
       }
 
     </div>

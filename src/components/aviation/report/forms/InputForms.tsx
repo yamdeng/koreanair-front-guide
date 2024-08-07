@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react"
-import { useStore } from "zustand"
-import { MyReportListScreenViewModel } from "../viewModels/MyReportListScreenViewModel"
-
 export const ReportInputType1 = (custom) => {
   const {
     rightContents,
@@ -70,7 +66,12 @@ export const ReportSelectType1 = (custom) => {
 }
 
 
-export const ReportInputWithLeftLabel = (text) => {
+export const ReportInputWithLeftLabel = (custom) => {
+
+  const {
+    text
+  } = custom
+
   return (
     <div className="tw-flex">
       <div className="av-flex-vertical-center av-input-left-rounded">{text}</div>
@@ -104,7 +105,7 @@ export const ReportButtonType1 = (custom) => {
     onClick
   } = custom
   return (
-    <div className="tw-gap-4 tw-flex tw-mt-4">
+    <div className="tw-flex tw-mt-4 tw-grow">
       <input
         type="button"
         id="name"
