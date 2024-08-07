@@ -96,17 +96,12 @@ function AppTable(props) {
     search,
     store = null,
     hiddenPagination,
-    editable = false,
     hiddenTableHeader = false,
+    readOnlyEdit = true,
   } = props;
 
   // store
   const { currentPage, prevPage, nextPage, totalCount, displayPageIndexList = [], changePageSize } = store || {};
-
-  let editType = '';
-  if (editable) {
-    editType = 'fullRow';
-  }
 
   // 컬럼 동적 셋팅 모달 open
   const [isColumnSettingModalOpen, setIsColumnSettingModalOpen] = useState(false);
@@ -303,7 +298,7 @@ function AppTable(props) {
           tooltipHideDelay={1000}
           tooltipMouseTrack={true}
           enableBrowserTooltips={false}
-          editType={editType}
+          readOnlyEdit={readOnlyEdit}
           onGridReady={(params) => {
             if (displayTableLoading) {
               params.api.showLoadingOverlay();

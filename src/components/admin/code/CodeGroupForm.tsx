@@ -38,7 +38,7 @@ function CodeGroupForm() {
 
   const { codeGrpId, workScope, codeGrpNameKor, codeGrpNameEng, useYn, remark } = formValue;
   const listState = useSysCodeGroupFormStore();
-  const { search, list, changeListApiPath } = listState;
+  const { search, list, changeListApiPath, changeListInfoByIndex } = listState;
 
   const [columns] = useState([
     { field: 'codeId', headerName: '코드ID', editable: true },
@@ -97,11 +97,17 @@ function CodeGroupForm() {
     },
   ];
 
-  const handleRowSingleClick = (props) => {
+  const handleRowDoubleClick = (props) => {
     const { event } = props;
     if (!event.defaultPrevented) {
-      alert('handleRowSingleClick');
+      // TODO : 모달 open
     }
+  };
+
+  const onCellEditRequest = (cellInfo) => {
+    const { rowIndex, column, newValue } = cellInfo;
+    const { colId } = column;
+    changeListInfoByIndex(rowIndex, colId, newValue);
   };
 
   useEffect(() => {
@@ -244,12 +250,12 @@ function CodeGroupForm() {
           columns={columns}
           store={listState}
           hiddenPagination
-          editable={true}
           customButtons={customButtons}
-          handleRowSingleClick={handleRowSingleClick}
           components={{
             deleteActionButton: DeleteActionButton,
           }}
+          onCellEditRequest={onCellEditRequest}
+          handleRowDoubleClick={handleRowDoubleClick}
         />
       ) : null}
 
