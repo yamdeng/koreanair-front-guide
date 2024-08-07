@@ -43,7 +43,7 @@ function <%= fileName %>() {
       { field: "<%= columnInfo.column_name %>", headerName: "<%= columnInfo.column_comment %>" },<% }) %>
   ])
   );
-  const { initSearch, searchParam, list, goAddPage, changeSearchInput, initSearchInput, clear } = state;
+  const { enterSearch, searchParam, list, goAddPage, changeSearchInput, initSearchInput, isExpandDetailSearch, toggleExpandDetailSearch, clear } = state;
   // TODO : 검색 파라미터 나열
   const { searchWord } = searchParam;
 
@@ -52,7 +52,7 @@ function <%= fileName %>() {
   }, []);
 
   useEffect(() => {
-    initSearch();
+    enterSearch();
     return clear;
   }, []);
 
@@ -64,28 +64,38 @@ function <%= fileName %>() {
       </div>
       {/* TODO : 검색 input 영역입니다 */}
       <div className="boxForm">
-        <div className="form-table">
-          <div className="form-cell wid50">
-            <span className="form-group wid100">
-              <AppSearchInput 
-                label="이름"
-                value={searchWord}
-                onChange={(value) => {
-                  changeSearchInput('searchWord', value);
-                }}
-                search={initSearch}
-              />
-            </span>
+        <div className={isExpandDetailSearch ? 'area-detail active' : 'area-detail'}>
+          <div className="form-table">
+            <div className="form-cell wid50">
+              <span className="form-group wid100">
+                <AppSearchInput 
+                  label="이름"
+                  value={searchWord}
+                  onChange={(value) => {
+                    changeSearchInput('searchWord', value);
+                  }}
+                  search={enterSearch}
+                />
+              </span>
+            </div>
           </div>
+          <div className="btn-area">
+            <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={enterSearch}>
+              조회
+            </button>
+            <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={initSearchInput}>
+              초기화
+            </button>
+          </div>          
         </div>
-        <div className="btn-area">
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={initSearch}>
-            조회
-          </button>
-          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={initSearchInput}>
-            초기화
-          </button>
-        </div>
+        <button
+            type="button"
+            name="button"
+            className={isExpandDetailSearch ? 'arrow button _control active' : 'arrow button _control'}
+            onClick={toggleExpandDetailSearch}
+          >
+          <span className="hide">접기</span>
+        </button>
       </div>
       <AppTable
         rowData={list}
