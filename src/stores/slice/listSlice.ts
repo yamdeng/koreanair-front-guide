@@ -44,6 +44,10 @@ export const listBaseState = {
 export const createListSlice = (set, get) => ({
   ...listBaseState,
 
+  changeStateProps: (propsName, propsValue) => {
+    set({ [propsName]: propsValue });
+  },
+
   goFirstPage() {
     const { prevPage } = get();
     if (prevPage) {

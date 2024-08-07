@@ -355,7 +355,28 @@ input, select{font-family:'KoreanAirSans'}
 .menu-tab-nav > .menu-tab-nav-operations .menu-tab-nav-more{position:absolute;left:1rem;top:0.5rem;width:3.2rem;height:3.2rem;font-size:0;background:url(../images/icon-option.svg)center center no-repeat;align-items:center}
 
 
-
+.editbox {
+  position: relative; 
+  border-top: 0.1rem solid var(--color-darkblue-100);
+  display:inline-block;
+  width:100%;
+  padding:1.5rem 0;
+}
+.editbox hr.line {
+  border:none;
+  height:0.1rem;
+  background:var(--color-neutral-40);
+  margin: 0;
+  padding: 0;
+  margin:1.5rem 0;
+}
+.editbox .form-table{display:flex; width:100%}
+/* .editbox .form-table:first-child{padding-top:3rem}*/
+.editbox .form-table + .form-table{/*padding-top:1.5rem*/}
+.editbox .form-table:last-child{/*padding-bottom:2.0rem*/}
+.editbox .form-table .form-cell{position:relative; flex-grow:1; padding-right:1.0rem;}
+.editbox .form-table .form-cell:last-child{padding-right:0}
+.editbox.tog{margin-bottom:0rem; padding-top:0rem}
 
 /*검색영역*/
 .info-wrap .edit-area > .boxForm{padding:0}
@@ -441,7 +462,16 @@ input, select{font-family:'KoreanAirSans'}
 .box-view-list .view-list .accumlate-list{position:relative;display:block}
 .box-view-list .view-list .t-label{display:block;color:var(--color-neutral-70);font-weight:400;font-size:1.5rem;white-space:nowrap}
 .box-view-list .view-list .text-desc{display:block;width:100%;margin-top:2rem;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
-.box-view-list .view-list .text-desc-type1{display:block;width:100%;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
+.box-view-list .view-list .text-desc-type1{position:relative;display:block;width:100%;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
+.box-view-list .view-list .text-desc-type1 .desc-file{position:relative;display:flex;width:100%;}
+.box-view-list .view-list .text-desc-type1 .desc-file span{width:100%}
+.box-view-list .view-list .text-desc-type1 .desc-file .download{float:right;
+  background: url(/src/resources/images/icon-download.svg) center center no-repeat;
+  font-size: 0;
+  width: 2rem;
+  height: 2rem;
+}
+
 .imgBoxWrap{position:relative;border:0.1rem solid var(--color-darkblue-100);background-color:var(--color-neutral-30)}
 .imgBox{position:relative;overflow:hidden;text-align:center;height:100px;width:100px}
 

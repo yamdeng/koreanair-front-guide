@@ -39,6 +39,10 @@ export const formBaseState = {
 
 // yup 연동 공통 slice : 가능하면 yup를 사용하는 방법으로 통일합니다
 export const createFormSliceYup = (set, get) => ({
+  changeStateProps: (propsName, propsValue) => {
+    set({ [propsName]: propsValue });
+  },
+
   changeInput: (inputName, inputValue) => {
     const { formValue } = get();
     formValue[inputName] = inputValue;
@@ -129,6 +133,16 @@ export const createFormSliceYup = (set, get) => ({
       formValue: detailInfo,
       formDetailId: id,
       formType: FORM_TYPE_UPDATE,
+    });
+  },
+
+  // 모달 전용으로 formData를 set할때 사용
+  setFormValue: (detailInfo, id = '') => {
+    set({
+      detailInfo: detailInfo || {},
+      formValue: detailInfo || {},
+      formDetailId: id,
+      formType: id ? FORM_TYPE_UPDATE : FORM_TYPE_ADD,
     });
   },
 

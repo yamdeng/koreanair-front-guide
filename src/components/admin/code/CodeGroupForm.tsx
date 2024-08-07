@@ -6,6 +6,7 @@ import AppTextInput from '@/components/common/AppTextInput';
 import AppSelect from '@/components/common/AppSelect';
 import Code from '@/config/Code';
 import { DETAIL_NEW_ID, FORM_TYPE_ADD } from '@/config/CommonConstant';
+import CodeFormModal from '@/components/modal/admin/CodeFormModal';
 
 const DeleteActionButton = (props) => {
   const { node, onClick } = props;
@@ -34,11 +35,13 @@ function CodeGroupForm() {
     removeAll,
     removeByIndex,
     saveCodeDetail,
+    openFormModal,
   } = useSysCodeGroupFormStore();
 
   const { codeGrpId, workScope, codeGrpNameKor, codeGrpNameEng, useYn, remark } = formValue;
   const listState = useSysCodeGroupFormStore();
-  const { search, list, changeListApiPath, changeListInfoByIndex } = listState;
+  const { search, list, changeListApiPath, changeListInfoByIndex, isCodeFormModalOpen, closeFormModal, okModal } =
+    listState;
 
   const [columns] = useState([
     { field: 'codeId', headerName: '코드ID', editable: true },
@@ -86,7 +89,8 @@ function CodeGroupForm() {
     {
       title: '행추가',
       onClick: () => {
-        addRow();
+        // addRow();
+        openFormModal(null);
       },
     },
     {
@@ -98,17 +102,17 @@ function CodeGroupForm() {
   ];
 
   const handleRowDoubleClick = (props) => {
-    const { event } = props;
+    const { event, data, rowIndex } = props;
     if (!event.defaultPrevented) {
-      // TODO : 모달 open
+      openFormModal(data, rowIndex);
     }
   };
 
-  const onCellEditRequest = (cellInfo) => {
-    const { rowIndex, column, newValue } = cellInfo;
-    const { colId } = column;
-    changeListInfoByIndex(rowIndex, colId, newValue);
-  };
+  // const onCellEditRequest = (cellInfo) => {
+  //   const { rowIndex, column, newValue } = cellInfo;
+  //   const { colId } = column;
+  //   changeListInfoByIndex(rowIndex, colId, newValue);
+  // };
 
   useEffect(() => {
     if (detailId && detailId !== DETAIL_NEW_ID) {
@@ -124,7 +128,7 @@ function CodeGroupForm() {
       <div className="conts-title">
         <h2>코드관리</h2>
       </div>
-      <div className="boxForm">
+      <div className="editbox">
         <div className="form-table">
           <div className="form-cell wid50">
             <div className="form-group wid100">
@@ -254,10 +258,12 @@ function CodeGroupForm() {
           components={{
             deleteActionButton: DeleteActionButton,
           }}
-          onCellEditRequest={onCellEditRequest}
+          // onCellEditRequest={onCellEditRequest}
           handleRowDoubleClick={handleRowDoubleClick}
         />
       ) : null}
+
+      <CodeFormModal isOpen={isCodeFormModalOpen} closeModal={closeFormModal} ok={okModal} />
 
       {/* 하단 버튼 영역 */}
       <div className="contents-btns" style={{ display: formType !== FORM_TYPE_ADD ? '' : 'none' }}>
