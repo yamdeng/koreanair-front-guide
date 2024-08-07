@@ -1,2 +1,48 @@
-### TODO ###
+CodeSelect
+ -isRemote : true / false
+ -codeGrpId
+
+1.store에 현재 다국어 반영하기
+ -appStore에 locale
+
+2.useEffect mount시에 callg하기
+ -변경 감지는 codeGrpId
+
+3.CommonUtil.getLocaleCodeKeyName(locale)
+ -ko === 
+
+4.조직도 다국어 컬럼
+CommonUtil.getLocaleColumnUserName
+CommonUtil.getLocaleColumnUserRankName
+CommonUtil.getLocaleColumnUserDeptName
+CommonUtil.getLocaleColumnUserDeptName
+
+5.메뉴 다국어 반영
+CommonUtil.getLocaleColumnMenuName
+
+6.키 기준으로 다국어 반영
+LocalService.getMessage('messageKey', '없을경우반영할 라벨')
+ -두번째 파라미터가 존재하지 않으면 첫번재로 반영, 두번째 파라미터 존재시 첫번째 메시지가 존재하지 않으면 두번째 파라미터 적용
+ i18n('common.message.save', '저장')
+ i18n('common.message.save')
+ i18n('저장')
+
+
+
+
+1.codeselect 만들기
+
+2.다국어 반영하기
+
+3.모달 정리
+
+4.사용자, 부서 선택 반영하기
+
+5.화면 마무리
+ -사용자관리 마무리
+ -부서관리 마무리
+
+
+
+
 
