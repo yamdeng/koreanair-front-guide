@@ -2,6 +2,7 @@ import useAppStore from '@/stores/useAppStore';
 
 // TODO : 자체 cache 반영 + changeLocale시에 cache 초기화
 
+// code그룹id 기준으로 original 코드 목록 반환
 export const getCodeListByCodeGrpId = (codeGrpId) => {
   const { codeAllMap } = useAppStore.getState();
   if (codeGrpId) {
@@ -13,6 +14,7 @@ export const getCodeListByCodeGrpId = (codeGrpId) => {
   return [];
 };
 
+// code그룹id + codeValue 기준으로 original 코드 info 반환
 export const getCodeInfo = (codeGrpId, codeValue) => {
   const { codeAllMap } = useAppStore.getState();
   if (codeGrpId) {
@@ -24,6 +26,7 @@ export const getCodeInfo = (codeGrpId, codeValue) => {
   return null;
 };
 
+// code그룹id + codeValue 기준으로 라벨 반환 : 다국어 반영
 export const getCodeLabelByValue = (codeGrpId, codeValue) => {
   const { codeAllMap, currentLocale } = useAppStore.getState();
   let codeLabel = '';
@@ -44,6 +47,7 @@ export const getCodeLabelByValue = (codeGrpId, codeValue) => {
   return codeLabel;
 };
 
+// code그룹id 기준으로 코드 목록 반환 : code / value 키 적용
 export const getOptions = (codeGrpId) => {
   const { codeAllMap, currentLocale } = useAppStore.getState();
   if (codeGrpId) {
@@ -66,6 +70,7 @@ export const getOptions = (codeGrpId) => {
   return [];
 };
 
+// 서버에서 받은 값을 기준으로 코드 목록 변환 : code / value 키 적용
 export const convertOptionsByCurrentLocale = (options) => {
   const { currentLocale } = useAppStore.getState();
   if (options && options.length) {
