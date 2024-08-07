@@ -455,6 +455,7 @@ input, select{font-family:'KoreanAirSans'}
 .form-group .df.row1{justify-content:center}
 .form-group .df.row1 > .btn-area{padding-top:0}
 
+
 /*상세리스트*/
 .box-view-list{}
 .box-view-list .view-list{display:flex;text-align:left;justify-content:space-between}
@@ -462,15 +463,10 @@ input, select{font-family:'KoreanAirSans'}
 .box-view-list .view-list .accumlate-list{position:relative;display:block}
 .box-view-list .view-list .t-label{display:block;color:var(--color-neutral-70);font-weight:400;font-size:1.5rem;white-space:nowrap}
 .box-view-list .view-list .text-desc{display:block;width:100%;margin-top:2rem;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
-.box-view-list .view-list .text-desc-type1{position:relative;display:block;width:100%;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
-.box-view-list .view-list .text-desc-type1 .desc-file{position:relative;display:flex;width:100%;}
-.box-view-list .view-list .text-desc-type1 .desc-file span{width:100%}
-.box-view-list .view-list .text-desc-type1 .desc-file .download{float:right;
-  background: url(/src/resources/images/icon-download.svg) center center no-repeat;
-  font-size: 0;
-  width: 2rem;
-  height: 2rem;
-}
+.box-view-list .view-list .text-desc-type1{position:relative;display:block;width:100%;padding-right:0.8rem;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
+.box-view-list .view-list .text-desc-type1 .desc-file a{position:relative;width:100%;}
+.box-view-list .view-list .text-desc-type1 .desc-file a span:hover{color:var(--color-mblue-100)}
+.box-view-list .view-list .text-desc-type1 .desc-file .download{float:left;margin-right:1rem;background:url(/src/resources/images/icon-download.svg) center center no-repeat;font-size:0;width:2.3rem;height:2.3rem}
 
 .imgBoxWrap{position:relative;border:0.1rem solid var(--color-darkblue-100);background-color:var(--color-neutral-30)}
 .imgBox{position:relative;overflow:hidden;text-align:center;height:100px;width:100px}
