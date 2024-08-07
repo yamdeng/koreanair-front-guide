@@ -21,20 +21,12 @@ const SysMessageListStore = create<any>((set, get) => ({
     searchWord: '',
   },
 
-  initSearchInput: () => {
-    set({
-      searchParam: {
-        searchWord: '',
-      },
-    });
-  },
-
   clear: () => {
     set(initListData);
   },
 }));
 
-function MessageList() {
+function SysMessageList() {
   const state = SysMessageListStore();
   const [columns, setColumns] = useState(
     CommonUtil.mergeColumnInfosByLocal([
@@ -126,4 +118,4 @@ function MessageList() {
   );
 }
 
-export default MessageList;
+export default SysMessageList;

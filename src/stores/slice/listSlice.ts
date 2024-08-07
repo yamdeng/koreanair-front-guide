@@ -143,6 +143,23 @@ export const createListSlice = (set, get) => ({
     get().search();
   },
 
+  initSearchInput: () => {
+    const { searchParam } = get();
+    const resultSearchParam = {};
+    if (searchParam) {
+      const searchParamKeys = Object.keys(searchParam);
+      searchParamKeys.forEach((keyName) => {
+        const typeName = typeof searchParam[keyName];
+        if (typeName === 'string') {
+          resultSearchParam[keyName] = '';
+        } else {
+          resultSearchParam[keyName] = null;
+        }
+      });
+      set({ searchParam: resultSearchParam });
+    }
+  },
+
   getColumns: () => {
     const { columns } = get();
     return CommonUtil.mergeColumnInfosByLocal(columns);
@@ -186,4 +203,6 @@ export const createListSlice = (set, get) => ({
   changeListApiPath: (listApiPath) => {
     set({ listApiPath: listApiPath });
   },
+
+  // TODO : 폼 모달 open 공통 처리 add
 });
