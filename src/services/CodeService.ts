@@ -66,11 +66,30 @@ export const getOptions = (codeGrpId) => {
   return [];
 };
 
+export const convertOptionsByCurrentLocale = (options) => {
+  const { currentLocale } = useAppStore.getState();
+  if (options && options.length) {
+    return options.map((info) => {
+      const { codeNameKor, codeNameEng, codeId } = info;
+      let label = codeNameKor;
+      if (currentLocale === 'en') {
+        label = codeNameEng;
+      }
+      return {
+        value: codeId,
+        label: label,
+      };
+    });
+  }
+  return [];
+};
+
 const CodeSerivce = {
   getCodeListByCodeGrpId,
   getCodeInfo,
   getOptions,
   getCodeLabelByValue,
+  convertOptionsByCurrentLocale,
 };
 
 export default CodeSerivce;
