@@ -7,11 +7,13 @@ export const createLeftMenuSlice = (set, get) => ({
   displayExpandMenu: true,
   leftMenuList: [],
   appWorkScope: 'S',
+
   changeWorkScope: (workScope) => {
     const { getLeftMenu } = get();
     set({ appWorkScope: workScope });
     getLeftMenu();
   },
+
   toggleLeftMenu: () => set((state) => ({ displayExpandMenu: !state.displayExpandMenu })),
 
   expandRootMenuInfo: (rootDeptMenuInfo) => {
@@ -163,9 +165,9 @@ export const createLeftMenuSlice = (set, get) => ({
   },
   getLeftMenu: async () => {
     const { appWorkScope } = get();
-    // sys/left-menus?isTree=N
     const apiParam = { isTree: 'Y', workScope: appWorkScope };
-    const apiResult = await ApiService.get('sys/left-menus', apiParam);
+    const menuApiUrl = import.meta.env.VITE_API_URL_LEFT_MENU || 'sys/left-menus';
+    const apiResult = await ApiService.get(`${menuApiUrl}`, apiParam);
     const data = apiResult.data;
     if (data && data.length) {
       const leftMenuList = data;

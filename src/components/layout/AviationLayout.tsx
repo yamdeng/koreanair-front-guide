@@ -9,6 +9,7 @@ import iconAlarmImage from '@/resources/images/icon_alram.svg';
 import iconSettingImage from '@/resources/images/icon_setting.svg';
 import closeImage from '@/resources/images/close.svg';
 import useAppStore from '@/stores/useAppStore';
+import i18n from '@/services/i18n';
 
 export default function AviationLayout() {
   const navigate = useNavigate();
@@ -17,13 +18,19 @@ export default function AviationLayout() {
     setDisplayLeftMenu(!displayLeftMenu);
   };
 
-  const { leftMenuList, toggleRootMenuExpand, clickSecondMenu, clickLastMenu, expandRootMenuInfo, initApp } = useStore(
-    useAppStore,
-    (state) => state
-  ) as any;
+  const {
+    leftMenuList,
+    toggleRootMenuExpand,
+    clickSecondMenu,
+    clickLastMenu,
+    expandRootMenuInfo,
+    changeWorkScope,
+    goHomePortal,
+    changeLocale,
+  } = useStore(useAppStore, (state) => state) as any;
 
   useEffect(() => {
-    initApp('A');
+    changeWorkScope('A');
   }, []);
 
   return (
@@ -37,8 +44,9 @@ export default function AviationLayout() {
           </div>
           <div className="top-logo">
             <a href="javascript:void(0);">
-              <img src={koreanairSymbolImage} />
-              <span>항공안전</span>
+              <img src={koreanairSymbolImage} onClick={goHomePortal} />
+              <span>{i18n('항공안전')}</span>
+              {/* <span>{i18n('components.Page.noApply')}</span> */}
             </a>
           </div>
         </div>
@@ -76,7 +84,7 @@ export default function AviationLayout() {
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0);">
+                  <a href="javascript:void(0);" onClick={() => changeLocale('en')}>
                     <img src={iconSettingImage} />
                   </a>
                 </li>

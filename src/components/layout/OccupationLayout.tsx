@@ -17,13 +17,19 @@ export default function OccupationLayout() {
     setDisplayLeftMenu(!displayLeftMenu);
   };
 
-  const { leftMenuList, toggleRootMenuExpand, clickSecondMenu, clickLastMenu, expandRootMenuInfo, initApp } = useStore(
-    useAppStore,
-    (state) => state
-  ) as any;
+  const {
+    leftMenuList,
+    toggleRootMenuExpand,
+    clickSecondMenu,
+    clickLastMenu,
+    expandRootMenuInfo,
+    changeWorkScope,
+    goHomePortal,
+    changeLocale,
+  } = useStore(useAppStore, (state) => state) as any;
 
   useEffect(() => {
-    initApp('O');
+    changeWorkScope('O');
   }, []);
 
   return (
@@ -37,7 +43,7 @@ export default function OccupationLayout() {
           </div>
           <div className="top-logo">
             <a href="javascript:void(0);">
-              <img src={koreanairSymbolImage} />
+              <img src={koreanairSymbolImage} onClick={goHomePortal} />
               <span>산업안전</span>
             </a>
           </div>
@@ -76,7 +82,7 @@ export default function OccupationLayout() {
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0);">
+                  <a href="javascript:void(0);" onClick={() => changeLocale('en')}>
                     <img src={iconSettingImage} />
                   </a>
                 </li>
