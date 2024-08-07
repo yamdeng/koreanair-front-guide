@@ -74,6 +74,7 @@ app.get("/api/columns/:tableName", async (req, res) => {
 });
 
 // 파일 생성하기 : /api/generate/:tableName/:generateType/fileCreate
+// text, numnber, select, code, textarea, edit, datepicker, timepicker, auto-complete, user-select-modal, dept-select-modal, user-auto-complete, tree-select
 app.get(
   "/api/generate/:tableName/:generateType/fileCreate",
   async (req, res) => {
