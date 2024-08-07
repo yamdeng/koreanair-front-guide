@@ -38,6 +38,7 @@ export const listBaseState = {
   listApiMethod: 'get',
   baseRoutePath: '',
   searchParam: {},
+  isExpandDetailSearch: true,
 };
 
 export const createListSlice = (set, get) => ({
@@ -175,6 +176,11 @@ export const createListSlice = (set, get) => ({
 
   deleteAll: () => {
     set({ list: [] });
+  },
+
+  toggleExpandDetailSearch: () => {
+    const { isExpandDetailSearch } = get();
+    set({ isExpandDetailSearch: !isExpandDetailSearch });
   },
 
   changeListApiPath: (listApiPath) => {
