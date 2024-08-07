@@ -364,7 +364,7 @@
   .editbox {
     position: relative; 
     border-top: 0.1rem solid var(--color-darkblue-100);
-    display:inline-table;
+    display:inline-block;
     width:100%;
     padding:1.5rem 0;
     margin-bottom:2.0rem;
@@ -377,10 +377,10 @@
     padding: 0;
     margin:1.5rem 0;
   }
-  .editbox .form-table{display:flex;width:100%}
+  .editbox .form-table{display:flex; width:100%}
 /* .editbox .form-table:first-child{padding-top:3rem}*/
 .editbox .form-table + .form-table{/*padding-top:1.5rem*/}
 .editbox .form-table:last-child{/*padding-bottom:2.0rem*/}
-.editbox .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;}
+.editbox .form-table .form-cell{position:relative; flex-grow:1; padding-right:1.0rem;}
 .editbox .form-table .form-cell:last-child{padding-right:0}
-.editbox.tog{margin-bottom:0rem;padding-top:0rem}
+.editbox.tog{margin-bottom:0rem; padding-top:0rem}

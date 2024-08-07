@@ -35,8 +35,8 @@
 .checklist-contents .checklist-row .checklist-col{position:relative;width:100%;border-radius:0.8rem;padding:1rem;border:solid 0.1rem var(--color-neutral-40);background-color:var(--color-neutral-20);height:100%;min-height:22.0rem}
 
 .checklist-contents .checklist-row.list ul{position:relative;display:flex;flex-direction:column;padding:1.0rem}
-.checklist-contents .checklist-row.list li.list-space{position:relative;display:inline-flex;align-items:center;font-size:1.5rem;line-height:3rem}
-.checklist-contents .checklist-row.list li.list-space a{padding-left:1rem}
+.checklist-contents .checklist-row.list li.list-space{position:relative;display:inline-flex;align-items:center;font-size:1.4rem;line-height:3rem}
+.checklist-contents .checklist-row.list li.list-space a{padding-left:1rem;font-size:1.4rem}
 .checklist-contents .checklist-row.list li.list-space a:hover{text-decoration:underline}
 .checklist-contents .checklist-row.list li.list-space button.btn-list{width:2.3rem;height:2rem;font-size:0;background:url(../images/icon-register.svg)center center no-repeat;align-items:center}
 .checklist-contents .checklist-row.list li.list-space button.btn-list .editChapter{visibility:hidden;opacity:0;margin-right:2rem}

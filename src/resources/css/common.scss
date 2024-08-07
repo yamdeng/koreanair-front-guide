@@ -59,7 +59,7 @@ body * {
 .mr5{margin-right:0.5rem !important}
 
 button, input, textarea, select, label{font-family:'KoreanAirSans';font-weight:400}
-.df{display:flex;width:100%}
+.df{display:flex;/*width:100%*/}
 .unt{line-height:3.5rem;align-items:center;padding:0 0.2rem}
 button,input{border:none;background:none;vertical-align:middle}
 select{vertical-align:middle}
@@ -170,7 +170,7 @@ input, select{font-family:'KoreanAirSans'}
   .btn-darkblue-line{border:solid 0.2rem var(--color-darkblue-100);color:var(--color-darkblue-100)}
   .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
   .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
-  /*position:relative;right:0;top:0;float:right;*/text-align:right;padding-top:1.2rem;
+  text-align:right;padding-top:1.2rem;
    /*@include mobile {
     width:100%;
     position:absolute;
@@ -364,10 +364,10 @@ input, select{font-family:'KoreanAirSans'}
 
 /*탭*/
 .menu-tab-nav{display:flex}
-.menu-tab{display:flex;flex-wrap:nowrap;margin:0 0 3.0rem 0;border-radius:0.8rem;overflow: auto hidden;scroll-behavior:smooth;gap:1.2rem 0}
+.menu-tab{display:flex;flex-wrap:nowrap;border-radius:0.8rem;overflow: auto hidden;scroll-behavior:smooth;gap:1.2rem 0}
 .menu-tab:after{content:'';display:block;clear:both}
 .menu-tab a:last-child{border-top-right-radius:0.8rem;border-bottom-right-radius:0.8rem}
-.menu-tab a{display:inline-flex;font-size:1.8rem;line-height:1.5;min-height:4.4rem;border:1px solid var(--color-neutral-40);background-color:var(--color-neutral-10);color:var(--color-neutral-80);padding:0 1.5rem;align-items:center;justify-content:center;text-align:center}
+.menu-tab a{display:inline-flex;font-size:1.6rem;line-height:1.5;min-height:4.4rem;border:1px solid var(--color-neutral-40);background-color:var(--color-neutral-10);color:var(--color-neutral-80);padding:0 1.5rem;align-items:center;justify-content:center;text-align:center}
 .menu-tab a.active{background-color:var(--color-darkblue-100);color:var(--color-neutral-10)}
 
 /*AUDIT-체크리스트 상단 탭*/
@@ -379,13 +379,13 @@ input, select{font-family:'KoreanAirSans'}
 
 /*검색영역*/
 .info-wrap .edit-area > .boxForm{padding:0}
-.boxForm{position:relative;display:inline-table;width:100%;padding:1.5rem 3rem 3rem;margin-bottom:2.0rem;background-color:var(--color-neutral-20);border-radius:0.8rem}
+.boxForm{position:relative;display:inline-table;width:100%;padding:1.0rem 3rem 1.0rem;margin-bottom:2.0rem;background-color:var(--color-neutral-20);border-radius:0.8rem}
 .boxForm::after{content:'';clear:both;display:block}
 .boxForm .form-table{display:flex;width:100%}
-/*.boxForm .form-table:first-child{padding-top:3rem}*/
 .boxForm .form-table + .form-table{/*padding-top:1.5rem*/}
-.boxForm .form-table:last-child{/*padding-bottom:2.0rem*/}
+.boxForm .form-table:last-child{padding-bottom:1.5rem}
 .boxForm .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;padding-top:1.2rem}
+
 .boxForm .form-table .form-cell:last-child{padding-right:0}
 .boxForm.tog{margin-bottom:0rem;padding-top:0rem}
 
@@ -393,12 +393,11 @@ input, select{font-family:'KoreanAirSans'}
 .conts-subTit span{font-size:1.5rem}
 
 /*검색영역-접기펴기 버튼영역*/
-.TopButton-area{position:relative;/*padding-top:2.0rem*/}
-.TopButton-area .btn-fold{position:absolute;left:50%;top:1.5rem;transform:translate(-50%, -50%);z-index:999;width:5rem;height:5rem; background: url(../images/icon-arrow-up.svg) center center no-repeat;/*background-color:var(--color-neutral-30);*/background-size:3.5rem;border-radius: 50%}
-.TopButton-area .btn-fold.open{position:absolute;left:50%;top:0;bottom:-3.0rem;transform:translate(-50%, -50%);background: url(../images/icon-arrow-down.svg) center center no-repeat;width:5rem;height:5rem;background-size:3.5rem}
-.TopButton-area .boxForm .area-detail{display:none;position:relative;width:100%; /* overflow:hidden;height:10px;*/}
+.boxForm .area-detail{display:none;position:relative;width:100%}
+.boxForm .area-detail.active{display:block;width:100%}
+.button._control.active{transform:rotate(180deg)}
+.boxForm button.arrow.button{display:block;width:100%;height:2.6rem;background: url(../images/icon-arrow-down.svg) center center no-repeat}
 
-.TopButton-area .boxForm .area-detail.open{display:block;width:100%;}
 
 .form-group{position:relative;display:inline-block;vertical-align:middle}
 .form-group .invalid_txt{position:absolute;left:1.1rem;top:3.6rem;font-size:1rem;color:var(--color-negative)}
@@ -462,6 +461,7 @@ input, select{font-family:'KoreanAirSans'}
 .box-view-list .view-list .accumlate-list{position:relative;display:block}
 .box-view-list .view-list .t-label{display:block;color:var(--color-neutral-70);font-weight:400;font-size:1.5rem;white-space:nowrap}
 .box-view-list .view-list .text-desc{display:block;width:100%;margin-top:2rem;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
+.box-view-list .view-list .text-desc-type1{display:block;width:100%;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
 .imgBoxWrap{position:relative;border:0.1rem solid var(--color-darkblue-100);background-color:var(--color-neutral-30)}
 .imgBox{position:relative;overflow:hidden;text-align:center;height:100px;width:100px}
 

@@ -16,6 +16,11 @@
   .btn-area {width: 100%;}
   .checklist-contents {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .checklist-contents .checklist-row.list {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 50%; padding-right: 0; margin: 0;}
+
+  .editbox .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
+  .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33.3%; padding: 0.5rem 1.0rem 0.5rem  0;}
+  .editbox .form-table .form-cell:nth-child(3) {padding-right: 0;}
+  .editbox hr.line {margin: 1.0rem 0;}
 }
 
 
@@ -25,12 +30,20 @@
   .list-common-modal-content, .org-select-modal-content, .org-change-modal-content {width: 90%;}
   .boxForm .form-table {display: block;}
   .boxForm .form-table .form-cell {width: 100%; padding-right:0;}
+
+  .editbox .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
+  .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33.3%; padding: 0.5rem 1.0rem 0.5rem  0;}
+  .editbox .form-table .form-cell:nth-child(3) {padding-right: 0;}
+  .editbox hr.line {margin: 1.0rem 0;}
+  
   .btn-area {display:flex; width: 100%;}
   .btn-area .btn-sm {width: 100%;}
   .btn-area > button + button {width: 50%;}
   .btn-area > button {margin: 0;}
+  
   .checklist-contents {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .checklist-contents .checklist-row.list {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 50%; padding-right: 0; margin: 0;}
+
 }
 
 
@@ -64,6 +77,7 @@
   .checklist-contents {}
   .checklist-contents {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .checklist-contents .checklist-row.list {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%; padding-right: 0; margin: 0;}
+  
   .notice-board th, colgroup {display: none;}
   .notice-board tr {display: flex; flex-wrap: wrap; border-bottom: 0.1rem solid var(--color-neutral-30);}
   .notice-board tr:nth-child(2) {border-top: 0.1rem solid var(--color-darkblue-100);}
@@ -73,6 +87,11 @@
   .notice-board td:nth-child(2) {width: calc(100% - 5.0rem); padding: 1.0rem 0 0 0;}
   .notice-board td:nth-child(3) {font-size: 1.4rem; padding: 0 1.0rem 1.0rem 5.0rem;}
   .notice-board td:nth-child(4) {font-size: 1.4rem; padding: 0 0 1.0rem;}
+
+  .editbox .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
+  .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 50%; padding: 0.5rem 1.0rem 0.5rem  0;}
+  .editbox .form-table .form-cell:nth-child(even) {padding-right: 0;}
+  .editbox hr.line {margin: 1.0rem 0;}
 }
 
 
