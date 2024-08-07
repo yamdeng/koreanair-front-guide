@@ -2,6 +2,7 @@ import ApiService from '@/services/ApiService';
 import ModalService from '@/services/ModalService';
 import history from '@/utils/history';
 import _ from 'lodash';
+import { FORM_TYPE_ADD, FORM_TYPE_UPDATE } from '@/config/CommonConstant';
 
 /*
 
@@ -29,7 +30,7 @@ export const formBaseState = {
   requiredFields: [],
   excludeApiKeys: [],
   formDetailId: null,
-  formType: 'add',
+  formType: FORM_TYPE_ADD,
   formApiPath: '',
   formName: '',
   baseRoutePath: '',
@@ -93,7 +94,7 @@ export const createFormSliceYup = (set, get) => ({
     if (isValid) {
       const apiParam = getApiParam();
       console.log(`apiParam : ${JSON.stringify(apiParam)}`);
-      if (formType === 'add') {
+      if (formType === FORM_TYPE_ADD) {
         await ApiService.post(`${formApiPath}`, apiParam);
       } else {
         await ApiService.put(`${formApiPath}/${formDetailId}`, apiParam);
@@ -112,7 +113,7 @@ export const createFormSliceYup = (set, get) => ({
         ModalService.alert({
           body: '삭제되었습니다.',
           ok: () => {
-            history.push(`${baseRoutePath}`);
+            history.replace(`${baseRoutePath}`);
           },
         });
       },
@@ -127,7 +128,7 @@ export const createFormSliceYup = (set, get) => ({
       detailInfo: detailInfo,
       formValue: detailInfo,
       formDetailId: id,
-      formType: 'update',
+      formType: FORM_TYPE_UPDATE,
     });
   },
 

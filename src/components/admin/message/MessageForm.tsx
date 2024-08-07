@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AppTextInput from '@/components/common/AppTextInput';
 import useSysMessageFormStore from '@/stores/admin/useSysMessageFormStore';
+import { FORM_TYPE_UPDATE } from '@/config/CommonConstant';
 
 function MessageForm() {
   /* formStore state input 변수 */
@@ -35,7 +36,7 @@ function MessageForm() {
                 onChange={(value) => changeInput('msgKey', value)}
                 required
                 errorMessage={errors.msgKey}
-                disabled={formType === 'update'}
+                disabled={formType === FORM_TYPE_UPDATE}
               />
             </div>
           </div>

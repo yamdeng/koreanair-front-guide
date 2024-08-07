@@ -4,6 +4,7 @@ import useSysCodeGroupFormStore from '@/stores/admin/useSysCodeGroupFormStore';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Code from '@/config/Code';
+import { FORM_TYPE_ADD } from '@/config/CommonConstant';
 
 function CodeGroupDetail() {
   /* formStore state input 변수 */
@@ -176,7 +177,7 @@ function CodeGroupDetail() {
         <button
           className="btn_text text_color_darkblue-100 btn_close"
           onClick={goFormPage}
-          style={{ display: formType !== 'add' ? '' : 'none' }}
+          style={{ display: formType !== FORM_TYPE_ADD ? '' : 'none' }}
         >
           수정
         </button>

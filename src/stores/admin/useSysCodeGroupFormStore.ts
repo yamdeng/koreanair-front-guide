@@ -2,6 +2,8 @@ import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
 import * as yup from 'yup';
 import { create } from 'zustand';
+import ApiService from '@/services/ApiService';
+import ModalService from '@/services/ModalService';
 
 const initListData = {
   ...listBaseState,
@@ -16,7 +18,7 @@ const yupFormSchema = yup.object({
   workScope: yup.string().required(),
   codeGrpNameKor: yup.string().required(),
   codeGrpNameEng: yup.string().required(),
-  useYn: yup.string().required(),
+  useYn: yup.string().required().required(),
   remark: yup.string(),
 });
 
@@ -49,10 +51,21 @@ const useSysCodeGroupFormStore = create<any>((set, get) => ({
   ...initFormData,
   ...initListData,
 
-  /* TODO : 검색에서 사용할 input 선언 */
   searchWord: '',
 
   yupFormSchema: yupFormSchema,
+
+  saveCodeDetail: async () => {
+    const { list, formDetailId, formApiPath, search } = get();
+    ModalService.confirm({
+      body: '저장하시겠습니까?',
+      ok: async () => {
+        const apiParam = list ? list : [];
+        await ApiService.post(`${formApiPath}/${formDetailId}/codes`, apiParam);
+        search();
+      },
+    });
+  },
 
   clear: () => {
     set({ ...initFormData, ...initListData });

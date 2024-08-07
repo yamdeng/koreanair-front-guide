@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useSysCodeGroupFormStore from '@/stores/admin/useSysCodeGroupFormStore';
 import AppTable from '@/components/common/AppTable';
+import AppTextInput from '@/components/common/AppTextInput';
 import AppSelect from '@/components/common/AppSelect';
 import Code from '@/config/Code';
+import { DETAIL_NEW_ID, FORM_TYPE_ADD } from '@/config/CommonConstant';
 
 const DeleteActionButton = (props) => {
   const { node, onClick } = props;
@@ -14,18 +16,13 @@ const DeleteActionButton = (props) => {
     event.nativeEvent.stopPropagation();
     onClick(rowIndex);
   };
-  return <div onClick={handleClick}>삭제2</div>;
+  return <div onClick={handleClick}>삭제</div>;
 };
 
 function CodeGroupForm() {
   /* formStore state input 변수 */
   const {
-    codeGrpId,
-    workScope,
-    codeGrpNameKor,
-    codeGrpNameEng,
-    useYn,
-    remark,
+    formValue,
     errors,
     changeInput,
     getDetail,
@@ -36,11 +33,12 @@ function CodeGroupForm() {
     addRow,
     removeAll,
     removeByIndex,
+    saveCodeDetail,
   } = useSysCodeGroupFormStore();
 
+  const { codeGrpId, workScope, codeGrpNameKor, codeGrpNameEng, useYn, remark } = formValue;
   const listState = useSysCodeGroupFormStore();
-  const { search, list, getColumns, changeListApiPath } = listState;
-  // const columns = getColumns();
+  const { search, list, changeListApiPath } = listState;
 
   const [columns] = useState([
     { field: 'codeId', headerName: '코드ID', editable: true },
@@ -72,6 +70,7 @@ function CodeGroupForm() {
     },
     { field: 'remark', headerName: '비고', editable: true },
     {
+      pinned: 'right',
       field: 'action',
       headerName: 'Action',
       cellRenderer: 'deleteActionButton',
@@ -106,7 +105,7 @@ function CodeGroupForm() {
   };
 
   useEffect(() => {
-    if (detailId && detailId !== 'add') {
+    if (detailId && detailId !== DETAIL_NEW_ID) {
       getDetail(detailId);
       changeListApiPath(`sys/code-groups/${detailId}/codes`);
       search();
@@ -119,142 +118,110 @@ function CodeGroupForm() {
       <div className="conts-title">
         <h2>코드관리</h2>
       </div>
-      <div className="detail-form">
-        <ul className="detail-list">
-          <li className="list">
-            <label className="f-label">
-              코드그룹ID <span className="required">*</span>
-            </label>
-            <div className="cont">
-              <div className="form-table">
-                <div className="form-cell wid100">
-                  <span className="form-group wid100 mr5">
-                    <input
-                      type="text"
-                      className={errors.codeGrpId ? 'form-tag error' : 'form-tag'}
-                      placeholder="코드그룹ID"
-                      name="codeGrpId"
-                      id="useSysCodeGroupFormStorecodeGrpId"
-                      value={codeGrpId}
-                      onChange={(event) => changeInput('codeGrpId', event.target.value)}
-                    />
-                    {errors.codeGrpId ? <span className="errorText">{errors.codeGrpId}</span> : null}
-                  </span>
-                </div>
-              </div>
+      <div className="boxForm">
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppTextInput
+                id="useSysCodeGroupFormStorecodeGrpId"
+                name="codeGrpId"
+                label="코드그룹ID"
+                value={codeGrpId}
+                onChange={(value) => changeInput('codeGrpId', value)}
+                required
+                errorMessage={errors.codeGrpId}
+                disabled={formType !== FORM_TYPE_ADD}
+              />
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <label className="f-label">업무구분(A:항공안전, O:산업안전, S:시스템)</label>
-            <div className="cont">
-              <div className="form-table">
-                <div className="form-cell wid100">
-                  <span className="form-group wid100 mr5">
-                    <input
-                      type="text"
-                      className={errors.workScope ? 'form-tag error' : 'form-tag'}
-                      placeholder="업무구분(A:항공안전, O:산업안전, S:시스템)"
-                      name="workScope"
-                      id="useSysCodeGroupFormStoreworkScope"
-                      value={workScope}
-                      onChange={(event) => changeInput('workScope', event.target.value)}
-                    />
-                    {errors.workScope ? <span className="errorText">{errors.workScope}</span> : null}
-                  </span>
-                </div>
-              </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppSelect
+                id="useSysCodeGroupFormStoreworkScope"
+                name="workScope"
+                label="업무구분"
+                options={Code.adminWorkScope}
+                value={workScope}
+                onChange={(value) => changeInput('workScope', value)}
+                errorMessage={errors.workScope}
+                required
+              />
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <label className="f-label">코드그룹명(한국어)</label>
-            <div className="cont">
-              <div className="form-table">
-                <div className="form-cell wid100">
-                  <span className="form-group wid100 mr5">
-                    <input
-                      type="text"
-                      className={errors.codeGrpNameKor ? 'form-tag error' : 'form-tag'}
-                      placeholder="코드그룹명(한국어)"
-                      name="codeGrpNameKor"
-                      id="useSysCodeGroupFormStorecodeGrpNameKor"
-                      value={codeGrpNameKor}
-                      onChange={(event) => changeInput('codeGrpNameKor', event.target.value)}
-                    />
-                    {errors.codeGrpNameKor ? <span className="errorText">{errors.codeGrpNameKor}</span> : null}
-                  </span>
-                </div>
-              </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppTextInput
+                id="useSysCodeGroupFormStorecodeGrpNameKor"
+                name="codeGrpNameKor"
+                label="코드그룹명(한국어)"
+                value={codeGrpNameKor}
+                onChange={(value) => changeInput('codeGrpNameKor', value)}
+                errorMessage={errors.codeGrpNameKor}
+                required
+              />
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <label className="f-label">코드그룹명(영어)</label>
-            <div className="cont">
-              <div className="form-table">
-                <div className="form-cell wid100">
-                  <span className="form-group wid100 mr5">
-                    <input
-                      type="text"
-                      className={errors.codeGrpNameEng ? 'form-tag error' : 'form-tag'}
-                      placeholder="코드그룹명(영어)"
-                      name="codeGrpNameEng"
-                      id="useSysCodeGroupFormStorecodeGrpNameEng"
-                      value={codeGrpNameEng}
-                      onChange={(event) => changeInput('codeGrpNameEng', event.target.value)}
-                    />
-                    {errors.codeGrpNameEng ? <span className="errorText">{errors.codeGrpNameEng}</span> : null}
-                  </span>
-                </div>
-              </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppTextInput
+                id="useSysCodeGroupFormStorecodeGrpNameEng"
+                name="codeGrpNameEng"
+                label="코드그룹명(영어)"
+                value={codeGrpNameEng}
+                onChange={(value) => changeInput('codeGrpNameEng', value)}
+                errorMessage={errors.codeGrpNameEng}
+                required
+              />
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <label className="f-label">사용여부</label>
-            <div className="cont">
-              <div className="form-table">
-                <div className="form-cell wid100">
-                  <span className="form-group wid100 mr5">
-                    <AppSelect
-                      style={{ width: 150, marginBottom: 10 }}
-                      options={Code.useYn}
-                      value={useYn}
-                      onChange={(appSelectValue) => {
-                        changeInput('useYn', appSelectValue);
-                      }}
-                      placeholder=""
-                    />
-                    {errors.useYn ? <span className="errorText">{errors.useYn}</span> : null}
-                  </span>
-                </div>
-              </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppSelect
+                id="useSysCodeGroupFormStoreuseYn"
+                name="useYn"
+                label="사용여부"
+                options={Code.useYn}
+                value={useYn}
+                onChange={(appSelectValue) => {
+                  changeInput('useYn', appSelectValue);
+                }}
+                required
+              />
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <label className="f-label">비고</label>
-            <div className="cont">
-              <div className="form-table">
-                <div className="form-cell wid100">
-                  <span className="form-group wid100 mr5">
-                    <input
-                      type="text"
-                      className={errors.remark ? 'form-tag error' : 'form-tag'}
-                      placeholder="비고"
-                      name="remark"
-                      id="useSysCodeGroupFormStoreremark"
-                      value={remark}
-                      onChange={(event) => changeInput('remark', event.target.value)}
-                    />
-                    {errors.remark ? <span className="errorText">{errors.remark}</span> : null}
-                  </span>
-                </div>
-              </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppTextInput
+                id="useSysCodeGroupFormStoreremark"
+                name="remark"
+                label="비고"
+                value={remark}
+                onChange={(value) => changeInput('remark', value)}
+                errorMessage={errors.remark}
+              />
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
 
       {/* 하단 버튼 영역 */}
@@ -262,9 +229,16 @@ function CodeGroupForm() {
         <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
           저장
         </button>
+        <button
+          className="btn_text text_color_darkblue-100 btn_close"
+          onClick={remove}
+          style={{ display: formType !== FORM_TYPE_ADD ? '' : 'none' }}
+        >
+          삭제
+        </button>
       </div>
 
-      {formType !== 'add' ? (
+      {formType !== FORM_TYPE_ADD ? (
         <AppTable
           rowData={list}
           columns={columns}
@@ -280,16 +254,9 @@ function CodeGroupForm() {
       ) : null}
 
       {/* 하단 버튼 영역 */}
-      <div className="contents-btns" style={{ display: formType !== 'add' ? '' : 'none' }}>
-        <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
-          저장
-        </button>
-        <button
-          className="btn_text text_color_darkblue-100 btn_close"
-          onClick={remove}
-          style={{ display: formType !== 'add' ? '' : 'none' }}
-        >
-          삭제
+      <div className="contents-btns" style={{ display: formType !== FORM_TYPE_ADD ? '' : 'none' }}>
+        <button className="btn_text text_color_neutral-10 btn_confirm" onClick={saveCodeDetail}>
+          코드 상세 저장
         </button>
       </div>
     </>

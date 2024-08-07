@@ -2,6 +2,8 @@
 export const FORM_TYPE_ADD = 'add';
 export const FORM_TYPE_UPDATE = 'update';
 
+export const DETAIL_NEW_ID = 'add';
+
 // datepicker 타입
 export const DATE_PICKER_TYPE_DATE = 'date';
 export const DATE_PICKER_TYPE_MONTH = 'month';
