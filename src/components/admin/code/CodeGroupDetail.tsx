@@ -1,4 +1,4 @@
-import AppSearchInput from '@/components/common/AppSearchnput';
+import AppSearchInput from '@/components/common/AppSearchInput';
 import AppTable from '@/components/common/AppTable';
 import useSysCodeGroupFormStore from '@/stores/admin/useSysCodeGroupFormStore';
 import { useEffect, useState } from 'react';

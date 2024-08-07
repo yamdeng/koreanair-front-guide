@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import { Tree } from 'antd';
 import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
-import AppSearchInput from '../common/AppSearchnput';
+import AppSearchInput from '../common/AppSearchInput';
 
 function MemberSelectModal(props) {
   const [treeData, setTreeData] = useState([]);

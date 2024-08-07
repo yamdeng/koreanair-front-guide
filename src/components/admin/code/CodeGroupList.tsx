@@ -1,5 +1,5 @@
 import AppTable from '@/components/common/AppTable';
-import AppSearchInput from '@/components/common/AppSearchnput';
+import AppSearchInput from '@/components/common/AppSearchInput';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
 import { useEffect, useState, useCallback } from 'react';
 import { create } from 'zustand';

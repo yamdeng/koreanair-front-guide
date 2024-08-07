@@ -3,7 +3,7 @@ import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
 import { useEffect, useState, useCallback } from 'react';
 import CommonUtil from '@/utils/CommonUtil';
 import { create } from 'zustand';
-import AppSearchInput from '@/components/common/AppSearchnput';
+import AppSearchInput from '@/components/common/AppSearchInput';
 
 const initListData = {
   ...listBaseState,
