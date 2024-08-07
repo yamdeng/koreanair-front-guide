@@ -29,8 +29,8 @@ body, button, input, textarea, select, label{font-family:'KoreanAirSans';font-we
 .contents{position:relative;margin:0 0 0 260px;width:100%;padding:0 3.0rem 3.0rem 3.0rem;box-sizing:border-box;background-color:var(--color-neutral10);background-color:var(--color-lightgray0);}
 .contents .Rightconts{width:calc(100% - 260px)}
 /*상단 타이틀*/
-.conts-title{position:relative;border-bottom:solid 1px var(--color-neutral-40);align-items:center;padding:20px 0 40px 0px;margin-bottom:10px}
-.conts-title h2{float:left;font-family:"KoreanAirSans";font-size:2.4rem;color:var(--color-neutral-80);font-weight:700}
+.conts-title{position:relative;align-items:center;padding:20px 0 40px 0px;margin-bottom:10px}
+.conts-title h2{float:left;font-family:"KoreanAirSans";font-size:3rem;color:var(--color-neutral-80);font-weight:700}
 
 .contents .Rightconts .conts-tit{display:flex;position:relative;padding:0 0 5px;border-bottom:solid 1px var(--color-neutral-40);align-items:center}
 .contents .Rightconts .conts-tit h2{font-family:'KoreanAirSans';font-size:20px}
