@@ -1,28 +1,37 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import useSysCodeGroupFormStore from '@/stores/admin/useSysCodeGroupFormStore';
-import Code from '@/config/Code';
+import AppSearchInput from '@/components/common/AppSearchnput';
 import AppTable from '@/components/common/AppTable';
+import useSysCodeGroupFormStore from '@/stores/admin/useSysCodeGroupFormStore';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Code from '@/config/Code';
 
 function CodeGroupDetail() {
   /* formStore state input 변수 */
-  const {
-    codeGrpId,
-    workScope,
-    codeGrpNameKor,
-    codeGrpNameEng,
-    useYn,
-    remark,
-    getDetail,
-    formType,
-    cancel,
-    goFormPage,
-    clear,
-  } = useSysCodeGroupFormStore();
+  const { detailInfo, getDetail, formType, cancel, goFormPage, clear } = useSysCodeGroupFormStore();
+  const { codeGrpId, workScope, codeGrpNameKor, codeGrpNameEng, useYn, remark } = detailInfo;
 
   const listState = useSysCodeGroupFormStore();
-  const { search, searchWord, list, getColumns, changeSearchInput, changeListApiPath } = listState;
-  const columns = getColumns();
+  const { search, searchParam, list, changeSearchInput, changeListApiPath } = listState;
+  const { searchWord } = searchParam;
+
+  const [columns, setColumns] = useState([
+    { field: 'codeGrpId', headerName: '코드그룹ID' },
+    { field: 'codeId', headerName: '코드ID' },
+    { field: 'codeNameKor', headerName: '코드명(한국어)' },
+    { field: 'codeNameEng', headerName: '코드명(영어)' },
+    { field: 'codeField1', headerName: '예비필드 1' },
+    { field: 'codeField2', headerName: '예비필드 2' },
+    { field: 'codeField3', headerName: '예비필드 3' },
+    { field: 'codeField4', headerName: '예비필드 4' },
+    { field: 'codeField5', headerName: '예비필드 5' },
+    { field: 'sortOrder', headerName: '정렬순서' },
+    { field: 'useYn', headerName: '사용여부' },
+    { field: 'remark', headerName: '비고' },
+    { field: 'regUserId', headerName: '등록자ID' },
+    { field: 'regDttm', headerName: '등록일시' },
+    { field: 'updUserId', headerName: '수정자ID' },
+    { field: 'updDttm', headerName: '수정일시' },
+  ]);
 
   const { detailId } = useParams();
 
@@ -38,114 +47,126 @@ function CodeGroupDetail() {
       <div className="conts-title">
         <h2>코드관리</h2>
       </div>
-      <div className="detail-form">
-        <ul className="detail-list">
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">
-                코드그룹ID <span className="required">*</span>
-              </label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{codeGrpId}</span>
-                  </div>
-                </div>
+      <div className="boxForm">
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">코드그룹ID</label>
+                    <span className="text-desc">{codeGrpId}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">업무구분</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{Code.getCodeLabelByValue('adminWorkScope', workScope)}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">업무구분</label>
+                    <span className="text-desc">{Code.getCodeLabelByValue('adminWorkScope', workScope)}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">코드그룹명(한국어)</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{codeGrpNameKor}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">코드그룹명(한국어)</label>
+                    <span className="text-desc">{codeGrpNameKor}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">코드그룹명(영어)</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{codeGrpNameEng}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">코드그룹명(영어)</label>
+                    <span className="text-desc">{codeGrpNameEng}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사용여부</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{useYn}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사용여부</label>
+                    <span className="text-desc">{useYn}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">비고</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{remark}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">비고</label>
+                    <span className="text-desc">{remark}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
 
       <div className="boxForm">
         <div className="form-table">
           <div className="form-cell wid50">
-            <span className="form-group wid100 mr5">
-              <input
-                type="text"
-                className="form-tag"
-                name="title"
+            <div className="form-group wid100">
+              <AppSearchInput
+                label="검색"
                 value={searchWord}
-                onChange={(event) => {
-                  changeSearchInput('searchWord', event.target.value);
+                onChange={(value) => {
+                  changeSearchInput('searchWord', value);
                 }}
-                onKeyDown={(event) => {
-                  if (event && event.key === 'Enter') {
-                    search();
-                  }
-                }}
+                search={search}
               />
-              <label className="f-label">이름</label>
-            </span>
+            </div>
+          </div>
+        </div>
+        <hr className="line"></hr>
+        {/*입력폼영역 */}
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppTable
+                rowData={list}
+                columns={columns}
+                setColumns={setColumns}
+                store={listState}
+                hiddenPagination
+                hiddenTableHeader
+              />
+            </div>
           </div>
         </div>
       </div>
-      <AppTable rowData={list} columns={columns} store={listState} hiddenPagination />
 
       {/* 하단 버튼 영역 */}
       <div className="contents-btns">

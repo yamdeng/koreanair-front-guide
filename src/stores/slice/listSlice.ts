@@ -138,7 +138,7 @@ export const createListSlice = (set, get) => ({
     set({ list: list || [] });
   },
 
-  initSearch: () => {
+  enterSearch: () => {
     set({ currentPage: 1 });
     get().search();
   },
@@ -187,7 +187,9 @@ export const createListSlice = (set, get) => ({
   addRow: () =>
     set(
       produce((state: any) => {
-        state.list.push({});
+        state.list.push({
+          updated: true,
+        });
       })
     ),
 
@@ -202,6 +204,18 @@ export const createListSlice = (set, get) => ({
 
   changeListApiPath: (listApiPath) => {
     set({ listApiPath: listApiPath });
+  },
+
+  removeByIndex: (removeIndex) => {
+    set(
+      produce((state: any) => {
+        state.list.splice(removeIndex, 1);
+      })
+    );
+  },
+
+  removeAll: () => {
+    set({ list: [] });
   },
 
   // TODO : 폼 모달 open 공통 처리 add

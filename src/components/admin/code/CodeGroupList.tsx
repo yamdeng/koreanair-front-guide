@@ -70,7 +70,7 @@ function CodeGroupList() {
   );
 
   const {
-    initSearch,
+    enterSearch,
     searchParam,
     list,
     workScope,
@@ -93,7 +93,7 @@ function CodeGroupList() {
   }, []);
 
   useEffect(() => {
-    initSearch();
+    enterSearch();
     return clear;
   }, []);
 
@@ -125,13 +125,13 @@ function CodeGroupList() {
                   onChange={(value) => {
                     changeSearchInput('searchWord', value);
                   }}
-                  search={initSearch}
+                  search={enterSearch}
                 />
               </span>
             </div>
           </div>
           <div className="btn-area">
-            <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={initSearch}>
+            <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={enterSearch}>
               조회
             </button>
             <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line" onClick={initSearchInput}>

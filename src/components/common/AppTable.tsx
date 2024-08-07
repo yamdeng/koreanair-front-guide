@@ -97,6 +97,7 @@ function AppTable(props) {
     store = null,
     hiddenPagination,
     editable = false,
+    hiddenTableHeader = false,
   } = props;
 
   // store
@@ -229,7 +230,7 @@ function AppTable(props) {
 
   return (
     <>
-      <div className="table-header">
+      <div className="table-header" style={{ display: hiddenTableHeader ? 'none' : '' }}>
         <div className="count">
           {CommonUtil.formatString(gridTotalCountTemplate, store ? totalCount : rowData.length)}
         </div>
