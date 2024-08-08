@@ -10,10 +10,10 @@ import AlertModalContainer from './components/layout/AlertModalContainer';
 
 function AdminApp() {
   const adminRoute = useAdminRoute();
-  const { initApp } = useStore(useAppStore, (state) => state) as any;
+  const { getLeftMenu } = useStore(useAppStore, (state) => state) as any;
 
   useEffect(() => {
-    initApp();
+    getLeftMenu();
   }, []);
 
   return (

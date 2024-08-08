@@ -18,8 +18,12 @@ const useSysDeptFormStore = create<any>((set) => ({
       pageSize: 100000,
     });
     const list = response.data.list;
-    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', '0');
-    set({ orgTreeData: treeData });
+    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', '0') || [];
+    let selectedDeptInfo = null;
+    if (treeData[0]) {
+      selectedDeptInfo = treeData[0];
+    }
+    set({ orgTreeData: treeData, selectedDeptInfo: selectedDeptInfo });
   },
 
   handleTreeSelect: (selectedKeys, info) => {
