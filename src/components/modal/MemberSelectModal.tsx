@@ -269,7 +269,11 @@ function MemberSelectModal(props) {
           </div>
         </div>
         <div className="pop_btns">
-          <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
+          <button
+            className="btn_text text_color_neutral-10 btn_confirm"
+            onClick={save}
+            disabled={!finalSelectList || !finalSelectList.length}
+          >
             적용
           </button>
         </div>

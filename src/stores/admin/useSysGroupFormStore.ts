@@ -115,14 +115,14 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     });
     usersApiParam = usersApiParam.concat(
       selectMemberList
-        .filter((info) => (info.userId ? true : false))
+        .filter((info) => info.selectedType === 'U')
         .map((info) => {
           return { userId: info.userId, groupCd: groupCd, groupAdminYn: 'N' };
         })
     );
 
     const deptsApiParam = selectMemberList
-      .filter((info) => info.deptCd)
+      .filter((info) => info.selectedType === 'D')
       .map((info) => {
         return { deptCd: info.deptCd, groupCd: groupCd };
       });
@@ -275,9 +275,19 @@ const useSysGroupFormStore = create<any>((set, get) => ({
       );
     } else {
       // 멤버 선택일 경우에
-      const filterMemberList = selectedList.filter((info: any) => {
+      const filterMemberList = selectedList.filter((selectedInfo: any) => {
         const searchInfo = selectMemberList.find((beforeInfo) => {
-          return beforeInfo.userId === info.userId || beforeInfo.deptCd === info.deptCd;
+          if (selectedInfo.selectedType === 'U' && beforeInfo.selectedType === 'U') {
+            if (selectedInfo.userId === beforeInfo.userId) {
+              return true;
+            }
+          }
+          if (selectedInfo.selectedType === 'D' && beforeInfo.selectedType === 'D') {
+            if (selectedInfo.deptCd === beforeInfo.deptCd) {
+              return true;
+            }
+          }
+          return false;
         });
         if (!searchInfo) {
           return true;
