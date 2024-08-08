@@ -114,10 +114,13 @@ const useSysMenuFormStore = create<any>((set, get) => ({
     changeInput('upperMenuId', selectedKey);
   },
 
-  changeTreeWorkScope: (workScope) => {
-    const { getMenuTree } = get();
+  changeTreeWorkScope: async (workScope) => {
+    const { formType, getMenuTree, changeWorkScope } = get();
     set({ treeWorkScope: workScope });
-    getMenuTree();
+    await getMenuTree();
+    if (formType === FORM_TYPE_ADD) {
+      changeWorkScope(workScope);
+    }
   },
 
   changeWorkScope: (workScope) => {
@@ -128,12 +131,13 @@ const useSysMenuFormStore = create<any>((set, get) => ({
   },
 
   addMenu: () => {
-    const { treeWorkScope } = get();
+    const { treeWorkScope, changeWorkScope } = get();
     const formValue = {
       ...initFormValue,
       workScope: treeWorkScope,
     };
     set({ formValue: formValue, formType: FORM_TYPE_ADD });
+    changeWorkScope(treeWorkScope);
   },
 
   save: async () => {
