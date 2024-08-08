@@ -48,7 +48,6 @@ export default defineConfig(({ mode }) => {
       strictPort: false,
       open: true,
       host: '0.0.0.0', // 모든 IP에서 접근 가능하도록 설정
-      port: 3000,
       proxy: {
         '/api/v1': {
           target: VITE_API_LOCAL_URL,

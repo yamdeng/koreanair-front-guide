@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "dev:offline": "HOST=0.0.0.0 PORT=3000 vite",
-    "dev:admin": "vite --mode admin",
+    "dev": "vite --port 8081",
+    "dev:offline": "vite --port 3000",
+    "dev:admin": "vite --port 8082 --mode admin",
     "build": "tsc && vite build",
     "build:pass": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
