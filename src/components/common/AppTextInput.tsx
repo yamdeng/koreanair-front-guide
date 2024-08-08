@@ -1,4 +1,5 @@
 import CommonUtil from '@/utils/CommonUtil';
+import classNames from 'classnames';
 
 /*
 
@@ -33,13 +34,20 @@ function AppTextInput(props) {
     style = {},
     disabled = false,
   } = props;
+  let isActiveClass = false;
+  if (inputType === 'number') {
+    if (value !== null && value !== undefined && value !== '') {
+      isActiveClass = true;
+    }
+  }
+  const applyClassName = classNames('form-tag', { error: errorMessage, active: isActiveClass });
   return (
     <>
       <input
         id={id}
         type={inputType}
         style={style}
-        className={errorMessage ? 'form-tag error' : 'form-tag'}
+        className={applyClassName}
         name={name}
         value={value}
         onChange={(event) => {

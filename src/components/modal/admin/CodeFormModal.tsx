@@ -1,8 +1,8 @@
-import AppTextInput from '@/components/common/AppTextInput';
 import AppSelect from '@/components/common/AppSelect';
-import Modal from 'react-modal';
-import useSysCodeFormStore from '@/stores/admin/useSysCodeFormStore';
+import AppTextInput from '@/components/common/AppTextInput';
 import Code from '@/config/Code';
+import useSysCodeFormStore from '@/stores/admin/useSysCodeFormStore';
+import Modal from 'react-modal';
 
 function CodeFormModal(props) {
   const { isOpen, closeModal, ok } = props;
@@ -73,6 +73,7 @@ function CodeFormModal(props) {
                         label="코드명(한국어)"
                         value={codeNameKor}
                         onChange={(value) => changeInput('codeNameKor', value)}
+                        required
                         errorMessage={errors.codeNameKor}
                       />
                     </div>
@@ -187,6 +188,7 @@ function CodeFormModal(props) {
                         value={sortOrder}
                         onChange={(value) => changeInput('sortOrder', value)}
                         errorMessage={errors.sortOrder}
+                        required
                       />
                     </div>
                   </div>

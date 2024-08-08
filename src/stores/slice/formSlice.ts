@@ -138,9 +138,10 @@ export const createFormSliceYup = (set, get) => ({
 
   // 모달 전용으로 formData를 set할때 사용
   setFormValue: (detailInfo, id = '') => {
+    const copyDetailInfo = detailInfo ? _.cloneDeep(detailInfo) : null;
     set({
-      detailInfo: detailInfo || {},
-      formValue: detailInfo || {},
+      detailInfo: copyDetailInfo,
+      formValue: copyDetailInfo,
       formDetailId: id,
       formType: id ? FORM_TYPE_UPDATE : FORM_TYPE_ADD,
     });

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { formBaseState, createFormSliceYup } from '@/stores/slice/formSlice';
 import * as yup from 'yup';
 import { FORM_TYPE_ADD, FORM_TYPE_UPDATE } from '@/config/CommonConstant';
+import _ from 'lodash';
 
 /* yup validation */
 const yupFormSchema = yup.object({
@@ -50,9 +51,10 @@ const useSysCodeFormStore = create<any>((set, get) => ({
 
   // 모달 전용으로 formData를 set할때 사용
   setFormValue: (detailInfo, id = '', listUpdateIndex) => {
+    const copyDetailInfo = detailInfo ? _.cloneDeep(detailInfo) : null;
     set({
-      detailInfo: detailInfo || initFormValue,
-      formValue: detailInfo || initFormValue,
+      detailInfo: copyDetailInfo || _.cloneDeep(initFormValue),
+      formValue: copyDetailInfo || _.cloneDeep(initFormValue),
       formDetailId: id,
       formType: id ? FORM_TYPE_UPDATE : FORM_TYPE_ADD,
       listUpdateIndex: listUpdateIndex,

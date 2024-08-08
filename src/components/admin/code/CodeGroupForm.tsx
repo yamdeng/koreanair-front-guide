@@ -31,7 +31,6 @@ function CodeGroupForm() {
     save,
     remove,
     clear,
-    addRow,
     removeAll,
     removeByIndex,
     saveCodeDetail,
@@ -40,38 +39,29 @@ function CodeGroupForm() {
 
   const { codeGrpId, workScope, codeGrpNameKor, codeGrpNameEng, useYn, remark } = formValue;
   const listState = useSysCodeGroupFormStore();
-  const { search, list, changeListApiPath, changeListInfoByIndex, isCodeFormModalOpen, closeFormModal, okModal } =
-    listState;
+  const { search, list, changeListApiPath, isCodeFormModalOpen, closeFormModal, okModal } = listState;
 
   const [columns] = useState([
-    { field: 'codeId', headerName: '코드ID', editable: true },
-    { field: 'codeNameKor', headerName: '코드명(한국어)', editable: true },
-    { field: 'codeNameEng', headerName: '코드명(영어)', editable: true },
-    { field: 'codeField1', headerName: '예비필드 1', editable: true },
-    { field: 'codeField2', headerName: '예비필드 2', editable: true },
-    { field: 'codeField3', headerName: '예비필드 3', editable: true },
-    { field: 'codeField4', headerName: '예비필드 4', editable: true },
-    { field: 'codeField5', headerName: '예비필드 5', editable: true },
+    { field: 'codeId', headerName: '코드ID', editable: false },
+    { field: 'codeNameKor', headerName: '코드명(한국어)', editable: false },
+    { field: 'codeNameEng', headerName: '코드명(영어)', editable: false },
+    { field: 'codeField1', headerName: '예비필드 1', editable: false },
+    { field: 'codeField2', headerName: '예비필드 2', editable: false },
+    { field: 'codeField3', headerName: '예비필드 3', editable: false },
+    { field: 'codeField4', headerName: '예비필드 4', editable: false },
+    { field: 'codeField5', headerName: '예비필드 5', editable: false },
     {
       field: 'sortOrder',
       headerName: '정렬순서',
-      editable: true,
-      cellEditor: 'agNumberCellEditor',
-      cellEditorParams: {
-        min: 1,
-        max: 300,
-      },
+      cellDataType: 'string',
+      editable: false,
     },
     {
       field: 'useYn',
       headerName: '사용여부',
-      editable: true,
-      cellEditor: 'agSelectCellEditor',
-      cellEditorParams: {
-        values: ['Y', 'N'],
-      },
+      editable: false,
     },
-    { field: 'remark', headerName: '비고', editable: true },
+    { field: 'remark', headerName: '비고', editable: false },
     {
       pinned: 'right',
       field: 'action',
@@ -89,7 +79,6 @@ function CodeGroupForm() {
     {
       title: '행추가',
       onClick: () => {
-        // addRow();
         openFormModal(null);
       },
     },
@@ -107,12 +96,6 @@ function CodeGroupForm() {
       openFormModal(data, rowIndex);
     }
   };
-
-  // const onCellEditRequest = (cellInfo) => {
-  //   const { rowIndex, column, newValue } = cellInfo;
-  //   const { colId } = column;
-  //   changeListInfoByIndex(rowIndex, colId, newValue);
-  // };
 
   useEffect(() => {
     if (detailId && detailId !== DETAIL_NEW_ID) {

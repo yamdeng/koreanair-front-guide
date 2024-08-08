@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { create } from 'zustand';
 import ApiService from '@/services/ApiService';
 import ModalService from '@/services/ModalService';
+import ToastService from '@/services/ToastService';
 import _ from 'lodash';
 import useSysCodeFormStore from '@/stores/admin/useSysCodeFormStore';
 import { FORM_TYPE_ADD } from '@/config/CommonConstant';
@@ -73,6 +74,7 @@ const useSysCodeGroupFormStore = create<any>((set, get) => ({
           : [];
         await ApiService.post(`${formApiPath}/${formDetailId}/codes`, apiParam);
         search();
+        ToastService.success('저장되었습니다.');
       },
     });
   },
