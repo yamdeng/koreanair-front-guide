@@ -22,3 +22,7 @@ export const ReportConfig = [
     ]
   }
 ]
+
+export const MSR_Select_Event = [
+  "Technical Incident (RTO, ATB, Divert, IFSD, Abnormal Landing)",
+]
