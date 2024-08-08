@@ -1,6 +1,7 @@
 import { useStore } from "zustand"
 import { ReportButtonType2, ReportButtonType3, ReportDateType1, ReportInputType1, ReportSelectType1 } from "./InputForms"
 import { MyReportListScreenViewModel } from "../viewModels/MyReportListScreenViewModel"
+import { v4 as uuidv4 } from 'uuid';
 
 export const BottomSheetLayout = (custom) => {
     const {
@@ -14,8 +15,8 @@ export const BottomSheetLayout = (custom) => {
   
     return (
       <>
-        <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-70 tw-rounded-lg" onClick={() => { onClose() }}></div>
-        <div className={css}>
+        <div key={uuidv4()} className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-70 tw-rounded-lg" onClick={() => { onClose() }}></div>
+        <div key={uuidv4()} className={css}>
           {jsx()}
         </div>
       </>
@@ -41,7 +42,7 @@ export const SheetSettingFilter = (custom) => {
   // }, [filterStruct])
 
   return (
-    <div className="tw-bg-slate-300 tw-rounded-t-2xl tw-p-6">
+    <div key={uuidv4()} className="tw-bg-slate-300 tw-rounded-t-2xl tw-p-6">
       {/* 보고서 종류 */}
       <div className="tw-w-full tw-pb-6 tw-text-3xl">
         검색조건 설정
@@ -96,7 +97,7 @@ export const SheetAddReport = (custom) => {
   } = custom
 
   return (
-    <div className="tw-bg-slate-300 tw-rounded-t-2xl tw-p-6">
+    <div className="tw-bg-slate-300 tw-rounded-t-2xl tw-p-6" key={uuidv4()}>
       {/* 보고서 종류 */}
       <div className="tw-w-full tw-pb-6 tw-text-3xl">
         보고서 종류

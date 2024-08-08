@@ -6,8 +6,8 @@ import { FilterConditionItem } from './components/ListScreenComponent';
 import { ReportButtonType1 } from './forms/InputForms';
 import { truncate } from 'fs';
 import { ModalDimmedScreen } from './forms/ModalScreen';
-import MyReportWriteScreen, { MyReportWriteScreenViewModel } from './MyReportWriteScreen';
 import { useStore } from 'zustand';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function MyReportListScreen() {
 
@@ -47,9 +47,8 @@ export default function MyReportListScreen() {
 
   return (
 
-    <div className="tw-flex tw-relative tw-w-full tw-bg-slate-400 tw-rounded-2xl">
-      {/*tw-overflow-hidden */}
-      <div className="tw-flex tw-flex-col tw-w-full tw-p-4">
+    <div className="tw-flex tw-relative tw-w-full tw-bg-slate-400 tw-rounded-2xl" key={uuidv4()}>
+      <div className="tw-flex tw-flex-col tw-w-full tw-p-4" key={uuidv4()}>
 
         {/* 리스트 상단 헤더 */}
         <div className="tw-bg-[#051766] tw-rounded-t-2xl">
@@ -128,10 +127,10 @@ export default function MyReportListScreen() {
         </div>
 
         {/* 중간 회색 Divider */}
-        <div className="tw-h-4 tw-bg-slate-200"></div>
+        <div className="tw-h-4 tw-bg-slate-200" key={uuidv4()}></div>
 
         {/* 제출완료 단계 표시 */}
-        <div className="tw-flex tw-w-full tw-gap-5 tw-hidden">
+        <div className="tw-flex tw-w-full tw-gap-5 tw-hidden" key={uuidv4()}>
 
           <div className="tw-grow tw-bg-slate-200 tw-rounded-2xl tw-p-4 tw-mt-4 tw-mb-12">
             <div className="tw-flex tw-text-center">
@@ -152,7 +151,7 @@ export default function MyReportListScreen() {
         </div>
 
         {/* 보고서 리스트 시작 */}
-        <div className="tw-bg-white">
+        <div className="tw-bg-white" key={uuidv4()}>
           <div className="tw-w-full tw-text-center av-report-list tw-divide-y tw-divide-[#eeeeee]">
             {/* <div className="">
               <div className="tw-row-span-2">순번</div>
@@ -165,7 +164,7 @@ export default function MyReportListScreen() {
             {
               (() => {
                 const elements = Array.from({ length: 10 }, (_, index) => (
-                  <div className="tw-py-4">
+                  <div className="tw-py-4" key={uuidv4()}>
                     <div className="tw-row-span-2 tw-leading-8">{index + 1}</div>
                     <div className="tw-leading-8 tw-px-2">제목입니다.제목입니다.제목입니다.제목입니다.제목제목입니다.제목제목입니다.</div>
                     <div className="tw-row-span-2 tw-flex tw-items-center tw-justify-center">

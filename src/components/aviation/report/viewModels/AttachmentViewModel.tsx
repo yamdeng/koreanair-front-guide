@@ -1,9 +1,10 @@
 import localforage from 'localforage';
-import { useEffect, useState, useRef } from "react";
 import initSqlJs from 'sql.js';
 import { set as idbSet, get as idbGet } from 'idb-keyval';
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand'
+import { DB_SQLJS_NAME, INSERT_ATTACHMENT, INSERT_REPORT, SELECT_ATTACHMENT_FULL, SELECT_LASTEST_REPORT_ID, SELECT_REPORT_JOIN_ATTACHMENT, TABLE_ATTACHMENT, TABLE_REPORT } from '../configs/AttachmentConfig';
+import { DefaultShiftHelper } from '../utils/BitShiftHelper';
 
 /**
  * DB 수동 삭제: chrome console에서 실행할 것
@@ -14,62 +15,6 @@ import { create } from 'zustand'
  * (1) 레포트 화면 진입시 현재의 UUID를 설정
  * (2) 레포트 작성 중간에 첨부파일을 추가하게 되면 ()
  */
-
-const DB_SQLJS_NAME = `ksms-offline-data`
-
-const TABLE_REPORT = `CREATE TABLE IF NOT EXISTS 
-  report 
-(id INTEGER PRIMARY KEY AUTOINCREMENT, category TEXT, payload TEXT);`
-
-const TABLE_ATTACHMENT = `CREATE TABLE IF NOT EXISTS
-  attachment
-(id INTEGER PRIMARY KEY AUTOINCREMENT, report_id INTEGER, filename TEXT, size INTEGER, attachment TEXT);`
-
-const INSERT_REPORT = `INSERT INTO report (category, payload) VALUES (?, ?);`
-
-const INSERT_ATTACHMENT = `INSERT INTO attachment (report_id, filename, size, attachment) VALUES (?, ?, ?, ?);`
-
-const SELECT_LASTEST_REPORT_ID = `SELECT
-  id
-FROM report
-ORDER BY id DESC LIMIT 1;`
-
-const SELECT_REPORT_BY_ID = `SELECT 
-  report.id,
-  report.category,
-  report.payload,
-  attachment.report_id,
-  attachment.filename,
-  attachment.attachment
-FROM report 
-LEFT JOIN attachment
-ON report.id = attachment.report_id 
-WHERE report.id = ? ;`
-
-const SELECT_REPORT = `SELECT 
-  id,
-  category,
-  payload
-FROM report;`
-
-const SELECT_REPORT_JOIN_ATTACHMENT = `SELECT 
-  report.id,
-  report.category,
-  report.payload,
-  attachment.report_id,
-  attachment.filename,
-  attachment.attachment
-FROM report 
-LEFT OUTER JOIN attachment
-ON report.id = attachment.report_id;`
-
-const SELECT_ATTACHMENT_FULL = `SELECT
-  id,
-  report_id,
-  filename,
-  size,
-  attachment
-FROM attachment;`
 
 const delay = (time) => {
   return new Promise(resolve => setTimeout(resolve, time));
@@ -103,7 +48,7 @@ export class BitShiftHelper {
   setupCompletion(count) {
     let i = 0;
     do {
-      shiftHelper.completionBit = shiftHelper.completionBit | 0x0001 << i;
+        DefaultShiftHelper.completionBit = DefaultShiftHelper.completionBit | 0x0001 << i;
       i++;
     } while (i < count);
   }
@@ -113,10 +58,7 @@ export class BitShiftHelper {
   }
 }
 
-const shiftHelper = new BitShiftHelper();
-
 const initailState = {
-  rootName: 'yamdeng',
   db: {},
   reports: [],
   attachments: [],
@@ -127,12 +69,12 @@ const initailState = {
   commit: () => { }
 };
 
-const databaseStore = create<any>((set, get) => ({
+export const AttachmentViewModel = create<any>((set, get) => ({
   ...initailState,
   initializeDB: async () => {
     try {
       const SQL = await initSqlJs({
-        locateFile: file => `/sql-wasm-1.10.3.wasm`
+        locateFile: file => `/src/resources/wasm/sql-wasm-1.10.3.wasm`
       });
       const savedDb = await idbGet(DB_SQLJS_NAME);
       if (savedDb) {
@@ -227,8 +169,8 @@ const databaseStore = create<any>((set, get) => ({
     // 파일 목록
     let fileMaps = [];
 
-    shiftHelper.setupCompletion(getFormArray().length);
-    shiftHelper.callback = () => {
+    DefaultShiftHelper.setupCompletion(getFormArray().length);
+    DefaultShiftHelper.callback = () => {
       // 1초후 보고서 DB 저장
       delay(1000).then(() => {
         let report_id = insertReportToDB();
@@ -263,7 +205,7 @@ const databaseStore = create<any>((set, get) => ({
               //console.log(`Stored file key: ${key}`);
             });
             fileMaps.push({ 'key': fileKey, 'filename': file.name, 'size': file.size })
-            shiftHelper.fetchCurrent(0x1 << i);
+            DefaultShiftHelper.fetchCurrent(0x1 << i);
             i++;
           } catch (storageError) {
             console.error('Error saving file to IndexedDB:', storageError);
@@ -296,102 +238,3 @@ const databaseStore = create<any>((set, get) => ({
     await idbSet(DB_SQLJS_NAME, dbData);
   }
 }))
-
-function OffLineRefactoring() {
-  const {
-    initializeDB,
-    createDB,
-    fetchReport,
-    reports,
-    attachments,
-    handleFileChange,
-    getFormArray,
-    removeFormFile,
-    saveReport
-  } = databaseStore()
-
-  const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    (async () => {
-      await initializeDB();
-      createDB();
-      fetchReport();
-    })()
-  }, []);
-
-  return (
-    <>
-      <div className="font-bold text-xl my-3">offline app</div>
-      <div>
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          onChange={handleFileChange}
-        />
-        <button onClick={() => {
-          // 업로드 시작
-          fileInputRef.current.click();
-        }} className="test-button">파일 선택</button>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        {
-          (() => {
-            //for (let [key, value] of formData.entries()) {
-            return getFormArray().map(([key, value]) => {
-              return (
-                <div className="flex justify-between mx-4 p-2 bg-yellow-200" key={key}>
-                  <div className="">
-                    {key} - <span className="font-bold">{value.name}</span>
-                  </div>
-                  <button
-                    onClick={(() => {
-                      removeFormFile(key)
-                    })}
-                    className="flex items-center justify-center w-6 h-6 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">
-                    <span className="text-lg font-bold">X</span>
-                  </button>
-                </div>
-              )
-            })
-          })()
-        }
-      </div>
-
-      <button onClick={saveReport} className="test-button" key={uuidv4()}>Save</button>
-
-      <h2 className="text-lg font-bold mt-4">Reports</h2>
-      <div className="my-4">
-        {
-          (() => {
-            return reports.map((element, index) => {
-              return (
-                <div key={index}>
-                  id: {element.id}, category: {element.category}, report_id: {element.report_id}, attachment: {element.attachment}
-                </div>
-              )
-            })
-          })()
-        }
-      </div>
-
-      <h2 className="text-lg font-bold">Attachment</h2>
-      <div className="my-4">
-        {
-          (() => {
-            return attachments.map((element, index) => {
-              return (
-                <div key={index}>
-                  id: {element.id}, report_id: {element.report_id}, filename: {element.filename}
-                </div>
-              )
-            })
-          })()
-        }
-      </div>
-    </>
-  )
-}
-export default OffLineRefactoring;

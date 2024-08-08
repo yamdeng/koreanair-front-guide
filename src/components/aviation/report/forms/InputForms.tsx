@@ -1,13 +1,15 @@
-export const ReportInputType1 = (custom) => {
+import { v4 as uuidv4 } from 'uuid';
+
+export const ReportInputType1 = (params) => {
   const {
     rightContents,
     placeholder,
     text,
     onChange
-  } = custom
+  } = params
 
   return (
-    <div className="tw-flex tw-gap-4 tw-grow">
+    <div className="tw-flex tw-gap-4 tw-grow" key={uuidv4()}>
       <input
         type="text"
         id="name"
@@ -22,13 +24,13 @@ export const ReportInputType1 = (custom) => {
   )
 }
 
-export const ReportDateType1 = (custom) => {
+export const ReportDateType1 = (params) => {
   const {
     rightContents,
     placeholder
-  } = custom
+  } = params
   return (
-    <div className="tw-flex tw-gap-4 tw-grow">
+    <div className="tw-flex tw-gap-4 tw-grow" key={uuidv4()}>
       <input
         type="date"
         id="name"
@@ -41,13 +43,13 @@ export const ReportDateType1 = (custom) => {
   )
 }
 
-export const ReportSelectType1 = (custom) => {
+export const ReportSelectType1 = (params) => {
   const {
     placeholder,
     onClick
-  } = custom
+  } = params
   return (
-    <div className="tw-flex tw-gap-4 tw-bg-white tw-rounded-lg tw-border-solid tw-border-slate-400 tw-border-[1px] tw-items-center tw-justify-between tw-py-4" onClick={onClick}>
+    <div key={uuidv4()} className="tw-flex tw-gap-4 tw-bg-white tw-rounded-lg tw-border-solid tw-border-slate-400 tw-border-[1px] tw-items-center tw-justify-between tw-py-4" onClick={onClick}>
       <div className="tw-mx-4">{placeholder}</div>
       <div className="tw-mx-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -66,14 +68,14 @@ export const ReportSelectType1 = (custom) => {
 }
 
 
-export const ReportInputWithLeftLabel = (custom) => {
+export const ReportInputWithLeftLabel = (params) => {
 
   const {
     text
-  } = custom
+  } = params
 
   return (
-    <div className="tw-flex">
+    <div className="tw-flex" key={uuidv4()}>
       <div className="av-flex-vertical-center av-input-left-rounded">{text}</div>
       <input
         type="text"
@@ -85,9 +87,12 @@ export const ReportInputWithLeftLabel = (custom) => {
   )
 }
 
-export const ReportInputWithRightLabel = (text) => {
+export const ReportInputWithRightLabel = (params) => {
+  const {
+    text
+  } = params
   return (
-    <div className="tw-flex tw-grow">
+    <div key={uuidv4()} className="tw-flex tw-grow">
       <input
         type="text"
         id="name"
@@ -99,13 +104,13 @@ export const ReportInputWithRightLabel = (text) => {
   )
 }
 
-export const ReportButtonType1 = (custom) => {
+export const ReportButtonType1 = (params) => {
   const {
     text,
     onClick
-  } = custom
+  } = params
   return (
-    <div className="tw-flex tw-mt-4 tw-grow">
+    <div key={uuidv4()} className="tw-flex tw-mt-4 tw-grow">
       <input
         type="button"
         id="name"
@@ -118,12 +123,12 @@ export const ReportButtonType1 = (custom) => {
   )
 }
 
-export const ReportButtonType2 = (custom) => {
+export const ReportButtonType2 = (params) => {
 
   const {
     text,
     onClick
-  } = custom
+  } = params
 
   return (
     <input
@@ -133,17 +138,19 @@ export const ReportButtonType2 = (custom) => {
       value={text}
       onClick={onClick}
       className="av-input-1 tw-rounded-xl"
+      key={uuidv4()}
     />
   )
 }
 
-export const ReportButtonType3 = (custom) => {
+export const ReportButtonType3 = (params) => {
   const {
     text,
     onClick
-  } = custom
+  } = params
   return (
     <input
+      key={uuidv4()}
       type="button"
       id="name"
       value={text}
