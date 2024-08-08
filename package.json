@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "HOST=0.0.0.0 PORT=3000 vite",
+    "dev": "vite",
+    "dev:offline": "HOST=0.0.0.0 PORT=3000 vite",
     "dev:admin": "vite --mode admin",
     "build": "tsc && vite build",
     "build:pass": "vite build",
