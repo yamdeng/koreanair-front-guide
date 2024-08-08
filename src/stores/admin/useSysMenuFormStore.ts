@@ -91,7 +91,7 @@ const useSysMenuFormStore = create<any>((set, get) => ({
   handleTreeSelect: async (selectedKeys, info) => {
     const { getParentMenuTree } = get();
     const menuInfo = info.node;
-    set({ formValue: menuInfo, formType: FORM_TYPE_UPDATE, errors: {} });
+    set({ formValue: menuInfo, formType: FORM_TYPE_UPDATE, errors: {}, selectedMenuInfo: menuInfo });
     await getParentMenuTree(menuInfo.workScope);
   },
 
@@ -116,7 +116,7 @@ const useSysMenuFormStore = create<any>((set, get) => ({
 
   changeTreeWorkScope: async (workScope) => {
     const { formType, getMenuTree, changeWorkScope } = get();
-    set({ treeWorkScope: workScope });
+    set({ treeWorkScope: workScope, selectedMenuInfo: null });
     await getMenuTree();
     if (formType === FORM_TYPE_ADD) {
       changeWorkScope(workScope);
@@ -131,13 +131,20 @@ const useSysMenuFormStore = create<any>((set, get) => ({
   },
 
   addMenu: () => {
-    const { treeWorkScope, changeWorkScope } = get();
+    const { treeWorkScope, selectedMenuInfo, changeWorkScope } = get();
+    let upperMenuId = '';
+    if (selectedMenuInfo) {
+      if (selectedMenuInfo.treeType === 'F' && selectedMenuInfo.level < 3) {
+        upperMenuId = selectedMenuInfo.menuId;
+      }
+    }
     const formValue = {
       ...initFormValue,
       workScope: treeWorkScope,
+      upperMenuId: upperMenuId,
     };
-    set({ formValue: formValue, formType: FORM_TYPE_ADD });
     changeWorkScope(treeWorkScope);
+    set({ formValue: formValue, formType: FORM_TYPE_ADD });
   },
 
   save: async () => {
