@@ -4,6 +4,7 @@ import useSysUserFormStore from '@/stores/admin/useSysUserFormStore';
 
 function AdminUserDetail() {
   /* formStore state input 변수 */
+  const { detailInfo, getDetail, cancel, clear } = useSysUserFormStore();
   const {
     userId,
     empNo,
@@ -13,34 +14,16 @@ function AdminUserDetail() {
     nameJpn,
     nameEtc,
     email,
-    statusCd,
-    deptId,
-    pstnId,
-    dutyId,
-    rankId,
-    photo,
-    sortOrder,
     officeTelNo,
     mobileTelNo,
-    compCd,
     subEmpNo,
     subCompCd,
     subEmail,
     empType,
     dsptYn,
-    jobCd,
-    bareaCd,
     eaiYn,
-    classCd,
     className,
-    regUserId,
-    regDttm,
-    updUserId,
-    updDttm,
-    getDetail,
-    cancel,
-    clear,
-  } = useSysUserFormStore();
+  } = detailInfo;
 
   const { detailId } = useParams();
 
@@ -52,428 +35,279 @@ function AdminUserDetail() {
   return (
     <>
       <div className="conts-title">
-        <h2>사용자 상세</h2>
+        <h2>사용자 정보</h2>
       </div>
-      <div className="detail-form">
-        <ul className="detail-list">
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">
-                사용자ID <span className="required">*</span>
-              </label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{userId}</span>
-                  </div>
-                </div>
+      <div className="editbox">
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사용자ID</label>
+                    <span className="text-desc">{userId}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사번</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{empNo}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사번</label>
+                    <span className="text-desc">{empNo}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사용자명(한국어)</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{nameKor}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사용자명(한국어)</label>
+                    <span className="text-desc">{nameKor}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사용자명(영어)</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{nameEng}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사용자명(영어)</label>
+                    <span className="text-desc">{nameEng}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사용자명(중국어)</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{nameChn}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">
+                      사진 <span className="required">*</span>
+                    </label>
+                    {/*사진이미지 */}
+                    <div className="imgBoxWrap">
+                      <div className="imgBox">
+                        <img src="/src/resources/images/img01.png" alt="" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사용자명(일본어)</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{nameJpn}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사용자명(중국어)</label>
+                    <span className="text-desc">{nameChn}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사용자명(기타)</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{nameEtc}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사용자명(일본어)</label>
+                    <span className="text-desc">{nameJpn}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">메일</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{email}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사용자명(기타)</label>
+                    <span className="text-desc">{nameEtc}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">상태</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{statusCd}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">메일</label>
+                    <span className="text-desc">{email}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">부서ID</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{deptId}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">사무실전화번호</label>
+                    <span className="text-desc">{officeTelNo}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">직위ID</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{pstnId}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">핸드폰 번호</label>
+                    <span className="text-desc">{mobileTelNo}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">직책ID</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{dutyId}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">부 사번</label>
+                    <span className="text-desc">{subEmpNo}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">RANK ID</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{rankId}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">파견 법인코드</label>
+                    <span className="text-desc">{subCompCd}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사진파일 이름</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{photo}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">부 메일주소</label>
+                    <span className="text-desc">{subEmail}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">정렬순서</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{sortOrder}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">직원구분</label>
+                    <span className="text-desc">{empType}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사무실전화번호</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{officeTelNo}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">주재원여부</label>
+                    <span className="text-desc">{dsptYn}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">핸드폰 번호</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{mobileTelNo}</span>
-                  </div>
-                </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">EAI연동여부</label>
+                    <span className="text-desc">{eaiYn}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </div>
+        <hr className="line"></hr>
 
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">법인코드</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{compCd}</span>
-                  </div>
-                </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">KE CLASS NAME</label>
+                    <span className="text-desc">{className}</span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">부 사번</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{subEmpNo}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">파견 법인코드</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{subCompCd}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">부 메일주소</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{subEmail}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">직원구분</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{empType}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">주재원여부</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{dsptYn}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">직무코드</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{jobCd}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">사업장코드</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{bareaCd}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">EAI연동여부</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{eaiYn}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">KE CLASS CODE</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{classCd}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">KE CLASS NAME</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{className}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">등록자ID</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{regUserId}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">등록일시</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{regDttm}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">수정자ID</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{updUserId}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="list">
-            <div className="list-row wid50">
-              <label className="f-label">수정일시</label>
-              <div className="cont">
-                <div className="form-table">
-                  <div className="form-cell wid100">
-                    <span className="form-group wid100">{updDttm}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
+          </div>
+        </div>
+        <hr className="line"></hr>
       </div>
 
       {/* 하단 버튼 영역 */}
