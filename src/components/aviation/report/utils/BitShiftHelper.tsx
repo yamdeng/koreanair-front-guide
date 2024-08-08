@@ -1,4 +1,3 @@
-
 export class BitShiftHelper {
   currentBit: any;
   static instance: any;
@@ -12,12 +11,12 @@ export class BitShiftHelper {
 
     this.completionBit = 0b0;
     this.currentBit = 0b0;
-    this.callback = () => { };
+    this.callback = () => {};
     BitShiftHelper.instance = this;
   }
 
   fetchCurrent(fetchBit) {
-    this.currentBit |= fetchBit
+    this.currentBit |= fetchBit;
     if (this.currentBit === this.completionBit) {
       this.callback?.();
       this.callback = undefined;
@@ -27,13 +26,13 @@ export class BitShiftHelper {
   setupCompletion(count) {
     let i = 0;
     do {
-      DefaultShiftHelper.completionBit = DefaultShiftHelper.completionBit | 0x0001 << i;
+      DefaultShiftHelper.completionBit = DefaultShiftHelper.completionBit | (0x0001 << i);
       i++;
     } while (i < count);
   }
 
   debug() {
-    console.log(`currentBit: ${this.currentBit.toString(2)}, completionBit: ${this.completionBit.toString(2)}`)
+    console.log(`currentBit: ${this.currentBit.toString(2)}, completionBit: ${this.completionBit.toString(2)}`);
   }
 }
 
@@ -47,4 +46,4 @@ export const formatFileSize = (bytes) => {
   const formattedSize = roundedKb.toLocaleString(); // 천 단위 구분 기호를 추가합니다.
 
   return `${formattedSize} KB`;
-}
+};

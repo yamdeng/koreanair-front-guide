@@ -15,7 +15,10 @@ function AppEditor(props) {
   return (
     <div className={errorMessage ? 'editor-in-valid' : ''}>
       <Editor
+        id={id}
+        label={label}
         name={name}
+        required={required}
         placeholder={placeholder}
         hideModeSwitch={true}
         initialEditType="wysiwyg"

@@ -17,16 +17,16 @@ AviationRouteInfo.list = [
   },
   {
     Component: OfflineSplash,
-    path: 'splash'
+    path: 'splash',
   },
   {
     Component: MyReportWriteScreen,
-    path: 'myreport-write'
+    path: 'myreport-write',
   },
   {
     Component: MyReportListScreen,
-    path: 'myreport-list'
-  }
+    path: 'myreport-list',
+  },
 ];
 
 export default AviationRouteInfo;
