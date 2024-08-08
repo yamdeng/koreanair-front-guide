@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -9,9 +9,19 @@ import useOccupationRoute from './routes/useOccupationRoute';
 import { StoreProvider } from './context/StoreContext';
 import LoadingBarContainer from './components/layout/LoadingBarContainer';
 import AlertModalContainer from './components/layout/AlertModalContainer';
+import localforage from 'localforage';
+
+localforage.config({
+  driver: [localforage.INDEXEDDB, localforage.WEBSQL, localforage.LOCALSTORAGE],
+  name: 'offline-storage',
+});
+
+const isFirstOnline = navigator.onLine;
 
 function App() {
-  const aviationRoute = useAviationRoute();
+  const [isNetworkOnline, setIsNetworkOnline] = useState(isFirstOnline);
+
+  const aviationRoute = useAviationRoute(isNetworkOnline);
   const occupationRoute = useOccupationRoute();
   const { initApp, isInitComplete } = useStore(useAppStore, (state) => state) as any;
   let routeAllComponent = null;
@@ -28,6 +38,15 @@ function App() {
 
   useEffect(() => {
     initApp();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('online', () => {
+      setIsNetworkOnline(true);
+    });
+    window.addEventListener('offline', () => {
+      setIsNetworkOnline(false);
+    });
   }, []);
 
   return (
