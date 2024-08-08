@@ -1,4 +1,3 @@
-import ASR from '@/components/aviation/report/ASR';
 import MyReportListScreen from '@/components/aviation/report/MyReportListScreen';
 import MyReportWriteScreen from '@/components/aviation/report/MyReportWriteScreen';
 import RiskForm from '@/components/aviation/report/RiskForm';
@@ -15,10 +14,6 @@ AviationRouteInfo.list = [
   {
     Component: RiskForm2,
     path: 'risk-form2',
-  },
-  {
-    Component: ASR,
-    path: 'report'
   },
   {
     Component: OfflineSplash,

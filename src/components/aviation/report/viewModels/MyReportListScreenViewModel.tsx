@@ -4,7 +4,7 @@ import { reportCategory, reportStatus } from "../configs/ListScreenConfig";
 import { create } from "zustand";
 import { SheetAddReport, SheetSelectReportCategory, SheetSelectReportStatus, SheetSettingFilter } from "../forms/BottomSheet";
 import { useNavigate } from "react-router-dom";
-import MyReportWriteScreen, { MyReportWriteScreenViewModel } from "../MyReportWriteScreen";
+import MyReportWriteScreen from "../MyReportWriteScreen";
 import { ReportConfig } from "../configs/WriteScreenConfig";
 
 const initailState = {

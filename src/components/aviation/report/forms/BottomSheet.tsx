@@ -3,34 +3,53 @@ import { ReportButtonType2, ReportButtonType3, ReportDateType1, ReportInputType1
 import { MyReportListScreenViewModel } from "../viewModels/MyReportListScreenViewModel"
 import { v4 as uuidv4 } from 'uuid';
 
-export const BottomSheetLayout = (custom) => {
-    const {
-      isShow,
-      onClose,
-      jsx
-    } = custom
-  
-    const open = isShow ? "tw-open" : ""
-    const css = `tw-absolute tw-bottom-0 tw-bottom-sheet ${open} tw-transition tw-transition-transform tw-duration-300 tw-ease-in-out tw-left-0 tw-w-full tw-text-white tw-rounded-t-lg tw-shadow-lg`
-  
-    return (
-      <>
-        <div key={uuidv4()} className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-70 tw-rounded-lg" onClick={() => { onClose() }}></div>
-        <div key={uuidv4()} className={css}>
-          {jsx()}
-        </div>
-      </>
-    )
-  }
-  
+export const BottomSheetLayout = (params) => {
+  const {
+    isShow,
+    onClose,
+    jsx
+  } = params
 
-export const SheetSettingFilter = (custom) => {
+  const open = isShow ? "tw-open" : ""
+  const css = `tw-absolute tw-bottom-0 tw-bottom-sheet ${open} tw-transition tw-transition-transform tw-duration-300 tw-ease-in-out tw-left-0 tw-w-full tw-text-white tw-rounded-t-lg tw-shadow-lg`
+
+  return (
+    <>
+      <div key={uuidv4()} className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-70 tw-rounded-lg" onClick={() => { onClose() }}></div>
+      <div key={uuidv4()} className={css}>
+        {jsx()}
+      </div>
+    </>
+  )
+}
+
+export const BottomSheetLayoutWhenWrite = (params) => {
+  const {
+    isShow,
+    onClose,
+    jsx
+  } = params
+
+  const open = isShow ? "tw-open" : ""
+  const css = `tw-absolute tw-bottom-0 tw-bottom-sheet ${open} tw-transition tw-transition-transform tw-duration-300 tw-ease-in-out tw-left-0 tw-w-full tw-text-white tw-shadow-lg`
+
+  return (
+    <>
+      <div key={uuidv4()} className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-50 tw-rounded-2xl" onClick={() => { onClose() }}></div>
+      <div key={uuidv4()} className={css}>
+        {jsx()}
+      </div>
+    </>
+  )
+}
+
+export const SheetSettingFilter = (params) => {
 
   const {
     confirmEvent,
     onClickSelectReportCategory,
     onClickSelectReportStatus
-  } = custom
+  } = params
 
   const {
     filterStruct,
@@ -90,11 +109,11 @@ export const SheetSettingFilter = (custom) => {
   )
 }
 
-export const SheetAddReport = (custom) => {
+export const SheetAddReport = (params) => {
 
   const {
     category
-  } = custom
+  } = params
 
   return (
     <div className="tw-bg-slate-300 tw-rounded-t-2xl tw-p-6" key={uuidv4()}>
@@ -115,11 +134,11 @@ export const SheetAddReport = (custom) => {
   )
 }
 
-export const SheetSelectReportCategory = (custom) => {
+export const SheetSelectReportCategory = (params) => {
 
   const {
     category,
-  } = custom
+  } = params
 
   return (
     <div className="tw-bg-slate-300 tw-rounded-t-2xl tw-p-6">
@@ -141,11 +160,11 @@ export const SheetSelectReportCategory = (custom) => {
 }
 
 
-export const SheetSelectReportStatus = (custom) => {
+export const SheetSelectReportStatus = (params) => {
 
   const {
     status,
-  } = custom
+  } = params
 
   return (
     <div className="tw-bg-slate-300 tw-rounded-t-2xl tw-p-6">

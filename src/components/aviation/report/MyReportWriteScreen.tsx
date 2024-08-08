@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { create, useStore } from 'zustand';
 import { AttachmentJSX, EventJSX, FlightDetailJSX, FlightSearchJSX } from './components/WriteScreenComponent';
-import { ReportButtonType1 } from './forms/InputForms';
+import { ReportButtonType1, ReportButtonType2 } from './forms/InputForms';
 import { useEffect, useRef } from 'react';
 import { MyReportWriteScreenViewModel } from './viewModels/MyReportWriteScreenViewModel';
 import { AttachmentViewModel } from './viewModels/AttachmentViewModel';
 import { v4 as uuidv4 } from 'uuid';
+import { ModalDimmedScreen } from './forms/ModalScreen';
+import { BottomSheetLayout, BottomSheetLayoutWhenWrite } from './forms/BottomSheet';
 
 export default function MyReportWriteScreen(params) {
 
@@ -14,8 +16,7 @@ export default function MyReportWriteScreen(params) {
     currentFragment,
     cardFragmentClipEvent,
     onCancel,
-    onNext,
-    flightResult
+    onNext
   } = useStore(MyReportWriteScreenViewModel, (state) => state) as any;
 
   const {
@@ -68,7 +69,7 @@ export default function MyReportWriteScreen(params) {
         }
       </div>
 
-      <div className="tw-flex tw-flex-col tw-h-full tw-justify-end">
+      <div className="tw-flex tw-flex-col tw-h-full tw-justify-end tw-relative">
         {/* height 0으로 잡아야 내부에서 스크롤 영역을 정확히 잡는데, 원인을 모르겠음 */}
         <div className="tw-grow tw-items-stretch tw-w-full tw-h-0">
           {
@@ -77,7 +78,7 @@ export default function MyReportWriteScreen(params) {
               switch (currentFragment.tab) {
                 case "Flight": {
                   switch (currentFragment.sub) {
-                    case "Search": 
+                    case "Search":
                       return (
                         <FlightSearchJSX />
                       )
@@ -90,10 +91,27 @@ export default function MyReportWriteScreen(params) {
                 }
                 case "Event": {
                   return (
-                    <EventJSX />
+                    <EventJSX
+                      onSelectFieldEvent={
+                        () => { }
+                      }
+                    />
                   )
                 }
                 case "Attachment": {
+                  return (
+                    <AttachmentJSX
+                      fileInputRef={fileInputRef}
+                      handleFileChange={handleFileChange}
+                      getFormArray={getFormArray}
+                      removeFormFile={removeFormFile}
+                      saveReport={saveReport}
+                      reports={reports}
+                      attachments={attachments}
+                    />
+                  )
+                }
+                case "Finish": {
                   return (
                     <AttachmentJSX
                       fileInputRef={fileInputRef}
@@ -117,6 +135,31 @@ export default function MyReportWriteScreen(params) {
             <ReportButtonType1 className="tw-w-full tw-grow" text="다음" onClick={onNext} />
           </div>
         </div>
+
+
+        {
+          (() => {
+
+            const html = (
+              <div key={uuidv4()} className="tw-bg-slate-300 tw-rounded-t-2xl tw-p-6">
+                {/* 보고서 종류 */}
+                <div className="tw-w-full tw-pb-6 tw-text-3xl">
+                  Event
+                </div>
+                <div className="tw-gap-4 tw-flex tw-flex-col xl:tw-flex-row">
+                <ReportButtonType2 text="dfsf" />
+                <ReportButtonType2 text="dfsf" />
+                <ReportButtonType2 text="dfsf" />
+                <ReportButtonType2 text="dfsf" />
+                <ReportButtonType2 text="dfsf" />
+                <ReportButtonType2 text="dfsf" />
+                </div>
+              </div>
+            )
+
+            return BottomSheetLayoutWhenWrite({ isShow: true, jsx: () => { return html }, onClose: () => { } })
+          })()
+        }
       </div>
 
     </div>

@@ -15,7 +15,7 @@
 }
 
 .av-flex-vertical-center {
-    @apply tw-font-bold tw-flex tw-items-center tw-justify-center
+    @apply tw-flex tw-items-center tw-justify-center
 }
 
 .av-input-right-rounded {

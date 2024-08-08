@@ -1,5 +1,6 @@
 import { ReportButtonType1, ReportButtonType2, ReportDateType1, ReportInputType1, ReportInputWithLeftLabel, ReportInputWithRightLabel } from "../forms/InputForms"
 import { v4 as uuidv4 } from 'uuid';
+import { formatFileSize } from "../utils/BitShiftHelper";
 
 export const FlightSearchJSX = () => {
 
@@ -115,7 +116,11 @@ export const FlightDetailJSX = () => {
 
 }
 
-export const EventJSX = () => {
+export const EventJSX = (params) => {
+
+  const {
+    onSelectFieldEvent
+  } = params
 
   return (
 
@@ -153,7 +158,7 @@ export const EventJSX = () => {
         {/* 이벤트 */}
         <div className="tw-p-3">
           <label className="av-label-1">Event</label>
-          <ReportButtonType2 text="Bird or Lightning Strike, FOD, Hard/Crab Landing" />
+          <ReportButtonType2 text="Bird or Lightning Strike, FOD, Hard/Crab Landing" onClick={onSelectFieldEvent} />
         </div>
 
       </div>
@@ -174,76 +179,96 @@ export const AttachmentJSX = (params) => {
   } = params
 
   return (
-    <>
-      <div className="font-bold text-xl my-3">offline app</div>
-      <div>
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          onChange={handleFileChange}
-        />
-        <button onClick={() => {
-          // 업로드 시작
-          fileInputRef.current.click();
-        }} className="test-button">파일 선택</button>
-      </div>
+    <div className="tw-bg-slate-200 tw-rounded-2xl tw-p-6 tw-mb-4 tw-h-full">
+      <div className="tw-p-6 tw-bg-white tw-rounded-2xl tw-h-full tw-h-full tw-overflow-y-scroll">
 
-      <div className="flex flex-col gap-4">
-        {
-          (() => {
-            //for (let [key, value] of formData.entries()) {
-            return getFormArray().map(([key, value]) => {
-              return (
-                <div className="flex justify-between mx-4 p-2 bg-yellow-200" key={key}>
-                  <div className="">
-                    {key} - <span className="font-bold">{value.name}</span>
-                  </div>
-                  <button
-                    onClick={(() => {
-                      removeFormFile(key)
-                    })}
-                    className="flex items-center justify-center w-6 h-6 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">
-                    <span className="text-lg font-bold">X</span>
-                  </button>
-                </div>
-              )
-            })
-          })()
-        }
-      </div>
+        <div className="tw-flex tw-flex-col tw-h-full tw-justify-end">
 
-      <button onClick={saveReport} className="test-button" key={uuidv4()}>Save</button>
+          <div className="tw-flex tw-flex-col tw-gap-6 tw-grow tw-items-stretch">
+            {
+              (() => {
 
-      <h2 className="text-lg font-bold mt-4">Reports</h2>
-      <div className="my-4">
-        {
-          (() => {
-            return reports.map((element, index) => {
-              return (
-                <div key={index}>
-                  id: {element.id}, category: {element.category}, report_id: {element.report_id}, attachment: {element.attachment}
-                </div>
-              )
-            })
-          })()
-        }
-      </div>
+                const list = getFormArray()
 
-      <h2 className="text-lg font-bold">Attachment</h2>
-      <div className="my-4">
-        {
-          (() => {
-            return attachments.map((element, index) => {
-              return (
-                <div key={index}>
-                  id: {element.id}, report_id: {element.report_id}, filename: {element.filename}
-                </div>
-              )
-            })
-          })()
-        }
+                if (list.length == 0) {
+                  return (
+                    <div>첨부파일이 없습니다.</div>
+                  )
+                }
+
+                return list.map(([key, value], index) => {
+                  return (
+                    <div className="tw-flex tw-gap-6 av-flex-vertical-center" key={key}>
+                      <div className="tw-flex-shrink-0 tw-bg-slate-600 tw-rounded-full tw-basis-10 tw-text-white av-flex-vertical-center">{index+1}</div>
+                      <div className="tw-grow">
+                        <span className="tw-font-bold tw-break-all">{value.name} ({formatFileSize(value.size)})</span>
+                      </div>
+                      <div className="tw-grow-0">
+                        <button
+                          onClick={(() => {
+                            removeFormFile(key)
+                          })}
+                          className="tw-flex tw-px-4 tw-py-2 tw-bg-slate-300 tw-rounded-2xl">
+                          <span className="tw-text-lg">삭제</span>
+                        </button>
+                      </div>
+                    </div>
+                  )
+                })
+              })()
+            }
+          </div>
+
+          <div className="tw-grow-0">
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
+            <button onClick={() => {
+              // 업로드 시작
+              fileInputRef.current.click();
+            }} className="av-input-1 tw-rounded-lg">추가</button>
+          </div>
+
+          <div className="tw-grow-0">
+            
+            <h1>Debugging</h1>
+
+            <button onClick={saveReport} className="av-input-1 tw-rounded-lg tw-hidden" key={uuidv4()}>Save</button>
+
+            <div className="tw-my-4">
+              {
+                (() => {
+                  return reports.map((element, index) => {
+                    return (
+                      <div key={index}>
+                        id: {element.id}, category: {element.category}, report_id: {element.report_id}, attachment: {element.attachment}
+                      </div>
+                    )
+                  })
+                })()
+              }
+            </div>
+
+            <div className="tw-my-4">
+              {
+                (() => {
+                  return attachments.map((element, index) => {
+                    return (
+                      <div key={index}>
+                        id: {element.id}, report_id: {element.report_id}, filename: {element.filename}
+                      </div>
+                    )
+                  })
+                })()
+              }
+            </div>
+          </div>
+
+        </div>
       </div>
-    </>
+    </div>
   )
 }
