@@ -1,3 +1,64 @@
+1.관리자 트리 스크롤
+
+2.사전에 공통 컴포넌트 포팅 체크하기
+ -css
+ -yamdeng : main, user
+ -내부
+
+3.yarn lint, build 한꺼번에 체크하기
+
+4.AppSelect
+ -allValue
+ -multiple 모드 체크
+
+5.로컬에서 관리자 서버 가동하기
+ -관리자 서버 동작확인 및 버그 수정
+ -사용자 / 관리자 서버 로컬에 띄우고 간단히 정리하기
+  : mac에서도 가동하기
+
+4.css 다시 한번 정리하기
+ -목록
+ -폼 : 라디오, 체크박스 반영
+ -상세
+
+99.메뉴얼 최신화
+
+
+
+
+CodeSelect
+ -isRemote : true / false
+ -codeGrpId
+
+1.store에 현재 다국어 반영하기
+ -appStore에 locale
+
+2.useEffect mount시에 callg하기
+ -변경 감지는 codeGrpId
+
+3.CommonUtil.getLocaleCodeKeyName(locale)
+ -ko === 
+
+4.조직도 다국어 컬럼
+CommonUtil.getLocaleColumnUserName
+CommonUtil.getLocaleColumnUserRankName
+CommonUtil.getLocaleColumnUserDeptName
+CommonUtil.getLocaleColumnUserDeptName
+
+5.메뉴 다국어 반영
+CommonUtil.getLocaleColumnMenuName
+
+6.키 기준으로 다국어 반영
+LocalService.getMessage('messageKey', '없을경우반영할 라벨')
+ -두번째 파라미터가 존재하지 않으면 첫번재로 반영, 두번째 파라미터 존재시 첫번째 메시지가 존재하지 않으면 두번째 파라미터 적용
+ i18n('common.message.save', '저장')
+ i18n('common.message.save')
+ i18n('저장')
+
+
+
+
+
 1.모달 fix : 11:15
  -(global) 사용자 선택 : single, multiple ===> UserSelectModal.tsx, UserSelectWithDeptTreeModal.tsx
  -(global) 부서 선택 반영하기 : single, multiple ===> OrgTreeSelectModal.tsx
