@@ -4,13 +4,13 @@ import { create } from 'zustand';
 const useModalStore = create<any>((set) => ({
   modalData: {},
   modalType: '',
-  displayModal: false,
+  isOpen: false,
 
   showModal: (modalType, modalData) => {
     set({
       modalType: modalType,
       modalData: modalData || {},
-      displayModal: true,
+      isOpen: true,
     });
   },
 
@@ -18,7 +18,7 @@ const useModalStore = create<any>((set) => ({
     set({
       modalType: '',
       modalData: {},
-      displayModal: false,
+      isOpen: false,
     });
   },
 }));

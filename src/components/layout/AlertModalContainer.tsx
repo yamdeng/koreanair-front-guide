@@ -7,7 +7,7 @@ import GlobalConfirmModal from '../modal/global/GlobalConfirmModal';
 function AlertModalContainer() {
   let modalComponent = null;
   let overlayClassName = '';
-  const { modalType, displayModal, modalData, hideModal } = useModalStore();
+  const { modalType, isOpen, modalData, hideModal } = useModalStore();
 
   let contentClassName = '';
   overlayClassName = 'alert-modal-overlay';
@@ -26,7 +26,7 @@ function AlertModalContainer() {
   return (
     <Modal
       shouldCloseOnOverlayClick={false}
-      isOpen={displayModal}
+      isOpen={isOpen}
       ariaHideApp={false}
       overlayClassName={overlayClassName}
       className={contentClassName}
