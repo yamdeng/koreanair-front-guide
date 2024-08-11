@@ -312,6 +312,7 @@ export default <%= fileName %>;
 `;
 
 const formModalGenerateString = ``;
+const formUseStateModalGenerateString = ``;
 const detailModalGenerateString = ``;
 
 module.exports = {
@@ -320,5 +321,6 @@ module.exports = {
   formViewGenerateString: formViewGenerateString,
   detailViewGenerateString: detailViewGenerateString,
   formModalGenerateString: formModalGenerateString,
+  formUseStateModalGenerateString: formUseStateModalGenerateString,
   detailModalGenerateString: detailModalGenerateString,
 };

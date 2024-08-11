@@ -5,13 +5,14 @@ const fs = require('fs');
 const AdmZip = require('adm-zip');
 const { tableSelectSql, columnSelectSql } = require('./sql-string');
 
-// TODO : form generate시에 import는 해당하는 것만 하기
-
 const {
   listComponentGenerateString,
   formStoreGenerateString,
   formViewGenerateString,
   detailViewGenerateString,
+  formModalGenerateString,
+  formUseStateModalGenerateString,
+  detailModalGenerateString,
 } = require('./generate-string');
 
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE, SERVER_PORT } = process.env;
@@ -81,9 +82,10 @@ app.get('/api/columns/:tableName', async (req, res) => {
 // 파일 다운로드하기 : /api/generate/:tableName/:generateType/fileDownload
 app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res) => {
   const tableName = req.params.tableName;
-  const generateType = req.params.generateType || 'all'; // all, list, formStore, formView
+  const generateType = req.params.generateType || 'all'; // all, list, formStore, formView, detailView, modalForm, modalView
   let columnList = req.body.checkedColumns || [];
   let checkedMultiColumn = req.body.checkedMultiColumn;
+  let checkedModalUseState = req.body.checkedModalUseState;
   let downloadFileName = '';
   try {
     converColumnList(columnList);
@@ -91,6 +93,8 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
     let formStoreFileName = '';
     let formViewFileName = '';
     let detailViewFileName = '';
+    let modalFormFileName = '';
+    let modalViewFileName = '';
     if (generateType === 'all' || generateType === 'list') {
       listFileName = await createListfile(tableName, columnList);
       if (generateType === 'list') {
@@ -116,12 +120,28 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
         downloadFileName = detailViewFileName;
       }
     }
+
+    if (generateType === 'all' || generateType === 'modalForm') {
+      modalFormFileName = await createModalFormfile(tableName, columnList, checkedMultiColumn, checkedModalUseState);
+      if (generateType === 'modalForm') {
+        downloadFileName = detailViewFileName;
+      }
+    }
+
+    if (generateType === 'all' || generateType === 'modalView') {
+      modalViewFileName = await createModalViewfile(tableName, columnList, checkedMultiColumn);
+      if (generateType === 'modalView') {
+        downloadFileName = detailViewFileName;
+      }
+    }
     if (generateType === 'all') {
       downloadFileName = await createZipArchive(tableName, [
         listFileName,
         formStoreFileName,
         formViewFileName,
         detailViewFileName,
+        modalFormFileName,
+        modalViewFileName,
       ]);
     }
   } catch (e) {
@@ -136,6 +156,7 @@ app.get('/api/generate/:tableName', async (req, res) => {
   const tableName = req.params.tableName;
   let columnList = req.query.checkedColumns || [];
   let checkedMultiColumn = req.query.checkedMultiColumn && req.query.checkedMultiColumn === 'true' ? true : false;
+  let checkedModalUseState = req.query.checkedModalUseState && req.query.checkedModalUseState === 'true' ? true : false;
 
   let result = {};
   try {
@@ -164,6 +185,7 @@ app.get('/api/generate/:tableName', async (req, res) => {
       fileName: `${applyFileName}Form`,
       storeName: `use${applyFileName}FormStore`,
       tableColumns: columnList,
+      importList: createCommonImportListToColumnList(columnList),
       tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
     };
 
@@ -171,17 +193,39 @@ app.get('/api/generate/:tableName', async (req, res) => {
       fileName: `${applyFileName}Detail`,
       storeName: `use${applyFileName}FormStore`,
       tableColumns: columnList,
+      importList: createCommonImportListToColumnList(columnList),
+      tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
+    };
+
+    const modalFormData = {
+      fileName: `${applyFileName}FormModal`,
+      storeName: `use${applyFileName}ModalFormStore`,
+      tableColumns: columnList,
+      importList: createCommonImportListToColumnList(columnList),
+      tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
+    };
+
+    const modalDetailData = {
+      fileName: `${applyFileName}DetailModal`,
+      storeName: `use${applyFileName}ModalFormStore`,
+      tableColumns: columnList,
+      importList: createCommonImportListToColumnList(columnList),
       tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
     };
 
     const formViewContent = ejs.render(formViewGenerateString, formViewData);
     const detailViewContent = ejs.render(detailViewGenerateString, detailViewData);
+    const modalFormContent = ejs.render(
+      checkedModalUseState ? formUseStateModalGenerateString : formModalGenerateString,
+      modalFormData
+    );
+    const modalViewContent = ejs.render(detailModalGenerateString, modalDetailData);
     result.listComponentContent = listComponentContent;
     result.formStoreContent = formStoreContent;
     result.formViewContent = formViewContent;
     result.detailViewContent = detailViewContent;
-    result.modalFormContent = detailViewContent;
-    result.modalViewContent = detailViewContent;
+    result.modalFormContent = modalFormContent;
+    result.modalViewContent = modalViewContent;
   } catch (e) {
     console.log(e);
   }
@@ -198,6 +242,7 @@ async function createListfile(tableName, columnList) {
     fileName: `${applyFileName}List`,
     storeName: `${applyFileName}ListStore`,
     tableColumns: columnList,
+    importList: createCommonImportListToColumnList(columnList),
   };
   const content = ejs.render(listComponentGenerateString, data);
   fs.writeFileSync(`./result/${applyFileName}List.tsx`, content);
@@ -250,6 +295,7 @@ async function createFormViewfile(tableName, columnList, checkedMultiColumn) {
     storeName: `use${applyFileName}FormStore`,
     tableColumns: columnList,
     tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
+    importList: createCommonImportListToColumnList(columnList),
   };
   const content = ejs.render(formViewGenerateString, data);
   fs.writeFileSync(`./result/${applyFileName}Form.tsx`, content);
@@ -267,10 +313,47 @@ async function createDetailViewfile(tableName, columnList, checkedMultiColumn) {
     storeName: `use${applyFileName}FormStore`,
     tableColumns: columnList,
     tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
+    importList: createCommonImportListToColumnList(columnList),
   };
   const content = ejs.render(detailViewGenerateString, data);
   fs.writeFileSync(`./result/${applyFileName}Detail.tsx`, content);
   return `./result/${applyFileName}Detail.tsx`;
+}
+
+// modal form 파일 생성
+async function createModalFormfile(tableName, columnList, checkedMultiColumn, checkedModalUseState) {
+  // 템플릿에서 대체할 변수들
+  let camelCaseTableName = _.camelCase(tableName);
+  const applyFileName = getApplyFileName(camelCaseTableName);
+
+  const data = {
+    fileName: `${applyFileName}FormModal`,
+    storeName: `use${applyFileName}ModalFormStore`,
+    tableColumns: columnList,
+    tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
+    importList: createCommonImportListToColumnList(columnList),
+  };
+  const content = ejs.render(checkedModalUseState ? formUseStateModalGenerateString : formModalGenerateString, data);
+  fs.writeFileSync(`./result/${applyFileName}FormModal.tsx`, content);
+  return `./result/${applyFileName}FormModal.tsx`;
+}
+
+// detail view 파일 생성
+async function createModalViewfile(tableName, columnList, checkedMultiColumn) {
+  // 템플릿에서 대체할 변수들
+  let camelCaseTableName = _.camelCase(tableName);
+  const applyFileName = getApplyFileName(camelCaseTableName);
+
+  const data = {
+    fileName: `${applyFileName}DetailModal`,
+    storeName: `use${applyFileName}ModalFormStore`,
+    tableColumns: columnList,
+    tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
+    importList: createCommonImportListToColumnList(columnList),
+  };
+  const content = ejs.render(detailModalGenerateString, data);
+  fs.writeFileSync(`./result/${applyFileName}DetailModal.tsx`, content);
+  return `./result/${applyFileName}DetailModal.tsx`;
 }
 
 // 파일 압축
@@ -288,11 +371,6 @@ async function createZipArchive(tableName, fileNameList) {
   }
   return zipFileName;
 }
-
-// 서버 listen
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
 
 function getApplyFileName(camelCaseTableName) {
   // return camelCaseTableName.charAt(0).toUpperCase() + camelCaseTableName.slice(1);
@@ -340,3 +418,46 @@ function converColumnList(columnList) {
     return info;
   });
 }
+
+function createCommonImportListToColumnList(columnList) {
+  const columnFilterList = _.uniqBy(
+    columnList.filter((info) => info.componentType),
+    'componentType'
+  );
+  const commonImportStringList = columnFilterList.map((info) => {
+    let importString = `import AppTextInput from '@/components/common/AppTextInput';`;
+    const componentType = info.componentType;
+    if (componentType === 'code') {
+      return `import AppCodeSelect from '@/components/common/AppCodeSelect';`;
+    } else if (componentType === 'select') {
+      return `import AppCodeSelect from '@/components/common/AppSelect';`;
+    } else if (componentType === 'textarea') {
+      return `import AppTextArea from '@/components/common/AppTextArea';`;
+    } else if (componentType === 'editor') {
+      return `import AppEditor from '@/components/common/AppEditor';`;
+    } else if (componentType === 'datepicker') {
+      return `import AppDatePicker from '@/components/common/AppDatePicker';`;
+    } else if (componentType === 'timepicker') {
+      return `import AppDatePicker from '@/components/common/AppTimePicker';`;
+    } else if (componentType === 'checkbox') {
+      return `import AppCheckbox from '@/components/common/AppCheckbox';`;
+    } else if (componentType === 'radio') {
+      return `import AppRadio from '@/components/common/AppRadio';`;
+    } else if (componentType === 'user-select-input') {
+      return `import AppUserSelectInput from '@/components/common/AppUserSelectInput';`;
+    } else if (componentType === 'dept-select-input') {
+      return `import AppDeptSelectInput from '@/components/common/AppDeptSelectInput';`;
+    } else if (componentType === 'auto-complete') {
+      return `import AppAutoComplete from '@/components/common/AppAutoComplete';`;
+    } else if (componentType === 'tree-select') {
+      return `import AppTreeSelect from '@/components/common/AppTreeSelect';`;
+    }
+    return importString;
+  });
+  return _.uniq(commonImportStringList);
+}
+
+// 서버 listen
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
