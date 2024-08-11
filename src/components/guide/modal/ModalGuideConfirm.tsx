@@ -3,20 +3,20 @@ import { useState } from 'react';
 import ConfirmModal from './ConfirmModal';
 
 function ModalGuideConfirm() {
-  const [displayModal, setDisplayModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => {
-    setDisplayModal(false);
+    setIsOpen(false);
   };
   return (
     <>
       <div>
         ModalGuideConfirm
         <p>
-          <button className="button" onClick={() => setDisplayModal(true)}>
+          <button className="button" onClick={() => setIsOpen(true)}>
             confirm modal open
           </button>
         </p>
-        <ConfirmModal displayModal={displayModal} closeModal={closeModal} />
+        <ConfirmModal isOpen={isOpen} closeModal={closeModal} />
       </div>
     </>
   );

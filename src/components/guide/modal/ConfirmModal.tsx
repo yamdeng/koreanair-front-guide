@@ -16,11 +16,11 @@ import Modal from 'react-modal';
 
 */
 function ConfirmModal(props) {
-  const { displayModal, closeModal } = props;
+  const { isOpen, closeModal } = props;
   return (
     <Modal
       shouldCloseOnOverlayClick={false}
-      isOpen={displayModal}
+      isOpen={isOpen}
       ariaHideApp={false}
       overlayClassName={'alert-modal-overlay'}
       className={'confirm-modal-content'}

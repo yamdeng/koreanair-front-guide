@@ -14,11 +14,11 @@ import Modal from 'react-modal';
 
 */
 function AlertModal(props) {
-  const { displayModal, closeModal } = props;
+  const { isOpen, closeModal } = props;
   return (
     <Modal
       shouldCloseOnOverlayClick={false}
-      isOpen={displayModal}
+      isOpen={isOpen}
       ariaHideApp={false}
       overlayClassName={'alert-modal-overlay'}
       className={'alert-modal-content'}

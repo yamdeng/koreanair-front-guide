@@ -3,20 +3,20 @@ import { useState } from 'react';
 import AlertModal from './AlertModal';
 
 function ModalGuideAlert() {
-  const [displayModal, setDisplayModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => {
-    setDisplayModal(false);
+    setIsOpen(false);
   };
   return (
     <>
       <div>
         ModalGuideAlert
         <p>
-          <button className="button" onClick={() => setDisplayModal(true)}>
+          <button className="button" onClick={() => setIsOpen(true)}>
             alert modal open
           </button>
         </p>
-        <AlertModal displayModal={displayModal} closeModal={closeModal} />
+        <AlertModal isOpen={isOpen} closeModal={closeModal} />
       </div>
     </>
   );
