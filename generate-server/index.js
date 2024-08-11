@@ -411,6 +411,10 @@ function converColumnList(columnList) {
       info.componentType = 'text';
     }
 
+    if (!info.codeGroupId) {
+      info.codeGroupId = '';
+    }
+
     let yupType = 'string';
     let formInitValue = '""';
     if (info.java_type === 'Double' || info.java_type === 'Long') {

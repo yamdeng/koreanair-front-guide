@@ -225,12 +225,12 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'code'){ %>
               <AppCodeSelect
+                codeGrpId="<%= columnInfo.codeGroupId %>"
                 id="<%= storeName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                options={[]}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'editor'){ %>
@@ -422,8 +422,430 @@ function <%= fileName %>() {
 export default <%= fileName %>;
 `;
 
-const formModalGenerateString = ``;
-const formUseStateModalGenerateString = ``;
+const formModalGenerateString = `import { useEffect } from 'react';
+import Modal from 'react-modal';
+/* TODO : store 경로를 변경해주세요. */
+import <%= storeName %> from '@/stores/guide/<%= storeName %>';
+
+/* TODO : 컴포넌트 이름을 확인해주세요 */
+function <%= fileName %>(props) {
+  const { isOpen, closeModal } = props;
+
+  // TODO : 목록에서 선택한 값을 그대로 이용할지 여부 결정
+  // const { detailInfo } = props;
+
+  /* formStore state input 변수 */
+  const {
+    errors,
+    changeInput,
+    getDetail,
+    formType,
+    formValue,
+    save,
+    remove,
+    cancel,
+    clear } =
+    <%= storeName %>();
+
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = detailInfo;
+
+  useEffect(() => {
+    // TODO : isOpen일 경우에 상세 api 호출 할지 결정 : if(isOpen)
+    // TODO : isOpen일 경우에 formValue를 넘겨준 값으로 셋팅할지 말지 : if(isOpen && detailInfo)
+    return clear;
+  }, [isOpen, detailInfo]);
+
+  return (
+    <>
+      <Modal
+        shouldCloseOnOverlayClick={false}
+        isOpen={isOpen}
+        ariaHideApp={false}
+        overlayClassName={'alert-modal-overlay'}
+        className={'list-common-modal-content'}
+        onRequestClose={() => {
+          closeModal();
+        }}
+      >
+        <div className="popup-container">
+          <h3 className="pop_title">TODO : 모달 타이틀</h3>
+          <div className="pop_full_cont_box">
+            <div className="pop_flex_group">
+              <div className="pop_cont_form">
+                {/*상세페이지 */}
+                <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
+                  <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
+                    <div className="form-cell wid100">
+                      <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
+                        <AppTextInput
+                          inputType="number"
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'select'){ %>
+                        <AppSelect
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          options={[]}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'textarea'){ %>
+                        <AppTextArea
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'code'){ %>
+                        <AppCodeSelect
+                          codeGrpId="<%= columnInfo.codeGroupId %>"
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          options={[]}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'editor'){ %>
+                        <AppEditor
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'datepicker'){ %>
+                        <AppDatePicker
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'timepicker'){ %>
+                        <AppTimePicker
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'checkbox'){ %>
+                        <AppCheckbox
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'radio'){ %>
+                        <AppRadio
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'user-select-input'){ %>
+                        <AppUserSelectInput
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
+                        <AppDeptSelectInput
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
+                        <AppAutoComplete
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'tree-select'){ %>
+                        <AppTreeSelect
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else { %>
+                        <AppTextInput
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } %>              
+                      </div>
+                    </div><% }) %>
+                  </div>
+                  <hr className="<% if (checkedMultiColumn) { %>line dp-n<% } else { %>line<% } %>"></hr>
+                  <% }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 하단 버튼 영역 */}
+          <div className="pop_btns">
+            <button className="btn_text text_color_neutral-90 btn_close" onClick={closeModal}>
+              취소
+            </button>
+            <button className="btn_text text_color_neutral-10 btn_confirm" onClick={closeModal}>
+              확인
+            </button>
+          </div>
+          <span className="pop_close" onClick={closeModal}>
+            X
+          </span>
+        </div>
+      </Modal>
+    </>
+  );
+}
+export default <%= fileName %>;
+`;
+const formUseStateModalGenerateString = `import { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+
+/* TODO : 컴포넌트 이름을 확인해주세요 */
+function <%= fileName %>(props) {
+  const { isOpen, closeModal } = props;
+
+  // TODO : 목록에서 선택한 값을 그대로 이용할지 여부 결정
+  // const { detailInfo } = props;
+
+  /* formStore state input 변수 */
+  const {
+    errors,
+    changeInput,
+    getDetail,
+    formType,
+    formValue,
+    save,
+    remove,
+    cancel,
+    clear } =
+    <%= storeName %>();
+
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = detailInfo;
+
+  useEffect(() => {
+    // TODO : isOpen일 경우에 상세 api 호출 할지 결정 : if(isOpen)
+    // TODO : isOpen일 경우에 formValue를 넘겨준 값으로 셋팅할지 말지 : if(isOpen && detailInfo)
+    return clear;
+  }, [isOpen, detailInfo]);
+
+  return (
+    <>
+      <Modal
+        shouldCloseOnOverlayClick={false}
+        isOpen={isOpen}
+        ariaHideApp={false}
+        overlayClassName={'alert-modal-overlay'}
+        className={'list-common-modal-content'}
+        onRequestClose={() => {
+          closeModal();
+        }}
+      >
+        <div className="popup-container">
+          <h3 className="pop_title">TODO : 모달 타이틀</h3>
+          <div className="pop_full_cont_box">
+            <div className="pop_flex_group">
+              <div className="pop_cont_form">
+                {/*상세페이지 */}
+                <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
+                  <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
+                    <div className="form-cell wid100">
+                      <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
+                        <AppTextInput
+                          inputType="number"
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'select'){ %>
+                        <AppSelect
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          options={[]}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'textarea'){ %>
+                        <AppTextArea
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'code'){ %>
+                        <AppCodeSelect
+                          codeGrpId="<%= columnInfo.codeGroupId %>"
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          options={[]}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'editor'){ %>
+                        <AppEditor
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'datepicker'){ %>
+                        <AppDatePicker
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'timepicker'){ %>
+                        <AppTimePicker
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'checkbox'){ %>
+                        <AppCheckbox
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'radio'){ %>
+                        <AppRadio
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'user-select-input'){ %>
+                        <AppUserSelectInput
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
+                        <AppDeptSelectInput
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
+                        <AppAutoComplete
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'tree-select'){ %>
+                        <AppTreeSelect
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else { %>
+                        <AppTextInput
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } %>              
+                      </div>
+                    </div><% }) %>
+                  </div>
+                  <hr className="<% if (checkedMultiColumn) { %>line dp-n<% } else { %>line<% } %>"></hr>
+                  <% }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 하단 버튼 영역 */}
+          <div className="pop_btns">
+            <button className="btn_text text_color_neutral-90 btn_close" onClick={closeModal}>
+              취소
+            </button>
+            <button className="btn_text text_color_neutral-10 btn_confirm" onClick={closeModal}>
+              확인
+            </button>
+          </div>
+          <span className="pop_close" onClick={closeModal}>
+            X
+          </span>
+        </div>
+      </Modal>
+    </>
+  );
+}
+export default <%= fileName %>;
+`;
 
 const detailModalGenerateString = `import { useEffect } from 'react';
 import Modal from 'react-modal';
