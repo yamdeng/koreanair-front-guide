@@ -154,8 +154,8 @@ const <%= fileName %> = create<any>((set, get) => ({
 export default <%= fileName %>`;
 
 const formViewGenerateString = `import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';<% importList.forEach((importString)=> { %>
-<%- importString %><% }) %>
+import { useParams } from 'react-router-dom';
+import AppTextInput from '@/components/common/AppTextInput';
 /* TODO : store 경로를 변경해주세요. */
 import <%= storeName %> from '@/stores/guide/<%= storeName %>';
 
@@ -194,136 +194,16 @@ function <%= fileName %>() {
       <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
         <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
           <div className="form-cell wid100">
-            <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
-              <AppTextInput
-                inputType="number"
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'select'){ %>
-               <AppSelect
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                options={[]}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'textarea'){ %>
-               <AppTextArea
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'code'){ %>
-              <AppCodeSelect
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                options={[]}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'editor'){ %>
-              <AppEditor
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'datepicker'){ %>
-              <AppDatePicker
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'timepicker'){ %>
-              <AppTimePicker
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'checkbox'){ %>
-              <AppCheckbox
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'radio'){ %>
-              <AppRadio
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'user-select-input'){ %>
-              <AppUserSelectInput
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
-              <AppDeptSelectInput
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
-              <AppAutoComplete
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'tree-select'){ %>
-              <AppTreeSelect
-                id="<%= storeName %><%= columnInfo.column_name %>"
-                name="<%= columnInfo.column_name %>"
-                label="<%= columnInfo.column_comment %>"
-                value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
-                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else { %>
+            <div className="form-group wid100">
               <AppTextInput
                 id="<%= storeName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } %>              
+                errorMessage={errors.<%= columnInfo.column_name %>}
+              />
             </div>
           </div><% }) %>
         </div>
@@ -383,26 +263,30 @@ function <%= fileName %>() {
       <div className="conts-title">
         <h2>TODO : 헤더 타이틀</h2>
       </div>
-      <div className="eidtbox"> <% tableColumnMultiArray.forEach((rootArray)=> { %>
-        <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
-          <div className="form-cell wid50">
-            <div className="form-group wid100">
-              <div className="box-view-list">
-                <ul className="view-list">
-                  <li className="accumlate-list">
-                    <label className="t-label">                        
-                      <%= columnInfo.column_comment %>
-                    </label>
-                    <span className="text-desc">{<%= columnInfo.column_name %>}</span>
-                  </li>
-                </ul>
+      <div className="eidtbox">
+        <% tableColumnMultiArray.forEach((rootArray)=> { %>
+          <div className="form-table">
+            <% rootArray.forEach((columnInfo)=> { %>
+              <div className="form-cell wid50">
+                <div className="form-group wid100">
+                  <div className="box-view-list">
+                    <ul className="view-list">
+                      <li className="accumlate-list">
+                        <label className="t-label">                        
+                          <%= columnInfo.column_comment %>
+                        </label>
+                        <span className="text-desc">{<%= columnInfo.column_name %>}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div><% }) %>
-        </div>
-        <hr className="<% if (checkedMultiColumn) { %>line dp-n<% } else { %>line<% } %>"></hr>
+            <% }) %>
+          </div>
+          <hr className="line"></hr>
         <% }) %>        
       </div>
+
       {/* 하단 버튼 영역 */}
       <div className="contents-btns">
         <button className="btn_text text_color_neutral-10 btn_confirm" onClick={cancel}>
