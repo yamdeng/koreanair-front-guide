@@ -441,13 +441,14 @@ function <%= fileName %>(props) {
     getDetail,
     formType,
     formValue,
+    detailInfo,
     save,
     remove,
     cancel,
     clear } =
     <%= storeName %>();
 
-  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = detailInfo;
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = formValue;
 
   useEffect(() => {
     // TODO : isOpen일 경우에 상세 api 호출 할지 결정 : if(isOpen)
@@ -472,7 +473,6 @@ function <%= fileName %>(props) {
           <div className="pop_full_cont_box">
             <div className="pop_flex_group">
               <div className="pop_cont_form">
-                {/*상세페이지 */}
                 <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
                   <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
                     <div className="form-cell wid100">
@@ -635,35 +635,64 @@ function <%= fileName %>(props) {
 }
 export default <%= fileName %>;
 `;
+
 const formUseStateModalGenerateString = `import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import * as yup from 'yup';
+import { useImmer } from 'use-immer';
+import CommonUtil from '@/utils/CommonUtil';<% importList.forEach((importString)=> { %>
+<%- importString %><% }) %>
+
+const formName = '<%= storeName %>';
+
+/* yup validation */
+const yupFormSchema = yup.object({<% tableColumns.forEach((columnInfo)=> { %>
+  <%= columnInfo.column_name %>: yup.<%= columnInfo.yupType %>,<% }) %>
+});
+
+/* form 초기화 */
+const initFormValue = {<% tableColumns.forEach((columnInfo)=> { %>
+  <%= columnInfo.column_name %>: <%- columnInfo.formInitValue %>,<% }) %>
+};
 
 /* TODO : 컴포넌트 이름을 확인해주세요 */
 function <%= fileName %>(props) {
-  const { isOpen, closeModal } = props;
 
-  // TODO : 목록에서 선택한 값을 그대로 이용할지 여부 결정
-  // const { detailInfo } = props;
+  const { isOpen, closeModal, detailInfo, ok } = props;
+  const [formValue, setFormValue] = useImmer({ ...initFormValue });
+  const [errors, setErrors] = useState<any>({});
 
-  /* formStore state input 변수 */
-  const {
-    errors,
-    changeInput,
-    getDetail,
-    formType,
-    formValue,
-    save,
-    remove,
-    cancel,
-    clear } =
-    <%= storeName %>();
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = formValue;
 
-  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = detailInfo;
+  const changeInput = (inputName, inputValue) => {
+    setFormValue((formValue) => {
+      formValue[inputName] = inputValue;
+    });
+  };
+
+  const save = async () => {
+    const validateResult = await CommonUtil.validateYupForm(yupFormSchema, formValue);
+    const { success, firstErrorFieldKey, errors } = validateResult;
+    if (success) {
+      // TODO : 모달 최종 저장시 액션 정의
+      ok(formValue);
+    } else {
+      setErrors({ errors });
+      if (formName + firstErrorFieldKey) {
+        document.getElementById(formName + firstErrorFieldKey).focus();
+      }
+    }
+  };
 
   useEffect(() => {
     // TODO : isOpen일 경우에 상세 api 호출 할지 결정 : if(isOpen)
-    // TODO : isOpen일 경우에 formValue를 넘겨준 값으로 셋팅할지 말지 : if(isOpen && detailInfo)
-    return clear;
+    if (isOpen) {
+      if (detailInfo) {
+        setFormValue(detailInfo);
+      } else {
+        setFormValue({ ...initFormValue });
+      }
+    }
   }, [isOpen, detailInfo]);
 
   return (
@@ -683,7 +712,6 @@ function <%= fileName %>(props) {
           <div className="pop_full_cont_box">
             <div className="pop_flex_group">
               <div className="pop_cont_form">
-                {/*상세페이지 */}
                 <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
                   <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
                     <div className="form-cell wid100">
@@ -832,7 +860,7 @@ function <%= fileName %>(props) {
             <button className="btn_text text_color_neutral-90 btn_close" onClick={closeModal}>
               취소
             </button>
-            <button className="btn_text text_color_neutral-10 btn_confirm" onClick={closeModal}>
+            <button className="btn_text text_color_neutral-10 btn_confirm" onClick={save}>
               확인
             </button>
           </div>
@@ -892,7 +920,6 @@ function <%= fileName %>(props) {
           <div className="pop_full_cont_box">
             <div className="pop_flex_group">
               <div className="pop_cont_form">
-                {/*상세페이지 */}
                 <div className="editbox"> <% tableColumnMultiArray.forEach((rootArray)=> { %>
                   <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
                     <div className="form-cell wid50">
