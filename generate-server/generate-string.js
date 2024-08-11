@@ -424,7 +424,95 @@ export default <%= fileName %>;
 
 const formModalGenerateString = ``;
 const formUseStateModalGenerateString = ``;
-const detailModalGenerateString = ``;
+
+const detailModalGenerateString = `import { useEffect } from 'react';
+import Modal from 'react-modal';
+/* TODO : store 경로를 변경해주세요. */
+import <%= storeName %> from '@/stores/guide/<%= storeName %>';
+
+/* TODO : 컴포넌트 이름을 확인해주세요 */
+function <%= fileName %>(props) {
+  const { isOpen, closeModal } = props;
+
+  // TODO : 목록에서 선택한 값을 그대로 이용할지 여부 결정
+  // const { detailInfo } = props;
+
+  /* formStore state input 변수 */
+  const {
+    detailInfo,
+    getDetail,
+    formType,
+    cancel,
+    goFormPage,
+    clear } =
+    <%= storeName %>();
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = detailInfo;
+
+  useEffect(() => {
+    // TODO : isOpen일 경우에 상세 api 호출 할지 결정
+    return clear;
+  }, [isOpen]);
+
+  return (
+    <>
+      <Modal
+        shouldCloseOnOverlayClick={false}
+        isOpen={isOpen}
+        ariaHideApp={false}
+        overlayClassName={'alert-modal-overlay'}
+        className={'list-common-modal-content'}
+        onRequestClose={() => {
+          closeModal();
+        }}
+      >
+        <div className="popup-container">
+          <h3 className="pop_title">TODO : 모달 타이틀</h3>
+          <div className="pop_full_cont_box">
+            <div className="pop_flex_group">
+              <div className="pop_cont_form">
+                {/*상세페이지 */}
+                <div className="editbox"> <% tableColumnMultiArray.forEach((rootArray)=> { %>
+                  <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
+                    <div className="form-cell wid50">
+                      <div className="form-group wid100">
+                        <div className="box-view-list">
+                          <ul className="view-list">
+                            <li className="accumlate-list">
+                              <label className="t-label">                        
+                                <%= columnInfo.column_comment %>
+                              </label>
+                              <span className="text-desc">{<%= columnInfo.column_name %>}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div><% }) %>
+                  </div>
+                  <hr className="<% if (checkedMultiColumn) { %>line dp-n<% } else { %>line<% } %>"></hr>
+                  <% }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 하단 버튼 영역 */}
+          <div className="pop_btns">
+            <button className="btn_text text_color_neutral-90 btn_close" onClick={closeModal}>
+              취소
+            </button>
+            <button className="btn_text text_color_neutral-10 btn_confirm" onClick={closeModal}>
+              확인
+            </button>
+          </div>
+          <span className="pop_close" onClick={closeModal}>
+            X
+          </span>
+        </div>
+      </Modal>
+    </>
+  );
+}
+export default <%= fileName %>;
+`;
 
 module.exports = {
   listComponentGenerateString: listComponentGenerateString,
