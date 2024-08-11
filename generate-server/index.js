@@ -124,14 +124,14 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
     if (generateType === 'all' || generateType === 'modalForm') {
       modalFormFileName = await createModalFormfile(tableName, columnList, checkedMultiColumn, checkedModalUseState);
       if (generateType === 'modalForm') {
-        downloadFileName = detailViewFileName;
+        downloadFileName = modalFormFileName;
       }
     }
 
     if (generateType === 'all' || generateType === 'modalView') {
       modalViewFileName = await createModalViewfile(tableName, columnList, checkedMultiColumn);
       if (generateType === 'modalView') {
-        downloadFileName = detailViewFileName;
+        downloadFileName = modalViewFileName;
       }
     }
     if (generateType === 'all') {
