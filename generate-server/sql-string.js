@@ -28,7 +28,7 @@ SELECT a.column_name
 	,a.data_type
 	,a.is_nullable
 FROM information_schema.columns a
-	inner join (
+	left outer join (
 		SELECT
 			PS.RELNAME AS TABLE_NAME,
 			PA.ATTNAME AS COLUMN_NAME,
