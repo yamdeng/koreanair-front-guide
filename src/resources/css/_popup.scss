@@ -9,6 +9,21 @@
   }
 }
 
+.risk-level-search-content {
+  width: 180.0rem;
+  box-sizing: border-box;
+  padding: 2.0rem 3.0rem;
+  @include mobile {
+    width: 100%;
+    padding: 0;
+    height: 100%;
+    border-radius: 0 !important;
+    .popup-container {
+      height: 100%;
+    }
+  }
+}
+
 .subj-org-appoint-modal-content {
   width: 50.0rem;
   box-sizing: border-box;
@@ -196,10 +211,22 @@
     border-radius: 99.9rem;
     background: var(--color-neutral-30); 
   }
+  .btn_delete {
+    padding: 0.8rem 4.8rem;
+    /*border: 0.2rem solid var(--color-darkblue-100);*/
+    border-radius: 99.9rem;
+    background: var(--color-neutral-30); 
+  }
   .btn_confirm {
     padding: 0.8rem 4.8rem;
     border-radius: 99.9rem; 
     background: var(--color-darkblue-100);
+  }
+  .btn-disabled {
+    padding: 0.8rem 4.8rem;
+    border-radius: 99.9rem;
+    background: var(--color-neutral-30); 
+    color: var(--color-neutral-50);
   }
   text-align: center;
   @include mobile {
