@@ -29,6 +29,12 @@
   --color-Warning-BG:#FEF4E6;
   --color-negative:#DA291C;
   --color-negative-bg:#FFF5F5;
+  /*위험도컬러*/
+  --color-Level:#EE4E10;
+  --color-Leve2:#FF884D;
+  --color-Leve3:#FFC247;
+  --color-Leve4:#02C27F;
+
  }
 
  html {
@@ -78,26 +84,31 @@ input[type=checkbox],input[type=radio]{padding:0;vertical-align:middle;margin-to
 [class^="chk-wrap"] > label > input {position:absolute;top:0;left:0;width:0;height:0;opacity:0}
 
 /* 기본형 */
-.radio-wrap{/*display:inline-block;*/line-height:0}
+.radio-wrap{/*display:inline-block;*/position: relative; line-height:0;border:0.1rem solid var(--color-neutral-40);border-radius:0.5rem;padding: 0 1.0rem;}
+.radio-wrap.border-no {border: 0;}
+.radio-wrap .input-box {position: relative;}
 .radio-wrap > label {display:inline-block;/*min-height:4.0rem;*/padding:0rem 0.9rem 0.2rem 2.5rem;line-height:2.2rem;margin:1.2rem 0 0 0.2rem}
 .radio-wrap > label > input + span {display:block;color:var(--color-neutral-60);font-size:1.4rem}
 .radio-wrap > label > input:checked + span{color:var(--color-neutral-80);font-size:1.4rem}
 .radio-wrap > label > input + span:before, .radio-wrap > label > input + span:after{content:'';position:absolute;top:50%}
-.radio-wrap > label > input + span:before{left:0;width:1.8rem;height:1.8rem;background:transparent;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
+.radio-wrap > label > input + span:before{left:0;width:1.6rem;height:1.6rem;background:transparent;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
 .radio-wrap > label > input[type="checkbox"] + span:after{left:0.8rem;margin-top:-0.2rem;width:0.8rem;height:0.5rem;border:solid var(--color-neutral-60); border-width:0 0 0.1rem 0.1rem; -webkit-transform:rotate(-45deg) translateY(-50%); transform:rotate(-45deg) translateY(-50%)}
-.radio-wrap > label > input[type="radio"] + span:after{left:0.3rem;width:1.2rem;height:1.2rem;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
+.radio-wrap > label > input[type="radio"] + span:after{left:0.3rem;width:1.0rem;height:1.0rem;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
 .radio-wrap > label > input:checked + span:before{border-color:var(--color-darkblue-100);background:var(--color-neutral-10)}
 .radio-wrap > label > input:checked + span:after{background:var(--color-darkblue-100)}
+.radio-wrap > label > input:checked[type="checkbox"] + span:before{border-color:var(--color-darkblue-100);background:var(--color-darkblue-100)}
+.radio-wrap > label > input:checked[type="checkbox"] + span:after{border-color:var(--color-neutral-10)}
 .bottom-area .list-toggle + .radio-wrap{margin:1.0rem 0 3.0rem 1.9rem}
+.radio-wrap.error{border:solid 0.1rem var(--color-negative)}
 
 .chk-wrap {display:inline-block;line-height:0}
 .chk-wrap > label {display:inline-block;/*min-height:4.0rem;*/padding:0rem 0.9rem 0.2rem 2.5rem;line-height:2.2rem;margin: 1.2rem 0 0 0.2rem}
 .chk-wrap > label > input + span {display:block;color:var(--color-neutral-60);font-size:1.4rem}
 .chk-wrap > label > input:checked + span{color:var(--color-neutral-80);font-size:1.4rem}
 .chk-wrap > label > input + span:before, .chk-wrap > label > input + span:after{content:'';position:absolute;top:50%}
-.chk-wrap > label > input + span:before{left:0;width:1.8rem;height:1.8rem;background:transparent;border:0.1rem solid var(--color-neutral-60);border-radius:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}
+.chk-wrap > label > input + span:before{left:0;width:1.6rem;height:1.6rem;background:transparent;border:0.1rem solid var(--color-neutral-60);border-radius:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}
 .chk-wrap > label > input[type="checkbox"] + span:after{left:0.8rem;margin-top:-0.2rem;width:0.8rem;height:0.5rem;border:solid var(--color-neutral-60); border-width:0 0 0.1rem 0.1rem; -webkit-transform:rotate(-45deg) translateY(-50%); transform:rotate(-45deg) translateY(-50%)}
-.chk-wrap > label > input[type="radio"] + span:after{left:0.3rem;width:1.2rem;height:1.2rem;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
+.chk-wrap > label > input[type="radio"] + span:after{left:0.3rem;width:1.0rem;height:1.0rem;border:0.1rem solid var(--color-neutral-60); border-radius:50%; -webkit-transform:translateY(-50%); transform:translateY(-50%)}
 .chk-wrap > label > input:checked + span:before {border-color:var(--color-darkblue-100);background:var(--color-darkblue-100)}
 .chk-wrap > label > input:checked + span:after{border-color:var(--color-neutral-10)}
 
@@ -234,14 +245,15 @@ input, select{font-family:'KoreanAirSans'}
   .btn_correct{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
   .btn_list{padding:0.6rem 3.8rem;border-radius:99.9rem;border:solid 0.2rem var(--color-neutral-60);color:var(--color-neutral-60)}
   .btn-del{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30);color:var(--color-neutral-70)}
+  .btn-disabled {padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30);color:var(--color-neutral-50)}
   .btn-share {padding:0.8rem 3.2rem 0.8rem 2.2rem ;border-radius:99.9rem;background-color: var(--color-darkblue-100);}
   .btn-share img {display: inline-block; vertical-align: bottom;}
   .btn-share span {display: inline-block; color: var(--color-neutral-10); vertical-align: top;}
   .btn-type01 {}
-  text-align:right;
+  text-align:right
 }
 /* 상단 타이틀 */
-.conts-title{position:relative;align-items:center;padding:2.0rem 0 4.0rem 0;margin-bottom:1.0rem}
+.conts-title{position:relative;align-items:center;padding:2.0rem 0 4.0rem 0;/*margin-bottom:1.0rem*/}
 .conts-title h2{float:left;font-family:"KoreanAirSans";font-size:3rem;color:var(--color-neutral-80);font-weight:700;letter-spacing:-0.1rem}
 .conts-title h2 span{font-size:2.5rem;color:var(--color-mblue-100)}
 
@@ -265,34 +277,17 @@ input, select{font-family:'KoreanAirSans'}
   .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;padding-top:0x}
   .form-table .form-cell:last-child{padding-right:0}
 
-  .group-box-wrap{
-    position: relative;
-    padding:0 1.0rem;
-    border: 0.1rem solid #ccc;
-    border-radius: 0.5rem;
-}
-.group-box-wrap .txt {
-  background: #fff;
-  padding: 0 0.5rem;
-  position: absolute;
-  left: 1.0rem;
-  top: -1.2rem;
-  font-size:1.4rem
-}
-  
-  //margin-bottom:1.0rem;
-  //@include mobile {
-  //  .detail-list{width:100%}
-  //  .detail-list .list{display:block;width:100%}
-  //  .detail-list .list .list-row{display:inline-block;width:100%;margin-left:0px}
-  //  .detail-list .list .list-row + .list-row{margin-left:0px}
-
-  //}
+  .group-box-wrap{position: relative;padding:0 1.0rem;height:4.0rem;border: 0.1rem solid var(--color-neutral-40);border-radius: 0.5rem}
+  .group-box-wrap .txt {position:absolute;left: 1.0rem;top: -1.2rem;background:var(--color-neutral-10);padding: 0 0.5rem;font-size:1.4rem;}
 }
 .detail-form{
   .detail-list .form-table{display:flex;width:100%}
   .form-table +.form-table{padding-top:1.5rem}
 }
+
+.group-box-wrap{position:relative;/*height:4.0rem;padding:0 1.0rem;border:0.1rem solid var(--color-neutral-40);border-radius:0.5rem*/}
+.group-box-wrap .txt{position:absolute;left:1.0rem;top:-1.2rem;background:var(--color-neutral-10);padding:0 0.5rem;font-size:1.4rem; z-index: 1;}
+.group-box-wrap span.errorText {display: block;color: var(--color-negative); font-size: 1.3rem; padding: 0.2rem 0.5rem;}
 
 /*부서검색*/
 .conts-box{position:relative;height: calc(100vh - 18.5rem);overflow:hidden}
@@ -360,7 +355,7 @@ input, select{font-family:'KoreanAirSans'}
   border-top: 0.1rem solid var(--color-darkblue-100);
   display:inline-block;
   width:100%;
-  padding:1.5rem 0;
+  /*padding:1.5rem 0;*/
 }
 .editbox hr.line {
   border:none;
@@ -368,15 +363,15 @@ input, select{font-family:'KoreanAirSans'}
   background:var(--color-neutral-40);
   margin: 0;
   padding: 0;
-  margin:1.5rem 0;
+  /*margin:1.5rem 0;*/
 }
-.editbox .form-table{display:flex; width:100%}
-/* .editbox .form-table:first-child{padding-top:3rem}*/
+.editbox .form-table{display:flex;width:100%}
 .editbox .form-table + .form-table{/*padding-top:1.5rem*/}
 .editbox .form-table:last-child{/*padding-bottom:2.0rem*/}
-.editbox .form-table .form-cell{position:relative; flex-grow:1; padding-right:1.0rem;}
+.editbox .form-table .form-cell{position:relative; flex-grow:1; padding:2.0rem 1.0rem 2.0rem 0;}
 .editbox .form-table .form-cell:last-child{padding-right:0}
 .editbox.tog{margin-bottom:0rem; padding-top:0rem}
+.editbox.NoLine{border-top:0} 
 
 /*검색영역*/
 .info-wrap .edit-area > .boxForm{padding:0}
@@ -385,8 +380,8 @@ input, select{font-family:'KoreanAirSans'}
 .boxForm .form-table{display:flex;width:100%}
 .boxForm .form-table + .form-table{/*padding-top:1.5rem*/}
 .boxForm .form-table:last-child{padding-bottom:1.5rem}
-.boxForm .form-table .form-cell{position:relative;flex-grow:1;padding:0 0.5rem;padding-top:1.2rem}
-
+.boxForm .form-table .form-cell{position:relative;flex-grow:1;padding:0 0.5rem;padding-top:1.2rem /*padding: 2rem 1rem 2rem 0;*/}
+.boxForm .form-table .wid-300 {max-width: 30.0rem;}
 /*.boxForm .form-table .form-cell:last-child{padding-right:0}*/
 .boxForm.tog{margin-bottom:0rem;padding-top:0rem}
 
@@ -405,7 +400,7 @@ input, select{font-family:'KoreanAirSans'}
 .form-group .invalid-txt.textarea{top: 201px}
 .form-group .row1{display:flex}
 
-.form-group .list{}
+
 .form-group .list li{position:relative;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
 .form-group .list li .delete{position:absolute;right:0;background: url(/src/resources/images/delete-text.svg) center center no-repeat;font-size: 0;width: 2rem;height: 2rem}
 
@@ -454,19 +449,25 @@ input, select{font-family:'KoreanAirSans'}
 
 .form-group .df.row1{justify-content:center}
 .form-group .df.row1 > .btn-area{padding-top:0}
+.form-group .img{width:100%;height:100%;margin:0 auto;overflow:hidden}
+.form-group .img .img-thumbnail{width:100%;
+  height:100%;
+  object-fit:cover;}
 
 
 /*상세리스트*/
 .box-view-list{}
-.box-view-list .view-list{display:flex;text-align:left;justify-content:space-between}
+.box-view-list .view-list{/*display:flex;*/text-align:left;justify-content:space-between}
 .box-view-list .view-list + .view-list{padding-top:2.0rem}
 .box-view-list .view-list .accumlate-list{position:relative;display:block}
 .box-view-list .view-list .t-label{display:block;color:var(--color-neutral-70);font-weight:400;font-size:1.5rem;white-space:nowrap}
 .box-view-list .view-list .text-desc{display:block;width:100%;margin-top:2rem;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
 .box-view-list .view-list .text-desc-type1{position:relative;display:block;width:100%;padding-right:0.8rem;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis}
-.box-view-list .view-list .text-desc-type1 .desc-file a{position:relative;width:100%;}
+.box-view-list .view-list .text-desc-type1 .desc-file a{position:relative;width:100%}
 .box-view-list .view-list .text-desc-type1 .desc-file a span:hover{color:var(--color-mblue-100)}
-.box-view-list .view-list .text-desc-type1 .desc-file .download{float:left;margin-right:1rem;background:url(/src/resources/images/icon-download.svg) center center no-repeat;font-size:0;width:2.3rem;height:2.3rem}
+.box-view-list .view-list .text-desc-type1 .desc-file .download{float:right;margin-right:1rem;background:url(/src/resources/images/icon-download.svg) center center no-repeat;font-size:0;width:2.3rem;height:2.3rem}
+.box-view-list .view-list .text-desc-type2{position:relative;display: inline-block;width:auto;padding-right:0.8rem;font-weight:400;font-size:1.6rem;color:var(--color-neutral-80);text-align:left;overflow:hidden;word-break:break-all;text-overflow:ellipsis;margin-right: 1.5rem;}
+.box-view-list .view-list .text-desc-type2 a:hover {text-decoration: underline;}
 
 .imgBoxWrap{position:relative;border:0.1rem solid var(--color-darkblue-100);background-color:var(--color-neutral-30)}
 .imgBox{position:relative;overflow:hidden;text-align:center;height:100px;width:100px}

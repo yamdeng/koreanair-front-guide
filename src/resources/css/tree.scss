@@ -54,15 +54,15 @@
     }
 
     
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree {background-color: transparent; font-family: 'KoreanAirSans'; overflow-y: auto; max-height:  calc(100% - 120px);}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher_close .ant-tree-switcher-icon svg, .ant-tree-switcher-icon svg {font-size: 1.0rem; display: inline-flex; align-items: flex-start; justify-content: center;}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher:not(.ant-tree-switcher-noop):hover {background-color: var(--color-lightblue-10);}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-node-content-wrapper:hover, :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-checkbox+span:hover {background-color: rgba(0, 0, 0, 0.04);}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-treenode-draggable .ant-tree-draggable-icon {width: 0; display: none;}
+    .ant-tree {background-color: transparent; font-family: 'KoreanAirSans'; overflow-y: auto; max-height:  calc(100% - 120px);}
+    .ant-tree .ant-tree-switcher_close .ant-tree-switcher-icon svg, .ant-tree-switcher-icon svg {font-size: 1.0rem; display: inline-flex; align-items: flex-start; justify-content: center;}
+    .ant-tree .ant-tree-switcher:not(.ant-tree-switcher-noop):hover {background-color: var(--color-lightblue-10);}
+    .ant-tree .ant-tree-node-content-wrapper:hover, .ant-tree .ant-tree-checkbox+span:hover {background-color: rgba(0, 0, 0, 0.04);}
+    .ant-tree .ant-tree-treenode-draggable .ant-tree-draggable-icon {width: 0; display: none;}
     .tree_form {margin-bottom: 2.0rem; border-radius: 0.8rem}
     .tree_box {width: 100%; height: 30.0rem; overflow: auto;}
     .tree_box.bg {background-color: var(--color-neutral-10); border: 0.1rem solid var(--color-neutral-30); border-radius: 0.8rem; padding: 1.0rem; overflow: auto;}
-    .tree_box :where(.css-dev-only-do-not-override-98ntnt).ant-tree {max-height: 100%;}
+    .tree_box .ant-tree {max-height: 100%;}
   }
 
  /*관리자 부서조회*/
@@ -122,17 +122,17 @@
     }
 
     
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree {background-color: transparent; font-family: 'KoreanAirSans'; overflow-y: auto; max-height:  calc(100% - 120px);}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher_close .ant-tree-switcher-icon svg, .ant-tree-switcher-icon svg {font-size: 1.0rem; display: inline-flex; align-items: flex-start; justify-content: center;}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-switcher:not(.ant-tree-switcher-noop):hover {background-color: var(--color-lightblue-10);}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-node-content-wrapper:hover, :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-checkbox+span:hover {background-color: rgba(0, 0, 0, 0.04);}
-    :where(.css-dev-only-do-not-override-98ntnt).ant-tree .ant-tree-treenode-draggable .ant-tree-draggable-icon {width: 0; display: none;}
+    .ant-tree {background-color: transparent; font-family: 'KoreanAirSans'; overflow-y: auto; max-height:  calc(100% - 120px);}
+    .ant-tree .ant-tree-switcher_close .ant-tree-switcher-icon svg, .ant-tree-switcher-icon svg {font-size: 1.0rem; display: inline-flex; align-items: flex-start; justify-content: center;}
+    .ant-tree .ant-tree-switcher:not(.ant-tree-switcher-noop):hover {background-color: var(--color-lightblue-10);}
+    .ant-tree .ant-tree-node-content-wrapper:hover, .ant-tree .ant-tree-checkbox+span:hover {background-color: rgba(0, 0, 0, 0.04);}
+    .ant-tree .ant-tree-treenode-draggable .ant-tree-draggable-icon {width: 0; display: none;}
     .tree_form {margin-bottom: 2.0rem; border-radius: 0.8rem;}
     .tree_form .form-group{margin-bottom:1rem}
     .tree_form .form-group:last-child{margin-bottom:0}
     .tree_box {width: 100%; height: 30.0rem; overflow: auto;}
     .tree_box.bg {background-color: var(--color-neutral-10); border: 0.1rem solid var(--color-neutral-30); border-radius: 0.8rem; padding: 1.0rem; overflow: auto;}
-    .tree_box :where(.css-dev-only-do-not-override-98ntnt).ant-tree {max-height: 100%;}
+    .tree_box .ant-tree {max-height: 100%;}
 
     /*관리자 부서조회*/
   }

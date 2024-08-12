@@ -2,7 +2,6 @@ import { Route } from 'react-router-dom';
 import AviationRouteInfo from './AviationRouteInfo';
 import AviationLayout from '@/components/layout/AviationLayout';
 import AviationPortal from '@/components/aviation/AviationPortal';
-import '@/resources/css/report.css';
 
 const useAviationRoute = () => {
   const routes = (
