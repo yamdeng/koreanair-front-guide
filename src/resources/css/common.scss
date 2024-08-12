@@ -239,6 +239,7 @@ input, select{font-family:'KoreanAirSans'}
 /*컨텐츠하단버튼*/
 .contents-btns{
   > button{margin:2.0rem 0.2rem}
+  > button:disabled {background:var(--color-neutral-30);color:var(--color-neutral-50);border:0;}
   .btn_text{font-family:'KoreanAirSans';font-weight:700;font-size:1.6rem}
   .btn_confirm{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-darkblue-100);align-items:center}
   .btn_close{padding:0.8rem 3.8rem;border-radius:99.9rem;background:var(--color-neutral-30)}
@@ -255,7 +256,8 @@ input, select{font-family:'KoreanAirSans'}
 /* 상단 타이틀 */
 .conts-title{position:relative;align-items:center;padding:2.0rem 0 4.0rem 0;/*margin-bottom:1.0rem*/}
 .conts-title h2{float:left;font-family:"KoreanAirSans";font-size:3rem;color:var(--color-neutral-80);font-weight:700;letter-spacing:-0.1rem}
-.conts-title h2 span{font-size:2.5rem;color:var(--color-mblue-100)}
+.conts-title h2 span a{position:relative;font-size:2.5rem;color:var(--color-mblue-100);padding-left:1.0rem}
+.conts-title h2 span a:after{content:'';position:absolute;box-sizing:content-box;right:-3.5rem;width:3.0rem;height:3.0rem;background:url(../images/icon-documents.svg)no-repeat center center;cursor:pointer}
 
 
 
@@ -274,15 +276,15 @@ input, select{font-family:'KoreanAirSans'}
   .detail-list .list .f-label .required{color:var(--color-negative)}
   .detail-list .list .cont{display:inline;margin-left:150px;box-sizing:border-box;width:100%}
   .form-table{display:flex;width:100%}
-  .form-table .form-cell{position:relative;flex-grow:1;padding-right:1.0rem;padding-top:0x}
-  .form-table .form-cell:last-child{padding-right:0}
+  .form-table .form-cell{position:relative;flex-grow:1;/*padding-right:1.0rem;padding-top:0*/ padding: 0.5rem;}
+  .form-table .form-cell:last-child{/*padding-right:0*/}
 
   .group-box-wrap{position: relative;padding:0 1.0rem;height:4.0rem;border: 0.1rem solid var(--color-neutral-40);border-radius: 0.5rem}
   .group-box-wrap .txt {position:absolute;left: 1.0rem;top: -1.2rem;background:var(--color-neutral-10);padding: 0 0.5rem;font-size:1.4rem;}
 }
 .detail-form{
   .detail-list .form-table{display:flex;width:100%}
-  .form-table +.form-table{padding-top:1.5rem}
+  .form-table +.form-table{/*padding-top:1.5rem*/}
 }
 
 .group-box-wrap{position:relative;/*height:4.0rem;padding:0 1.0rem;border:0.1rem solid var(--color-neutral-40);border-radius:0.5rem*/}
@@ -474,13 +476,15 @@ input, select{font-family:'KoreanAirSans'}
 
 
 /*toggle*/
-.info-wrap{padding:0px 2.0rem 0rem;border-top:0rem solid var(--color-darkblue-100);background-color:var(--color-neutral-10)}
-.info-wrap > dl > dt{padding:1.8rem 0 1.7rem}
-.info-wrap > dl > dt .btn-tg{padding:0 6.7rem 0 0;font-family:"KoreanAirSans";font-size:2.0rem;color:var(--color-darkblue-100);font-weight:500}
-.info-wrap > dl > dd{margin:0 -2.0rem 1.0rem}
+.info-wrap{/*padding:0px 2.0rem 0rem;*/border-top:0rem solid var(--color-darkblue-100);background-color:var(--color-neutral-10)}
+.info-wrap > dl > dt{padding:1.8rem 0 1.0rem;}
+.info-wrap > dl > dt .btn-tg{/*padding:0 6.7rem 0 0;*/font-family:"KoreanAirSans";font-size:2.0rem;color:var(--color-darkblue-100);font-weight:500}
+.info-wrap > dl > dd{/*margin:0 -2.0rem 1.0rem*/}
 .info-wrap .edit-area{padding:2.0rem 2.0rem;border-top:0.1rem solid var(--color-darkblue-100);border-bottom:0.1rem solid var(--color-neutral-30);background-color:var(--color-neutral-20);color:var(--color-neutral-80);line-height:2.0rem;font-size:1.6rem}
-.toggle .btn-tg{position:relative;font-family:"KoreanAirSans";font-size:1.6rem;color:var(--color-darkblue-100);background-color:var(--color-neutral-10);text-align:left;width:100%}
-.toggle .btn-tg:after{position:absolute;top:50%;right:0;content:'';display:inline-block;width:0.7rem;height:0.7rem;margin:0 0 0 1.3rem;border: solid var(--color-darkblue-100);border-width: 0 0.1rem 0.1rem 0;-webkit-transform: translateY(-50%) rotate(45deg);transform: translateY(-50%) rotate(45deg);-webkit-transform-origin: center;transform-origin:center}
+.toggle .btn-tg{position:relative;font-family:"KoreanAirSans";font-size:1.6rem;color:var(--color-darkblue-100);text-align:left;width:100%}
+.toggle .btn-tg span {background: url(../images/arrow-down.svg)center right no-repeat; background-size: 3.2rem;display: inline-block; width: 3.2rem; height: 3.2rem; vertical-align:middle; float: right;}
+.toggle .btn-tg span.active {transform: rotate(180deg);}
+.toggle .btn-tg:after{position:absolute;top:50%;right:0;content:'';display:inline-block;/*width:0.7rem;height:0.7rem;transform: translateY(-50%) rotate(45deg);*/margin:0 0 0 1.3rem;-webkit-transform: translateY(-50%) rotate(45deg);-webkit-transform-origin: center;transform-origin:center}
 .toggle .active .btn-tg:after{-webkit-transform:translateY(-50%) rotate(-135deg);transform:translateY(-50%) rotate(-135deg)}
 .toggle .active .tg-conts{display:block}
 

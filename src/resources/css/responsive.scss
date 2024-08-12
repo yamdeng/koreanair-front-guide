@@ -28,6 +28,8 @@
 
   .contents-btns > button.btn-type01 {width: calc(50% - 0.2rem); margin: 1.0rem 0;}
   .contents-btns > button.btn-type01:nth-child(odd) {margin-right:0.2rem;}
+
+
 }
 
 
@@ -63,6 +65,10 @@
   .c-step-wrap ol{position:relative;display:flex;width:100%;flex-wrap:nowrap;overflow:auto hidden;scroll-behavior:smooth;justify-content:center}
   [class*=c-step-list-type][class*=-list-type-5]>li:before{display:block;position:static;content:"0" counter(stepCounter);font-weight:400;font-size:1.4rem;line-height:1.4rem}
   [class*=c-step-list-type][class*=-list-type-5] .info-title{font-weight:400;font-size:1.5rem !important;line-height:1.5rem}
+
+  .detail-form .detail-list .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
+  .detail-form .detail-list .form-table .form-cell {width: 33.3%;}
+
 }
 
 
@@ -118,6 +124,8 @@
   .editbox .line .form-cell {border-bottom: 0.1rem solid var(--color-neutral-40);}
   .dp-n {display: none;}
 
+  .detail-form .detail-list .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
+  .detail-form .detail-list .form-table .form-cell {width: 50%;}
 
   .group-box-wrap {display: block; height: auto !important;}
   .file-link {height: auto !important; line-height: auto !important;}
@@ -125,6 +133,7 @@
   .c-step-wrap ol{position:relative;display:flex;width:100%;flex-wrap:nowrap;overflow:auto hidden;scroll-behavior:smooth}
   [class*=c-step-list-type][class*=-list-type-5]>li:before{display:block;position:static;content:"0" counter(stepCounter);font-weight:400;font-size:1.4rem;line-height:1.4rem}
   [class*=c-step-list-type][class*=-list-type-5] .info-title{font-weight:400;font-size:1.5rem !important;line-height:1.5rem}
+
 }
 
 
@@ -154,4 +163,7 @@
   .c-step-wrap ol{overflow:auto hidden;scroll-behavior:smooth}
   [class*=c-step-list-type][class*=-list-type-5]>li:before{display:block;position:static;content:"0" counter(stepCounter);font-weight:400;font-size:1.4rem;line-height:1.4rem}
   [class*=c-step-list-type][class*=-list-type-5] .info-title{font-weight:400;font-size:1.5rem !important;line-height:1.5rem}
+
+  .detail-form .detail-list .form-table .form-cell {width: 100%;}
+
 }

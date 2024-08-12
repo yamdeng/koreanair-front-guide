@@ -171,6 +171,7 @@
   + .pop_btns {
     /*border-top: 1px solid #{$col-gray350};*/
     padding-top: 2.0rem;
+    :disabled {background:var(--color-neutral-30);color:var(--color-neutral-50);border:0;}
     @include mobile {
       border-top: none;
     }
@@ -531,4 +532,39 @@
 .selectlist .departmentlist .list {margin: 1.0rem 0 0 0; position: relative; height: 12.0rem; overflow: auto;}
 .selectlist .departmentlist .list li {width: 28.0rem; height: 3.0rem; margin: 0.3rem 0; text-overflow:ellipsis; white-space: nowrap; overflow: hidden;}
 .selectlist .departmentlist .delete {background: url(../images/delete-text.svg)center center no-repeat; font-size: 0; width: 2.0rem; height: 2.0rem;position: absolute; right: 0;}
+
+/*위험레벨 조회*/
+.RiskLevel-box{display:flex;width:100%;min-width:76.7rem;height:100%;overflow:auto;gap:0 2.0rem}
+.RiskLevel-box .RiskLevel-list{padding:2.0rem;width:40%;height:auto;border:0.1rem solid var(--color-neutral-40);border-radius:0.8rem;background-color: var(--color-neutral-20)}
+.RiskLevel-box .RiskLevel-top-box{display:flex;justify-content: space-between; margin-bottom:1.0rem;}
+
+.h4-tit{font-size:1.8rem;font-weight:600;}
+.RiskLevel-box .RiskLevel-list .list-box-a{height:100%}
+.RiskLevel-box .RiskLevel-list .search_box .list{position:relative;width:30rem;margin:1rem 0;height:23rem;overflow:auto}
+.RiskLevel-box .RiskLevel-list .search_box .list li{width:25rem;height: 3rem;margin: 0.3rem 0;text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
+.RiskLevel-box .RiskLevel-list .search_box .list li a.active{font-weight:700;}
+.RiskLevel-box .RiskLevel-list .list-box-b{height:100%}
+
+.boxlist-wrap{box-sizing:border-box;min-width:30rem}
+.RiskLevel-box .RiskLevel-area{width:60%;height:auto;}
+.RiskLevel-box .RiskLevel-area .Level-area{display:flex;width:100%;gap:0 1.0rem}
+
+.RiskLevel-box .RiskLevel-area .Level-area .LevelLeft{float:left;width:40%}
+.RiskLevel-box .RiskLevel-area .Level-area .LevelRight{float:right;width:60%}
+.RiskLevel-box .RiskLevel-area .Level-area-bottom{display:block;width:100%;margin-top:0.5rem}
+
+.RiskLevelTable{width:100%;border-collapse:collapse}
+.RiskLevelTable.left th{height:4.0rem}
+.RiskLevelTable.left td{padding:1.0rem;text-align:center;vertical-align:middle;border:solid 1px var(--color-neutral-40)}
+.RiskLevelTable th{width:2.0rem;height:2.0rem;line-height:1.8rem;vertical-align:middle;background-color:var(--color-neutral-20);color:var(--color-neutral-80);font-size:1.4rem;border:solid 1px var(--color-neutral-40)}
+.RiskLevelTable td{width:100px;height:50px;font-size:1.4rem;text-align:center;color:var(--color-neutral-80);border:solid 1px var(--color-neutral-20)}
+.RiskLevelTable td.level1{background-color:var(--color-Level)}
+.RiskLevelTable td.level2{background-color:var(--color-Leve2)}
+.RiskLevelTable td.level3{background-color:var(--color-Leve3)}
+.RiskLevelTable td.level4{background-color:var(--color-Leve4)}
+
+.RiskLevelTable.Risk td{font-weight:600;vertical-align: middle;}
+.RiskLevelTable.Risk td span{display: block;font-size:1.4rem;}
+.RiskLevelTable.severity th{height:2.5rem}
+.RiskLevelTable.severity td{text-align:left;line-height:1.4;color:var(--color-neutral-80);border:solid 1px var(--color-neutral-20)}
 
