@@ -152,11 +152,11 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
 });
 
 // generate 문자열 반환 : /api/generate/:tableName
-app.get('/api/generate/:tableName', async (req, res) => {
+app.post('/api/generate/:tableName', async (req, res) => {
   const tableName = req.params.tableName;
-  let columnList = req.query.checkedColumns || [];
-  let checkedMultiColumn = req.query.checkedMultiColumn && req.query.checkedMultiColumn === 'true' ? true : false;
-  let checkedModalUseState = req.query.checkedModalUseState && req.query.checkedModalUseState === 'true' ? true : false;
+  let columnList = req.body.checkedColumns || [];
+  let checkedMultiColumn = req.body.checkedMultiColumn && req.body.checkedMultiColumn === 'true' ? true : false;
+  let checkedModalUseState = req.body.checkedModalUseState && req.body.checkedModalUseState === 'true' ? true : false;
 
   let result = {};
   try {
