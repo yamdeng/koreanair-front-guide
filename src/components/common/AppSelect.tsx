@@ -37,6 +37,7 @@ function AppSelect(props) {
     allValue = '',
     style = { width: '100%' },
     labelOnlyTop = false,
+    isMultiple = false,
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
@@ -67,6 +68,7 @@ function AppSelect(props) {
     <>
       <Select
         {...props}
+        mode={isMultiple ? 'multiple' : ''}
         status={!isFocused && errorMessage ? 'error' : ''}
         style={style}
         className={applyClassName}
