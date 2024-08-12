@@ -21,8 +21,6 @@ const isFirstOnline = navigator.onLine;
 function App() {
   const [isNetworkOnline, setIsNetworkOnline] = useState(isFirstOnline);
 
-  console.log(isNetworkOnline);
-
   const aviationRoute = useAviationRoute();
   const occupationRoute = useOccupationRoute();
   const { initApp, isInitComplete } = useStore(useAppStore, (state) => state) as any;

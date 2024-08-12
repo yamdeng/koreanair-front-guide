@@ -17,10 +17,7 @@ export default function AdminLayout() {
           <div className="LNB_side">
             <ul className="LNB_list">
               {leftMenuList.map((rootDepthMenuInfo) => {
-                const { treeType, level, nameKor, menuId, isMenuExapand, children } = rootDepthMenuInfo;
-
-                console.log(treeType);
-                console.log(level);
+                const { nameKor, menuId, isMenuExapand, children } = rootDepthMenuInfo;
 
                 let childrenMenuComponent = null;
                 if (children && children.length && isMenuExapand) {

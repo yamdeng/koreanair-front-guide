@@ -189,11 +189,9 @@ function AppTable(props) {
 
   const searchEnableRowSpanColumnInfo = columns.find((info) => info.enableRowSpan);
   const enableRowSpanColumnName = searchEnableRowSpanColumnInfo ? searchEnableRowSpanColumnInfo.field : '';
-  console.log(`enableRowSpanColumnName : ${enableRowSpanColumnName}`);
 
   const onPaginationChanged = useCallback(
     (params) => {
-      console.log(params);
       // pageSize가 변경되었을 경우
       if (params.newPageSize) {
         const newPageSize = params.api.paginationGetPageSize();

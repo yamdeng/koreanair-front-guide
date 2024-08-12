@@ -1,6 +1,4 @@
 function GridActionButtonComponent(props) {
-  console.log(props);
-
   const { data, actionButtons, actionButtonListPath, search } = props;
   const detailId = data.id;
   const restListUri = actionButtonListPath ? actionButtonListPath : location.pathname;

@@ -83,7 +83,6 @@ export const createFormSliceYup = (set, get) => ({
     const isValid = await validate();
     if (isValid) {
       const apiParam = getApiParam();
-      console.log(`apiParam : ${JSON.stringify(apiParam)}`);
       if (formType === FORM_TYPE_ADD) {
         await ApiService.post(`${formApiPath}`, apiParam);
       } else {
