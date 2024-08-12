@@ -4,7 +4,7 @@ import UserSelectWithOrgTreeModal from '../modal/UserSelectWithOrgTreeModal';
 import AppSearchInput from './AppSearchInput';
 
 function AppUserSelectInput(props) {
-  const { value, onChange, withTree = false } = props;
+  const { value, onChange, withOrgTree = false } = props;
   const [isUserSelectModalopen, setIsUserSelectModalopen] = useState(false);
 
   const clearHandler = () => {
@@ -27,7 +27,7 @@ function AppUserSelectInput(props) {
         clearHandler={clearHandler}
         value={searchInputValue}
       />
-      {withTree ? (
+      {withOrgTree ? (
         <UserSelectWithOrgTreeModal
           isOpen={isUserSelectModalopen}
           closeModal={() => setIsUserSelectModalopen(false)}

@@ -161,7 +161,6 @@ function MemberSelectModal(props) {
               <div className="tree_wrap tree-right-space">
                 <div className="tree_box bg" style={{ height: '35rem' }}>
                   <Tree
-                    className="draggable-tree"
                     blockNode
                     checkedKeys={checkedKeys}
                     treeData={treeData}

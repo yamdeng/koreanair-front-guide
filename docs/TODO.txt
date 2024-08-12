@@ -1,116 +1,22 @@
-1.관리자 트리 스크롤
-
-2.사전에 공통 컴포넌트 포팅 체크하기
- -css
- -yamdeng : main, user
- -내부
-
-3.yarn lint, build 한꺼번에 체크하기
-
-4.AppSelect
- -allValue
- -multiple 모드 체크
-
-5.로컬에서 관리자 서버 가동하기
- -관리자 서버 동작확인 및 버그 수정
- -사용자 / 관리자 서버 로컬에 띄우고 간단히 정리하기
-  : mac에서도 가동하기
-
-4.css 다시 한번 정리하기
- -목록
- -폼 : 라디오, 체크박스 반영
- -상세
-
-99.메뉴얼 최신화
+0.파일다운로드
+1.store reset 아래로 통일
+clear: () => {
+  set({ ...listBaseState });
+},
+2.form clear 확인하기
+3.number일 경우 nullable 추가
+4.formSlice clear 추가
+5.genereate : 공통 컴포넌트 전체 basic 사용가이드 정리하면 generate 시에 필수 속성들 나열할 부분 정리하기
+6.generate : 50, 100 반영하기
+7.generate : modal generate fix 하기
+8.generate : checkboxgroup 분류하기
+9.store을 안에 넣을지 여부 체크박스
+10.검색 input box 처리하기 위한 부분을 반영 : 내가 사용하기 위한
 
 
 
-
-CodeSelect
- -isRemote : true / false
- -codeGrpId
-
-1.store에 현재 다국어 반영하기
- -appStore에 locale
-
-2.useEffect mount시에 callg하기
- -변경 감지는 codeGrpId
-
-3.CommonUtil.getLocaleCodeKeyName(locale)
- -ko === 
-
-4.조직도 다국어 컬럼
-CommonUtil.getLocaleColumnUserName
-CommonUtil.getLocaleColumnUserRankName
-CommonUtil.getLocaleColumnUserDeptName
-CommonUtil.getLocaleColumnUserDeptName
-
-5.메뉴 다국어 반영
-CommonUtil.getLocaleColumnMenuName
-
-6.키 기준으로 다국어 반영
-LocalService.getMessage('messageKey', '없을경우반영할 라벨')
- -두번째 파라미터가 존재하지 않으면 첫번재로 반영, 두번째 파라미터 존재시 첫번째 메시지가 존재하지 않으면 두번째 파라미터 적용
- i18n('common.message.save', '저장')
- i18n('common.message.save')
- i18n('저장')
-
-
-
-
-
-1.모달 fix : 11:15
- -(global) 사용자 선택 : single, multiple ===> UserSelectModal.tsx, UserSelectWithDeptTreeModal.tsx
- -(global) 부서 선택 반영하기 : single, multiple ===> OrgTreeSelectModal.tsx
- -사용자, 부서 선택 반영하기
-  : UserSelectInput.tsx
-  : DeptSelectInput.tsx
-
-2.사용자 메뉴에 시현 관리 메뉴를 생성해서 시현하기
- -항공안전 > 개발가이드 가이드
-  1.사용자 선택 모달 사용 방법
-  2.부서 선택 모달 사용 방법
-  3.사용자 선택 input 사용 방법
-  4.부서 선택 input 사용 방법
- 
-#.yarn lint, build 적용
-
-#.시현할 사항 정리하기
- -관리자 사이트 만든 부분 시현하기
- -공통 컴포넌트 설명 : 일반 input
- -CodeSelect : isRemote
- -다국어 반영하기
- -loading 수동으로 사용하는 방법 설명
- -api 서버 연동하는 방법 설명
- -api 옵션 bypass 및 에러 무시하는 방법 설명
- -ModalService : 자주 사용하는 컴포넌트 나열(<Modal/> 을 render 영역에 않넣기 위한 global 모달 사용방법)
- -ToastService 사용 방법
- -퍼블리싱 해놓은 사항 포팅하는 방법 설명하기
- -소스 generate 사용방법 설명
- @.문서화 1차 fix는 차주에 진행 예정. 개발을 진짜로 진행할거면
-
-#.
-
-
-
-1.CodeSelect 반영
- -<AppCodeSelect isRemote codeGrpId="CODE_GRP_303" style={{ width: '300px' }} />
-
-
-
-
-
-4.조직도 다국어 컬럼
-CommonUtil.getLocaleColumnUserName
-CommonUtil.getLocaleColumnUserRankName
-CommonUtil.getLocaleColumnUserDeptName
-CommonUtil.getLocaleColumnUserDeptName
-
-5.메뉴 다국어 반영
-CommonUtil.getLocaleColumnMenuName
-
-
-
-
+13.관리자 기능 bug fix 하기
+99.AppFileAttach
+0.yarn lint, build 한꺼번에 체크하기
 
 

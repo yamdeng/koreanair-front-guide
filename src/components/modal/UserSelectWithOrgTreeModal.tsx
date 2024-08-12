@@ -1,9 +1,12 @@
 import AppTable from '@/components/common/AppTable';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
 import { useCallback, useEffect, useState } from 'react';
+import { Tree } from 'antd';
 import Modal from 'react-modal';
 import { create } from 'zustand';
 import AppSearchInput from '../common/AppSearchInput';
+import ApiService from '@/services/ApiService';
+import CommonUtil from '@/utils/CommonUtil';
 
 const initListData = {
   ...listBaseState,
@@ -40,6 +43,7 @@ const SysUserListStore = create<any>((set, get) => ({
 }));
 
 function UserSelectWithOrgTreeModal(props) {
+  const [treeData, setTreeData] = useState([]);
   const { isOpen, closeModal, isMultiple = false, ok } = props;
 
   const state = SysUserListStore();
@@ -62,8 +66,23 @@ function UserSelectWithOrgTreeModal(props) {
   const [selectUserList, setSelectUserList] = useState([]);
   const [selectUserInfo, setSelectUserInfo] = useState(null);
 
-  const { enterSearch, searchParam, list, changeSearchInput, initSearchInput, clear } = state;
+  const { enterSearch, searchParam, list, setList, changeSearchInput, initSearchInput, clear } = state;
   const { searchWord } = searchParam;
+
+  const onSelect = useCallback(
+    async (selectedKeys) => {
+      const apiUrl = import.meta.env.VITE_API_URL_USERS;
+      const apiParam = { deptCd: selectedKeys[0], searchWord: searchWord };
+      const apiResult = await ApiService.get(apiUrl, apiParam);
+      const list = apiResult.data || [];
+      list.forEach((listInfo) => {
+        listInfo.checked = false;
+        listInfo.selectedType = 'U';
+      });
+      setList(list);
+    },
+    [isOpen, searchWord]
+  );
 
   const handleRowDoubleClick = useCallback((selectedInfo) => {
     const { data } = selectedInfo;
@@ -102,9 +121,24 @@ function UserSelectWithOrgTreeModal(props) {
     clear();
   };
 
+  const getOrgTree = useCallback(async () => {
+    const apiUrl = import.meta.env.VITE_API_URL_DEPTS;
+    const apiResult = await ApiService.get(apiUrl, {
+      pageNum: 1,
+      pageSize: 100000,
+    });
+    const list = apiResult.data;
+    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', '0');
+    setTreeData(treeData);
+  }, [isOpen]);
+
   useEffect(() => {
-    return clear;
-  }, []);
+    if (isOpen) {
+      getOrgTree();
+    } else {
+      clear();
+    }
+  }, [isOpen]);
 
   let saveDisabled = false;
   if (isMultiple) {
@@ -130,6 +164,15 @@ function UserSelectWithOrgTreeModal(props) {
         <h3 className="pop_title">사용자 목록</h3>
         <div className="pop_full_cont_box">
           <div className="pop_flex_group">
+            <div className="tree_wrap">
+              <Tree
+                blockNode
+                treeData={treeData}
+                checkStrictly
+                onSelect={onSelect}
+                fieldNames={{ title: 'nameKor', key: 'deptCd' }}
+              />
+            </div>
             <div className="pop_cont_form">
               <div className="boxForm">
                 <div id="" className="area-detail active">

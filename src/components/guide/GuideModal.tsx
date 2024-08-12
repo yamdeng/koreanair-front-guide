@@ -73,7 +73,7 @@ function GuideModal() {
       <UserSelectWithOrgTreeModal
         isOpen={isUserWithOrgSelectModalopen}
         closeModal={() => setIsUserWithOrgSelectModalopen(false)}
-        isMultiple={false}
+        isMultiple={true}
         ok={handleUserWithOrgSelectModal}
       />
     </>
