@@ -9,18 +9,6 @@ import { FORM_TYPE_ADD, FORM_TYPE_UPDATE } from '@/config/CommonConstant';
   기본 form slice
 
 */
-export const defaultFormExcludeKeys = [
-  'autoSaveApiPath',
-  'requiredFields',
-  'excludeApiKeys',
-  'errors',
-  'isDirty',
-  'isValid',
-  'yupFormSchema',
-  'formApiPath',
-  'baseRoutePath',
-  'detailInfo',
-];
 
 export const formBaseState = {
   detailInfo: {},
@@ -31,9 +19,7 @@ export const formBaseState = {
   excludeApiKeys: [],
   formDetailId: null,
   formType: FORM_TYPE_ADD,
-  formApiPath: '',
   formName: '',
-  baseRoutePath: '',
   formValue: {},
 };
 

@@ -1,70 +1,37 @@
-import CommonUtil from '@/utils/CommonUtil';
-import classNames from 'classnames';
-
-/*
-
-  <AppTextInput 
-    inputType={'number'}
-    id={''}
-    name={'id와 동일하기 전달'}
-    label='이름 or messageKey'
-    value={value}
-    onChange={onChange}
-    placeholder=''
-    errorMessage=''
-    requried={true}
-    hiddenClearButton={true}
-    style = {}
-  />
-
-*/
+import { useState } from 'react';
+import OrgTreeSelectModal from '../modal/OrgTreeSelectModal';
+import AppSearchInput from './AppSearchInput';
 
 function AppDeptSelectInput(props) {
-  const {
-    inputType = 'text',
-    name = '',
-    id = CommonUtil.getUUID(),
-    label,
-    value,
-    onChange,
-    placeholder = '',
-    required = false,
-    errorMessage,
-    hiddenClearButton = false,
-    style = {},
-    disabled = false,
-  } = props;
-  let isActiveClass = false;
-  if (inputType === 'number') {
-    if (value !== null && value !== undefined && value !== '') {
-      isActiveClass = true;
-    }
-  }
-  const applyClassName = classNames('form-tag', { error: errorMessage, active: isActiveClass });
+  const { value, onChange } = props;
+  const [isOrgSelectModalopen, setIsOrgSelectModalopen] = useState(false);
+
+  const clearHandler = () => {
+    onChange(null);
+  };
+
+  const handleOrgSelectModal = (selectedValue) => {
+    onChange(selectedValue);
+    setIsOrgSelectModalopen(false);
+  };
+
+  const searchInputValue = value ? value.nameKor : '';
+
   return (
     <>
-      <input
-        id={id}
-        type={inputType}
-        style={style}
-        className={applyClassName}
-        name={name}
-        value={value}
-        onChange={(event) => {
-          onChange(event.target.value, event);
-        }}
-        placeholder={placeholder}
-        disabled={disabled}
+      <AppSearchInput
+        {...props}
+        disabled
+        search={() => setIsOrgSelectModalopen(true)}
+        clearHandler={clearHandler}
+        value={searchInputValue}
       />
-      <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
-        {label} {required ? <span className="required">*</span> : null}
-      </label>
-      {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
-        <button className="btnClear" onClick={() => onChange('')}></button>
-      )}
-      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
-        {errorMessage}
-      </span>
+      <OrgTreeSelectModal
+        isOpen={isOrgSelectModalopen}
+        closeModal={() => setIsOrgSelectModalopen(false)}
+        isMultiple={false}
+        ok={handleOrgSelectModal}
+      />
     </>
   );
 }

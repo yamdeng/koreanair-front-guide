@@ -15,6 +15,22 @@ const useAppStore = createStore<any>((set, get) => ({
   codeAllList: [],
   codeAllMap: {},
   currentLocale: 'ko',
+  apiCacheMap: {},
+  getCacheData: (cacheKey) => {
+    const { apiCacheMap } = get();
+    const cacheData = apiCacheMap[cacheKey];
+    if (cacheData) {
+      return cacheData;
+    } else {
+      return null;
+    }
+  },
+
+  setCacheData: (cacheKey, data) => {
+    const { apiCacheMap } = get();
+    apiCacheMap[cacheKey] = data;
+    set({ formValue: apiCacheMap });
+  },
 
   initApp: async () => {
     LoadingBar.show();

@@ -3,27 +3,7 @@ import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
 import history from '@/utils/history';
 
-export const defaultListExcludeKeys = [
-  'list',
-  'excludeApiKeys',
-  'displayTableLoading',
-  'listApiPath',
-  'beforeApiParam',
-  'currentPage',
-  'pageSize',
-  'totalCount',
-  'prevPage',
-  'nextPage',
-  'lastPage',
-  'displayPageIndexList',
-  'listApiMethod',
-  'columns',
-  'baseRoutePath',
-  'disablePaging',
-];
-
 export const listBaseState = {
-  listApiPath: '',
   beforeApiParam: {},
   displayTableLoading: false,
   list: [],
@@ -35,8 +15,6 @@ export const listBaseState = {
   nextPage: null,
   displayPageIndexList: [],
   pageSize: 10,
-  listApiMethod: 'get',
-  baseRoutePath: '',
   searchParam: {},
   isExpandDetailSearch: true,
 };
@@ -133,8 +111,9 @@ export const createListSlice = (set, get) => ({
 
   search: async () => {
     const { listApiPath, getSearchParam, setTotalCount, listApiMethod, disablePaging } = get();
+    const applyListApiMethod = listApiMethod || 'get';
     const apiParam = getSearchParam();
-    const apiResult: any = await ApiService[listApiMethod](listApiPath, apiParam, { disableLoadingBar: true });
+    const apiResult: any = await ApiService[applyListApiMethod](listApiPath, apiParam, { disableLoadingBar: true });
     const data = apiResult.data;
     const list = disablePaging ? data : data.list;
     const totalCount = disablePaging && list ? list.length : data.total;

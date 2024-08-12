@@ -35,6 +35,7 @@ function AppSelect(props) {
     errorMessage,
     applyAllSelect = false,
     allValue = '',
+    allLabel = '전체',
     style = { width: '100%' },
     labelOnlyTop = false,
     isMultiple = false,
@@ -50,7 +51,7 @@ function AppSelect(props) {
     setIsFocused(false);
   };
 
-  const applyOptions = applyAllSelect ? [{ label: '전체', value: allValue }, ...options] : options;
+  const applyOptions = applyAllSelect ? [{ label: allLabel, value: allValue }, ...options] : options;
   let isSelectedClass = false;
   if (value) {
     if (Array.isArray(value)) {

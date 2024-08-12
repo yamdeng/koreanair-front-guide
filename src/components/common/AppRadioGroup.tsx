@@ -1,38 +1,45 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 
-function AppCheckbox(props) {
+function AppRadioGroup(props) {
   const {
     id = CommonUtil.getUUID(),
     name = '',
     label,
-    value = false,
+    options = [],
+    value,
     onChange,
     required = false,
     errorMessage,
     disabled = false,
     noBorder = false,
   } = props;
+  const selectedValue = value;
   const applyClassName = classNames('radio-wrap', { error: errorMessage, 'border-no': noBorder });
-
   return (
     <>
       <span className="txt" style={{ display: !noBorder && label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </span>
       <div id={id} className={applyClassName}>
-        <label key={label}>
-          <input
-            type="checkbox"
-            name={name}
-            disabled={disabled}
-            checked={value}
-            onChange={(event) => {
-              onChange(event.target.checked, event);
-            }}
-          />
-          <span>{label}</span>
-        </label>
+        {options.map((info) => {
+          const { value, label } = info;
+          return (
+            <label key={label}>
+              <input
+                type="radio"
+                name={name}
+                disabled={disabled}
+                value={value}
+                checked={selectedValue === value}
+                onChange={(event) => {
+                  onChange(event.target.value, event);
+                }}
+              />
+              <span>{label}</span>
+            </label>
+          );
+        })}
       </div>
       <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
         error
@@ -41,4 +48,4 @@ function AppCheckbox(props) {
   );
 }
 
-export default AppCheckbox;
+export default AppRadioGroup;

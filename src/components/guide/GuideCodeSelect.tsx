@@ -1,5 +1,7 @@
 import AppCodeSelect from '../common/AppCodeSelect';
+import AppSelect from '../common/AppSelect';
 import i18n from '@/services/i18n';
+import Code from '@/config/Code';
 
 function GuideCodeSelect() {
   //admin.AdminMain.CodeAdmin.cancel
@@ -15,17 +17,32 @@ function GuideCodeSelect() {
         <div className="form-table">
           <div className="form-cell wid50">
             <div className="form-group wid100">
-              <AppCodeSelect label="다국어 code 확인" codeGrpId="CODE_GRP_303" />
+              <AppCodeSelect label="다국어 code 확인" codeGrpId="CODE_GRP_303" apply />
             </div>
           </div>
         </div>
         <div className="form-table">
           <div className="form-cell wid50">
             <div className="form-group wid100">
-              <AppCodeSelect label="다국어 code 확인(remote)" isRemote codeGrpId="CODE_GRP_303" />
+              <AppCodeSelect label="다국어 code 확인(remote)" isRemote codeGrpId="CODE_GRP_303" isMultiple />
             </div>
           </div>
         </div>
+        <div className="form-table">
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppSelect
+                id="useSysCodeGroupFormStoreworkScope"
+                name="workScope"
+                label="업무구분"
+                required
+                options={Code.adminWorkScope}
+                isMultiple
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="form-table">
           <div className="form-cell wid50">
             <div className="form-group wid100">

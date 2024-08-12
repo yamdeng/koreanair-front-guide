@@ -28,6 +28,7 @@ function AppSearchInput(props) {
     style = {},
     search,
     disabled = false,
+    clearHandler = null,
   } = props;
   return (
     <>
@@ -52,7 +53,9 @@ function AppSearchInput(props) {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label}
       </label>
-      {!disabled && value ? <button className="sch-btnClear" onClick={() => onChange('')}></button> : null}
+      {value ? (
+        <button className="sch-btnClear" onClick={() => (clearHandler ? clearHandler() : onChange(''))}></button>
+      ) : null}
       <button type="button" className="icon-sch" onClick={search}></button>
     </>
   );

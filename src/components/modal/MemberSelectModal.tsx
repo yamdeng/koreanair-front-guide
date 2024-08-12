@@ -16,8 +16,9 @@ function MemberSelectModal(props) {
 
   const onSelect = useCallback(
     async (selectedKeys) => {
+      const apiUrl = import.meta.env.VITE_API_URL_USERS;
       const apiParam = { deptCd: selectedKeys[0] };
-      const response = await ApiService.get('sys/common/users', apiParam);
+      const response = await ApiService.get(apiUrl, apiParam);
       const list = response.data || [];
       list.forEach((listInfo) => {
         listInfo.checked = false;
@@ -42,7 +43,8 @@ function MemberSelectModal(props) {
   const searchUser = async () => {
     if (userSearchInputValue) {
       const apiParam = { searchWord: userSearchInputValue };
-      const response = await ApiService.get('sys/common/users', apiParam);
+      const apiUrl = import.meta.env.VITE_API_URL_USERS;
+      const response = await ApiService.get(apiUrl, apiParam);
       const list = response.data || [];
       list.forEach((listInfo) => {
         listInfo.checked = false;
@@ -63,7 +65,8 @@ function MemberSelectModal(props) {
   }, []);
 
   const getOrgTree = useCallback(async () => {
-    const response = await ApiService.get('sys/depts', {
+    const apiUrl = import.meta.env.VITE_API_URL_DEPTS;
+    const response = await ApiService.get(apiUrl, {
       pageNum: 1,
       pageSize: 100000,
     });
