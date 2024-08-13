@@ -1,5 +1,6 @@
 import ApiService from '@/services/ApiService';
 import ModalService from '@/services/ModalService';
+import ToastService from '@/services/ToastService';
 import history from '@/utils/history';
 import _ from 'lodash';
 import { FORM_TYPE_ADD, FORM_TYPE_UPDATE } from '@/config/CommonConstant';
@@ -82,13 +83,20 @@ export const createFormSliceYup = (set, get) => ({
     const { validate, getApiParam, formType, formDetailId, formApiPath, baseRoutePath } = get();
     const isValid = await validate();
     if (isValid) {
-      const apiParam = getApiParam();
-      if (formType === FORM_TYPE_ADD) {
-        await ApiService.post(`${formApiPath}`, apiParam);
-      } else {
-        await ApiService.put(`${formApiPath}/${formDetailId}`, apiParam);
-      }
-      history.push(`${baseRoutePath}`);
+      ModalService.confirm({
+        body: '저장하시겠습니까?',
+        ok: async () => {
+          const apiParam = getApiParam();
+          console.log(`apiParam : ${JSON.stringify(apiParam)}`);
+          if (formType === FORM_TYPE_ADD) {
+            await ApiService.post(`${formApiPath}`, apiParam);
+          } else {
+            await ApiService.put(`${formApiPath}/${formDetailId}`, apiParam);
+          }
+          ToastService.success('저장되었습니다.');
+          history.push(`${baseRoutePath}`);
+        },
+      });
     }
   },
 
