@@ -14,7 +14,7 @@ const {
   formModalGenerateString,
   formUseStateModalGenerateString,
   detailModalGenerateString,
-  searchFormGenerateString
+  searchFormGenerateString,
 } = require('./generate-string');
 
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE, SERVER_PORT } = process.env;
@@ -139,7 +139,12 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
       }
     }
     if (generateType === 'all' || generateType === 'searchForm') {
-      searchFormFileName = await createSearchFormfile(tableName, columnList, checkedMultiColumn, checkedSearchFormDetail);
+      searchFormFileName = await createSearchFormfile(
+        tableName,
+        columnList,
+        checkedMultiColumn,
+        checkedSearchFormDetail
+      );
       if (generateType === 'searchForm') {
         downloadFileName = modalViewFileName;
       }
@@ -152,7 +157,7 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
         detailViewFileName,
         modalFormFileName,
         modalViewFileName,
-        searchFormFileName
+        searchFormFileName,
       ]);
     }
   } catch (e) {
@@ -239,7 +244,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
       importList: createCommonImportListToColumnList(columnList),
       tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
       checkedMultiColumn: checkedMultiColumn,
-      checkedSearchFormDetail: checkedSearchFormDetail
+      checkedSearchFormDetail: checkedSearchFormDetail,
     };
 
     const formViewContent = ejs.render(formViewGenerateString, formViewData);
@@ -394,10 +399,8 @@ async function createModalViewfile(tableName, columnList, checkedMultiColumn) {
   return `./result/${applyFileName}DetailModal.tsx`;
 }
 
-
 // search form 파일 생성
 function createSearchFormfile(tableName, columnList, checkedMultiColumn, checkedSearchFormDetail) {
-
   // 템플릿에서 대체할 변수들
   let camelCaseTableName = _.camelCase(tableName);
   const applyFileName = getApplyFileName(camelCaseTableName);
@@ -409,7 +412,7 @@ function createSearchFormfile(tableName, columnList, checkedMultiColumn, checked
     tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
     checkedMultiColumn: checkedMultiColumn,
     importList: createCommonImportListToColumnList(columnList),
-    checkedSearchFormDetail: checkedSearchFormDetail
+    checkedSearchFormDetail: checkedSearchFormDetail,
   };
   const content = ejs.render(searchFormGenerateString, data);
   fs.writeFileSync(`./result/${applyFileName}SearchForm.tsx`, content);
@@ -438,7 +441,7 @@ function getApplyFileName(camelCaseTableName) {
   return camelCaseTableName.slice(2);
 }
 
-function toMultiArray(array, spliceCount = 2) {
+function toMultiArray(array, spliceCount = 2) {  
   const originalArray = _.cloneDeep(array);
   const results = [];
   // eslint-disable-next-line no-constant-condition
@@ -446,7 +449,22 @@ function toMultiArray(array, spliceCount = 2) {
     if (!originalArray.length) {
       break;
     }
-    const removeArray = originalArray.splice(0, spliceCount);
+    const firstComponentType = originalArray[0].componentType;
+    let secondComponentType = null;
+    if (originalArray.length > 1) {
+      secondComponentType = originalArray[1].componentType;
+    }
+
+    let fullComponent = false;
+    if (firstComponentType === 'textarea' || firstComponentType === 'editor' || firstComponentType === 'file') {
+      fullComponent = true;
+    }
+    if (secondComponentType) {
+      if (secondComponentType === 'textarea' || secondComponentType === 'editor' || secondComponentType === 'file') {
+        fullComponent = true;
+      }
+    }
+    const removeArray = fullComponent ? originalArray.splice(0, 1) : originalArray.splice(0, spliceCount);
     results.push(removeArray);
   }
   return results;
@@ -463,13 +481,11 @@ function converColumnList(columnList) {
       info.componentType = 'text';
     }
 
-    
-
     if (!info.codeGroupId) {
       info.codeGroupId = '';
     }
     info.formGroupClassName = 'form-group';
-    if(info.componentType === 'radio' || info.componentType === 'checkboxgroup' || info.componentType === 'checkbox') {
+    if (info.componentType === 'radio' || info.componentType === 'checkboxgroup' || info.componentType === 'checkbox') {
       info.formGroupClassName = 'group-box-wrap';
     }
 
@@ -482,15 +498,15 @@ function converColumnList(columnList) {
       yupType = 'boolean';
       formInitValue = 'false';
     }
-    if(yupType === 'number') {
-      if(info.is_nullable === 'YES') {
-        info.yupType = yupType + '().nullable()'       
-      } else{
-        info.yupType = yupType + '().required()'       
-      }      
+    if (yupType === 'number') {
+      if (info.is_nullable === 'YES') {
+        info.yupType = yupType + '().nullable()';
+      } else {
+        info.yupType = yupType + '().required()';
+      }
     } else {
       info.yupType = yupType + '()' + (info.is_nullable !== 'YES' ? '.required()' : '');
-    }    
+    }
     info.formInitValue = formInitValue;
 
     return info;
@@ -547,6 +563,6 @@ app.listen(port, () => {
 });
 
 const resultDirectory = path.join(__dirname, 'result');
-if(!fs.existsSync(resultDirectory)) {
-  fs.mkdirSync(resultDirectory)
+if (!fs.existsSync(resultDirectory)) {
+  fs.mkdirSync(resultDirectory);
 }

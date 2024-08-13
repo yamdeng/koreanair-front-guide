@@ -203,8 +203,8 @@ function <%= fileName %>() {
         <h2>TODO : 헤더 타이틀</h2>
       </div>
       <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
-        <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>          
-          <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
+        <div className="<% if (rootArray.length > 1) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>          
+          <div className="<% if (rootArray.length > 1) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
             <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
               <AppTextInput
                 inputType="number"
@@ -371,7 +371,7 @@ function <%= fileName %>() {
             </div>
           </div><% }) %>
         </div>
-        <hr className="<% if (checkedMultiColumn) { %>line dp-n<% } else { %>line<% } %>"></hr>
+        <hr className="<% if (rootArray.length > 1) { %>line dp-n<% } else { %>line<% } %>"></hr>
         <% }) %>
       </div>
       {/* 하단 버튼 영역 */}
@@ -518,8 +518,8 @@ function <%= fileName %>(props) {
             <div className="pop_flex_group">
               <div className="pop_cont_form">
                 <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
-                  <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
-                    <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
+                  <div className="<% if (rootArray.length > 1) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
+                    <div className="<% if (rootArray.length > 1) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
                       <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
                         <AppTextInput
                           inputType="number"
@@ -686,7 +686,7 @@ function <%= fileName %>(props) {
                       </div>
                     </div><% }) %>
                   </div>
-                  <hr className="<% if (checkedMultiColumn) { %>line dp-n<% } else { %>line<% } %>"></hr>
+                  <hr className="<% if (rootArray.length > 1) { %>line dp-n<% } else { %>line<% } %>"></hr>
                   <% }) %>
                 </div>
               </div>
@@ -789,8 +789,8 @@ function <%= fileName %>(props) {
             <div className="pop_flex_group">
               <div className="pop_cont_form">
                 <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
-                  <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
-                    <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
+                  <div className="<% if (rootArray.length > 1) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
+                    <div className="<% if (rootArray.length > 1) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
                       <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
                         <AppTextInput
                           inputType="number"
@@ -957,7 +957,7 @@ function <%= fileName %>(props) {
                       </div>
                     </div><% }) %>
                   </div>
-                  <hr className="<% if (checkedMultiColumn) { %>line dp-n<% } else { %>line<% } %>"></hr>
+                  <hr className="<% if (rootArray.length > 1) { %>line dp-n<% } else { %>line<% } %>"></hr>
                   <% }) %>
                 </div>
               </div>
