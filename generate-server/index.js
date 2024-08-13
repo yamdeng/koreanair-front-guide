@@ -14,6 +14,7 @@ const {
   formModalGenerateString,
   formUseStateModalGenerateString,
   detailModalGenerateString,
+  searchFormGenerateString
 } = require('./generate-string');
 
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE, SERVER_PORT } = process.env;
@@ -87,6 +88,7 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
   let columnList = req.body.checkedColumns || [];
   let checkedMultiColumn = req.body.checkedMultiColumn;
   let checkedModalUseState = req.body.checkedModalUseState;
+  let checkedSearchFormDetail = req.body.checkedSearchFormDetail;
   let downloadFileName = '';
   try {
     converColumnList(columnList);
@@ -96,6 +98,7 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
     let detailViewFileName = '';
     let modalFormFileName = '';
     let modalViewFileName = '';
+    let searchFormFileName = '';
     if (generateType === 'all' || generateType === 'list') {
       listFileName = await createListfile(tableName, columnList);
       if (generateType === 'list') {
@@ -135,6 +138,12 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
         downloadFileName = modalViewFileName;
       }
     }
+    if (generateType === 'all' || generateType === 'searchForm') {
+      searchFormFileName = await createSearchFormfile(tableName, columnList, checkedMultiColumn, checkedSearchFormDetail);
+      if (generateType === 'searchForm') {
+        downloadFileName = modalViewFileName;
+      }
+    }
     if (generateType === 'all') {
       downloadFileName = await createZipArchive(tableName, [
         listFileName,
@@ -143,6 +152,7 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
         detailViewFileName,
         modalFormFileName,
         modalViewFileName,
+        searchFormFileName
       ]);
     }
   } catch (e) {
@@ -158,6 +168,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
   let columnList = req.body.checkedColumns || [];
   let checkedMultiColumn = req.body.checkedMultiColumn;
   let checkedModalUseState = req.body.checkedModalUseState;
+  let checkedSearchFormDetail = req.body.checkedSearchFormDetail;
 
   let result = {};
   try {
@@ -205,7 +216,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
     const modalFormData = {
       formName: `${applyFileName}Form`,
       fileName: `${applyFileName}FormModal`,
-      storeName: `use${applyFileName}ModalFormStore`,
+      storeName: `use${applyFileName}FormStore`,
       tableColumns: columnList,
       importList: createCommonImportListToColumnList(columnList),
       tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
@@ -214,11 +225,21 @@ app.post('/api/generate/:tableName', async (req, res) => {
 
     const modalDetailData = {
       fileName: `${applyFileName}DetailModal`,
-      storeName: `use${applyFileName}ModalFormStore`,
+      storeName: `use${applyFileName}FormStore`,
       tableColumns: columnList,
       importList: createCommonImportListToColumnList(columnList),
       tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
       checkedMultiColumn: checkedMultiColumn,
+    };
+
+    const searchFormData = {
+      fileName: `${applyFileName}SearchForm`,
+      storeName: `${applyFileName}ListStore`,
+      tableColumns: columnList,
+      importList: createCommonImportListToColumnList(columnList),
+      tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
+      checkedMultiColumn: checkedMultiColumn,
+      checkedSearchFormDetail: checkedSearchFormDetail
     };
 
     const formViewContent = ejs.render(formViewGenerateString, formViewData);
@@ -228,12 +249,14 @@ app.post('/api/generate/:tableName', async (req, res) => {
       modalFormData
     );
     const modalViewContent = ejs.render(detailModalGenerateString, modalDetailData);
+    const searchFormContent = ejs.render(searchFormGenerateString, searchFormData);
     result.listComponentContent = listComponentContent;
     result.formStoreContent = formStoreContent;
     result.formViewContent = formViewContent;
     result.detailViewContent = detailViewContent;
     result.modalFormContent = modalFormContent;
     result.modalViewContent = modalViewContent;
+    result.searchFormContent = searchFormContent;
   } catch (e) {
     console.log(e);
   }
@@ -341,7 +364,7 @@ async function createModalFormfile(tableName, columnList, checkedMultiColumn, ch
   const data = {
     formName: `${applyFileName}Form`,
     fileName: `${applyFileName}FormModal`,
-    storeName: `use${applyFileName}ModalFormStore`,
+    storeName: `use${applyFileName}FormStore`,
     tableColumns: columnList,
     tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
     checkedMultiColumn: checkedMultiColumn,
@@ -360,7 +383,7 @@ async function createModalViewfile(tableName, columnList, checkedMultiColumn) {
 
   const data = {
     fileName: `${applyFileName}DetailModal`,
-    storeName: `use${applyFileName}ModalFormStore`,
+    storeName: `use${applyFileName}FormStore`,
     tableColumns: columnList,
     tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
     checkedMultiColumn: checkedMultiColumn,
@@ -369,6 +392,28 @@ async function createModalViewfile(tableName, columnList, checkedMultiColumn) {
   const content = ejs.render(detailModalGenerateString, data);
   fs.writeFileSync(`./result/${applyFileName}DetailModal.tsx`, content);
   return `./result/${applyFileName}DetailModal.tsx`;
+}
+
+
+// search form 파일 생성
+function createSearchFormfile(tableName, columnList, checkedMultiColumn, checkedSearchFormDetail) {
+
+  // 템플릿에서 대체할 변수들
+  let camelCaseTableName = _.camelCase(tableName);
+  const applyFileName = getApplyFileName(camelCaseTableName);
+
+  const data = {
+    fileName: `${applyFileName}SearchForm`,
+    storeName: `use${applyFileName}ListStore`,
+    tableColumns: columnList,
+    tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
+    checkedMultiColumn: checkedMultiColumn,
+    importList: createCommonImportListToColumnList(columnList),
+    checkedSearchFormDetail: checkedSearchFormDetail
+  };
+  const content = ejs.render(searchFormGenerateString, data);
+  fs.writeFileSync(`./result/${applyFileName}SearchForm.tsx`, content);
+  return `./result/${applyFileName}SearchForm.tsx`;
 }
 
 // 파일 압축
@@ -464,6 +509,8 @@ function createCommonImportListToColumnList(columnList) {
       return `import AppCodeSelect from '@/components/common/AppCodeSelect';`;
     } else if (componentType === 'select') {
       return `import AppSelect from '@/components/common/AppSelect';`;
+    } else if (componentType === 'search-input') {
+      return `import AppSearchInput from '@/components/common/AppSearchInput';`;
     } else if (componentType === 'textarea') {
       return `import AppTextArea from '@/components/common/AppTextArea';`;
     } else if (componentType === 'editor') {
