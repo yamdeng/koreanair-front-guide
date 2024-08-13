@@ -538,15 +538,15 @@
 .RiskLevel-box .RiskLevel-list{padding:2.0rem;width:40%;height:auto;border:0.1rem solid var(--color-neutral-40);border-radius:0.8rem;background-color: var(--color-neutral-20)}
 .RiskLevel-box .RiskLevel-top-box{display:flex;justify-content: space-between; margin-bottom:1.0rem;}
 
-.h4-tit{font-size:1.8rem;font-weight:600;}
+.h4-tit{font-size:1.8rem;font-weight:600}
 .RiskLevel-box .RiskLevel-list .list-box-a{height:100%}
 .RiskLevel-box .RiskLevel-list .search_box .list{position:relative;width:30rem;margin:1rem 0;height:23rem;overflow:auto}
-.RiskLevel-box .RiskLevel-list .search_box .list li{width:25rem;height: 3rem;margin: 0.3rem 0;text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
-.RiskLevel-box .RiskLevel-list .search_box .list li a.active{font-weight:700;}
+.RiskLevel-box .RiskLevel-list .search_box .list li{width:25rem;height:3rem;margin:0.3rem 0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.RiskLevel-box .RiskLevel-list .search_box .list li a.active{font-weight:700}
 .RiskLevel-box .RiskLevel-list .list-box-b{height:100%}
 
 .boxlist-wrap{box-sizing:border-box;min-width:30rem}
-.RiskLevel-box .RiskLevel-area{width:60%;height:auto;}
+.RiskLevel-box .RiskLevel-area{width:60%;height:auto}
 .RiskLevel-box .RiskLevel-area .Level-area{display:flex;width:100%;gap:0 1.0rem}
 
 .RiskLevel-box .RiskLevel-area .Level-area .LevelLeft{float:left;width:40%}
@@ -555,16 +555,18 @@
 
 .RiskLevelTable{width:100%;border-collapse:collapse}
 .RiskLevelTable.left th{height:4.0rem}
-.RiskLevelTable.left td{padding:1.0rem;text-align:center;vertical-align:middle;border:solid 1px var(--color-neutral-40)}
-.RiskLevelTable th{width:2.0rem;height:2.0rem;line-height:1.8rem;vertical-align:middle;background-color:var(--color-neutral-20);color:var(--color-neutral-80);font-size:1.4rem;border:solid 1px var(--color-neutral-40)}
-.RiskLevelTable td{width:100px;height:50px;font-size:1.4rem;text-align:center;color:var(--color-neutral-80);border:solid 1px var(--color-neutral-20)}
+.RiskLevelTable.left td{padding:1.0rem;text-align:center;vertical-align:middle;border:solid 0.1rem var(--color-neutral-40)}
+.RiskLevelTable th{width:2.0rem;height:2.0rem;line-height:1.8rem;vertical-align:middle;background-color:var(--color-neutral-20);color:var(--color-neutral-80);font-size:1.4rem;border:solid 0.1rem var(--color-neutral-40)}
+.RiskLevelTable td{width:100px;height:50px;font-size:1.4rem;text-align:center;color:var(--color-neutral-90);border:solid 0.1rem var(--color-neutral-20)}
+.RiskLevelTable td:hover{border:dotted 0.3rem var(--color-lightblue-10)!important;cursor:pointer}
+.RiskLevelTable td.selected{border:dotted 0.3rem var(--color-lightblue-10)!important;color:var(--color-neutral-10)}
 .RiskLevelTable td.level1{background-color:var(--color-Level)}
 .RiskLevelTable td.level2{background-color:var(--color-Leve2)}
 .RiskLevelTable td.level3{background-color:var(--color-Leve3)}
 .RiskLevelTable td.level4{background-color:var(--color-Leve4)}
 
-.RiskLevelTable.Risk td{font-weight:600;vertical-align: middle;}
-.RiskLevelTable.Risk td span{display: block;font-size:1.4rem;}
+.RiskLevelTable.Risk td{font-weight:600;vertical-align:middle;}
+.RiskLevelTable.Risk td span{display:block;font-size:1.4rem;}
 .RiskLevelTable.severity th{height:2.5rem}
-.RiskLevelTable.severity td{text-align:left;line-height:1.4;color:var(--color-neutral-80);border:solid 1px var(--color-neutral-20)}
+.RiskLevelTable.severity td{text-align:left;line-height:1.4;color:var(--color-neutral-80);border:solid 0.1rem var(--color-neutral-20)}
 
