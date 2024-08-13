@@ -155,8 +155,8 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
 app.post('/api/generate/:tableName', async (req, res) => {
   const tableName = req.params.tableName;
   let columnList = req.body.checkedColumns || [];
-  let checkedMultiColumn = req.body.checkedMultiColumn && req.body.checkedMultiColumn === 'true' ? true : false;
-  let checkedModalUseState = req.body.checkedModalUseState && req.body.checkedModalUseState === 'true' ? true : false;
+  let checkedMultiColumn = req.body.checkedMultiColumn;
+  let checkedModalUseState = req.body.checkedModalUseState;
 
   let result = {};
   try {
@@ -424,7 +424,15 @@ function converColumnList(columnList) {
       yupType = 'boolean';
       formInitValue = 'false';
     }
-    info.yupType = yupType + '()' + (info.is_nullable !== 'YES' ? '.required()' : '');
+    if(yupType === 'number') {
+      if(info.is_nullable === 'YES') {
+        info.yupType = yupType + '().nullable()'       
+      } else{
+        info.yupType = yupType + '().required()'       
+      }      
+    } else {
+      info.yupType = yupType + '()' + (info.is_nullable !== 'YES' ? '.required()' : '');
+    }    
     info.formInitValue = formInitValue;
 
     return info;

@@ -11,6 +11,11 @@ const initListData = {
   baseRoutePath: 'TODO:UI라우트패스',
 };
 
+// TODO : 검색 초기값 설정
+const initSearchParam = {
+  searchWord: '',
+};
+
 /* zustand store 생성 */
 const <%= storeName %> = create<any>((set, get) => ({
   ...createListSlice(set, get),
@@ -25,13 +30,13 @@ const <%= storeName %> = create<any>((set, get) => ({
   initSearchInput: () => {
     set({
       searchParam: {
-        searchWord: '',
+        ...initSearchParam,
       },
     });
   },
 
   clear: () => {
-    set(initListData);
+    set({ ...listBaseState });
   },
 }));
 
@@ -125,6 +130,13 @@ const yupFormSchema = yup.object({<% tableColumns.forEach((columnInfo)=> { %>
   <%= columnInfo.column_name %>: yup.<%= columnInfo.yupType %>,<% }) %>
 });
 
+/* TODO : form 초기값 상세 셋팅 */
+/* formValue 초기값 */
+const initFormValue = {
+  <% tableColumns.forEach((columnInfo)=> { %>
+  <%= columnInfo.column_name %>: <%- columnInfo.formInitValue %>,<% }) %>
+};
+
 /* form 초기화 */
 const initFormData = {
   ...formBaseState,
@@ -133,8 +145,7 @@ const initFormData = {
   baseRoutePath: 'TODO : UI route path',
   formName: '<%= fileName %>',
   formValue: {
-  <% tableColumns.forEach((columnInfo)=> { %>
-  <%= columnInfo.column_name %>: <%- columnInfo.formInitValue %>,<% }) %>
+    ...initFormValue,
   }
 };
 
@@ -147,7 +158,7 @@ const <%= fileName %> = create<any>((set, get) => ({
   yupFormSchema: yupFormSchema,
 
   clear: () => {
-    set(initFormData);
+    set({ ...formBaseState, formValue: { ...initFormValue } });
   },
 }));
 
@@ -192,8 +203,8 @@ function <%= fileName %>() {
         <h2>TODO : 헤더 타이틀</h2>
       </div>
       <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
-        <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
-          <div className="form-cell wid100">
+        <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>          
+          <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
             <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
               <AppTextInput
                 inputType="number"
@@ -385,7 +396,7 @@ function <%= fileName %>() {
       </div>
       <div className="eidtbox"> <% tableColumnMultiArray.forEach((rootArray)=> { %>
         <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
-          <div className="form-cell wid50">
+          <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
             <div className="form-group wid100">
               <div className="box-view-list">
                 <ul className="view-list">
@@ -475,7 +486,7 @@ function <%= fileName %>(props) {
               <div className="pop_cont_form">
                 <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
                   <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
-                    <div className="form-cell wid100">
+                    <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
                       <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
                         <AppTextInput
                           inputType="number"
@@ -714,7 +725,7 @@ function <%= fileName %>(props) {
               <div className="pop_cont_form">
                 <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
                   <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
-                    <div className="form-cell wid100">
+                    <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
                       <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
                         <AppTextInput
                           inputType="number"
@@ -922,7 +933,7 @@ function <%= fileName %>(props) {
               <div className="pop_cont_form">
                 <div className="editbox"> <% tableColumnMultiArray.forEach((rootArray)=> { %>
                   <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
-                    <div className="form-cell wid50">
+                    <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
                       <div className="form-group wid100">
                         <div className="box-view-list">
                           <ul className="view-list">
