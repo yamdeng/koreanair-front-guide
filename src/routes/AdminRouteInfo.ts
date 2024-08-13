@@ -9,6 +9,7 @@ import AdminUserList from '@/components/admin/user/AdminUserList';
 import AdminUserDetail from '@/components/admin/user/AdminUserDetail';
 import AdminDeptList from '@/components/admin/dept/AdminDeptList';
 import RoleManage from '@/components/admin/role/RoleManage';
+import GuideFileAttach from '@/components/guide/GuideFileAttach';
 
 const AdminRouteInfo: any = {};
 
@@ -56,6 +57,10 @@ AdminRouteInfo.list = [
   {
     Component: RoleManage,
     path: 'roles',
+  },
+  {
+    Component: GuideFileAttach,
+    path: 'guides/file',
   },
 ];
 

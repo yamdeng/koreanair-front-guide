@@ -6,6 +6,7 @@ import OfflineSplash from '@/components/offline/OfflineSplash';
 import GuideCodeSelect from '@/components/guide/GuideCodeSelect';
 import GuideModal from '@/components/guide/GuideModal';
 import GuideMemberInput from '@/components/guide/GuideMemberInput';
+import GuideFileAttach from '@/components/guide/GuideFileAttach';
 
 const AviationRouteInfo: any = {};
 
@@ -41,6 +42,10 @@ AviationRouteInfo.list = [
   {
     Component: GuideMemberInput,
     path: 'guides/member-input',
+  },
+  {
+    Component: GuideFileAttach,
+    path: 'guides/file',
   },
 ];
 
