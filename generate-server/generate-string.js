@@ -143,7 +143,7 @@ const initFormData = {
 
   formApiPath: 'TODO : api path',
   baseRoutePath: 'TODO : UI route path',
-  formName: '<%= fileName %>',
+  formName: '<%= formName %>',
   formValue: {
     ...initFormValue,
   }
@@ -208,7 +208,7 @@ function <%= fileName %>() {
             <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
               <AppTextInput
                 inputType="number"
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -217,7 +217,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'select'){ %>
                <AppSelect
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -227,7 +227,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'textarea'){ %>
                <AppTextArea
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -237,7 +237,7 @@ function <%= fileName %>() {
               /><% } else if(columnInfo.componentType === 'code'){ %>
               <AppCodeSelect
                 codeGrpId="<%= columnInfo.codeGroupId %>"
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -246,7 +246,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'editor'){ %>
               <AppEditor
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -255,7 +255,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'datepicker'){ %>
               <AppDatePicker
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -264,7 +264,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'timepicker'){ %>
               <AppTimePicker
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -273,7 +273,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'checkbox'){ %>              
               <AppCheckbox
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -282,7 +282,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'checkboxgroup'){ %>
               <AppCheckboxGroup
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 options={[]}
@@ -292,7 +292,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'radio'){ %>
               <AppRadioGroup
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 options={[]}
@@ -302,7 +302,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'user-select-input'){ %>
               <AppUserSelectInput
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -314,7 +314,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
               <AppDeptSelectInput
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -326,7 +326,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
               <AppAutoComplete
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -336,7 +336,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'tree-select'){ %>
               <AppTreeSelect
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 fieldNames={{ label: '라벨키', value: 'value키' }}
@@ -349,7 +349,7 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else { %>
               <AppTextInput
-                id="<%= storeName %><%= columnInfo.column_name %>"
+                id="<%= formName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
@@ -512,7 +512,7 @@ function <%= fileName %>(props) {
                       <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
                         <AppTextInput
                           inputType="number"
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -521,7 +521,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'select'){ %>
                         <AppSelect
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -531,7 +531,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'textarea'){ %>
                         <AppTextArea
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -541,7 +541,7 @@ function <%= fileName %>(props) {
                         /><% } else if(columnInfo.componentType === 'code'){ %>
                         <AppCodeSelect
                           codeGrpId="<%= columnInfo.codeGroupId %>"
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -550,7 +550,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'editor'){ %>
                         <AppEditor
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -559,7 +559,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'datepicker'){ %>
                         <AppDatePicker
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -568,7 +568,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'timepicker'){ %>
                         <AppTimePicker
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -577,7 +577,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'checkbox'){ %>              
                         <AppCheckbox
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -586,7 +586,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'checkboxgroup'){ %>
                         <AppCheckboxGroup
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           options={[]}
@@ -596,7 +596,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'radio'){ %>
                         <AppRadioGroup
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           options={[]}
@@ -606,7 +606,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'user-select-input'){ %>
                         <AppUserSelectInput
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -618,7 +618,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
                         <AppDeptSelectInput
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -630,7 +630,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
                         <AppAutoComplete
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -640,7 +640,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'tree-select'){ %>
                         <AppTreeSelect
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           fieldNames={{ label: '라벨키', value: 'value키' }}
@@ -653,7 +653,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else { %>
                         <AppTextInput
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -772,7 +772,7 @@ function <%= fileName %>(props) {
                       <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
                         <AppTextInput
                           inputType="number"
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -781,7 +781,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'select'){ %>
                         <AppSelect
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -791,7 +791,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'textarea'){ %>
                         <AppTextArea
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -801,7 +801,7 @@ function <%= fileName %>(props) {
                         /><% } else if(columnInfo.componentType === 'code'){ %>
                         <AppCodeSelect
                           codeGrpId="<%= columnInfo.codeGroupId %>"
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -810,7 +810,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'editor'){ %>
                         <AppEditor
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -819,7 +819,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'datepicker'){ %>
                         <AppDatePicker
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -828,7 +828,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'timepicker'){ %>
                         <AppTimePicker
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -837,7 +837,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'checkbox'){ %>              
                         <AppCheckbox
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -846,7 +846,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'checkboxgroup'){ %>
                         <AppCheckboxGroup
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           options={[]}
@@ -856,7 +856,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'radio'){ %>
                         <AppRadioGroup
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           options={[]}
@@ -866,7 +866,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'user-select-input'){ %>
                         <AppUserSelectInput
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -878,7 +878,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
                         <AppDeptSelectInput
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -890,7 +890,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
                         <AppAutoComplete
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
@@ -900,7 +900,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'tree-select'){ %>
                         <AppTreeSelect
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           fieldNames={{ label: '라벨키', value: 'value키' }}
@@ -913,7 +913,7 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else { %>
                         <AppTextInput
-                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          id="<%= formName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}

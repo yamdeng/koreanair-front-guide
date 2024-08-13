@@ -174,6 +174,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
     const listComponentContent = ejs.render(listComponentGenerateString, listData);
 
     const formStoreData = {
+      formName: `${applyFileName}Form`,
       fileName: `use${applyFileName}FormStore`,
       requiredFieldList: requiredFields,
       tableColumns: columnList,
@@ -182,6 +183,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
     const formStoreContent = ejs.render(formStoreGenerateString, formStoreData);
 
     const formViewData = {
+      formName: `${applyFileName}Form`,
       fileName: `${applyFileName}Form`,
       storeName: `use${applyFileName}FormStore`,
       tableColumns: columnList,
@@ -200,6 +202,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
     };
 
     const modalFormData = {
+      formName: `${applyFileName}Form`,
       fileName: `${applyFileName}FormModal`,
       storeName: `use${applyFileName}ModalFormStore`,
       tableColumns: columnList,
@@ -279,6 +282,7 @@ async function createFormStorefile(tableName, columnList) {
   // yup 가공 end
 
   const data = {
+    formName: `${applyFileName}Form`,
     fileName: `use${applyFileName}FormStore`,
     requiredFieldList: requiredFields,
     tableColumns: columnList,
@@ -295,6 +299,7 @@ async function createFormViewfile(tableName, columnList, checkedMultiColumn) {
   const applyFileName = getApplyFileName(camelCaseTableName);
 
   const data = {
+    formName: `${applyFileName}Form`,
     fileName: `${applyFileName}Form`,
     storeName: `use${applyFileName}FormStore`,
     tableColumns: columnList,
@@ -333,6 +338,7 @@ async function createModalFormfile(tableName, columnList, checkedMultiColumn, ch
   const applyFileName = getApplyFileName(camelCaseTableName);
 
   const data = {
+    formName: `${applyFileName}Form`,
     fileName: `${applyFileName}FormModal`,
     storeName: `use${applyFileName}ModalFormStore`,
     tableColumns: columnList,
