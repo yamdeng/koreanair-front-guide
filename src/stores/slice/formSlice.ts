@@ -20,7 +20,6 @@ export const formBaseState = {
   excludeApiKeys: [],
   formDetailId: null,
   formType: FORM_TYPE_ADD,
-  formName: '',
   formValue: {},
 };
 
