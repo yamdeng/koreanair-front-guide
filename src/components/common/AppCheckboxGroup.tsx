@@ -13,6 +13,8 @@ function AppCheckboxGroup(props) {
     errorMessage,
     disabled = false,
     noBorder = false,
+    labelKey = 'label',
+    valueKey = 'value',
   } = props;
   const selectedValue = value;
   const applyClassName = classNames('radio-wrap', { error: errorMessage, 'border-no': noBorder });
@@ -39,7 +41,8 @@ function AppCheckboxGroup(props) {
       </span>
       <div id={id} className={applyClassName}>
         {options.map((info) => {
-          const { value, label } = info;
+          const label = info[labelKey];
+          const value = info[valueKey];
           const checked = selectedValue.find((info) => info === value);
           return (
             <label key={label}>

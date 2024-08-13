@@ -13,6 +13,8 @@ function AppRadioGroup(props) {
     errorMessage,
     disabled = false,
     noBorder = false,
+    labelKey = 'label',
+    valueKey = 'value',
   } = props;
   const selectedValue = value;
   const applyClassName = classNames('radio-wrap', { error: errorMessage, 'border-no': noBorder });
@@ -23,7 +25,8 @@ function AppRadioGroup(props) {
       </span>
       <div id={id} className={applyClassName}>
         {options.map((info) => {
-          const { value, label } = info;
+          const label = info[labelKey];
+          const value = info[valueKey];
           return (
             <label key={label}>
               <input
