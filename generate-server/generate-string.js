@@ -36,7 +36,7 @@ const <%= storeName %> = create<any>((set, get) => ({
   },
 
   clear: () => {
-    set({ ...listBaseState });
+    set({ ...listBaseState, searchParam: { ...initSearchParam } });
   },
 }));
 
