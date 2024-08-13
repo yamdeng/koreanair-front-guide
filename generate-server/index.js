@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const _ = require('lodash');
 const ejs = require('ejs');
 const fs = require('fs');
@@ -497,3 +498,8 @@ function createCommonImportListToColumnList(columnList) {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+const resultDirectory = path.join(__dirname, 'result');
+if(!fs.existsSync(resultDirectory)) {
+  fs.mkdirSync(resultDirectory)
+}
