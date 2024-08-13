@@ -205,7 +205,7 @@ function <%= fileName %>() {
       <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
         <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>          
           <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
-            <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
+            <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
               <AppTextInput
                 inputType="number"
                 id="<%= storeName %><%= columnInfo.column_name %>"
@@ -271,7 +271,7 @@ function <%= fileName %>() {
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'checkbox'){ %>
+              /><% } else if(columnInfo.componentType === 'checkbox'){ %>              
               <AppCheckbox
                 id="<%= storeName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
@@ -280,11 +280,22 @@ function <%= fileName %>() {
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-              /><% } else if(columnInfo.componentType === 'radio'){ %>
-              <AppRadio
+              /><% } else if(columnInfo.componentType === 'checkboxgroup'){ %>
+              <AppCheckboxGroup
                 id="<%= storeName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
+                options={[]}
+                value={<%= columnInfo.column_name %>}
+                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                errorMessage={errors.<%= columnInfo.column_name %>}
+                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+              /><% } else if(columnInfo.componentType === 'radio'){ %>
+              <AppRadioGroup
+                id="<%= storeName %><%= columnInfo.column_name %>"
+                name="<%= columnInfo.column_name %>"
+                label="<%= columnInfo.column_comment %>"
+                options={[]}
                 value={<%= columnInfo.column_name %>}
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 errorMessage={errors.<%= columnInfo.column_name %>}
@@ -295,7 +306,10 @@ function <%= fileName %>() {
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                onChange={(value) => {
+                  // TODO : value가 object 형이여서 추가 처리가 필요함
+                  changeInput('<%= columnInfo.column_name %>', value)
+                }}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
@@ -304,7 +318,10 @@ function <%= fileName %>() {
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
-                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                onChange={(value) => {
+                  // TODO : value가 object 형이여서 추가 처리가 필요함
+                  changeInput('<%= columnInfo.column_name %>', value)
+                }}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
@@ -313,6 +330,7 @@ function <%= fileName %>() {
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
+                options={[]}
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
@@ -321,6 +339,10 @@ function <%= fileName %>() {
                 id="<%= storeName %><%= columnInfo.column_name %>"
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
+                fieldNames={{ label: '라벨키', value: 'value키' }}
+                treeData={[]}
+                treeDefaultExpandAll={false}
+                treeCheckable={false}
                 value={<%= columnInfo.column_name %>}
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 errorMessage={errors.<%= columnInfo.column_name %>}
@@ -487,7 +509,7 @@ function <%= fileName %>(props) {
                 <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
                   <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
                     <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
-                      <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
+                      <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
                         <AppTextInput
                           inputType="number"
                           id="<%= storeName %><%= columnInfo.column_name %>"
@@ -524,7 +546,6 @@ function <%= fileName %>(props) {
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                          options={[]}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'editor'){ %>
@@ -554,7 +575,7 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-                        /><% } else if(columnInfo.componentType === 'checkbox'){ %>
+                        /><% } else if(columnInfo.componentType === 'checkbox'){ %>              
                         <AppCheckbox
                           id="<%= storeName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
@@ -563,11 +584,22 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-                        /><% } else if(columnInfo.componentType === 'radio'){ %>
-                        <AppRadio
+                        /><% } else if(columnInfo.componentType === 'checkboxgroup'){ %>
+                        <AppCheckboxGroup
                           id="<%= storeName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
+                          options={[]}
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'radio'){ %>
+                        <AppRadioGroup
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          options={[]}
                           value={<%= columnInfo.column_name %>}
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
@@ -578,7 +610,10 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          onChange={(value) => {
+                            // TODO : value가 object 형이여서 추가 처리가 필요함
+                            changeInput('<%= columnInfo.column_name %>', value)
+                          }}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
@@ -587,7 +622,10 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          onChange={(value) => {
+                            // TODO : value가 object 형이여서 추가 처리가 필요함
+                            changeInput('<%= columnInfo.column_name %>', value)
+                          }}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
@@ -596,6 +634,7 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
+                          options={[]}
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
@@ -604,6 +643,10 @@ function <%= fileName %>(props) {
                           id="<%= storeName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
+                          fieldNames={{ label: '라벨키', value: 'value키' }}
+                          treeData={[]}
+                          treeDefaultExpandAll={false}
+                          treeCheckable={false}
                           value={<%= columnInfo.column_name %>}
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
@@ -617,7 +660,7 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-                        /><% } %>              
+                        /><% } %>         
                       </div>
                     </div><% }) %>
                   </div>
@@ -726,7 +769,7 @@ function <%= fileName %>(props) {
                 <div className="editbox"><% tableColumnMultiArray.forEach((rootArray)=> { %>
                   <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
                     <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
-                      <div className="form-group wid100"><% if (columnInfo.componentType === 'number') { %>
+                      <div className="<%= columnInfo.formGroupClassName %> wid100"><% if (columnInfo.componentType === 'number') { %>
                         <AppTextInput
                           inputType="number"
                           id="<%= storeName %><%= columnInfo.column_name %>"
@@ -763,7 +806,6 @@ function <%= fileName %>(props) {
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
-                          options={[]}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'editor'){ %>
@@ -793,7 +835,7 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-                        /><% } else if(columnInfo.componentType === 'checkbox'){ %>
+                        /><% } else if(columnInfo.componentType === 'checkbox'){ %>              
                         <AppCheckbox
                           id="<%= storeName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
@@ -802,11 +844,22 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
-                        /><% } else if(columnInfo.componentType === 'radio'){ %>
-                        <AppRadio
+                        /><% } else if(columnInfo.componentType === 'checkboxgroup'){ %>
+                        <AppCheckboxGroup
                           id="<%= storeName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
+                          options={[]}
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'radio'){ %>
+                        <AppRadioGroup
+                          id="<%= storeName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          options={[]}
                           value={<%= columnInfo.column_name %>}
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
@@ -817,7 +870,10 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          onChange={(value) => {
+                            // TODO : value가 object 형이여서 추가 처리가 필요함
+                            changeInput('<%= columnInfo.column_name %>', value)
+                          }}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'dept-select-input'){ %>
@@ -826,7 +882,10 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          onChange={(value) => {
+                            // TODO : value가 object 형이여서 추가 처리가 필요함
+                            changeInput('<%= columnInfo.column_name %>', value)
+                          }}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'auto-complete'){ %>
@@ -835,6 +894,7 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
+                          options={[]}
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
@@ -843,6 +903,10 @@ function <%= fileName %>(props) {
                           id="<%= storeName %><%= columnInfo.column_name %>"
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
+                          fieldNames={{ label: '라벨키', value: 'value키' }}
+                          treeData={[]}
+                          treeDefaultExpandAll={false}
+                          treeCheckable={false}
                           value={<%= columnInfo.column_name %>}
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}

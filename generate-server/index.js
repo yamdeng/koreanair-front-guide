@@ -411,8 +411,14 @@ function converColumnList(columnList) {
       info.componentType = 'text';
     }
 
+    
+
     if (!info.codeGroupId) {
       info.codeGroupId = '';
+    }
+    info.formGroupClassName = 'form-group';
+    if(info.componentType === 'radio' || info.componentType === 'checkboxgroup' || info.componentType === 'checkbox') {
+      info.formGroupClassName = 'group-box-wrap';
     }
 
     let yupType = 'string';
@@ -461,8 +467,10 @@ function createCommonImportListToColumnList(columnList) {
       return `import AppTimePicker from '@/components/common/AppTimePicker';`;
     } else if (componentType === 'checkbox') {
       return `import AppCheckbox from '@/components/common/AppCheckbox';`;
+    } else if (componentType === 'checkboxgroup') {
+      return `import AppCheckbox from '@/components/common/AppCheckboxGroup';`;
     } else if (componentType === 'radio') {
-      return `import AppRadio from '@/components/common/AppRadio';`;
+      return `import AppRadio from '@/components/common/AppRadioGroup';`;
     } else if (componentType === 'user-select-input') {
       return `import AppUserSelectInput from '@/components/common/AppUserSelectInput';`;
     } else if (componentType === 'dept-select-input') {
@@ -471,6 +479,8 @@ function createCommonImportListToColumnList(columnList) {
       return `import AppAutoComplete from '@/components/common/AppAutoComplete';`;
     } else if (componentType === 'tree-select') {
       return `import AppTreeSelect from '@/components/common/AppTreeSelect';`;
+    } else if (componentType === 'file') {
+      return `import AppFileAttach from '@/components/common/AppFileAttach';`;
     }
     return importString;
   });
