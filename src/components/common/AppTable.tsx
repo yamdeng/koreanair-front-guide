@@ -11,6 +11,8 @@ import GridLinkComponent from './GridLinkComponent';
 const defaultColDef = {
   sortable: true,
   filter: true,
+  flex: 1,
+  minWidth: 100,
 };
 
 const convertColumns = (columns) => {
