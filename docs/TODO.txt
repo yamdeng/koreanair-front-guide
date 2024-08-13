@@ -1,21 +1,12 @@
+1.generate : modal generate fix 하기
+2.store을 안에 넣을지 여부 체크박스
+
+
+
+
 0.파일다운로드
-1.store reset 아래로 통일
-clear: () => {
-  set({ ...listBaseState });
-},
-2.form clear 확인하기
-3.number일 경우 nullable 추가
-4.formSlice clear 추가
-5.genereate : 공통 컴포넌트 전체 basic 사용가이드 정리하면 generate 시에 필수 속성들 나열할 부분 정리하기
-6.generate : 50, 100 반영하기
-7.generate : modal generate fix 하기
-8.generate : checkboxgroup 분류하기
-9.store을 안에 넣을지 여부 체크박스
-10.검색 input box 처리하기 위한 부분을 반영 : 내가 사용하기 위한
-
-
-
 13.관리자 기능 bug fix 하기
+14.store 사용방법 일관적이게 가이드
 99.AppFileAttach
 0.yarn lint, build 한꺼번에 체크하기
 
