@@ -334,6 +334,17 @@ function <%= fileName %>() {
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+              /><% } else if(columnInfo.componentType === 'file'){ %>
+              <AppFileAttach
+                fileGroupSeq={null}
+                workScope={'업무구문(A,O,S)'}
+                updateFileGroupSeq={(newFileGroupSeq) => {
+                  // TODO : newFileGroupSeq를 handle
+                  changeInput('fileGroupSeq', newFileGroupSeq);
+                }}
+                updateFileList={(fileList) => {
+                  // TODO : fileList handle
+                }}
               /><% } else if(columnInfo.componentType === 'tree-select'){ %>
               <AppTreeSelect
                 id="<%= formName %><%= columnInfo.column_name %>"
@@ -638,6 +649,17 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'file'){ %>
+                        <AppFileAttach
+                          fileGroupSeq={null}
+                          workScope={'업무구문(A,O,S)'}
+                          updateFileGroupSeq={(newFileGroupSeq) => {
+                            // TODO : newFileGroupSeq를 handle
+                            changeInput('fileGroupSeq', newFileGroupSeq);
+                          }}
+                          updateFileList={(fileList) => {
+                            // TODO : fileList handle
+                          }}
                         /><% } else if(columnInfo.componentType === 'tree-select'){ %>
                         <AppTreeSelect
                           id="<%= formName %><%= columnInfo.column_name %>"
@@ -898,6 +920,17 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'file'){ %>
+                        <AppFileAttach
+                          fileGroupSeq={null}
+                          workScope={'업무구문(A,O,S)'}
+                          updateFileGroupSeq={(newFileGroupSeq) => {
+                            // TODO : newFileGroupSeq를 handle
+                            changeInput('fileGroupSeq', newFileGroupSeq);
+                          }}
+                          updateFileList={(fileList) => {
+                            // TODO : fileList handle
+                          }}
                         /><% } else if(columnInfo.componentType === 'tree-select'){ %>
                         <AppTreeSelect
                           id="<%= formName %><%= columnInfo.column_name %>"
