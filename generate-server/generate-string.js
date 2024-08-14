@@ -342,9 +342,6 @@ function <%= fileName %>() {
                   // TODO : newFileGroupSeq를 handle
                   changeInput('fileGroupSeq', newFileGroupSeq);
                 }}
-                updateFileList={(fileList) => {
-                  // TODO : fileList handle
-                }}
               /><% } else if(columnInfo.componentType === 'tree-select'){ %>
               <AppTreeSelect
                 id="<%= formName %><%= columnInfo.column_name %>"
@@ -657,9 +654,6 @@ function <%= fileName %>(props) {
                             // TODO : newFileGroupSeq를 handle
                             changeInput('fileGroupSeq', newFileGroupSeq);
                           }}
-                          updateFileList={(fileList) => {
-                            // TODO : fileList handle
-                          }}
                         /><% } else if(columnInfo.componentType === 'tree-select'){ %>
                         <AppTreeSelect
                           id="<%= formName %><%= columnInfo.column_name %>"
@@ -927,9 +921,6 @@ function <%= fileName %>(props) {
                           updateFileGroupSeq={(newFileGroupSeq) => {
                             // TODO : newFileGroupSeq를 handle
                             changeInput('fileGroupSeq', newFileGroupSeq);
-                          }}
-                          updateFileList={(fileList) => {
-                            // TODO : fileList handle
                           }}
                         /><% } else if(columnInfo.componentType === 'tree-select'){ %>
                         <AppTreeSelect
