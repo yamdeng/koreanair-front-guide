@@ -1,31 +1,21 @@
-2.AppFileAttach : 파일첨부 공통 컴포넌트 반영
- -싱글만 되어야 함 : 드래그도 같이 확인 : disableMultiUpload
- -파일 확장자를 제어하는 속성을 받아야 함 : allowFileExtentions: []
- -오직 이미지만 첨부 가능하게끔 : onlyImageUpload : false / true
- -applyPreviewImageModal : false / true
- -fileGroupSeq
- -updateFileGroupSeq
- -updateFileList
- -workScope : A, O, S
- -setFileList
- -setFileGroupSeq
- -clickEventHandler 확인
+#.<AppSelect isRemote={true} apiUrl='' />
 
-#.generate : 직접 개발해보면서 generate fix 하기
- -modal 구조 fix 
- -store을 안에 넣을지 여부 체크박스 적용할지 말지 결정 필요
+#.AgGrid에서 CodeLabelComponent
 
+#.local navigation
+<Navigation />
+  1.menuId 추출
+  2.title recursive 하게 추출
+  3.진입시 권한 체크도 같이 함
 
-
-
-#.AppEditor : 이미지 업로드 hook
+#.홈에 로그인 페이지 생성
+ -콤보박스 : 항공안전, 산업안전
+ -로그인 id : input
+ -[로그인]
 
 #.다국어
  -yup 다국어 : 선언위치 체크 필요
  -파리미터를 받는 경우 체크
-
-
-#.가이드 예제 페이지 작성
 
 #.yarn lint, build 한꺼번에 체크하기
 
@@ -33,8 +23,17 @@
 
 
 
-14.store 사용방법 일관적이게 가이드
-99.store readonly 되는 부분 확인
+
+
+@.기타
+ 1.generate : 직접 개발해보면서 generate fix 하기
+  -modal 구조 fix 
+  -store을 안에 넣을지 여부 체크박스 적용할지 말지 결정 필요
+
+ 2.AppEditor : 이미지 업로드 hook
+
+ 3.store 사용방법 일관적이게 가이드
+  -store readonly 되는 부분 확인
 
 
 
