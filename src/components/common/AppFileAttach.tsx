@@ -23,6 +23,7 @@ function AppFileAttach(props) {
     workScope,
     fileGroupSeq,
     updateFileGroupSeq,
+    mode = 'edit',
   } = props;
 
   const [fileList, setFileList] = useImmer([]);
@@ -35,15 +36,17 @@ function AppFileAttach(props) {
     data: { workScope: workScope },
 
     onRemove(file) {
-      const { fileSeq } = file;
-      ModalService.confirm({
-        body: '파일 삭제시 즉시 삭제됩니다.\n삭제하시겠습니까?',
-        ok: async () => {
-          await ApiService.delete(`sys/file-groups/file/${fileSeq}`);
-          getFileList(true);
-          ToastService.info('파일이 삭제되었습니다.');
-        },
-      });
+      if (mode === 'edit') {
+        const { fileSeq } = file;
+        ModalService.confirm({
+          body: '파일 삭제시 즉시 삭제됩니다.\n삭제하시겠습니까?',
+          ok: async () => {
+            await ApiService.delete(`sys/file-groups/file/${fileSeq}`);
+            getFileList(true);
+            ToastService.info('파일이 삭제되었습니다.');
+          },
+        });
+      }
       return false;
     },
 
@@ -166,7 +169,7 @@ function AppFileAttach(props) {
           </Dragger>
         ) : (
           <Upload {...baseProps} fileList={fileList}>
-            <div className="btn-area">
+            <div className="btn-area" style={{ display: mode === 'edit' ? '' : 'none' }}>
               <button type="button" name="button" className="btn-big btn_text btn-darkblue-line mg-n">
                 + Upload
               </button>
