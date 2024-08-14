@@ -38,9 +38,10 @@ function AppFileAttach(props) {
       const { fileSeq } = file;
       ModalService.confirm({
         body: '파일 삭제시 즉시 삭제됩니다.\n삭제하시겠습니까?',
-        ok: () => {
-          alert(`삭제 : ${fileSeq}`);
-          // TODO : 전체 삭제이후에 onChange에 null로 전달하기 getFileList(true)
+        ok: async () => {
+          await ApiService.delete(`sys/file-groups/file/${fileSeq}`);
+          getFileList(true);
+          ToastService.info('파일이 삭제되었습니다.');
         },
       });
       return false;
@@ -140,6 +141,7 @@ function AppFileAttach(props) {
     setFileList(fileList);
     if (isRemoveAcation) {
       if (!fileList || !fileList.length) {
+        fileGroupSeqRef.current = null;
         updateFileGroupSeq(null);
       }
     }

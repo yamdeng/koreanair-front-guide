@@ -6,6 +6,7 @@ function GuideFileAttach() {
 
   const changeInput = (selectedValue) => {
     setFileGroupSeq(selectedValue);
+    console.log(`newFileGroupSeq : ${selectedValue}`);
   };
 
   return (
