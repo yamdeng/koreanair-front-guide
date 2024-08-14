@@ -35,6 +35,16 @@ class ApiService {
   delete(apiPath, config?: any) {
     return ApiUtil.delete(prefixUrl + apiPath, config);
   }
+
+  // file upload
+  fileUpload(formData: any, params: any, onUploadProgress) {
+    return ApiUtil.post(prefixUrl + 'sys/file-groups/file/upload', formData, {
+      params: params,
+      headers: { 'Content-Type': 'multipart/form-data' },
+      disableLoadingBar: true,
+      onUploadProgress: onUploadProgress,
+    } as any);
+  }
 }
 
 export default new ApiService();
