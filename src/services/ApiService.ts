@@ -38,7 +38,7 @@ class ApiService {
 
   // file upload
   fileUpload(formData: any, params: any, onUploadProgress) {
-    return ApiUtil.post(prefixUrl + 'sys/file-groups/file/upload', formData, {
+    return ApiUtil.post(prefixUrl + `${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/upload`, formData, {
       params: params,
       headers: { 'Content-Type': 'multipart/form-data' },
       disableLoadingBar: true,

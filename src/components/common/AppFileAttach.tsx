@@ -41,7 +41,7 @@ function AppFileAttach(props) {
         ModalService.confirm({
           body: '파일 삭제시 즉시 삭제됩니다.\n삭제하시겠습니까?',
           ok: async () => {
-            await ApiService.delete(`sys/file-groups/file/${fileSeq}`);
+            await ApiService.delete(`${import.meta.env.VITE_API_URL_FIEL_GROUPS}}/file/${fileSeq}`);
             getFileList(true);
             ToastService.info('파일이 삭제되었습니다.');
           },
@@ -52,7 +52,10 @@ function AppFileAttach(props) {
 
     onPreview(file) {
       const { fileSeq } = file;
-      const url = import.meta.env.VITE_API_URL + import.meta.env.VITE_API_PREFIX + `/sys/file-groups/file/${fileSeq}`;
+      const url =
+        import.meta.env.VITE_API_URL +
+        import.meta.env.VITE_API_PREFIX +
+        `/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${fileSeq}`;
       window.open(url);
       return false;
     },
@@ -132,7 +135,7 @@ function AppFileAttach(props) {
   const getFileList = async (isRemoveAcation = false) => {
     isFileListLoadedRef.current = true;
     const fileGroupSeq = fileGroupSeqRef.current;
-    const apiResult = await ApiService.get(`sys/file-groups/${fileGroupSeq}`);
+    const apiResult = await ApiService.get(`${import.meta.env.VITE_API_URL_FIEL_GROUPS}/${fileGroupSeq}`);
     const data = apiResult.data;
     const fileList = data.map((info) => {
       info.status = 'done';
