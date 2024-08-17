@@ -11,6 +11,7 @@ const {
   formStoreGenerateString,
   formViewGenerateString,
   detailViewGenerateString,
+  detailViewGenerateNoStoreString,
   formModalGenerateString,
   formUseStateModalGenerateString,
   detailModalGenerateString,
@@ -120,7 +121,7 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
     }
 
     if (generateType === 'all' || generateType === 'detailView') {
-      detailViewFileName = await createDetailViewfile(tableName, columnList, checkedMultiColumn);
+      detailViewFileName = await createDetailViewfile(tableName, columnList, checkedMultiColumn, checkedInnerFormStore);
       if (generateType === 'detailView') {
         downloadFileName = detailViewFileName;
       }
@@ -252,7 +253,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
     };
 
     const formViewContent = ejs.render(formViewGenerateString, formViewData);
-    const detailViewContent = ejs.render(detailViewGenerateString, detailViewData);
+    const detailViewContent = ejs.render(checkedInnerFormStore ? detailViewGenerateNoStoreString : detailViewGenerateString, detailViewData);
     const modalFormContent = ejs.render(
       checkedModalUseState ? formUseStateModalGenerateString : formModalGenerateString,
       modalFormData
@@ -347,7 +348,7 @@ async function createFormViewfile(tableName, columnList, checkedMultiColumn, che
 }
 
 // detail view 파일 생성
-async function createDetailViewfile(tableName, columnList, checkedMultiColumn) {
+async function createDetailViewfile(tableName, columnList, checkedMultiColumn, checkedInnerFormStore) {
   // 템플릿에서 대체할 변수들
   let camelCaseTableName = _.camelCase(tableName);
   const applyFileName = getApplyFileName(camelCaseTableName);
@@ -360,7 +361,7 @@ async function createDetailViewfile(tableName, columnList, checkedMultiColumn) {
     checkedMultiColumn: checkedMultiColumn,
     importList: createCommonImportListToColumnList(columnList),
   };
-  const content = ejs.render(detailViewGenerateString, data);
+  const content = ejs.render(checkedInnerFormStore ? detailViewGenerateNoStoreString : detailViewGenerateString, data);
   fs.writeFileSync(`./result/${applyFileName}Detail.tsx`, content);
   return `./result/${applyFileName}Detail.tsx`;
 }

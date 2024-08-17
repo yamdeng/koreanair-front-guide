@@ -1,4 +1,4 @@
-import AppNavigation from '../common/AppNavigation';
+import AppNavigation from '@/components/common/AppNavigation';
 
 function GuideAppCodeSelect() {
   return (

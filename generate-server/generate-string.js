@@ -1,4 +1,5 @@
 const listComponentGenerateString = `import AppTable from "@/components/common/AppTable";
+import AppNavigation from '@/components/common/AppNavigation';
 import { createListSlice, listBaseState } from "@/stores/slice/listSlice";
 import { useEffect, useState, useCallback } from "react";
 import CommonUtil from '@/utils/CommonUtil';
@@ -62,6 +63,7 @@ function <%= fileName %>() {
 
   return (
     <>
+      <AppNavigation />
       {/* TODO : 헤더 영역입니다 */}
       <div className="conts-title">
         <h2>TODO: 타이틀</h2>
@@ -165,6 +167,7 @@ const <%= fileName %> = create<any>((set, get) => ({
 export default <%= fileName %>`;
 
 const formViewGenerateString = `import { useEffect } from 'react';
+import AppNavigation from '@/components/common/AppNavigation';
 import { useParams } from 'react-router-dom';<% importList.forEach((importString)=> { %>
 <%- importString %><% }) %><% if(checkedInnerFormStore) { %>
 import { create } from "zustand";
@@ -239,6 +242,7 @@ function <%= fileName %>() {
 
   return (
     <>
+      <AppNavigation />
       <div className="conts-title">
         <h2>TODO : 헤더 타이틀</h2>
       </div>
@@ -434,6 +438,7 @@ export default <%= fileName %>;
 `;
 
 const detailViewGenerateString = `import { useEffect } from 'react';
+import AppNavigation from '@/components/common/AppNavigation';
 import { useParams } from 'react-router-dom';
 /* TODO : store 경로를 변경해주세요. */
 import <%= storeName %> from '@/stores/guide/<%= storeName %>';
@@ -461,6 +466,7 @@ function <%= fileName %>() {
 
   return (
     <>
+      <AppNavigation />
       <div className="conts-title">
         <h2>TODO : 헤더 타이틀</h2>
       </div>
@@ -492,7 +498,79 @@ function <%= fileName %>() {
         <button
           className="btn_text text_color_darkblue-100 btn_close"
           onClick={goFormPage}
-          style={{ display: formType !== 'add' ? '' : 'none' }}
+        >
+          수정
+        </button>
+      </div>
+    </>
+  );
+}
+export default <%= fileName %>;
+`;
+
+const detailViewGenerateNoStoreString = `import { useEffect, useState } from 'react';
+import AppNavigation from '@/components/common/AppNavigation';
+import { useParams } from 'react-router-dom';
+import ApiService from '@/services/ApiService';
+
+/* TODO : 컴포넌트 이름을 확인해주세요 */
+function <%= fileName %>() {
+
+  const [detailInfo, setDetailInfo] = useState<any>({});
+
+  const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = detailInfo;
+
+  const { detailId } = useParams();
+
+  const cancel = () => {
+    // TODO : [목록으로] 버튼 처리
+  };
+
+  const goFormPage = () => {
+    // TODO : [수정] 버튼 처리
+  };
+
+  useEffect(() => {
+    ApiService.get('TODO: detailId with api path').then((apiResult) => {
+      const detailInfo = apiResult.data || {};
+      setDetailInfo(detailInfo);
+    });
+  }, []);
+
+  return (
+    <>
+      <AppNavigation />
+      <div className="conts-title">
+        <h2>TODO : 헤더 타이틀</h2>
+      </div>
+      <div className="eidtbox"> <% tableColumnMultiArray.forEach((rootArray)=> { %>
+        <div className="<% if (checkedMultiColumn) { %>form-table line<% } else { %>form-table<% } %>"><% rootArray.forEach((columnInfo)=> { %>
+          <div className="<% if (checkedMultiColumn) { %>form-cell wid50<% } else { %>form-cell wid100<% } %>">
+            <div className="form-group wid100">
+              <div className="box-view-list">
+                <ul className="view-list">
+                  <li className="accumlate-list">
+                    <label className="t-label">                        
+                      <%= columnInfo.column_comment %>
+                    </label>
+                    <span className="text-desc">{<%= columnInfo.column_name %>}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div><% }) %>
+        </div>
+        <hr className="<% if (checkedMultiColumn) { %>line dp-n<% } else { %>line<% } %>"></hr>
+        <% }) %>        
+      </div>
+      {/* 하단 버튼 영역 */}
+      <div className="contents-btns">
+        <button className="btn_text text_color_neutral-10 btn_confirm" onClick={cancel}>
+          목록으로
+        </button>
+        <button
+          className="btn_text text_color_darkblue-100 btn_close"
+          onClick={goFormPage}
         >
           수정
         </button>
@@ -1056,8 +1134,6 @@ export default <%= fileName %>;
 
 const detailModalGenerateString = `import { useEffect } from 'react';
 import Modal from 'react-modal';
-/* TODO : store 경로를 변경해주세요. */
-import <%= storeName %> from '@/stores/guide/<%= storeName %>';
 
 /* TODO : 컴포넌트 이름을 확인해주세요 */
 function <%= fileName %>(props) {
@@ -1422,6 +1498,7 @@ module.exports = {
   formStoreGenerateString: formStoreGenerateString,
   formViewGenerateString: formViewGenerateString,
   detailViewGenerateString: detailViewGenerateString,
+  detailViewGenerateNoStoreString: detailViewGenerateNoStoreString,
   formModalGenerateString: formModalGenerateString,
   formUseStateModalGenerateString: formUseStateModalGenerateString,
   detailModalGenerateString: detailModalGenerateString,
