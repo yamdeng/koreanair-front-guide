@@ -221,7 +221,14 @@ function MemberSelectModal(props) {
             <div className="title">
               <p>
                 선택목록
-                <a className="icon" href="javascript:void(0);" onClick={deleteAllFinalList}>
+                <a
+                  className="icon"
+                  href=""
+                  onClick={(e) => {
+                    e.preventDefault();
+                    deleteAllFinalList();
+                  }}
+                >
                   <span></span>
                 </a>
               </p>
@@ -237,7 +244,7 @@ function MemberSelectModal(props) {
                   return (
                     <li key={nameKor}>
                       {nameKor}
-                      <a href="javascript:void(0);">
+                      <a href="" onClick={(e) => e.preventDefault()}>
                         <span className="delete" onClick={() => deleteFinalListByInfo(info)}>
                           X
                         </span>
@@ -258,7 +265,7 @@ function MemberSelectModal(props) {
                   return (
                     <li key={nameKor}>
                       {nameKor}
-                      <a href="javascript:void(0);">
+                      <a href="" onClick={(e) => e.preventDefault()}>
                         <span className="delete" onClick={() => deleteFinalListByInfo(info)}>
                           X
                         </span>

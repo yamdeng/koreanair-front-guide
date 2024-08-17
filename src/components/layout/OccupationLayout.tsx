@@ -37,12 +37,12 @@ export default function OccupationLayout() {
       <header className="header">
         <div className="logo">
           <div className="menu" onClick={toggleLeftMenu}>
-            <a href="javascript:void(0);">
+            <a href="" onClick={(e) => e.preventDefault()}>
               <img src={iconMenuFriesImage} />
             </a>
           </div>
           <div className="top-logo">
-            <a href="javascript:void(0);">
+            <a href="" onClick={(e) => e.preventDefault()}>
               <img src={koreanairSymbolImage} onClick={goHomePortal} />
               <span>산업안전</span>
             </a>
@@ -61,7 +61,9 @@ export default function OccupationLayout() {
                     expandRootMenuInfo(rootMenuInfo);
                   }}
                 >
-                  <a href="javascript:void(0);">{nameKor}</a>
+                  <a href="" onClick={(e) => e.preventDefault()}>
+                    {nameKor}
+                  </a>
                 </li>
               );
             })}
@@ -72,17 +74,23 @@ export default function OccupationLayout() {
             <li className="util-icon">
               <ul>
                 <li>
-                  <a href="javascript:void(0);">
+                  <a href="" onClick={(e) => e.preventDefault()}>
                     <img src={iconSearchImage} />
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0);">
+                  <a href="" onClick={(e) => e.preventDefault()}>
                     <img src={iconAlarmImage} />
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0);" onClick={() => changeLocale('en')}>
+                  <a
+                    href=""
+                    onClick={(e) => {
+                      e.preventDefault();
+                      changeLocale('en');
+                    }}
+                  >
                     <img src={iconSettingImage} />
                   </a>
                 </li>
@@ -90,16 +98,18 @@ export default function OccupationLayout() {
             </li>
             <li className="btn">
               <a
-                href="javascript:void(0);"
-                onClick={() => {
+                href=""
+                onClick={(e) => {
+                  e.preventDefault();
                   navigate('/aviation');
                 }}
               >
                 <span>항공안전</span>
               </a>
               <a
-                href="javascript:void(0);"
-                onClick={() => {
+                href=""
+                onClick={(e) => {
+                  e.preventDefault();
                   navigate('/occupation');
                 }}
               >
@@ -113,22 +123,22 @@ export default function OccupationLayout() {
       <div className={displayLeftMenu ? 'LNB' : 'LNB hide'}>
         <div className="LNB_menu">
           <div className="m-lnb_top_logo">
-            <a href="javascript:void(0);">
+            <a href="" onClick={(e) => e.preventDefault()}>
               <img src={koreanairSymbolImage} />
               <span>항공안전</span>
             </a>
           </div>
           <div className="m-lnb_top_btn">
             <div className="tab_btn">
-              <a href="javascript:void(0);">
+              <a href="" onClick={(e) => e.preventDefault()}>
                 <span className="active">항공</span>
               </a>
-              <a href="javascript:void(0);">
+              <a href="" onClick={(e) => e.preventDefault()}>
                 <span>산업</span>
               </a>
             </div>
             <div className="close" onClick={toggleLeftMenu}>
-              <a href="javascript:void(0);">
+              <a href="" onClick={(e) => e.preventDefault()}>
                 <img src={closeImage} />
               </a>
             </div>
@@ -159,7 +169,9 @@ export default function OccupationLayout() {
                                     clickLastMenu(lastDeptMenuInfo);
                                   }}
                                 >
-                                  <a href="javascript:void(0)">{lastDeptMenuInfo.nameKor}</a>
+                                  <a href="" onClick={(e) => e.preventDefault()}>
+                                    {lastDeptMenuInfo.nameKor}
+                                  </a>
                                 </li>
                               );
                             })}
@@ -176,7 +188,9 @@ export default function OccupationLayout() {
                             clickSecondMenu(secondDepthMenuInfo);
                           }}
                         >
-                          <a href="javascript:void(0)">{secondDepthMenuInfo.nameKor}</a>
+                          <a href="" onClick={(e) => e.preventDefault()}>
+                            {secondDepthMenuInfo.nameKor}
+                          </a>
                           {lastChildrenMenuComponent}
                         </li>
                       );
@@ -205,7 +219,7 @@ export default function OccupationLayout() {
                     toggleRootMenuExpand(rootDepthMenuInfo);
                   }}
                 >
-                  <a href="javascript:void(0)" className={rootDepthClass}>
+                  <a href="" onClick={(e) => e.preventDefault()} className={rootDepthClass}>
                     {nameKor}
                   </a>
                   {childrenMenuComponent}

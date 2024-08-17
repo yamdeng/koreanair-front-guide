@@ -343,7 +343,13 @@ function RoleManage() {
                                     <li key={nameKor}>
                                       {nameKor}
                                       {' / '} {rankNmKor} {' / '} {deptNmKor}
-                                      <a href="javascript:void(0);" onClick={() => removeManager(index)}>
+                                      <a
+                                        href=""
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          removeManager(index);
+                                        }}
+                                      >
                                         <span className="delete">X</span>
                                       </a>
                                     </li>
@@ -401,7 +407,13 @@ function RoleManage() {
                                   <ul className="list">
                                     <li key={displayName}>
                                       {displayName}{' '}
-                                      <a href="javascript:void(0);" onClick={() => removeMember(index)}>
+                                      <a
+                                        href=""
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          removeMember(index);
+                                        }}
+                                      >
                                         <span className="delete">X</span>
                                       </a>
                                     </li>

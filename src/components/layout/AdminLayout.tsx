@@ -39,7 +39,9 @@ export default function AdminLayout() {
                                       clickLastMenu(lastDeptMenuInfo);
                                     }}
                                   >
-                                    <a href="javascript:void(0)">{lastDeptMenuInfo.nameKor}</a>
+                                    <a href="" onClick={(e) => e.preventDefault()}>
+                                      {lastDeptMenuInfo.nameKor}
+                                    </a>
                                   </li>
                                 );
                               })}
@@ -56,7 +58,9 @@ export default function AdminLayout() {
                               clickSecondMenu(secondDepthMenuInfo);
                             }}
                           >
-                            <a href="javascript:void(0)">{secondDepthMenuInfo.nameKor}</a>
+                            <a href="" onClick={(e) => e.preventDefault()}>
+                              {secondDepthMenuInfo.nameKor}
+                            </a>
                             {lastChildrenMenuComponent}
                           </li>
                         );
@@ -85,7 +89,7 @@ export default function AdminLayout() {
                       toggleRootMenuExpand(rootDepthMenuInfo);
                     }}
                   >
-                    <a href="javascript:void(0)" className={rootDepthClass}>
+                    <a href="" onClick={(e) => e.preventDefault()} className={rootDepthClass}>
                       {nameKor}
                     </a>
                     {childrenMenuComponent}
