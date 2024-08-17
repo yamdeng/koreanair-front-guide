@@ -2,6 +2,7 @@ import { useState } from 'react';
 import OrgTreeSelectModal from '../modal/OrgTreeSelectModal';
 import UserSelectModal from '../modal/UserSelectModal';
 import UserSelectWithOrgTreeModal from '../modal/UserSelectWithOrgTreeModal';
+import AppNavigation from '../common/AppNavigation';
 
 function GuideModal() {
   const [isOrgSelectModalopen, setIsOrgSelectModalopen] = useState(false);
@@ -25,6 +26,7 @@ function GuideModal() {
 
   return (
     <>
+      <AppNavigation />
       <div className="conts-title">
         <h2>모달 가이드</h2>
       </div>

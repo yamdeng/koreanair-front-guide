@@ -2,10 +2,52 @@ import ApiService from '@/services/ApiService';
 import { produce } from 'immer';
 import history from '@/utils/history';
 
+const convertNavigationArray = function (list, children, parentList) {
+  children.forEach((treeInfo) => {
+    settingMenuNavigation(list, treeInfo, parentList);
+  });
+};
+
+// 트리의 children 속성(하위 목록)을 추출하여 하나의 list에 모두 넣기 : parentList에 상위 목록을 저장
+const settingMenuNavigation = function (resultList, menuInfo, parentList = null) {
+  const { workScope, menuId, nameEng, nameKor, menuUrl, treeType, level, upperMenuId, children } = menuInfo;
+  const applyParentList = parentList && parentList.length ? parentList : [];
+  if (children && children.length) {
+    resultList.push({
+      key: menuInfo.key,
+      workScope: workScope,
+      menuId: menuId,
+      nameKor: nameKor,
+      nameEng: nameEng,
+      menuUrl: menuUrl,
+      treeType: treeType,
+      level: level,
+      upperMenuId: upperMenuId,
+      parentList: applyParentList,
+    });
+    convertNavigationArray(resultList, children, [...applyParentList, menuInfo]);
+  } else {
+    // 자식이 존재하지 않을 경우
+    resultList.push({
+      key: menuInfo.key,
+      workScope: workScope,
+      menuId: menuId,
+      nameKor: nameKor,
+      nameEng: nameEng,
+      menuUrl: menuUrl,
+      treeType: treeType,
+      level: level,
+      upperMenuId: upperMenuId,
+      parentList: parentList,
+    });
+  }
+};
+
 // menu 공통 slice
 export const createLeftMenuSlice = (set, get) => ({
   displayExpandMenu: true,
   leftMenuList: [],
+  navationMenuList: [],
   appWorkScope: 'S',
 
   changeWorkScope: (workScope) => {
@@ -168,13 +210,17 @@ export const createLeftMenuSlice = (set, get) => ({
     const apiParam = { isTree: 'Y', workScope: appWorkScope };
     const menuApiUrl = import.meta.env.VITE_API_URL_LEFT_MENU || 'sys/left-menus';
     const apiResult = await ApiService.get(`${menuApiUrl}`, apiParam);
-    const data = apiResult.data;
+    const data = apiResult.data || [];
+    const navationMenuList = [];
+    data.forEach((rootMenuInfo) => {
+      settingMenuNavigation(navationMenuList, rootMenuInfo);
+    });
     if (data && data.length) {
       const leftMenuList = data;
       leftMenuList.map((info) => {
         info.isMenuExapand = false;
       });
-      set({ leftMenuList: leftMenuList });
+      set({ leftMenuList: leftMenuList, navationMenuList: navationMenuList });
     }
   },
 });

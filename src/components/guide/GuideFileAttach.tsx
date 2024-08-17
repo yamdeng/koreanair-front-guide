@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AppFileAttach from '../common/AppFileAttach';
+import AppNavigation from '../common/AppNavigation';
 
 function GuideFileAttach() {
   const [fileGroupSeq, setFileGroupSeq] = useState(null);
@@ -11,6 +12,7 @@ function GuideFileAttach() {
 
   return (
     <>
+      <AppNavigation />
       <div className="conts-title">
         <h2>file첨부 가이드</h2>
       </div>
