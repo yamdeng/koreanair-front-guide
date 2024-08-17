@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useStore } from 'zustand';
 import useAppStore from '@/stores/useAppStore';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function AppNavigation() {
-  const { appWorkScope, navationMenuList } = useStore(useAppStore, (state) => state) as any;
+  const { appWorkScope, toggleRootMenuExpand, clickSecondMenu, clickLastMenu, navationMenuList } = useStore(
+    useAppStore,
+    (state) => state
+  ) as any;
+  const searchInfoCheckedRef = useRef(null);
   const [curretMenuInfo, setCurretMenuInfo] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,7 +23,7 @@ function AppNavigation() {
   };
 
   useEffect(() => {
-    if (navationMenuList && navationMenuList.length) {
+    if (!searchInfoCheckedRef.current && navationMenuList && navationMenuList.length) {
       if (appWorkScope === navationMenuList[0].workScope) {
         const searchMenuInfo = navationMenuList.find((info) => {
           if (info.menuUrl && currentUrlPath.indexOf(info.menuUrl) !== -1) {
@@ -27,7 +31,18 @@ function AppNavigation() {
           }
           return false;
         });
-        setCurretMenuInfo(searchMenuInfo);
+        if (searchMenuInfo) {
+          searchInfoCheckedRef.current = searchMenuInfo;
+          if (searchMenuInfo.level === 1) {
+            toggleRootMenuExpand(searchMenuInfo);
+          } else if (searchMenuInfo.level === 2) {
+            clickSecondMenu(searchMenuInfo);
+          } else if (searchMenuInfo.level === 3) {
+            clickLastMenu(searchMenuInfo);
+          }
+          setCurretMenuInfo(searchMenuInfo);
+        }
+
         // TODO : menuUrl이 존재하지 않으면 권한이 존재하지 않는다는 페이지로 팅김
         // TODO : setCurretMenuInfo 하는 순간에 menuId 던져줌
       }
@@ -35,7 +50,7 @@ function AppNavigation() {
   }, [navationMenuList, location, appWorkScope]);
 
   let menuParentList = [];
-  if (curretMenuInfo) {
+  if (curretMenuInfo && curretMenuInfo.parentList) {
     menuParentList = curretMenuInfo.parentList;
   }
 

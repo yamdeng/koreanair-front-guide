@@ -144,12 +144,15 @@ export const createLeftMenuSlice = (set, get) => ({
           state.leftMenuList.forEach((rootMenuInfo) => {
             // 최상위 선택된 메뉴 초기화
             rootMenuInfo.isSelected = false;
+            rootMenuInfo.isMenuExapand = false;
+            let rootMenuSelected = false;
             if (rootMenuInfo.children) {
               rootMenuInfo.children.forEach((secondMenuInfo) => {
                 // 2번째 depth 선택된 메뉴 초기화
                 secondMenuInfo.isSelected = false;
                 if (secondMenuInfo.menuId === menuId) {
                   secondMenuInfo.isSelected = true;
+                  rootMenuSelected = true;
                 }
                 if (secondMenuInfo.children) {
                   // 3번째 depth 선택된 메뉴 초기화
@@ -158,6 +161,10 @@ export const createLeftMenuSlice = (set, get) => ({
                   });
                 }
               });
+              if (rootMenuSelected) {
+                rootMenuInfo.isSelected = true;
+                rootMenuInfo.isMenuExapand = true;
+              }
             }
           });
         })
@@ -174,6 +181,7 @@ export const createLeftMenuSlice = (set, get) => ({
           state.leftMenuList.forEach((rootMenuInfo) => {
             // 최상위 선택된 메뉴 초기화
             rootMenuInfo.isSelected = false;
+            let rootMenuSelected = false;
             if (rootMenuInfo.children) {
               rootMenuInfo.children.forEach((secondMenuInfo) => {
                 // 2번째 depth 선택된 메뉴 초기화
@@ -185,10 +193,15 @@ export const createLeftMenuSlice = (set, get) => ({
                       // 3번째 depth 선택된 메뉴 초기화
                       selecteSecondMenuId = secondMenuInfo.menuId;
                       lastMenuInfo.isSelected = true;
+                      rootMenuSelected = true;
                     }
                   });
                 }
               });
+              if (rootMenuSelected) {
+                rootMenuInfo.isSelected = true;
+                rootMenuInfo.isMenuExapand = true;
+              }
             }
           });
           state.leftMenuList.forEach((rootMenuInfo) => {
