@@ -88,6 +88,7 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
   let columnList = req.body.checkedColumns || [];
   let checkedMultiColumn = req.body.checkedMultiColumn;
   let checkedModalUseState = req.body.checkedModalUseState;
+  let checkedInnerFormStore = req.body.checkedInnerFormStore;
   let checkedSearchFormDetail = req.body.checkedSearchFormDetail;
   let downloadFileName = '';
   try {
@@ -112,7 +113,7 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
       }
     }
     if (generateType === 'all' || generateType === 'formView') {
-      formViewFileName = await createFormViewfile(tableName, columnList, checkedMultiColumn);
+      formViewFileName = await createFormViewfile(tableName, columnList, checkedMultiColumn, checkedInnerFormStore);
       if (generateType === 'formView') {
         downloadFileName = formViewFileName;
       }
@@ -126,7 +127,7 @@ app.post('/api/generate/:tableName/:generateType/fileDownload', async (req, res)
     }
 
     if (generateType === 'all' || generateType === 'modalForm') {
-      modalFormFileName = await createModalFormfile(tableName, columnList, checkedMultiColumn, checkedModalUseState);
+      modalFormFileName = await createModalFormfile(tableName, columnList, checkedMultiColumn, checkedModalUseState, checkedInnerFormStore);
       if (generateType === 'modalForm') {
         downloadFileName = modalFormFileName;
       }
@@ -173,6 +174,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
   let columnList = req.body.checkedColumns || [];
   let checkedMultiColumn = req.body.checkedMultiColumn;
   let checkedModalUseState = req.body.checkedModalUseState;
+  let checkedInnerFormStore = req.body.checkedInnerFormStore;
   let checkedSearchFormDetail = req.body.checkedSearchFormDetail;
 
   let result = {};
@@ -207,6 +209,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
       importList: createCommonImportListToColumnList(columnList),
       tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
       checkedMultiColumn: checkedMultiColumn,
+      checkedInnerFormStore: checkedInnerFormStore
     };
 
     const detailViewData = {
@@ -226,6 +229,7 @@ app.post('/api/generate/:tableName', async (req, res) => {
       importList: createCommonImportListToColumnList(columnList),
       tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
       checkedMultiColumn: checkedMultiColumn,
+      checkedInnerFormStore: checkedInnerFormStore
     };
 
     const modalDetailData = {
@@ -322,7 +326,7 @@ async function createFormStorefile(tableName, columnList) {
 }
 
 // form view 파일 생성
-async function createFormViewfile(tableName, columnList, checkedMultiColumn) {
+async function createFormViewfile(tableName, columnList, checkedMultiColumn, checkedInnerFormStore) {
   // 템플릿에서 대체할 변수들
   let camelCaseTableName = _.camelCase(tableName);
   const applyFileName = getApplyFileName(camelCaseTableName);
@@ -334,6 +338,7 @@ async function createFormViewfile(tableName, columnList, checkedMultiColumn) {
     tableColumns: columnList,
     tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
     checkedMultiColumn: checkedMultiColumn,
+    checkedInnerFormStore: checkedInnerFormStore,
     importList: createCommonImportListToColumnList(columnList),
   };
   const content = ejs.render(formViewGenerateString, data);
@@ -361,7 +366,7 @@ async function createDetailViewfile(tableName, columnList, checkedMultiColumn) {
 }
 
 // modal form 파일 생성
-async function createModalFormfile(tableName, columnList, checkedMultiColumn, checkedModalUseState) {
+async function createModalFormfile(tableName, columnList, checkedMultiColumn, checkedModalUseState, checkedInnerFormStore) {
   // 템플릿에서 대체할 변수들
   let camelCaseTableName = _.camelCase(tableName);
   const applyFileName = getApplyFileName(camelCaseTableName);
@@ -373,6 +378,7 @@ async function createModalFormfile(tableName, columnList, checkedMultiColumn, ch
     tableColumns: columnList,
     tableColumnMultiArray: toMultiArray(columnList, checkedMultiColumn ? 2 : 1),
     checkedMultiColumn: checkedMultiColumn,
+    checkedInnerFormStore: checkedInnerFormStore,
     importList: createCommonImportListToColumnList(columnList),
   };
   const content = ejs.render(checkedModalUseState ? formUseStateModalGenerateString : formModalGenerateString, data);
@@ -538,9 +544,9 @@ function createCommonImportListToColumnList(columnList) {
     } else if (componentType === 'checkbox') {
       return `import AppCheckbox from '@/components/common/AppCheckbox';`;
     } else if (componentType === 'checkboxgroup') {
-      return `import AppCheckbox from '@/components/common/AppCheckboxGroup';`;
+      return `import AppCheckboxGroup from '@/components/common/AppCheckboxGroup';`;
     } else if (componentType === 'radio') {
-      return `import AppRadio from '@/components/common/AppRadioGroup';`;
+      return `import AppRadioGroup from '@/components/common/AppRadioGroup';`;
     } else if (componentType === 'user-select-input') {
       return `import AppUserSelectInput from '@/components/common/AppUserSelectInput';`;
     } else if (componentType === 'dept-select-input') {

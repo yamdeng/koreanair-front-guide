@@ -166,9 +166,49 @@ export default <%= fileName %>`;
 
 const formViewGenerateString = `import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';<% importList.forEach((importString)=> { %>
-<%- importString %><% }) %>
+<%- importString %><% }) %><% if(checkedInnerFormStore) { %>
+import { create } from "zustand";
+import { formBaseState, createFormSliceYup } from "@/stores/slice/formSlice";
+import * as yup from "yup"; <% } %>
+<% if(checkedInnerFormStore) { %>
+/* yup validation */
+const yupFormSchema = yup.object({<% tableColumns.forEach((columnInfo)=> { %>
+  <%= columnInfo.column_name %>: yup.<%= columnInfo.yupType %>,<% }) %>
+});
+
+/* TODO : form 초기값 상세 셋팅 */
+/* formValue 초기값 */
+const initFormValue = {<% tableColumns.forEach((columnInfo)=> { %>
+  <%= columnInfo.column_name %>: <%- columnInfo.formInitValue %>,<% }) %>
+};
+
+/* form 초기화 */
+const initFormData = {
+  ...formBaseState,
+
+  formApiPath: 'TODO : api path',
+  baseRoutePath: 'TODO : UI route path',
+  formName: '<%= formName %>',
+  formValue: {
+    ...initFormValue,
+  }
+};
+
+/* zustand store 생성 */
+const <%= storeName %> = create<any>((set, get) => ({
+  ...createFormSliceYup(set, get),
+
+  ...initFormData,
+
+  yupFormSchema: yupFormSchema,
+
+  clear: () => {
+    set({ ...formBaseState, formValue: { ...initFormValue } });
+  },
+}));<% } else { %>
 /* TODO : store 경로를 변경해주세요. */
 import <%= storeName %> from '@/stores/guide/<%= storeName %>';
+<% } %>
 
 /* TODO : 컴포넌트 이름을 확인해주세요 */
 function <%= fileName %>() {
@@ -464,9 +504,49 @@ export default <%= fileName %>;
 `;
 
 const formModalGenerateString = `import { useEffect } from 'react';
-import Modal from 'react-modal';
+import Modal from 'react-modal';<% if(checkedInnerFormStore) { %>
+import { create } from "zustand";
+import { formBaseState, createFormSliceYup } from "@/stores/slice/formSlice";
+import * as yup from "yup";<% } %>
+<% if(checkedInnerFormStore) { %>
+/* yup validation */
+const yupFormSchema = yup.object({<% tableColumns.forEach((columnInfo)=> { %>
+  <%= columnInfo.column_name %>: yup.<%= columnInfo.yupType %>,<% }) %>
+});
+
+/* TODO : form 초기값 상세 셋팅 */
+/* formValue 초기값 */
+const initFormValue = {<% tableColumns.forEach((columnInfo)=> { %>
+  <%= columnInfo.column_name %>: <%- columnInfo.formInitValue %>,<% }) %>
+};
+
+/* form 초기화 */
+const initFormData = {
+  ...formBaseState,
+
+  formApiPath: 'TODO : api path',
+  baseRoutePath: 'TODO : UI route path',
+  formName: '<%= formName %>',
+  formValue: {
+    ...initFormValue,
+  }
+};
+
+/* zustand store 생성 */
+const <%= storeName %> = create<any>((set, get) => ({
+  ...createFormSliceYup(set, get),
+
+  ...initFormData,
+
+  yupFormSchema: yupFormSchema,
+
+  clear: () => {
+    set({ ...formBaseState, formValue: { ...initFormValue } });
+  },
+}));<% } else { %>
 /* TODO : store 경로를 변경해주세요. */
 import <%= storeName %> from '@/stores/guide/<%= storeName %>';
+<% } %>
 
 /* TODO : 컴포넌트 이름을 확인해주세요 */
 function <%= fileName %>(props) {
