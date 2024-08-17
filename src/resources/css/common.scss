@@ -136,6 +136,7 @@ input, select{font-family:'KoreanAirSans'}
   border-radius: 0.3rem;
   overflow: hidden;
 }
+.filebox {border:  0.1rem solid var(--color-neutral-40); border-radius: 1.0rem; padding: 1.0rem;}
 .filebox.error {border:  0.1rem solid var(--color-negative); border-radius: 1.0rem; padding: 1.0rem;}
 .filebox .file-label{display: inline-block;
   position: absolute;
@@ -263,7 +264,7 @@ input, select{font-family:'KoreanAirSans'}
   text-align:right
 }
 /* 상단 타이틀 */
-.conts-title{position:relative;align-items:center;padding:2.0rem 0 4.0rem 0;/*margin-bottom:1.0rem*/}
+.conts-title{position:relative;align-items:center;padding:2.0rem 0 4.0rem 0;margin-bottom:1.0rem}
 .conts-title h2{float:left;font-family:"KoreanAirSans";font-size:3rem;color:var(--color-neutral-80);font-weight:700;letter-spacing:-0.1rem}
 .conts-title h2 span a{position:relative;font-size:2.5rem;color:var(--color-mblue-100);padding-left:1.0rem}
 .conts-title h2 span a:after{content:'';position:absolute;box-sizing:content-box;right:-3.5rem;width:3.0rem;height:3.0rem;background:url(../images/icon-documents.svg)no-repeat center center;cursor:pointer}
@@ -297,10 +298,9 @@ input, select{font-family:'KoreanAirSans'}
 }
 .detail-form{
   .detail-list .form-table{display:flex;width:100%}
-  .form-table +.form-table{/*padding-top:1.5rem*/}
 }
 
-.group-box-wrap{position:relative;/*height:4.0rem;padding:0 1.0rem;border:0.1rem solid var(--color-neutral-40);border-radius:0.5rem*/}
+.group-box-wrap{position:relative}
 .group-box-wrap .txt{position:absolute;left:1.0rem;top:-1.2rem;background:var(--color-neutral-10);padding:0 0.5rem;font-size:1.4rem; z-index: 1;}
 .group-box-wrap span.errorText {display: block;color: var(--color-negative); font-size: 1.3rem; padding: 0.2rem 0.5rem;}
 .group-box-wrap.line {border: 0.1rem solid var(--color-neutral-40); border-radius: 0.5rem;}
@@ -354,7 +354,7 @@ input, select{font-family:'KoreanAirSans'}
 }
 
 /*탭*/
-.menu-tab-nav{display:flex}
+.menu-tab-nav{display:flex;position:relative;width:100%}
 .menu-tab{display:flex;flex-wrap:nowrap;border:0.1rem solid var(--color-neutral-40);border-radius:0.8rem;overflow:auto hidden;scroll-behavior:smooth;gap:1.2rem 0;margin:2.0rem 0}
 .menu-tab:after{content:'';display:block;clear:both}
 .menu-tab a:nth-child(n){border-right:0.1rem solid var(--color-neutral-40)}
@@ -395,14 +395,13 @@ input, select{font-family:'KoreanAirSans'}
 
 /*검색영역*/
 .info-wrap .edit-area > .boxForm{padding:0}
-.boxForm{position:relative;display:inline-table;width:100%;padding:1.0rem 3rem 1.0rem;margin-bottom:2.0rem;background-color:var(--color-neutral-20);border-radius:0.8rem}
+.boxForm{position:relative;display:inline-table;width:100%;padding:1.0rem 3rem 1.0rem;margin-bottom:5.0rem;background-color:var(--color-neutral-20);border-radius:0.8rem}
 .boxForm::after{content:'';clear:both;display:block}
 .boxForm .form-table{display:flex;width:100%}
 .boxForm .form-table + .form-table{/*padding-top:1.5rem*/}
 .boxForm .form-table:last-child{padding-bottom:1.5rem}
-.boxForm .form-table .form-cell{position:relative;flex-grow:1;padding:0 0.5rem;padding-top:1.2rem /*padding: 2rem 1rem 2rem 0;*/}
-.boxForm .form-table .wid-300 {max-width: 30.0rem;}
-/*.boxForm .form-table .form-cell:last-child{padding-right:0}*/
+.boxForm .form-table .form-cell{position:relative;flex-grow:1;padding:0 0.5rem;padding-top:1.2rem}
+.boxForm .form-table .wid-300{max-width:30.0rem}
 .boxForm.tog{margin-bottom:0rem;padding-top:0rem}
 
 .conts-subTit{width:100%;line-height:3.5rem;padding-bottom:1.0rem}
@@ -456,24 +455,18 @@ input, select{font-family:'KoreanAirSans'}
 .form-tag:not([value=""]){border:0.1rem solid var(--color-neutral-40)}
 .form-tag.active+.f-label, .form-tag:focus+.f-label{color:var(--color-mblue-100) !important}
 .form-tag-select:disabled + .f-label, .form-tag-select:focus + .f-label, .form-tag-select.active + .f-label, .form-tag-select.isValue + .f-label, .form-tag-select.invalid + .f-label{left:1.0rem;top:-2.0rem;font-size:1.3rem;transition: all 0.3s ease}
-.form-group .sch-btnClear {
-  position: absolute;
-  top: 0.7rem;
-  right: 4.0rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: url(../images/delete-text.svg) center center no-repeat;
-  background-size: cover;
-  border: none;
-  outline: none;
-  cursor: pointer}
+.form-group .sch-btnClear{position:absolute;top: 0.7rem;right:4.0rem;width:2.5rem;height:2.5rem;background:url(../images/delete-text.svg) center center no-repeat;background-size: cover;border: none;outline: none;cursor: pointer}
 
 .form-group .df.row1{justify-content:center}
 .form-group .df.row1 > .btn-area{padding-top:0}
 .form-group .img{width:100%;height:100%;margin:0 auto;overflow:hidden}
-.form-group .img .img-thumbnail{width:100%;
-  height:100%;
-  object-fit:cover;}
+.form-group .img .img-thumbnail{width:100%;height:100%;object-fit:cover}
+
+.ant-input-group{position:relative;display:table;margin:0;padding:0;color:var(--color-neutral-90);font-size:1.4rem;line-height:1.5715;list-style:none;width:100%;border-collapse:separate;border-spacing:0;box-sizing:border-box}
+.ant-input-group-addon:first-child{border-right:0}
+.ant-input-group-addon:first-child, .ant-input-group-addon:first-child{border-top-left-radius:0.8rem;border-bottom-left-radius:0.8rem;border-top-right-radius:0;border-bottom-right-radius:0}
+.ant-input-group-addon{position:relative;padding:0 1.1rem;color:var(--color-neutral-90);font-weight:400;font-size:1.4rem;text-align:center;background-color:var(--color-neutral-10);border:0.1rem solid var(--color-neutral-40);border-radius:0.8rem;transition: all .3s}
+.ant-input-group-addon, .ant-input-group-wrap{display:table-cell;width:0.1rem;white-space:nowrap;vertical-align:middle}
 
 
 /*상세리스트*/

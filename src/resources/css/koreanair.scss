@@ -402,6 +402,9 @@
     .table-box {
       display: block;
       width: 100%;
-    .left-table {display: inline-block; width: auto;}
-    .right-table {display: inline-block; width: auto;}
+      
+    .left-table {width: auto; vertical-align: top;}
+    .left-table table {display: block; width: 100%;}
+    .left-table th, td {padding: 1.0rem 2.4rem; text-align: center;}
+    .right-table {display: inline-block; width: auto; vertical-align: top; background-color: brown;}
     }

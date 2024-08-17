@@ -9,7 +9,7 @@
 
 @media screen and (min-width: 1024px) and (max-width: 1280px){
   .header .GNB  {display: none;} 
-  .list-common-modal-content, .org-select-modal-content, .org-change-modal-content {width: 90%;}
+  .list-common-modal-content, .org-select-modal-content, .org-change-modal-content, .risk-level-search-content {width: 90%;}
   .boxForm .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .boxForm .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 50%; /*padding-right: 0;*/}
   .boxForm .form-table .wid-300 {max-width: 100%;}
@@ -28,6 +28,9 @@
 
   .contents-btns > button.btn-type01 {width: calc(50% - 0.2rem); margin: 1.0rem 0;}
   .contents-btns > button.btn-type01:nth-child(odd) {margin-right:0.2rem;}
+  .RiskLevel-box{display:block}
+  .RiskLevel-box .RiskLevel-list{width:100%}
+  .RiskLevel-box .RiskLevel-area{width:100%}
 
 
 }
@@ -36,7 +39,7 @@
 @media screen and (min-width: 768px) and (max-width: 1023px){
   .header .GNB  {display: none;}
   .LNB_bg.active {display: block;} 
-  .list-common-modal-content, .org-select-modal-content, .org-change-modal-content {width: 90%;}
+  .list-common-modal-content, .org-select-modal-content, .org-change-modal-content .risk-level-search-content {width: 90%;}
   .boxForm .form-table {display: block;}
   .boxForm .form-table .form-cell {width: 100%; padding-right:0;}
   .boxForm .form-table .wid-300 {max-width: 100%;}
@@ -68,6 +71,9 @@
 
   .detail-form .detail-list .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .detail-form .detail-list .form-table .form-cell {width: 33.3%;}
+  .RiskLevel-box{display:block}
+  .RiskLevel-box .RiskLevel-list{position:relative;display:flex;width:100%}
+  .RiskLevel-box .RiskLevel-area{width:100%}
 
 
 
@@ -85,7 +91,7 @@
   .contents {padding: 2.4rem;}
   .conts-title h2 {font-size: 2.4rem;}
 
-  .list-common-modal-content, .org-select-modal-content, .org-change-modal-content {width: 100%; height: 100%; border-radius: 0 !important;}
+  .list-common-modal-content, .org-select-modal-content, .org-change-modal-content, .risk-level-search-content{width: 100%; height: 100%; border-radius: 0 !important;}
   .pop_full_cont_box {height: calc(100vh - 12.0rem); padding-bottom: 0;}
   .pop_btns {width: 100%; position: absolute; left: 0; bottom: 0; display: flex;}
   .pop_btns > button {border-radius: 0 !important; margin: 0; flex-basis: auto; flex-grow: 1;}
@@ -139,6 +145,13 @@
   .Status-area .Status-chart{display:block;height: auto !important}
 
   .menu-tab a{display: inline-flex;font-size:1.4rem;line-height:1.4;min-height:4.4rem}
+  .RiskLevel-box{display:block}
+  .RiskLevel-box .RiskLevel-list{width:100%}
+  .RiskLevel-box .RiskLevel-area{width:100%}
+  .RiskLevel-box .RiskLevel-area .Level-area{display:block}
+  .RiskLevel-box .RiskLevel-area .Level-area .LevelLeft{width:100%}
+  .RiskLevel-box .RiskLevel-area .Level-area .LevelRight{width:100%}
+  .RiskLevel-area .h4-tit{display:block;margin-top:2.0rem}
 
 }
 
@@ -171,5 +184,7 @@
   [class*=c-step-list-type][class*=-list-type-5] .info-title{font-weight:400;font-size:1.5rem !important;line-height:1.5rem}
 
   .Status-area .Status-chart{display:block;height: auto !important}
+  .RiskLevel-box{display:block}
+  .RiskLevel-box .RiskLevel-list{width:100%}
 
 }

@@ -1,6 +1,10 @@
 @charset "UTF-8";
+:root {
+    --color-neutral-01:#ebebeb;
+}
 
 .tc{text-align:center}
+.tl{text-align:left !important}
 .h3{position:relative;font-size:2.2rem;font-weight:700;height:4.0rem;letter-spacing:-0.01rem}
 .h3:after{content:'';display:block}
 .flex-e{display:flex;justify-content:flex-end !important}
@@ -18,7 +22,8 @@
 .Status-chart .Status-col{position:relative;min-height: 1px;width:100%}
 .Status-chart .Status-col .h4{color:var(--color-darkblue-100);font-weight:500;font-size:1.8rem;line-height:1.8;letter-spacing:-0.1rem}
 .Status-chart .Status-col .h4 span{color:var(--color-negative)}
-.Status-chart .Status-col .Chart-box{border-radius:0.8rem;padding: 1rem;border:solid 0.1rem var(--color-neutral-40);background-color:var(--color-neutral-20);}
+.Status-chart .Status-col .Chart-box{border-radius:0.8rem;padding: 1rem;border:solid 0.1rem var(--color-neutral-01);background-color:var(--color-neutral-10);box-shadow:0 0.2rem 0.4rem 0 rgba(0, 0, 0, .05)}
+.Status-chart .Status-col .Chart-box:hover{border-color:var(--color-darkblue-100)}
 
 
 /* 리포트 프로세스*/
@@ -98,12 +103,17 @@
 /*AUDIT 체크리스트*/
 .checklist-contents{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:100%;box-sizing:border-box;margin-top:1.0rem}
 .checklist-contents::after{content:'';display:block;clear:both}
-.checklist-contents .checklist-row.list h4 label{position:relative;display:inline-block;width:100%;padding-bottom:1.0rem;border-bottom:0.1rem solid rgb(188, 188, 205)}
+.checklist-contents .checklist-row.list h4 label{position:relative;display:inline-block;width:100%;padding-bottom:1.3rem;border-bottom:0.1rem solid rgb(188, 188, 205)}
 .checklist-contents .checklist-row.list h4 label button.btn-list{position:absolute;left:1rem;top:0.5rem;width:2.3rem;height:2rem;font-size:0;background:url(../images/icon-register.svg)center center no-repeat;align-items:center}
 .checklist-contents .checklist-row.list h4 a{display:inline-block;font-size:1.6rem;font-weight:700;padding-left:4.0rem}
 .checklist-contents .checklist-row.list h4 a span{line-height:2.0rem}
 .checklist-contents .checklist-row{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:25%;box-sizing:border-box;overflow:hidden;padding:1rem}
-.checklist-contents .checklist-row .checklist-col{position:relative;width:100%;border-radius:0.8rem;padding:1rem;border:solid 0.1rem var(--color-neutral-40);background-color:var(--color-neutral-20);height:100%;min-height:32.0rem}
+.checklist-contents .checklist-row .checklist-col{position:relative;width:100%;;height:100%;min-height:32.0rem;border-radius:0.8rem;padding:1.2rem 1rem;border:solid 0.1rem var(--color-neutral-01);background-color:var(--color-neutral-10);box-shadow:0 0.2rem 0.4rem 0 rgba(0, 0, 0, .05)}
+
+
+
+.checklist-contents .checklist-row .checklist-col:hover{border-color:var(--color-darkblue-100)}
+
 
 .checklist-contents .checklist-row.list ul{position:relative;display:flex;flex-direction:column;padding:1.0rem}
 .checklist-contents .checklist-row.list li.list-space{position:relative;display:inline-flex;align-items:center;font-size:1.5rem;line-height:2.0}
@@ -113,17 +123,11 @@
 .checklist-contents .checklist-row.list li.list-space button.btn-list .editChapter{visibility:hidden;opacity:0;margin-right:2rem}
 
 /*AUDIT-체크리스트 상단 탭*/
-.menu-tab-nav > .menu-tab-nav-operations{display:flex;position:relative;align-self:stretch;border: 1px solid #222;}
-.menu-tab-nav > .menu-tab-nav-operations .menu-tab-nav-more{position:absolute;left:1rem;top:30%;width:3.2rem;height:3.2rem;font-size:0;background:url(../images/icon-option.svg)center center no-repeat;align-items:center}
-.menu-tab-nav{position: relative;}
-.menu-tab-nav .c-tab-btn-group {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: flex-start;
-    z-index: 1;
-}
+.menu-tab-nav .swiper-container{position:relative;display:flex;overflow:hidden;width:100%}
+.menu-tab-nav .swiper-container > .menu-tab-nav-operations{position:absolute;top:23%;right:0;display:flex;justify-content:flex-start;z-index: 1;gap:0 0.5rem;background-color:var(--color-neutral-10);}
+.menu-tab-nav .swiper-container > .menu-tab-nav-operations .menu-tab-nav-more{width:3.2rem;height:4.7rem;padding:0 3rem;border:solid 0.1rem var(--color-neutral-40);font-size:0;background:url(../images/icon-option.svg)center center no-repeat;align-items:center}
+.menu-tab-nav .swiper-container > .menu-tab-nav-operations .menu-tab-btn-next{width:3.2rem;height:4.7rem;padding:0 3rem;border:solid 0.1rem var(--color-neutral-40)}
+
 
 /*공통테이블*/
 .Safety-table-cell{text-align:center;align-items:center}
