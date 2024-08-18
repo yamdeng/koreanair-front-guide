@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import CommonUtil from '@/utils/CommonUtil';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
-import CommonUtil from '@/utils/CommonUtil';
 
 function AppTimePicker(props) {
   const {
@@ -26,16 +25,6 @@ function AppTimePicker(props) {
     style = { width: '100%' },
   } = props;
 
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
   let applyDateValueFormat = 'HH:mm:ss';
   if (excludeSecondsTime) {
     applyDateValueFormat = 'HH:mm';
@@ -55,7 +44,7 @@ function AppTimePicker(props) {
     <>
       <TimePicker
         className={value || placeholder ? 'label-picker selected' : 'label-picker'}
-        status={!isFocused && errorMessage ? 'error' : ''}
+        status={errorMessage ? 'error' : ''}
         style={style}
         id={id}
         name={name}
@@ -73,8 +62,6 @@ function AppTimePicker(props) {
         minuteStep={minuteStep}
         hourStep={hourStep}
         secondStep={secondStep}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}

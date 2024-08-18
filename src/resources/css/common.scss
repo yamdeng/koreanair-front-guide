@@ -545,6 +545,9 @@ input, select{font-family:'KoreanAirSans'}
 }
 .label-select .css-13cymwt-control{height: 4.0rem; border-color: var(--color-neutral-40);}
 .css-t3ipsp-control {height: 4.0rem; box-shadow: none !important;}
+.ant-picker-focused.ant-picker-status-error {
+  border:0.1rem solid var(--color-mblue-100) !important;color:var(--color-mblue-100) !important
+}
 
 /* 에디터 메뉴 툴팁 text override */
 .toastui-editor-tooltip .text{color:var(--color-neutral-10)}

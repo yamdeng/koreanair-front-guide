@@ -19,6 +19,7 @@ import classNames from 'classnames';
     -value(string)
     -onChange : (string, event)
     -inputType(string) : 'number' | 'text' (생략시 기본 'text')
+    -hiddenClearButton(boolean) : false
 
 */
 

@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
 import { DATE_PICKER_TYPE_QUARTER } from '@/config/CommonConstant';
 import CommonUtil from '@/utils/CommonUtil';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
+import { useCallback } from 'react';
 
 /*
 
@@ -66,16 +66,6 @@ const AppDatePicker = (props) => {
     style = { width: '100%' },
   } = props;
 
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
   let applyDateValueFormat = CommonUtil.getDateFormatByPickerType(pickerType, showTime, excludeSecondsTime);
   if (valueFormat) {
     applyDateValueFormat = valueFormat;
@@ -123,7 +113,7 @@ const AppDatePicker = (props) => {
     <>
       <DatePicker
         className={value || placeholder ? 'label-picker selected' : 'label-picker'}
-        status={!isFocused && errorMessage ? 'error' : ''}
+        status={errorMessage ? 'error' : ''}
         style={style}
         id={id}
         name={name}
@@ -151,8 +141,6 @@ const AppDatePicker = (props) => {
         maxDate={applyMaxDate}
         disabled={disabled}
         disabledDate={disabledDate}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}

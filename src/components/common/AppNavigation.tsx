@@ -26,7 +26,9 @@ function AppNavigation() {
     if (!searchInfoCheckedRef.current && navationMenuList && navationMenuList.length) {
       if (appWorkScope === navationMenuList[0].workScope) {
         const searchMenuInfo = navationMenuList.find((info) => {
-          if (info.menuUrl && currentUrlPath.indexOf(info.menuUrl) !== -1) {
+          const { menuUrl } = info;
+          // if (menuUrl && currentUrlPath.indexOf(menuUrl) !== -1) {
+          if (menuUrl && menuUrl.indexOf(currentUrlPath) !== -1) {
             return true;
           }
           return false;
@@ -57,7 +59,7 @@ function AppNavigation() {
   let naviationComponent = (
     <ol>
       <li className="breadcrumb-item">
-        <a href="javascript:void(0);">홈</a>
+        <a href={undefined}>홈</a>
       </li>
     </ol>
   );
@@ -65,18 +67,18 @@ function AppNavigation() {
     naviationComponent = (
       <ol>
         <li className="breadcrumb-item" onClick={goHome}>
-          <a href="javascript:void(0);">홈</a>
+          <a href={undefined}>홈</a>
         </li>
         {menuParentList.map((parentMenuInfo) => {
           const { nameKor } = parentMenuInfo;
           return (
             <li key={nameKor} className="breadcrumb-item">
-              <a href="javascript:void(0);">{nameKor}</a>
+              <a href={undefined}>{nameKor}</a>
             </li>
           );
         })}
         <li className="breadcrumb-item">
-          <a href="javascript:void(0);">{curretMenuInfo.nameKor}</a>
+          <a href={undefined}>{curretMenuInfo.nameKor}</a>
         </li>
       </ol>
     );
