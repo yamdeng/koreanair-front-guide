@@ -380,7 +380,10 @@ function <%= fileName %>() {
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else if(columnInfo.componentType === 'file'){ %>
               <AppFileAttach
-                fileGroupSeq={null}
+                id="<%= formName %><%= columnInfo.column_name %>"
+                name="<%= columnInfo.column_name %>"
+                label="<%= columnInfo.column_comment %>"
+                fileGroupSeq={<%= columnInfo.column_name %>}
                 workScope={'업무구문(A,O,S)'}
                 updateFileGroupSeq={(newFileGroupSeq) => {
                   // TODO : newFileGroupSeq를 handle
@@ -806,7 +809,10 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'file'){ %>
                         <AppFileAttach
-                          fileGroupSeq={null}
+                          id="<%= formName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          fileGroupSeq={<%= columnInfo.column_name %>}
                           workScope={'업무구문(A,O,S)'}
                           updateFileGroupSeq={(newFileGroupSeq) => {
                             // TODO : newFileGroupSeq를 handle
@@ -1074,7 +1080,10 @@ function <%= fileName %>(props) {
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else if(columnInfo.componentType === 'file'){ %>
                         <AppFileAttach
-                          fileGroupSeq={null}
+                          id="<%= formName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          fileGroupSeq={<%= columnInfo.column_name %>}
                           workScope={'업무구문(A,O,S)'}
                           updateFileGroupSeq={(newFileGroupSeq) => {
                             // TODO : newFileGroupSeq를 handle
