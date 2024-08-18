@@ -12,7 +12,7 @@ function AppUserSelectInput(props) {
   };
 
   const handleOrgSelectModal = (selectedValue) => {
-    onChange(selectedValue);
+    onChange(selectedValue, selectedValue ? selectedValue.userId : '');
     setIsUserSelectModalopen(false);
   };
 

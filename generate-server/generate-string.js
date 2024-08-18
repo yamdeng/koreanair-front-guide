@@ -350,7 +350,7 @@ function <%= fileName %>() {
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
-                onChange={(value) => {
+                onChange={(value, userId) => {
                   // TODO : value가 object 형이여서 추가 처리가 필요함
                   changeInput('<%= columnInfo.column_name %>', value)
                 }}
@@ -362,7 +362,7 @@ function <%= fileName %>() {
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
-                onChange={(value) => {
+                onChange={(value, deptCd) => {
                   // TODO : value가 object 형이여서 추가 처리가 필요함
                   changeInput('<%= columnInfo.column_name %>', value)
                 }}
@@ -788,7 +788,7 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          onChange={(value) => {
+                          onChange={(value, userId) => {
                             // TODO : value가 object 형이여서 추가 처리가 필요함
                             changeInput('<%= columnInfo.column_name %>', value)
                           }}
@@ -800,7 +800,7 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          onChange={(value) => {
+                          onChange={(value, deptCd) => {
                             // TODO : value가 object 형이여서 추가 처리가 필요함
                             changeInput('<%= columnInfo.column_name %>', value)
                           }}
@@ -1068,7 +1068,7 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          onChange={(value) => {
+                          onChange={(value, userId) => {
                             // TODO : value가 object 형이여서 추가 처리가 필요함
                             changeInput('<%= columnInfo.column_name %>', value)
                           }}
@@ -1080,7 +1080,7 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          onChange={(value) => {
+                          onChange={(value, deptCd) => {
                             // TODO : value가 object 형이여서 추가 처리가 필요함
                             changeInput('<%= columnInfo.column_name %>', value)
                           }}
@@ -1351,7 +1351,7 @@ function <%= fileName %>() {
                 <AppUserSelectInput
                   label="<%= columnInfo.column_comment %>"
                   value={<%= columnInfo.column_name %>}
-                  onChange={(value) => {
+                  onChange={(value, userId) => {
                     // TODO : value가 object 형이여서 추가 처리가 필요함
                     changeSearchInput('<%= columnInfo.column_name %>', value)
                   }}
@@ -1359,7 +1359,7 @@ function <%= fileName %>() {
                 <AppDeptSelectInput
                   label="<%= columnInfo.column_comment %>"
                   value={<%= columnInfo.column_name %>}
-                  onChange={(value) => {
+                  onChange={(value, deptCd) => {
                     // TODO : value가 object 형이여서 추가 처리가 필요함
                     changeSearchInput('<%= columnInfo.column_name %>', value)
                   }}
@@ -1487,7 +1487,7 @@ function <%= fileName %>() {
               <AppUserSelectInput
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
-                onChange={(value) => {
+                onChange={(value, userId) => {
                   // TODO : value가 object 형이여서 추가 처리가 필요함
                   changeSearchInput('<%= columnInfo.column_name %>', value)
                 }}
@@ -1495,7 +1495,7 @@ function <%= fileName %>() {
               <AppDeptSelectInput
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
-                onChange={(value) => {
+                onChange={(value, deptCd) => {
                   // TODO : value가 object 형이여서 추가 처리가 필요함
                   changeSearchInput('<%= columnInfo.column_name %>', value)
                 }}

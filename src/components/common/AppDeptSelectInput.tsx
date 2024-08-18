@@ -11,7 +11,7 @@ function AppDeptSelectInput(props) {
   };
 
   const handleOrgSelectModal = (selectedValue) => {
-    onChange(selectedValue);
+    onChange(selectedValue, selectedValue ? selectedValue.deptCd : '');
     setIsOrgSelectModalopen(false);
   };
 
