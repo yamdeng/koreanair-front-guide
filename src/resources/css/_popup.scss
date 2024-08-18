@@ -201,6 +201,7 @@
   > button {
     margin: 0 0.5rem;
   }
+  > button:disabled {background:var(--color-neutral-30);color:var(--color-neutral-50);border:0;}
   .btn_text {
     font-family: 'KoreanAirSans';
     font-weight: 400;

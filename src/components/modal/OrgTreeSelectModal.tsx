@@ -11,6 +11,9 @@ function OrgTreeSelectModal(props) {
   const { isOpen, closeModal, ok, isMultiple = false } = props;
 
   const onSelect = useCallback((selectedKeys, info) => {
+    if (info.node) {
+      info.node.selectedType = 'D';
+    }
     setSelectedInfo(info.node);
   }, []);
 
@@ -49,13 +52,13 @@ function OrgTreeSelectModal(props) {
       ok(selectedInfo);
     }
     clear();
+    closeModal();
   }, [selectedInfo, checkedDeptList, isMultiple, ok]);
 
-  useEffect(() => {
-    if (isOpen) {
-      getOrgTree();
-    }
-  }, [isOpen]);
+  const handleClose = () => {
+    clear();
+    closeModal();
+  };
 
   let saveDisabled = false;
   if (isMultiple) {
@@ -68,6 +71,12 @@ function OrgTreeSelectModal(props) {
     }
   }
 
+  useEffect(() => {
+    if (isOpen) {
+      getOrgTree();
+    }
+  }, [isOpen]);
+
   return (
     <Modal
       shouldCloseOnOverlayClick={false}
@@ -75,9 +84,7 @@ function OrgTreeSelectModal(props) {
       ariaHideApp={false}
       overlayClassName={'alert-modal-overlay'}
       className={'alert-modal-content'}
-      onRequestClose={() => {
-        closeModal();
-      }}
+      onRequestClose={handleClose}
     >
       <div className="popup-container">
         <h3 className="pop_title">제목</h3>
