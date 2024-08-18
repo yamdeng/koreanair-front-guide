@@ -46,7 +46,10 @@ function AppTextInput(props) {
   if (placeholder) {
     isActiveClass = true;
   }
-  const applyClassName = classNames('form-tag', { error: errorMessage, active: isActiveClass });
+  const applyClassName = classNames('form-tag', {
+    error: errorMessage,
+    active: isActiveClass,
+  });
   return (
     <>
       <input

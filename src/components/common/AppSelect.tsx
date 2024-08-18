@@ -30,7 +30,7 @@ function AppSelect(props) {
     value,
     options = [],
     onChange,
-    placeHolder = '',
+    placeholder = '',
     required = false,
     errorMessage,
     applyAllSelect = false,
@@ -63,7 +63,7 @@ function AppSelect(props) {
     }
   }
   const applyClassName = classNames('label-select', {
-    selected: isSelectedClass || labelOnlyTop || applyAllSelect,
+    selected: isSelectedClass || labelOnlyTop || applyAllSelect || placeholder,
   });
   return (
     <>
@@ -77,7 +77,7 @@ function AppSelect(props) {
         name={name}
         value={value}
         options={applyOptions}
-        placeholder={placeHolder}
+        placeholder={placeholder}
         onChange={onChange}
         onFocus={handleFocus}
         onBlur={handleBlur}

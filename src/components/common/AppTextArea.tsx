@@ -36,7 +36,7 @@ function AppTextArea(props) {
       <textarea
         id={id}
         style={style}
-        className={errorMessage ? 'form-tag error' : 'form-tag'}
+        className={errorMessage ? 'form-tag error' : 'label-select form-tag'}
         name={name}
         value={value}
         onChange={(event) => {

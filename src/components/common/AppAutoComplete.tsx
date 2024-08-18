@@ -29,7 +29,7 @@ function AppAutoComplete(props) {
     value,
     options = [],
     onChange,
-    placeHolder = '',
+    placeholder = '',
     required = false,
     errorMessage,
     style = { width: '100%' },
@@ -37,7 +37,19 @@ function AppAutoComplete(props) {
     disabled = false,
   } = props;
 
+  let isSelectedClass = false;
+  if (value) {
+    if (Array.isArray(value)) {
+      if (value.length) {
+        isSelectedClass = true;
+      }
+    } else {
+      isSelectedClass = true;
+    }
+  }
+
   const applyClassName = classNames('label-select', {
+    selected: isSelectedClass || placeholder,
     focused: isFocused,
     disabled: disabled,
   });
@@ -59,7 +71,7 @@ function AppAutoComplete(props) {
           classNames={{
             control: (state) => (!state.isFocused && errorMessage ? 'select-in-valid' : ''),
           }}
-          placeHolder={placeHolder}
+          placeholder={placeholder}
           style={style}
           isDisabled={disabled}
         />

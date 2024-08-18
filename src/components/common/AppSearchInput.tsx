@@ -1,4 +1,5 @@
 import CommonUtil from '@/utils/CommonUtil';
+import classNames from 'classnames';
 
 /*
 
@@ -25,18 +26,28 @@ function AppSearchInput(props) {
     value,
     onChange,
     placeholder = '',
+    required = false,
+    errorMessage,
     style = {},
     search,
     disabled = false,
     clearHandler = null,
   } = props;
+  let isActiveClass = false;
+  if (placeholder) {
+    isActiveClass = true;
+  }
+  const applyClassName = classNames('form-tag', {
+    error: errorMessage,
+    active: isActiveClass,
+  });
   return (
     <>
       <input
         id={id}
         type={inputType}
         style={style}
-        className={'form-tag'}
+        className={applyClassName}
         name={name}
         value={value}
         onChange={(event) => {
@@ -51,12 +62,15 @@ function AppSearchInput(props) {
         disabled={disabled}
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
-        {label}
+        {label} {required ? <span className="required">*</span> : null}
       </label>
       {value ? (
         <button className="sch-btnClear" onClick={() => (clearHandler ? clearHandler() : onChange(''))}></button>
       ) : null}
       <button type="button" className="icon-sch" onClick={search}></button>
+      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
+        {errorMessage}
+      </span>
     </>
   );
 }

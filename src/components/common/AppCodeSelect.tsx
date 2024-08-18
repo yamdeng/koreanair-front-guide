@@ -11,13 +11,14 @@ function AppCodeSelect(props) {
     label,
     value,
     onChange,
-    placeHolder = '',
+    placeholder = '',
     required = false,
     errorMessage,
     applyAllSelect = false,
     allValue = '',
     style = { width: '100%' },
     labelOnlyTop = false,
+    isMultiple = false,
     isRemote = false,
     codeGrpId = '',
   } = props;
@@ -48,13 +49,14 @@ function AppCodeSelect(props) {
         name={name}
         label={label}
         value={value}
-        placeholder={placeHolder}
+        placeholder={placeholder}
         onChange={onChange}
         required={required}
         errorMessage={errorMessage}
         labelOnlyTop={labelOnlyTop}
         applyAllSelect={applyAllSelect}
         allValue={allValue}
+        isMultiple={isMultiple}
       />
     </>
   );

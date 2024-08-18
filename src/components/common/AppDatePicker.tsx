@@ -122,7 +122,7 @@ const AppDatePicker = (props) => {
   return (
     <>
       <DatePicker
-        className={value ? 'label-picker selected' : 'label-picker'}
+        className={value || placeholder ? 'label-picker selected' : 'label-picker'}
         status={!isFocused && errorMessage ? 'error' : ''}
         style={style}
         id={id}

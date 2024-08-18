@@ -29,7 +29,7 @@ function AppTreeSelect(props) {
     value,
     treeData = [],
     onChange,
-    placeHolder = '',
+    placeholder = '',
     required = false,
     errorMessage,
     style = { width: '100%' },
@@ -59,8 +59,10 @@ function AppTreeSelect(props) {
     }
   }
   const applyClassName = classNames('label-select', {
-    selected: isSelectedClass || labelOnlyTop,
+    selected: isSelectedClass || labelOnlyTop || placeholder,
   });
+
+  const applyValue = value ? value : null;
   return (
     <>
       <TreeSelect
@@ -74,8 +76,8 @@ function AppTreeSelect(props) {
         }}
         id={id}
         name={name}
-        value={value}
-        placeholder={placeHolder}
+        value={applyValue}
+        placeholder={placeholder}
         onChange={onChange}
         onFocus={handleFocus}
         onBlur={handleBlur}

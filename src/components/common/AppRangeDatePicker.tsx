@@ -98,7 +98,7 @@ const AppRangeDatePicker = (props) => {
   return (
     <>
       <RangePicker
-        className={value ? 'label-picker selected' : 'label-picker'}
+        className={value || placeholder ? 'label-picker selected' : 'label-picker'}
         status={!isFocused && errorMessage ? 'error' : ''}
         style={style}
         id={{

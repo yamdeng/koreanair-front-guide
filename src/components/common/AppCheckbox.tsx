@@ -6,6 +6,7 @@ function AppCheckbox(props) {
     id = CommonUtil.getUUID(),
     name = '',
     label,
+    checkboxTitle = '',
     value = false,
     onChange,
     required = false,
@@ -31,7 +32,7 @@ function AppCheckbox(props) {
               onChange(event.target.checked, event);
             }}
           />
-          <span>{label}</span>
+          <span>{checkboxTitle ? checkboxTitle : label}</span>
         </label>
       </div>
       <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
