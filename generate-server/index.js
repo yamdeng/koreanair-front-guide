@@ -528,6 +528,7 @@ function createCommonImportListToColumnList(columnList) {
   const commonImportStringList = columnFilterList.map((info) => {
     let importString = `import AppTextInput from '@/components/common/AppTextInput';`;
     const componentType = info.componentType;
+
     if (componentType === 'code') {
       return `import AppCodeSelect from '@/components/common/AppCodeSelect';`;
     } else if (componentType === 'select') {
@@ -542,6 +543,8 @@ function createCommonImportListToColumnList(columnList) {
       return `import AppDatePicker from '@/components/common/AppDatePicker';`;
     } else if (componentType === 'timepicker') {
       return `import AppTimePicker from '@/components/common/AppTimePicker';`;
+    } else if (componentType === 'rangepicker') {
+      return `import AppRangeDatePicker from '@/components/common/AppRangeDatePicker';`;
     } else if (componentType === 'checkbox') {
       return `import AppCheckbox from '@/components/common/AppCheckbox';`;
     } else if (componentType === 'checkboxgroup') {

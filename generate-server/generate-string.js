@@ -402,6 +402,15 @@ function <%= fileName %>() {
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+              /><% } else if(columnInfo.componentType === 'search-input'){ %>
+              <AppSearchInput
+                id="<%= formName %><%= columnInfo.column_name %>"
+                name="<%= columnInfo.column_name %>"
+                label="<%= columnInfo.column_comment %>"
+                value={<%= columnInfo.column_name %>}
+                onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                errorMessage={errors.<%= columnInfo.column_name %>}
+                <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
               /><% } else { %>
               <AppTextInput
                 id="<%= formName %><%= columnInfo.column_name %>"
@@ -831,6 +840,15 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'search-input'){ %>
+                        <AppSearchInput
+                          id="<%= formName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else { %>
                         <AppTextInput
                           id="<%= formName %><%= columnInfo.column_name %>"
@@ -1102,6 +1120,15 @@ function <%= fileName %>(props) {
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
+                        /><% } else if(columnInfo.componentType === 'search-input'){ %>
+                        <AppSearchInput
+                          id="<%= formName %><%= columnInfo.column_name %>"
+                          name="<%= columnInfo.column_name %>"
+                          label="<%= columnInfo.column_comment %>"
+                          value={<%= columnInfo.column_name %>}
+                          onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
+                          errorMessage={errors.<%= columnInfo.column_name %>}
+                          <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
                         /><% } else { %>
                         <AppTextInput
                           id="<%= formName %><%= columnInfo.column_name %>"
@@ -1283,6 +1310,13 @@ function <%= fileName %>() {
                   onChange={(value) => {
                     changeSearchInput('<%= columnInfo.column_name %>', value);
                   }}
+                /><% } else if(columnInfo.componentType === 'rangepicker'){ %>
+                <AppRangeDatePicker
+                  label="<%= columnInfo.column_comment %>"
+                  value={<%= columnInfo.column_name %>}
+                  onChange={(value) => {
+                    changeSearchInput('<%= columnInfo.column_name %>', value);
+                  }}
                 /><% } else if(columnInfo.componentType === 'timepicker'){ %>
                 <AppTimePicker
                   label="<%= columnInfo.column_comment %>"
@@ -1400,6 +1434,13 @@ function <%= fileName %>() {
               /><% } else if(columnInfo.componentType === 'code'){ %>
               <AppCodeSelect
                 codeGrpId="<%= columnInfo.codeGroupId %>"
+                label="<%= columnInfo.column_comment %>"
+                value={<%= columnInfo.column_name %>}
+                onChange={(value) => {
+                  changeSearchInput('<%= columnInfo.column_name %>', value);
+                }}
+              /><% } else if(columnInfo.componentType === 'rangepicker'){ %>
+              <AppRangeDatePicker
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
                 onChange={(value) => {
