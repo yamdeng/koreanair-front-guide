@@ -8,6 +8,7 @@
     "dev:admin": "vite --port 8082 --mode admin",
     "build": "tsc && vite build",
     "build:pass": "vite build",
+    "build:admin-pass": "vite build --mode admin",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
