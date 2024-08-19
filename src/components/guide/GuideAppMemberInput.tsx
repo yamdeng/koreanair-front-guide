@@ -49,8 +49,20 @@ function GuideAppMemberInput() {
           <div className="form-cell wid50">
             <div className="form-group wid100">
               <AppUserSelectInput
-                withOrgTree={true}
+                withOrgTree={false}
                 label="사용자선택"
+                value={userSelectValue}
+                onChange={(value, userId) => {
+                  handleUserSelectInput(value, userId);
+                }}
+              />
+            </div>
+          </div>
+          <div className="form-cell wid50">
+            <div className="form-group wid100">
+              <AppUserSelectInput
+                withOrgTree={true}
+                label="사용자선택(부서트리)"
                 value={userSelectValue}
                 onChange={(value, userId) => {
                   handleUserSelectInput(value, userId);

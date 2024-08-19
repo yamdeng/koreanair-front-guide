@@ -27,6 +27,7 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990021', 'A', 'AppTreeSelect', 'AppTreeSelect', '', '', '', 'M', 'A990010', 99, '/aviation/guides/app-tree-select', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990022', 'A', 'AppAutoComplete', 'AppAutoComplete', '', '', '', 'M', 'A990010', 99, '/aviation/guides/app-auto-complete', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990023', 'A', 'AppFileAttach', 'AppFileAttach', '', '', '', 'M', 'A990010', 99, '/aviation/guides/app-file-attach', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990024', 'A', 'Tree', 'Tree', '', '', '', 'M', 'A990010', 99, '/aviation/guides/tree', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990031', 'A', 'AlertModal', 'AlertModal', '', '', '', 'M', 'A990030', 99, '/aviation/guides/alert-modal', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990032', 'A', '조직도모달', '조직도모달', '', '', '', 'M', 'A990030', 99, '/aviation/guides/org-modal', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990033', 'A', '모달서비스', '모달서비스', '', '', '', 'M', 'A990030', 99, '/aviation/guides/modal-service', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
@@ -36,3 +37,5 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990044', 'A', '다국어-org', '다국어-org', '', '', '', 'M', 'A990040', 99, '/aviation/guides/locale-org-component', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990081', 'A', '토스트 alert', '토스트 alert', '', '', '', 'M', 'A990080', 99, '/aviation/guides/toast-service', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990082', 'A', 'api 옵션', 'api 옵션', '', '', '', 'M', 'A990080', 99, '/aviation/guides/api-service', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+
+

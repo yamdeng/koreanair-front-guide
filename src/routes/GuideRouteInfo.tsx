@@ -24,6 +24,7 @@ import GuideModalService from '@/components/guide/GuideModalService';
 import GuideOrgModal from '@/components/guide/GuideOrgModal';
 import GuideSecondLevelMenu from '@/components/guide/GuideSecondLevelMenu';
 import GuideToastService from '@/components/guide/GuideToastService';
+import GuideTree from '@/components/guide/GuideTree';
 
 const GuideRouteInfo: any = {};
 
@@ -87,6 +88,10 @@ GuideRouteInfo.list = [
   {
     Component: GuideAppFileAttach,
     path: 'guides/app-file-attach',
+  },
+  {
+    Component: GuideTree,
+    path: 'guides/tree',
   },
   {
     Component: GuideAlertModal,

@@ -30,7 +30,7 @@ function MemberSelectModal(props) {
   );
 
   const onCheck = useCallback(
-    (checkedKeys, treeInfo) => {
+    (checkedInfo, treeInfo) => {
       const deptList = treeInfo.checkedNodes || [];
       deptList.forEach((listInfo) => {
         listInfo.selectedType = 'D';
