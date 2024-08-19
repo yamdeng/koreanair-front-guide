@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AppNavigation from '../common/AppNavigation';
 import AppAutoComplete from '@/components/common/AppAutoComplete';
 import AppSearchInput from '../common/AppSearchInput';
 import AppCheckbox from '@/components/common/AppCheckbox';
@@ -19,7 +20,6 @@ import AppUserSelectInput from '@/components/common/AppUserSelectInput';
 import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
 import * as yup from 'yup';
 import { create } from 'zustand';
-// TODO : daterangepicker
 
 /* yup validation */
 const yupFormSchema = yup.object({
@@ -104,6 +104,7 @@ function SysDeptForm() {
 
   return (
     <>
+      <AppNavigation />
       <div className="conts-title">
         <h2>app-input 공통 속성</h2>
       </div>
