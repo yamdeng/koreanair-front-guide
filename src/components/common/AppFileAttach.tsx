@@ -2,15 +2,10 @@ import ApiService from '@/services/ApiService';
 import ModalService from '@/services/ModalService';
 import ToastService from '@/services/ToastService';
 import CommonUtil from '@/utils/CommonUtil';
-import { Upload } from 'antd';
-import { useEffect, useRef } from 'react';
+import { Image, Upload } from 'antd';
+import { useEffect, useRef, useState } from 'react';
 import { useImmer } from 'use-immer';
 const { Dragger } = Upload;
-
-// TODO : allowFileExtentions, onlyImageUpload
-// TODO : 썸네일 반영
-// TODO : applyPreviewImageModal
-// TODO : file api url 환경변수로 분류
 
 function AppFileAttach(props) {
   const {
@@ -24,16 +19,42 @@ function AppFileAttach(props) {
     fileGroupSeq,
     updateFileGroupSeq,
     mode = 'edit',
+    accept = null,
+    onlyImageUpload = false,
+    maxSizeMb = 5,
   } = props;
+
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState('');
 
   const [fileList, setFileList] = useImmer([]);
   const fileGroupSeqRef = useRef(null);
   const isFileListLoadedRef = useRef(null);
 
+  let applyAccept = accept;
+  if (!accept) {
+    if (onlyImageUpload) {
+      applyAccept = 'image/*';
+    }
+  }
+
   const baseProps: any = {
     name: 'files',
     multiple: multiple,
+    accept: applyAccept,
     data: { workScope: workScope },
+    listType: onlyImageUpload ? 'picture-card' : null,
+    showUploadList: {
+      extra: ({ fileSize = 0 }) => (
+        <span
+          style={{
+            color: '#cccccc',
+          }}
+        >
+          ({(fileSize / 1024 / 1024).toFixed(2)}MB)
+        </span>
+      ),
+    },
 
     onRemove(file) {
       if (mode === 'edit') {
@@ -50,20 +71,36 @@ function AppFileAttach(props) {
       return false;
     },
 
-    onPreview(file) {
+    async onPreview(file) {
       const { fileSeq } = file;
       const url =
         import.meta.env.VITE_API_URL +
         import.meta.env.VITE_API_PREFIX +
         `/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${fileSeq}`;
-      window.open(url);
+      if (onlyImageUpload) {
+        setPreviewImage(file.url);
+        setPreviewOpen(true);
+      } else {
+        window.open(url);
+      }
       return false;
     },
 
     beforeUpload(file, fileList) {
-      if (fileList && fileList.length) {
-        if (fileList.filter((info) => info.uid).length === fileList.length) {
-          handleUploadMulti(fileList);
+      let successFileSizeCheck = true;
+      fileList.forEach((fileInfo) => {
+        if (fileInfo.size / 1024 / 1024 > maxSizeMb) {
+          successFileSizeCheck = false;
+        }
+      });
+      if (!successFileSizeCheck) {
+        ToastService.warn(`file max size :${maxSizeMb} MB`);
+      }
+      if (successFileSizeCheck) {
+        if (fileList && fileList.length) {
+          if (fileList.filter((info) => info.uid).length === fileList.length) {
+            handleUploadMulti(fileList);
+          }
         }
       }
       return false;
@@ -111,7 +148,9 @@ function AppFileAttach(props) {
             (beforeInfo) => beforeInfo.status === 'uploading' && info.origFilename === beforeInfo.name
           );
           const searchInfo = { ...beforeList[searchIndex] };
-          searchInfo.url = info.s3Path;
+          // searchInfo.url = info.s3Path;
+          searchInfo.url = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;
+
           searchInfo.fileSeq = info.fileSeq;
           searchInfo.name = info.origFilename;
           searchInfo.status = 'done';
@@ -141,7 +180,8 @@ function AppFileAttach(props) {
       info.status = 'done';
       info.uid = info.fileSeq;
       info.name = info.origFilename;
-      info.url = info.s3Path;
+      // info.url = info.s3Path;
+      info.url = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${info.fileSeq}`;
       return info;
     });
     setFileList(fileList);
@@ -163,10 +203,17 @@ function AppFileAttach(props) {
     }
   }, [fileGroupSeq]);
 
+  let isDragUpload = false;
+  if (mode === 'edit') {
+    if (onlyImageUpload || isDragType) {
+      isDragUpload = true;
+    }
+  }
+
   return (
     <>
       <div className={errorMessage ? 'filebox error' : 'filebox'} id={id}>
-        {isDragType ? (
+        {isDragUpload ? (
           <Dragger {...baseProps} fileList={fileList}>
             <p className="ant-upload-text ">+ 이 곳을 클릭하거나 마우스로 업로드할 파일을 끌어서 놓으세요.</p>
           </Dragger>
@@ -186,6 +233,20 @@ function AppFileAttach(props) {
       <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
         {errorMessage}
       </span>
+
+      {previewImage && (
+        <Image
+          wrapperStyle={{
+            display: 'none',
+          }}
+          preview={{
+            visible: previewOpen,
+            onVisibleChange: (visible) => setPreviewOpen(visible),
+            afterOpenChange: (visible) => !visible && setPreviewImage(''),
+          }}
+          src={previewImage}
+        />
+      )}
     </>
   );
 }
