@@ -77,6 +77,20 @@ Code.groupUsage = [
   },
 ];
 
+/*
+    로그인 구분
+*/
+Code.loginScope = [
+  {
+    label: '항공안전',
+    value: WORK_SCOPE_AVIATION,
+  },
+  {
+    label: '산업안전',
+    value: WORK_SCOPE_OCCUPATION,
+  },
+];
+
 // 코드명 가져오기 : value 기준
 Code.getCodeLabelByValue = function (codeCategory, codeValue) {
   let codeLabel = null;

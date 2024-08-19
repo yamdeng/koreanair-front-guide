@@ -52,11 +52,16 @@ const saveInfoToLocalStorage = (key, value) => {
 // 로컬 스토리지에 정보 가져오기 : json object로 가져옴
 const getByLocalStorage = (key) => {
   const jsonString = localStorage.getItem(key);
-  if (jsonString) {
-    return JSON.parse(jsonString);
-  } else {
-    return null;
+  try {
+    if (jsonString) {
+      return JSON.parse(jsonString);
+    } else {
+      return null;
+    }
+  } catch (e) {
+    // TODO : 에러로그
   }
+  return null;
 };
 
 const mergeColumnInfosByLocal = (columns) => {

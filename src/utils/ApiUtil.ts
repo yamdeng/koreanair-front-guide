@@ -1,6 +1,7 @@
 import axios from 'axios';
 import LoadingBar from '@/utils/LoadingBar';
 import ModalService from '@/services/ModalService';
+// import useAppStore from '@/stores/useAppStore';
 
 /*
 
@@ -19,9 +20,13 @@ Api.defaults.headers.post['Content-Type'] = 'application/json';
 // 요청 인터셉터
 Api.interceptors.request.use(
   function (config: any) {
+    // TODO : 로그인 토큰 반영
+    // const { loginToken } = useAppStore.getState();
     if (!config.disableLoadingBar) {
       LoadingBar.show();
     }
+    // const AuthorizationValue = loginToken;
+    // config.headers['Authorization'] = AuthorizationValue;
     return config;
   },
   function (error) {

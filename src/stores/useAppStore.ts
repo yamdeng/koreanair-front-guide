@@ -3,11 +3,13 @@ import { createLeftMenuSlice } from '@/stores/slice/menuSlice';
 import ApiService from '@/services/ApiService';
 import LoadingBar from '@/utils/LoadingBar';
 import _ from 'lodash';
+import CommonUtil from '@/utils/CommonUtil';
 
 // currentLocale : 'ko', 'en'
 const useAppStore = createStore<any>((set, get) => ({
   ...createLeftMenuSlice(set, get),
 
+  loginToken: CommonUtil.getByLocalStorage('loginToken') || '',
   profile: null,
   displayLoadingBar: false,
   isInitComplete: false,
@@ -16,6 +18,11 @@ const useAppStore = createStore<any>((set, get) => ({
   codeAllMap: {},
   currentLocale: 'ko',
   apiCacheMap: {},
+
+  setLoginToke: (value) => {
+    set({ loginToken: value });
+  },
+
   getCacheData: (cacheKey) => {
     const { apiCacheMap } = get();
     const cacheData = apiCacheMap[cacheKey];
@@ -40,11 +47,14 @@ const useAppStore = createStore<any>((set, get) => ({
       const messageAllList = messageApiResult.data ? JSON.parse(messageApiResult.data) : [];
       const codeAllList = codeApiResult.data || [];
       const codeAllMap = _.groupBy(codeAllList, 'codeGrpId');
+      // TODO : profile api 나왔을 경우 반영
+      const profile = null;
       set({
         isInitComplete: true,
         messageAllList: messageAllList || [],
         codeAllList: codeAllList,
         codeAllMap: codeAllMap,
+        profile: profile,
       });
     } catch (e) {
       //
