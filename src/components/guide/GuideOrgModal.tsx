@@ -4,12 +4,14 @@ import AppNavigation from '../common/AppNavigation';
 import OrgTreeSelectModal from '../modal/OrgTreeSelectModal';
 import UserSelectModal from '../modal/UserSelectModal';
 import UserSelectWithOrgTreeModal from '../modal/UserSelectWithOrgTreeModal';
+import MemberSelectModal from '../modal/MemberSelectModal';
 import Config from '@/config/Config';
 
 function GuideOrgModal() {
   const [isOrgSelectModalopen, setIsOrgSelectModalopen] = useState(false);
   const [isUserSelectModalopen, setIsUserSelectModalopen] = useState(false);
   const [isUserWithOrgSelectModalopen, setIsUserWithOrgSelectModalopen] = useState(false);
+  const [isMemberSelectModalOpen, setIsMemberSelectModalOpen] = useState(false);
 
   const handleOrgSelectModal = (selectedValue) => {
     console.log(selectedValue);
@@ -24,6 +26,11 @@ function GuideOrgModal() {
   const handleUserWithOrgSelectModal = (selectedValue) => {
     console.log(selectedValue);
     setIsUserWithOrgSelectModalopen(false);
+  };
+
+  const handleMemberSelectModal = (selectedValue) => {
+    console.log(selectedValue);
+    setIsMemberSelectModalOpen(false);
   };
 
   return (
@@ -64,6 +71,14 @@ function GuideOrgModal() {
           >
             UserWithOrgSelectModal open
           </button>
+          <button
+            type="button"
+            name="button"
+            className="btn-sm btn_text btn-darkblue-line"
+            onClick={() => setIsMemberSelectModalOpen(true)}
+          >
+            MemberSelectModal open
+          </button>
         </div>
       </div>
       <OrgTreeSelectModal
@@ -83,6 +98,12 @@ function GuideOrgModal() {
         closeModal={() => setIsUserWithOrgSelectModalopen(false)}
         isMultiple={true}
         ok={handleUserWithOrgSelectModal}
+      />
+      <MemberSelectModal
+        isOpen={isMemberSelectModalOpen}
+        onlyUserSelect={true}
+        ok={handleMemberSelectModal}
+        closeModal={() => setIsMemberSelectModalOpen(false)}
       />
     </>
   );

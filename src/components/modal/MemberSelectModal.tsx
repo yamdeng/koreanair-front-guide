@@ -66,11 +66,11 @@ function MemberSelectModal(props) {
 
   const getOrgTree = useCallback(async () => {
     const apiUrl = import.meta.env.VITE_API_URL_DEPTS;
-    const response = await ApiService.get(apiUrl, {
+    const apiResult = await ApiService.get(apiUrl, {
       pageNum: 1,
       pageSize: 100000,
     });
-    const list = response.data.list;
+    const list = apiResult.data;
     const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', '0');
     setTreeData(treeData);
   }, []);

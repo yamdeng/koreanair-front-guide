@@ -20,8 +20,15 @@ import Config from '@/config/Config';
     -isValueString = true / false
 
 */
+
+const beforeSingleValue = { userId: '32636', nameKor: 'aaa1' };
+const beforeMultiValue = [
+  { userId: '32636', nameKor: 'aaa1' },
+  { userId: '32637', nameKor: 'aaa2' },
+];
 function GuideAppAutoComplete() {
-  const [selectValue, setSelectValue] = useState(null);
+  const [selectSingleValue, setSelectSingleValue] = useState(beforeSingleValue);
+  const [selectMultipleValue, setSelectMultipleValue] = useState(beforeMultiValue);
   const [selectUser, setSelectUser] = useState(null);
   const [onlyKeyValue, setOnlyKeyValue] = useState(null);
 
@@ -43,18 +50,36 @@ function GuideAppAutoComplete() {
           <div className="form-cell wid100">
             <div className="form-group wid100">
               <AppAutoComplete
-                label="AppAutoComplete(basic)"
+                label="AppAutoComplete(single)"
                 apiUrl="com/users"
-                value={selectValue}
+                value={selectSingleValue}
                 labelKey="nameKor"
                 valueKey="userId"
-                onChange={(value) => setSelectValue(value)}
-                isMultiple={false}
+                onChange={(value) => setSelectSingleValue(value)}
+                isMultiple={true}
               />
             </div>
           </div>
         </div>
-        <p>basic : {JSON.stringify(selectValue)}</p>
+        <p>single : {JSON.stringify(selectSingleValue)}</p>
+        <hr className="line"></hr>
+
+        <div className="form-table">
+          <div className="form-cell wid100">
+            <div className="form-group wid100">
+              <AppAutoComplete
+                label="AppAutoComplete(multiple)"
+                apiUrl="com/users"
+                value={selectMultipleValue}
+                labelKey="nameKor"
+                valueKey="userId"
+                onChange={(value) => setSelectMultipleValue(value)}
+                isMultiple={true}
+              />
+            </div>
+          </div>
+        </div>
+        <p>multiple : {JSON.stringify(selectMultipleValue)}</p>
         <hr className="line"></hr>
 
         <div className="form-table">
