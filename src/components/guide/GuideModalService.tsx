@@ -1,6 +1,7 @@
 import ModalService from '@/services/ModalService';
 import AppNavigation from '../common/AppNavigation';
 import Config from '@/config/Config';
+import i18n from '@/services/i18n';
 
 function GuideModalService() {
   const handleAlertModal = () => {
@@ -18,8 +19,8 @@ function GuideModalService() {
     ModalService.confirm({
       title: 'confirm test',
       body: '안녕하세요.\n반갑습니다.',
-      okLabel: '저장.',
-      cancelLabel: '닫아주세요',
+      okLabel: '저장2.',
+      cancelLabel: i18n.t('front.common.modal.close'),
       ok: () => {
         alert('ok handler');
       },

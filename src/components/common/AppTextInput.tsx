@@ -1,5 +1,6 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
+import CommonInputError from './CommonInputError';
 
 /*
 
@@ -72,9 +73,7 @@ function AppTextInput(props) {
       {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
         <button className="btnClear" onClick={() => onChange('')}></button>
       )}
-      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
-        {errorMessage}
-      </span>
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 }

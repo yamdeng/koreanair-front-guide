@@ -38,3 +38,11 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990082', 'A', 'api 옵션', 'api 옵션', '', '', '', 'M', 'A990080', 99, '/aviation/guides/api-service', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
 
+-- 다국어
+INSERT INTO tb_sys_message
+(msg_key, msg_kor, msg_eng, msg_chn, msg_jpn, msg_etc, reg_user_id, reg_dttm, upd_user_id, upd_dttm)
+VALUES('front.text.001', '테스트01', 'test01', '', '', '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('front.text.002', '테스트02 {{name}} 입니다', 'test02 {{name}} 입니다', '', '', '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('front.common.modal.close', '닫기', 'close', '', '', '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('front.validation.validation.required', '필수값입니다.', 'required field', '', '', '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+

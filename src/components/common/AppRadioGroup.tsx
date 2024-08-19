@@ -1,5 +1,6 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
+import CommonInputError from './CommonInputError';
 
 /*
 
@@ -66,9 +67,7 @@ function AppRadioGroup(props) {
           );
         })}
       </div>
-      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
-        error
-      </span>
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 }

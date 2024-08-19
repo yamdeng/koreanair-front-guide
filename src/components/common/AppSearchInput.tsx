@@ -1,5 +1,6 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
+import CommonInputError from './CommonInputError';
 
 /*
 
@@ -75,9 +76,7 @@ function AppSearchInput(props) {
         <button className="sch-btnClear" onClick={() => (clearHandler ? clearHandler() : onChange(''))}></button>
       ) : null}
       <button type="button" className="icon-sch" onClick={search}></button>
-      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
-        {errorMessage}
-      </span>
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 }

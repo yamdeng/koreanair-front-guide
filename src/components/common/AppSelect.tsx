@@ -3,6 +3,7 @@ import { Select } from 'antd';
 import CommonUtil from '@/utils/CommonUtil';
 import ApiService from '@/services/ApiService';
 import classNames from 'classnames';
+import CommonInputError from './CommonInputError';
 
 /*
 
@@ -116,9 +117,7 @@ function AppSelect(props) {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
-      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
-        {errorMessage}
-      </span>
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 }

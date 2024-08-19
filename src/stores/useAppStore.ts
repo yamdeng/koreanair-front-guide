@@ -5,6 +5,7 @@ import LoadingBar from '@/utils/LoadingBar';
 import _ from 'lodash';
 import CommonUtil from '@/utils/CommonUtil';
 import dayjs from 'dayjs';
+import i18n, { initializeI18n } from '@/services/i18n';
 
 // currentLocale : 'ko', 'en'
 const useAppStore = createStore<any>((set, get) => ({
@@ -57,6 +58,10 @@ const useAppStore = createStore<any>((set, get) => ({
       const messageAllList = messageApiResult.data ? JSON.parse(messageApiResult.data) : [];
       const codeAllList = codeApiResult.data || [];
       const codeAllMap = _.groupBy(codeAllList, 'codeGrpId');
+
+      // locale 메시지 초기화
+      initializeI18n(messageAllList);
+
       // TODO : profile api 나왔을 경우 반영
       const profile = null;
       set({
@@ -79,8 +84,10 @@ const useAppStore = createStore<any>((set, get) => ({
     // }
     const { currentLocale } = get();
     if (locale && currentLocale === 'ko') {
+      i18n.changeLanguage('en');
       set({ currentLocale: 'en' });
     } else {
+      i18n.changeLanguage('ko');
       set({ currentLocale: 'ko' });
     }
   },

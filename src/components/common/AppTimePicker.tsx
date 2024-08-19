@@ -1,6 +1,7 @@
 import CommonUtil from '@/utils/CommonUtil';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
+import CommonInputError from './CommonInputError';
 
 function AppTimePicker(props) {
   const {
@@ -66,9 +67,7 @@ function AppTimePicker(props) {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
-      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
-        {errorMessage}
-      </span>
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 }

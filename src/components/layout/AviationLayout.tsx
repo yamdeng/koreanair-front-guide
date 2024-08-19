@@ -9,7 +9,6 @@ import iconAlarmImage from '@/resources/images/icon_alram.svg';
 import iconSettingImage from '@/resources/images/icon_setting.svg';
 import closeImage from '@/resources/images/close.svg';
 import useAppStore from '@/stores/useAppStore';
-import i18n from '@/services/i18n';
 
 export default function AviationLayout() {
   const navigate = useNavigate();
@@ -45,8 +44,7 @@ export default function AviationLayout() {
           <div className="top-logo">
             <a href="" onClick={(e) => e.preventDefault()}>
               <img src={koreanairSymbolImage} onClick={goHomePortal} />
-              <span>{i18n('항공안전')}</span>
-              {/* <span>{i18n('components.Page.noApply')}</span> */}
+              <span>항공안전</span>
             </a>
           </div>
         </div>

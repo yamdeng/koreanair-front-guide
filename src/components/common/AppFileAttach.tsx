@@ -5,6 +5,8 @@ import CommonUtil from '@/utils/CommonUtil';
 import { Image, Upload } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useImmer } from 'use-immer';
+import CommonInputError from './CommonInputError';
+
 const { Dragger } = Upload;
 
 function AppFileAttach(props) {
@@ -232,9 +234,7 @@ function AppFileAttach(props) {
           {label} {required ? <span className="required">*</span> : null}
         </label>
       </div>
-      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
-        {errorMessage}
-      </span>
+      <CommonInputError errorMessage={errorMessage} />
 
       {previewImage && (
         <Image

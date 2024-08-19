@@ -3,6 +3,7 @@ import CommonUtil from '@/utils/CommonUtil';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import { useCallback } from 'react';
+import CommonInputError from './CommonInputError';
 
 /*
 
@@ -165,9 +166,7 @@ const AppDatePicker = (props) => {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
-      <span className="errorText" style={{ display: errorMessage ? '' : 'none' }}>
-        {errorMessage}
-      </span>
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 };
