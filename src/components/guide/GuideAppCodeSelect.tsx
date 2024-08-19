@@ -3,6 +3,7 @@ import AppNavigation from '@/components/common/AppNavigation';
 import AppSelect from '@/components/common/AppSelect';
 import AppCodeSelect from '@/components/common/AppCodeSelect';
 import Code from '@/config/Code';
+import Config from '@/config/Config';
 
 /*
 
@@ -58,7 +59,12 @@ function GuideAppTextInput() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AppSelect, AppCodeSelect</h2>
+        <h2>
+          AppSelect, AppCodeSelect :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppCodeSelect.tsx`}>
+            GuideAppCodeSelect
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">

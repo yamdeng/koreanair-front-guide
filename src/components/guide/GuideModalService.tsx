@@ -1,5 +1,6 @@
 import ModalService from '@/services/ModalService';
 import AppNavigation from '../common/AppNavigation';
+import Config from '@/config/Config';
 
 function GuideModalService() {
   const handleAlertModal = () => {
@@ -32,7 +33,12 @@ function GuideModalService() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>ModalService.alert, ModalService.confirm</h2>
+        <h2>
+          ModalService.alert, ModalService.confirm :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideModalService.tsx`}>
+            GuideModalService
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="btn-area">

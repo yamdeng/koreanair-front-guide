@@ -4,6 +4,7 @@ import AppNavigation from '../common/AppNavigation';
 import OrgTreeSelectModal from '../modal/OrgTreeSelectModal';
 import UserSelectModal from '../modal/UserSelectModal';
 import UserSelectWithOrgTreeModal from '../modal/UserSelectWithOrgTreeModal';
+import Config from '@/config/Config';
 
 function GuideOrgModal() {
   const [isOrgSelectModalopen, setIsOrgSelectModalopen] = useState(false);
@@ -29,7 +30,12 @@ function GuideOrgModal() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>OrgTreeSelectModal, UserSelectModal, UserSelectWithOrgTreeModal</h2>
+        <h2>
+          OrgTreeSelectModal, UserSelectModal, UserSelectWithOrgTreeModal :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideOrgModal.tsx`}>
+            GuideOrgModal
+          </a>
+        </h2>
       </div>
       {/*검색영역 */}
       <div className="editbox">

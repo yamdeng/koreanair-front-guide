@@ -2,6 +2,7 @@ import AppNavigation from '@/components/common/AppNavigation';
 import AppTreeSelect from '@/components/common/AppTreeSelect';
 import { useEffect, useState } from 'react';
 import ApiService from '@/services/ApiService';
+import Config from '@/config/Config';
 
 /*
 
@@ -45,7 +46,12 @@ function GuideAppTreeSelect() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AppTreeSelect</h2>
+        <h2>
+          AppTreeSelect :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppTreeSelect.tsx`}>
+            GuideAppTreeSelect
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">

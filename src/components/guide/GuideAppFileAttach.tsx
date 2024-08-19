@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AppFileAttach from '../common/AppFileAttach';
 import AppNavigation from '../common/AppNavigation';
+import Config from '@/config/Config';
 
 /*
 
@@ -21,7 +22,12 @@ function GuideAppFileAttach() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>file첨부 가이드</h2>
+        <h2>
+          file첨부 가이드 :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppFileAttach.tsx`}>
+            GuideAppFileAttach
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Config from '@/config/Config';
 import AppNavigation from '../common/AppNavigation';
 import AppUserSelectInput from '../common/AppUserSelectInput';
 import AppDeptSelectInput from '../common/AppDeptSelectInput';
@@ -31,7 +32,12 @@ function GuideAppMemberInput() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AppDeptSelectInput, AppUserSelectInput</h2>
+        <h2>
+          AppDeptSelectInput, AppUserSelectInput :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppMemberInput.tsx`}>
+            GuideAppMemberInput
+          </a>
+        </h2>
       </div>
       <div className="boxForm">
         <div className="form-table">

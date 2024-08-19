@@ -9,6 +9,7 @@ import {
 import CommonUtil from '@/utils/CommonUtil';
 import _ from 'lodash';
 import { useState } from 'react';
+import Config from '@/config/Config';
 
 /*
 
@@ -98,6 +99,14 @@ function GuideAppRangeDatePicker() {
   return (
     <>
       <AppNavigation />
+      <div className="conts-title">
+        <h2>
+          AppRangeDatePicker case1 :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppRangeDatePicker.tsx`}>
+            GuideAppRangeDatePicker
+          </a>
+        </h2>
+      </div>
       <h3>value, onChange, showNow : {_.toString(firstDateValue)}</h3>
       <AppRangeDatePicker onChange={changeFirstDatePickerValue} value={firstDateValue} showNow={false} />
       <br />

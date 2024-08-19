@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AppNavigation from '@/components/common/AppNavigation';
 import AppSearchInput from '@/components/common/AppSearchInput';
 import AppTextInput from '@/components/common/AppTextInput';
+import Config from '@/config/Config';
 
 /*
 
@@ -35,7 +36,12 @@ function GuideAppTextInput() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AppTextInput, AppSearchInput</h2>
+        <h2>
+          AppTextInput, AppSearchInput :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppTextInput.tsx`}>
+            GuideAppTextInput
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">

@@ -3,6 +3,7 @@ import { DATE_PICKER_TYPE_MONTH } from '@/config/CommonConstant';
 import _ from 'lodash';
 import { useState } from 'react';
 import AppNavigation from '../common/AppNavigation';
+import Config from '@/config/Config';
 
 /*
 
@@ -53,6 +54,14 @@ function GuideAppRangeDatePicker2() {
   return (
     <>
       <AppNavigation />
+      <div className="conts-title">
+        <h2>
+          AppRangeDatePicker case2 :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppRangeDatePicker2.tsx`}>
+            GuideAppRangeDatePicker2
+          </a>
+        </h2>
+      </div>
       <button onClick={toggleDisabled}>disabled toggle</button>
       <h3>max, min (date 유형) : {_.toString(datePickerTypeValue)} </h3>
       <AppRangeDatePicker

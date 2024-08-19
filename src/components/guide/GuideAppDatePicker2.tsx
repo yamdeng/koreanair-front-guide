@@ -1,5 +1,6 @@
 import AppDatePicker from '@/components/common/AppDatePicker';
 import AppNavigation from '../common/AppNavigation';
+import Config from '@/config/Config';
 
 import { useState } from 'react';
 
@@ -53,7 +54,12 @@ function GuideAppDatePicker2() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AppDatePicker case2</h2>
+        <h2>
+          AppDatePicker case2 :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppDatePicker2.tsx`}>
+            GuideAppDatePicker2
+          </a>
+        </h2>
       </div>
       <button onClick={toggleDisabled}>disabled toggle</button>
       <h3>max, min (date 유형) : {datePickerTypeValue} </h3>

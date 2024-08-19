@@ -20,6 +20,7 @@ import AppUserSelectInput from '@/components/common/AppUserSelectInput';
 import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
 import * as yup from 'yup';
 import { create } from 'zustand';
+import Config from '@/config/Config';
 
 /* yup validation */
 const yupFormSchema = yup.object({
@@ -106,7 +107,12 @@ function SysDeptForm() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>app-input 공통 속성</h2>
+        <h2>
+          app-input 공통 속성 :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideCommonInputForm.tsx`}>
+            GuideCommonInputForm
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">

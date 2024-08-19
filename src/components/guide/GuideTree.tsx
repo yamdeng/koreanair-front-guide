@@ -3,6 +3,7 @@ import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
 import { Tree } from 'antd';
 import { useEffect, useState } from 'react';
+import Config from '@/config/Config';
 
 /*
 
@@ -69,7 +70,12 @@ function GuideTree() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>Tree</h2>
+        <h2>
+          Tree :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideTree.tsx`}>
+            GuideTree
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">

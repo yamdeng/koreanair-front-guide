@@ -1,5 +1,6 @@
 import ToastService from '@/services/ToastService';
 import AppNavigation from '../common/AppNavigation';
+import Config from '@/config/Config';
 
 function GuideToastService() {
   const handleToastService = () => {
@@ -13,7 +14,12 @@ function GuideToastService() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>ToastService</h2>
+        <h2>
+          ToastService :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideToastService.tsx`}>
+            GuideToastService
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="btn-area">

@@ -8,6 +8,7 @@ import {
 } from '@/config/CommonConstant';
 import CommonUtil from '@/utils/CommonUtil';
 import { useState } from 'react';
+import Config from '@/config/Config';
 
 /*
 
@@ -94,7 +95,12 @@ function GuideAppDatePicker() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AppDatePicker case1</h2>
+        <h2>
+          AppDatePicker case1 :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppDatePicker.tsx`}>
+            GuideAppDatePicker
+          </a>
+        </h2>
       </div>
       <h3>value, onChange, showNow : {firstDateValue}</h3>
       <AppDatePicker onChange={changeFirstDatePickerValue} value={firstDateValue} showNow={true} needConfirm={true} />

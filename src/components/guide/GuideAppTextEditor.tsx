@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AppNavigation from '../common/AppNavigation';
 import AppTextArea from '../common/AppTextArea';
 import AppEditor from '../common/AppEditor';
+import Config from '@/config/Config';
 
 /*
 
@@ -23,7 +24,12 @@ function GuideAppTextEditor() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AppTextArea, AppEditor</h2>
+        <h2>
+          AppTextArea, AppEditor :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppTextEditor.tsx`}>
+            GuideAppTextEditor
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">

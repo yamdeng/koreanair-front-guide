@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AppNavigation from '../common/AppNavigation';
 import AlertModal from '../modal/AlertModal';
 import ConfirmModal from '../modal/ConfirmModal';
+import Config from '@/config/Config';
 
 function GuideAlertModal() {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
@@ -23,7 +24,12 @@ function GuideAlertModal() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AlertModal, ConfirmModal</h2>
+        <h2>
+          AlertModal, ConfirmModal :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAlertModal.tsx`}>
+            GuideAlertModal
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <button

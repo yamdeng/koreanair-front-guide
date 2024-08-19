@@ -1,6 +1,7 @@
 import AppTimePikcer from '@/components/common/AppTimePicker';
 import { useState } from 'react';
 import AppNavigation from '../common/AppNavigation';
+import Config from '@/config/Config';
 
 /*
 
@@ -35,6 +36,14 @@ function GuideAppTimePicker() {
   return (
     <>
       <AppNavigation />
+      <div className="conts-title">
+        <h2>
+          AppTimePicker :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppTimePicker.tsx`}>
+            GuideAppTimePicker
+          </a>
+        </h2>
+      </div>
       <h3>value, onChange, showNow : {firstTimeValue}</h3>
       <AppTimePikcer onChange={changeFirstTimePickerValue} value={firstTimeValue} showNow={true} needConfirm={true} />
       <br />

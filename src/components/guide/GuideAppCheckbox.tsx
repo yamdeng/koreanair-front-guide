@@ -3,6 +3,7 @@ import AppCheckboxGroup from '@/components/common/AppCheckboxGroup';
 import AppNavigation from '@/components/common/AppNavigation';
 import AppRadioGroup from '@/components/common/AppRadioGroup';
 import { useState } from 'react';
+import Config from '@/config/Config';
 
 /*
 
@@ -69,7 +70,12 @@ function GuideAppCheckbox() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>AppCheckbox, AppCheckboxGroup, AppRadioGroup</h2>
+        <h2>
+          AppCheckbox, AppCheckboxGroup, AppRadioGroup :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideAppCheckbox.tsx`}>
+            GuideAppCheckbox
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">

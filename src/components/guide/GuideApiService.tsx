@@ -1,5 +1,6 @@
 import ApiService from '@/services/ApiService';
 import AppNavigation from '../common/AppNavigation';
+import Config from '@/config/Config';
 
 function GuideToastService() {
   const handleApiServiceBasic = async () => {
@@ -32,7 +33,12 @@ function GuideToastService() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>ApiService</h2>
+        <h2>
+          ApiService :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideApiService.tsx`}>
+            GuideApiService
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="btn-area">
