@@ -16,7 +16,7 @@ const useAppStore = createStore<any>((set, get) => ({
   messageAllList: [],
   codeAllList: [],
   codeAllMap: {},
-  currentLocale: 'ko',
+  currentLocale: 'en',
   apiCacheMap: {},
 
   setLoginToke: (value) => {
@@ -64,8 +64,14 @@ const useAppStore = createStore<any>((set, get) => ({
   },
 
   changeLocale: (locale) => {
-    if (locale) {
-      set({ currentLocale: locale });
+    // if (locale) {
+    //   set({ currentLocale: locale });
+    // }
+    const { currentLocale } = get();
+    if (locale && currentLocale === 'ko') {
+      set({ currentLocale: 'en' });
+    } else {
+      set({ currentLocale: 'ko' });
     }
   },
 
