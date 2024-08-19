@@ -1,6 +1,7 @@
 import GuideAlertModal from '@/components/guide/GuideAlertModal';
 import GuideApiService from '@/components/guide/GuideApiService';
 import GuideAppAutoComplete from '@/components/guide/GuideAppAutoComplete';
+import GuideAppAutoCompleteRaw from '@/components/guide/GuideAppAutoCompleteRaw';
 import GuideAppCheckbox from '@/components/guide/GuideAppCheckbox';
 import GuideAppCodeSelect from '@/components/guide/GuideAppCodeSelect';
 import GuideAppDatePicker from '@/components/guide/GuideAppDatePicker';
@@ -80,6 +81,10 @@ GuideRouteInfo.list = [
   {
     Component: GuideAppTreeSelect,
     path: 'guides/app-tree-select',
+  },
+  {
+    Component: GuideAppAutoCompleteRaw,
+    path: 'guides/app-auto-complete-raw',
   },
   {
     Component: GuideAppAutoComplete,
