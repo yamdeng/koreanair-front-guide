@@ -66,6 +66,8 @@ const AppDatePicker = (props) => {
     style = { width: '100%' },
   } = props;
 
+  // const [open, setOpen] = useState(false);
+
   let applyDateValueFormat = CommonUtil.getDateFormatByPickerType(pickerType, showTime, excludeSecondsTime);
   if (valueFormat) {
     applyDateValueFormat = valueFormat;
@@ -109,6 +111,21 @@ const AppDatePicker = (props) => {
     [disabledHoiloday, disabledDates]
   );
 
+  const renderFooter = () => (
+    <button
+      onClick={() => {
+        const dateString = CommonUtil.getNowByServerTime(showTime ? 'dateTime' : 'date');
+        onChange(dateString, dayjs(dateString));
+        // setOpen(false);
+        // setTimeout(() => {
+        //   onChange(dateString, dayjs(dateString));
+        // }, 100);
+      }}
+    >
+      Now
+    </button>
+  );
+
   return (
     <>
       <DatePicker
@@ -135,12 +152,15 @@ const AppDatePicker = (props) => {
             ? { format: applyTimeFormat, hourStep: hourStep, minuteStep: minuteStep, secondStep: secondStep }
             : false
         }
-        showNow={showNow}
+        showNow={false}
         needConfirm={needConfirm}
         minDate={applyMinDate}
         maxDate={applyMaxDate}
         disabled={disabled}
         disabledDate={disabledDate}
+        renderExtraFooter={showNow ? renderFooter : null}
+        // open={open}
+        // onOpenChange={(status) => setOpen(status)}
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}

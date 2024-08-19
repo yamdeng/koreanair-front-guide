@@ -226,6 +226,19 @@ const validateYupForm = async (yupFormSchema, formValue) => {
   return { success, firstErrorFieldKey, errors };
 };
 
+const getNowByServerTime = (dateType = 'dateTime') => {
+  const serverTimeDiffSecondValue = getByLocalStorage('serverTimeDiffSecondValue');
+  if (serverTimeDiffSecondValue) {
+    const resultDate = dayjs().add(serverTimeDiffSecondValue, 'second');
+    if (dateType === 'date') {
+      return resultDate.format('YYYY-MM-DD');
+    } else {
+      return resultDate.format('YYYY-MM-DD HH:mm:ss');
+    }
+  }
+  return null;
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -243,4 +256,5 @@ export default {
   objectToQueryString,
   getUUID,
   validateYupForm,
+  getNowByServerTime,
 };

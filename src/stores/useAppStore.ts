@@ -4,6 +4,7 @@ import ApiService from '@/services/ApiService';
 import LoadingBar from '@/utils/LoadingBar';
 import _ from 'lodash';
 import CommonUtil from '@/utils/CommonUtil';
+import dayjs from 'dayjs';
 
 // currentLocale : 'ko', 'en'
 const useAppStore = createStore<any>((set, get) => ({
@@ -41,6 +42,15 @@ const useAppStore = createStore<any>((set, get) => ({
 
   initApp: async () => {
     LoadingBar.show();
+
+    // TODO : 서버 시간 받기
+    const clientNowString = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    const serverNowString = '2024-08-17 11:36:01';
+    const clientDate = dayjs(clientNowString);
+    const serverDate = dayjs(serverNowString);
+    const diffInSeconds = serverDate.diff(clientDate, 'second');
+    CommonUtil.saveInfoToLocalStorage('serverTimeDiffSecondValue', diffInSeconds);
+
     try {
       const codeApiResult = await ApiService.get('com/code-groups/codes/all', null, { disableLoadingBar: true });
       const messageApiResult = await ApiService.get('com/locales/translation', null, { disableLoadingBar: true });
