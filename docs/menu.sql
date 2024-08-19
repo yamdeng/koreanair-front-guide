@@ -34,7 +34,6 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990041', 'A', '다국어-basic', '다국어-basic', '', '', '', 'M', 'A990040', 99, '/aviation/guides/locale-basic', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990042', 'A', '다국어-code', '다국어-code', '', '', '', 'M', 'A990040', 99, '/aviation/guides/locale-code', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990043', 'A', '다국어-form', '다국어-form', '', '', '', 'M', 'A990040', 99, '/aviation/guides/locale-form', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990044', 'A', '다국어-org', '다국어-org', '', '', '', 'M', 'A990040', 99, '/aviation/guides/locale-org-component', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990081', 'A', '토스트 alert', '토스트 alert', '', '', '', 'M', 'A990080', 99, '/aviation/guides/toast-service', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990082', 'A', 'api 옵션', 'api 옵션', '', '', '', 'M', 'A990080', 99, '/aviation/guides/api-service', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 

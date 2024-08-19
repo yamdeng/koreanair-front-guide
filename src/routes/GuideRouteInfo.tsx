@@ -20,7 +20,6 @@ import GuideFirstLevelMenu from '@/components/guide/GuideFirstLevelMenu';
 import GuideLocaleBasic from '@/components/guide/GuideLocaleBasic';
 import GuideLocaleCode from '@/components/guide/GuideLocaleCode';
 import GuideLocaleForm from '@/components/guide/GuideLocaleForm';
-import GuideLocaleOrgComponent from '@/components/guide/GuideLocaleOrgComponent';
 import GuideModalService from '@/components/guide/GuideModalService';
 import GuideOrgModal from '@/components/guide/GuideOrgModal';
 import GuideSecondLevelMenu from '@/components/guide/GuideSecondLevelMenu';
@@ -121,10 +120,6 @@ GuideRouteInfo.list = [
   {
     Component: GuideLocaleForm,
     path: 'guides/locale-form',
-  },
-  {
-    Component: GuideLocaleOrgComponent,
-    path: 'guides/locale-org-component',
   },
   {
     Component: GuideToastService,

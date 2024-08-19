@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AppNavigation from '../common/AppNavigation';
 import AppAutoComplete from '@/components/common/AppAutoComplete';
 import AppCheckbox from '@/components/common/AppCheckbox';
 import AppCheckboxGroup from '@/components/common/AppCheckboxGroup';
@@ -12,6 +13,7 @@ import AppSelect from '@/components/common/AppSelect';
 import AppTextInput from '@/components/common/AppTextInput';
 import AppTreeSelect from '@/components/common/AppTreeSelect';
 import AppUserSelectInput from '@/components/common/AppUserSelectInput';
+import Config from '@/config/Config';
 
 const basicCheckboxOptions = [
   {
@@ -53,8 +55,15 @@ function GuideCommonInputSearch() {
 
   return (
     <>
-      {/* TODO : 검색 input 영역입니다 */}
-
+      <AppNavigation />
+      <div className="conts-title">
+        <h2>
+          검색 form에서 공통 input :{' '}
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideCommonInputSearch.tsx`}>
+            GuideCommonInputSearch
+          </a>
+        </h2>
+      </div>
       <div className="boxForm">
         <div className={isExpandDetailSearch ? 'area-detail active' : 'area-detail'}>
           <div className="form-table">
