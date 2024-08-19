@@ -374,7 +374,9 @@ function <%= fileName %>() {
                 name="<%= columnInfo.column_name %>"
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
-                options={[]}
+                apiUrl="TODO: apiUrl"
+                labelKey="TODO: labelKey"
+                valueKey="TODO: valueKey"
                 onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                 errorMessage={errors.<%= columnInfo.column_name %>}
                 <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
@@ -812,7 +814,9 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          options={[]}
+                          apiUrl="TODO: apiUrl"
+                          labelKey="TODO: labelKey"
+                          valueKey="TODO: valueKey"
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
@@ -1094,7 +1098,9 @@ function <%= fileName %>(props) {
                           name="<%= columnInfo.column_name %>"
                           label="<%= columnInfo.column_comment %>"
                           value={<%= columnInfo.column_name %>}
-                          options={[]}
+                          apiUrl="TODO: apiUrl"
+                          labelKey="TODO: labelKey"
+                          valueKey="TODO: valueKey"
                           onChange={(value) => changeInput('<%= columnInfo.column_name %>', value)}
                           errorMessage={errors.<%= columnInfo.column_name %>}
                           <% if (columnInfo.is_nullable !== 'YES') { %>required<% } %>
@@ -1369,7 +1375,9 @@ function <%= fileName %>() {
                 <AppAutoComplete
                   label="<%= columnInfo.column_comment %>"
                   value={<%= columnInfo.column_name %>}
-                  options={[]}
+                  apiUrl="TODO: apiUrl"
+                  labelKey="TODO: labelKey"
+                  valueKey="TODO: valueKey"
                   onChange={(value) => {
                     changeSearchInput('<%= columnInfo.column_name %>', value);
                   }}
@@ -1505,7 +1513,9 @@ function <%= fileName %>() {
               <AppAutoComplete
                 label="<%= columnInfo.column_comment %>"
                 value={<%= columnInfo.column_name %>}
-                options={[]}
+                apiUrl="TODO: apiUrl"
+                labelKey="TODO: labelKey"
+                valueKey="TODO: valueKey"
                 onChange={(value) => {
                   changeSearchInput('<%= columnInfo.column_name %>', value);
                 }}
