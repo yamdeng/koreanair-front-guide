@@ -9,8 +9,8 @@ import GridActionButtonComponent from './GridActionButtonComponent';
 import GridLinkComponent from './GridLinkComponent';
 
 const defaultColDef = {
-  sortable: true,
-  filter: true,
+  sortable: false,
+  filter: false,
   flex: 1,
   minWidth: 100,
 };
@@ -308,6 +308,8 @@ function AppTable(props) {
             if (getGridRef) {
               getGridRef(params);
             }
+            // params.api.sizeColumnsToFit();
+            params.api.autoSizeAllColumns();
           }}
         />
       </div>

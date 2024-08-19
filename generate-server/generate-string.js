@@ -1402,7 +1402,15 @@ function <%= fileName %>() {
                 /><% } %>
               </div>
             </div><% }) %>              
-          </div><% }) %>          
+          </div><% }) %>
+          <div className="btn-area">
+            <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
+              조회
+            </button>
+            <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
+              초기화
+            </button>
+          </div>      
         </div>
         <button
             type="button"
@@ -1539,20 +1547,22 @@ function <%= fileName %>() {
                 }}
               /><% } %>
             </div>
-          </div><% }) %>              
+          </div><% }) %>             
         </div><% }) %>     
-        <button
-            type="button"
-            name="button"
-            className={isExpandDetailSearch ? 'arrow button _control active' : 'arrow button _control'}
-            onClick={toggleExpandDetailSearch}
-          >
-          <span className="hide">접기</span>
-        </button>
+        <div className="btn-area">
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
+            조회
+          </button>
+          <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
+            초기화
+          </button>
+        </div> 
       </div>
       <% } %>      
     </>
   );
+}
+export default <%= fileName %>;
 `;
 
 module.exports = {
