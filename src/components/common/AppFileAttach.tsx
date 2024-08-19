@@ -150,6 +150,7 @@ function AppFileAttach(props) {
           const searchInfo = { ...beforeList[searchIndex] };
           // searchInfo.url = info.s3Path;
           searchInfo.url = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;
+          searchInfo.thumbUrl = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;
 
           searchInfo.fileSeq = info.fileSeq;
           searchInfo.name = info.origFilename;
@@ -182,6 +183,7 @@ function AppFileAttach(props) {
       info.name = info.origFilename;
       // info.url = info.s3Path;
       info.url = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${info.fileSeq}`;
+      info.thumbUrl = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${info.fileSeq}`;
       return info;
     });
     setFileList(fileList);
