@@ -1,0 +1,48 @@
+### 프론트가이드_최종(이후 추가된 버전은 별도로 정리해서 링크로 공유) ###
+
+ #.프론트 개발 설치 가이드
+  -https://docs.google.com/document/d/1u-BTkk0VlGQeieIsUV-sDoN2lBx-oNw_44toaVBHGBM/edit
+  -TODO : 서버 연동 방법 가이드
+  -TODO : 에디터 기본 사용법 정의
+
+ #.퍼블리싱 상세 가이드
+  -https://docs.google.com/document/d/10l2X4B_G64X9Jw7uTd-9uMZx1iY93kP7tMkM2y5qkmo/edit
+
+ #.라우트 등록 가이드
+  -퍼블리싱 파일 move 가이드
+  -라우팅이 많을 경우에는 분류해도 됨
+  -목록, 상세, 수정에 대한 공통 라우팅 url 가이드
+
+ #.관리자 필수 기능 설명
+  1.메뉴 관리
+  2.코드 관리
+  3.메시지 관리
+  4.가상그룹 관리
+
+ #.상단 네비게이션 가이드
+
+ #.공통 input 가이드
+
+ #.공통 모달 가이드
+
+ #.다국어 가이드 및 확인 방법
+  -코드 상세 가이드 : CodeService, CodeLabelComponent
+
+ #.로그인 가이드
+
+ #.개발 패턴 가이드
+
+
+
+
+
+ #.공통 테이블 가이드
+
+ #.guide 브런치에서 필수적으로 봐야하는 것들
+  -이외에는 main 브런치의 가이드 화면을 참고하면 됨
+
+ #.기타 가이드
+  1.a tag : void를 넣지 않는다
+
+ #.generate 서버 사용 가이드
+

@@ -25,6 +25,8 @@ import GuideOrgModal from '@/components/guide/GuideOrgModal';
 import GuideSecondLevelMenu from '@/components/guide/GuideSecondLevelMenu';
 import GuideToastService from '@/components/guide/GuideToastService';
 import GuideTree from '@/components/guide/GuideTree';
+import GuideDetailPage from '@/components/guide/GuideDetailPage';
+import GuideFormUnload from '@/components/guide/GuideFormUnload';
 
 const GuideRouteInfo: any = {};
 
@@ -136,6 +138,14 @@ GuideRouteInfo.list = [
   {
     Component: GuideSecondLevelMenu,
     path: 'guides/second-level-menu',
+  },
+  {
+    Component: GuideDetailPage,
+    path: 'guides/detailpage-editor',
+  },
+  {
+    Component: GuideFormUnload,
+    path: 'guides/unload',
   },
 ];
 

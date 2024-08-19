@@ -1,3 +1,29 @@
+/* zustand store 생성 */
+const useSysMessageFormStore = create((set, get) => {
+  // 생성자와 유사한 초기화 로직
+  const initializeState = () => {
+    // 초기화할 상태나 로직 작성
+    set({ count: 0, initialized: true });
+  };
+
+  debugger;
+  // 초기화 로직 실행
+  initializeState();
+
+  return {
+    ...createFormSliceYup(set, get),
+
+    ...initFormData,
+
+    yupFormSchema: yupFormSchema,
+
+    clear: () => {
+      set(initFormData);
+    },
+  };
+});
+
+
 #.<AppSelect isRemote={true} apiUrl='' />
 
 #.AgGrid에서 CodeLabelComponent
@@ -37,3 +63,42 @@
 
 
 
+
+
+var clientNowString = dayjs().format('YYYY-MM-DD HH:mm:ss'); 
+var serverNowString = '2024-08-19 11:36:01';
+
+// dayjs 객체로 변환
+var clientDate = dayjs(clientNowString);
+var serverDate = dayjs(serverNowString);
+
+// 초 단위 차이 계산
+var diffInSeconds = clientDate.diff(serverDate, 'second');
+
+// 45초를 뺀 시간
+var resultTime = dayjs().subtract(diffInSeconds, 'second');
+var resultDisplay = resultTime.format('YYYY-MM-DD HH:mm:ss');
+
+
+
+const now = dayjs();
+
+// 120초를 더한 시간
+const futureTime = now.add(diffInSeconds, 'second');
+
+
+// new
+
+var clientNowString = dayjs().format('YYYY-MM-DD HH:mm:ss'); 
+var serverNowString = '2024-08-19 11:36:01';
+
+// dayjs 객체로 변환
+var clientDate = dayjs(clientNowString);
+var serverDate = dayjs(serverNowString);
+
+// 초 단위 차이 계산
+var diffInSeconds = serverDate.diff(clientDate, 'second');
+
+// 45초를 뺀 시간
+var resultTime = dayjs().add(diffInSeconds, 'second');
+var resultDisplay = resultTime.format('YYYY-MM-DD HH:mm:ss');

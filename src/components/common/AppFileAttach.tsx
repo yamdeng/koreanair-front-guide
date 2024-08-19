@@ -216,7 +216,11 @@ function AppFileAttach(props) {
 
   return (
     <>
-      <div className={errorMessage ? 'filebox error' : 'filebox'} id={id}>
+      <div
+        className={errorMessage ? 'filebox error' : 'filebox'}
+        id={id}
+        style={{ display: mode === 'view' && !fileList.length ? 'none' : '' }}
+      >
         {isDragUpload ? (
           <Dragger {...baseProps} fileList={fileList}>
             <p className="ant-upload-text ">+ 이 곳을 클릭하거나 마우스로 업로드할 파일을 끌어서 놓으세요.</p>
@@ -235,6 +239,17 @@ function AppFileAttach(props) {
         </label>
       </div>
       <CommonInputError errorMessage={errorMessage} />
+
+      <div
+        className={errorMessage ? 'filebox error' : 'filebox'}
+        id={id}
+        style={{ display: mode === 'view' && !fileList.length ? '' : 'none' }}
+      >
+        <div>첨부파일이 존재하지 않습니다</div>
+        <label htmlFor="file" className="file-label">
+          {label} {required ? <span className="required">*</span> : null}
+        </label>
+      </div>
 
       {previewImage && (
         <Image

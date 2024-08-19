@@ -1,0 +1,13 @@
+/*폼아이콘변경*/
+.ant-select .ant-select-arrow .anticon >svg {background: url(../images/arrow-down.svg)center center no-repeat; background-size: cover;}
+.ant-select .ant-select-arrow .anticon >svg path {display: none;}
+.ant-picker .ant-picker-suffix .anticon svg {background: url(../images/calendar.svg)center center no-repeat; background-size: cover; width: 2.4rem; height: 2.4rem;}
+.ant-picker .ant-picker-suffix .anticon svg path {display: none;}
+.ant-picker .ant-picker-suffix .anticon-clock-circle svg {background: url(../images/arrival-time.svg)center center no-repeat; background-size: cover;}
+.ant-picker .ant-picker-suffix .anticon-clock-circle svg path {display: none;}
+// .css-tj5bde-Svg {background: url(../images/icon-arrow-down.svg)center center no-repeat; background-size: cover;}
+// .css-tj5bde-Svg path {display: none;}
+
+1.placeholder color 확인 필요
+2.textarea 전반적인 확인 필요
+3.label background color 적용 필요
