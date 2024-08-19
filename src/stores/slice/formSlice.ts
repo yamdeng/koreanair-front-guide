@@ -32,7 +32,7 @@ export const createFormSliceYup = (set, get) => ({
   changeInput: (inputName, inputValue) => {
     const { formValue } = get();
     formValue[inputName] = inputValue;
-    set({ formValue: formValue });
+    set({ formValue: formValue, isDirty: true });
   },
 
   getApiParam: () => {

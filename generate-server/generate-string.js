@@ -913,6 +913,7 @@ function <%= fileName %>(props) {
   const { isOpen, closeModal, detailInfo, ok } = props;
   const [formValue, setFormValue] = useImmer({ ...initFormValue });
   const [errors, setErrors] = useState<any>({});
+  const [isDirty, setIsDirty] = useState(false);
 
   const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = formValue;
 
@@ -920,6 +921,7 @@ function <%= fileName %>(props) {
     setFormValue((formValue) => {
       formValue[inputName] = inputValue;
     });
+    setIsDirty(true);
   };
 
   const save = async () => {
