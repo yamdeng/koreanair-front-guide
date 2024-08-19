@@ -65,9 +65,13 @@ function AppAutoComplete(props) {
       setIsLoading(true);
 
       try {
-        const apiResult = await ApiService.get(`${apiUrl}`, {
-          searchWord: input,
-        });
+        const apiResult = await ApiService.get(
+          `${apiUrl}`,
+          {
+            searchWord: input,
+          },
+          { disableLoadingBar: true }
+        );
         const data = apiResult.data || [];
 
         setSelectOptions(data);

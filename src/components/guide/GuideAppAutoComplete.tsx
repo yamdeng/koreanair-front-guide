@@ -79,7 +79,7 @@ function GuideAppAutoComplete() {
           <div className="form-cell wid100">
             <div className="form-group wid100">
               <AppAutoComplete
-                label="AppAutoComplete(value string)"
+                label="AppAutoComplete(value type string)"
                 apiUrl="com/users"
                 value={onlyKeyValue}
                 labelKey="nameKor"
