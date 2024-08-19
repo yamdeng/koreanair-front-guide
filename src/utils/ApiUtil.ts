@@ -6,12 +6,17 @@ import ModalService from '@/services/ModalService';
 /*
 
   ajax 구현체 중복 처리 구현
+   -disableLoadingBar
+   -applyOriginalResponse
+   -byPassError
 
 */
 
 const Api = axios.create({
   headers: { 'Content-Type': 'application/json' },
   disableLoadingBar: false,
+  applyOriginalResponse: false,
+  byPassError: false,
 } as any);
 
 Api.defaults.timeout = 1000 * 30;
@@ -40,12 +45,12 @@ Api.interceptors.response.use(
   function (response: any) {
     LoadingBar.hide();
     const responseData = response.data;
-    if (responseData.successOrNot !== 'Y') {
+    if (!response.config.byPassError && responseData.successOrNot !== 'Y') {
       ModalService.alert({ body: responseData.HeaderMsg });
       return Promise.reject({ errorType: 'api', errorData: responseData });
     }
     if (response.config.applyOriginalResponse) {
-      response;
+      return response;
     }
     return response.data;
   },
