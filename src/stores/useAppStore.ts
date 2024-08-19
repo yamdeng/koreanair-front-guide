@@ -1,6 +1,7 @@
 import { createStore } from 'zustand';
 import { createLeftMenuSlice } from '@/stores/slice/menuSlice';
 import ApiService from '@/services/ApiService';
+import ToastService from '@/services/ToastService';
 import LoadingBar from '@/utils/LoadingBar';
 import _ from 'lodash';
 import CommonUtil from '@/utils/CommonUtil';
@@ -90,6 +91,7 @@ const useAppStore = createStore<any>((set, get) => ({
       i18n.changeLanguage('ko');
       set({ currentLocale: 'ko' });
     }
+    ToastService.success(i18n.t('locale이 변경되었습니다.'));
   },
 
   getProfile: async () => {

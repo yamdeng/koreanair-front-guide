@@ -1,12 +1,13 @@
-import { useCallback } from 'react';
 import useModalStore from '@/stores/common/useModalStore';
 import ReactUtil from '@/utils/ReactUtil';
-import { LABEL_MODAL_OK } from '@/config/CommonConstant';
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function GlobalAlertModal(props) {
   const { hideModal } = useModalStore();
   const { modalData } = props;
   const { title, body, okLabel } = modalData;
+  const { t } = useTranslation();
 
   const ok = useCallback(() => {
     if (modalData.ok) {
@@ -25,7 +26,7 @@ function GlobalAlertModal(props) {
       <p className="pop_cont" dangerouslySetInnerHTML={{ __html: ReactUtil.convertEnterStringToBrTag(body) }} />
       <div className="pop_btns">
         <button className="btn_text text_color_neutral-10 btn_confirm" onClick={ok}>
-          {okLabel || LABEL_MODAL_OK}
+          {okLabel || t('front.common.modal.close', '닫기')}
         </button>
       </div>
       <span className="pop_close" onClick={hideModal}>

@@ -935,7 +935,7 @@ function <%= fileName %>(props) {
       // TODO : 모달 최종 저장시 액션 정의
       ok(formValue);
     } else {
-      setErrors({ errors });
+      setErrors(errors);
       if (formName + firstErrorFieldKey) {
         document.getElementById(formName + firstErrorFieldKey).focus();
       }

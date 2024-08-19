@@ -32,22 +32,24 @@ function GuideAlertModal() {
         </h2>
       </div>
       <div className="editbox">
-        <button
-          type="button"
-          name="button"
-          className="btn-sm btn_text btn-darkblue-line"
-          onClick={() => setIsAlertModalOpen(true)}
-        >
-          AlertModal open
-        </button>
-        <button
-          type="button"
-          name="button"
-          className="btn-sm btn_text btn-darkblue-line"
-          onClick={() => setIsConfirmModalOpen(true)}
-        >
-          ConfirmModal open
-        </button>
+        <div className="btn-area">
+          <button
+            type="button"
+            name="button"
+            className="btn-sm btn_text btn-darkblue-line"
+            onClick={() => setIsAlertModalOpen(true)}
+          >
+            AlertModal open
+          </button>
+          <button
+            type="button"
+            name="button"
+            className="btn-sm btn_text btn-darkblue-line"
+            onClick={() => setIsConfirmModalOpen(true)}
+          >
+            ConfirmModal open
+          </button>
+        </div>
       </div>
       <AlertModal
         title="alert 모달 테스트"

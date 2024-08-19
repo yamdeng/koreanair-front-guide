@@ -9,7 +9,7 @@ function GuideLocaleBasic() {
       <AppNavigation />
       <div className="conts-title">
         <h2>
-          AppTextInput, AppSearchInput :{' '}
+          다국어 기본 :{' '}
           <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideLocaleBasic.tsx`}>
             GuideLocaleBasic
           </a>
