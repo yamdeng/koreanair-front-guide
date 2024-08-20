@@ -17,6 +17,7 @@ import Config from '@/config/Config';
     -applyAllSelect, allValue, allLabel
      : single에서만 사용하세요
     -apiUrl
+    -placeholder : 체크 기준은 ''이 아닌 null 입니다.
 
   <AppCodeSelect /> 
     -codeGrpId

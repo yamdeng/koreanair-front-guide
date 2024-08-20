@@ -2,7 +2,7 @@ import AppNavigation from '@/components/common/AppNavigation';
 import Config from '@/config/Config';
 import CommonUtil from '@/utils/CommonUtil';
 import { Viewer } from '@toast-ui/react-editor';
-import AppFileAttach from '../common/AppFileAttach';
+import AppFileAttach from '@/components/common/AppFileAttach';
 
 function GuideDetailPage() {
   const editorValue = CommonUtil.getByLocalStorage('test-editor');
@@ -21,14 +21,28 @@ function GuideDetailPage() {
         <div className="form-table">
           <div className="form-cell wid100">
             <div className="form-group wid100">
-              <AppFileAttach mode="view" label="파일첨부" fileGroupSeq={'27'} workScope={'A'} onlyImageUpload={true} />
+              <ul className="view-list">
+                <li className="accumlate-list">
+                  <label className="t-label">제목</label>
+                  <span className="text-desc-type1">
+                    <AppFileAttach mode="view" fileGroupSeq={'27'} workScope={'A'} onlyImageUpload={true} />
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
         <div className="form-table">
           <div className="form-cell wid100">
             <div className="form-group wid100">
-              <Viewer initialValue={editorValue} />
+              <ul className="view-list">
+                <li className="accumlate-list">
+                  <label className="t-label">제목</label>
+                  <span className="text-desc-type1">
+                    <Viewer initialValue={editorValue} />
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

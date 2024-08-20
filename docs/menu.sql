@@ -13,7 +13,7 @@ VALUES('A990010', 'A', '공통 input 컴포넌트', '공통 input 컴포넌트_e
 -- 실제 메뉴들 : input
 INSERT INTO public.tb_sys_menu(menu_id, work_scope, name_kor, name_eng, name_chn, name_jpn, name_etc, tree_type, upper_menu_id, sort_order, menu_url, use_yn, remark, reg_user_id, reg_dttm, upd_user_id, upd_dttm)
 VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', '', 'M', 'A990010', 99, '/aviation/guides/common-input-form', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990012', 'A', '공통속성(search)', '공통속성(search)_en', '', '', '', 'M', 'A990010', 99, '/aviation/guides/common-input-search', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP)
+('A990012', 'A', '공통속성(search)', '공통속성(search)_en', '', '', '', 'M', 'A990010', 99, '/aviation/guides/common-input-search', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990013', 'A', 'AppTextInput', 'AppTextInput', '', '', '', 'M', 'A990010', 99, '/aviation/guides/app-text-input', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990014', 'A', 'AppCodeSelect', 'AppCodeSelect', '', '', '', 'M', 'A990010', 99, '/aviation/guides/app-code-select', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990015', 'A', 'AppCheckbox', 'AppCheckbox', '', '', '', 'M', 'A990010', 99, '/aviation/guides/app-checkbox-radio', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
@@ -36,7 +36,7 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990043', 'A', '다국어-form', '다국어-form', '', '', '', 'M', 'A990040', 99, '/aviation/guides/locale-form', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990081', 'A', '토스트 alert', '토스트 alert', '', '', '', 'M', 'A990080', 99, '/aviation/guides/toast-service', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990082', 'A', 'api 옵션', 'api 옵션', '', '', '', 'M', 'A990080', 99, '/aviation/guides/api-service', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990083', 'A', '상세(첨부,에디터)', 'api 옵션', '', '', '', 'M', 'A990080', 99, '/aviation/guides/detailpage-editor', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990083', 'A', '상세(첨부,에디터)', '상세(첨부,에디터)', '', '', '', 'M', 'A990080', 99, '/aviation/guides/detailpage-editor', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990084', 'A', 'useFormDirtyCheck', 'useFormDirtyCheck', '', '', '', 'M', 'A990080', 99, '/aviation/guides/unload', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
 

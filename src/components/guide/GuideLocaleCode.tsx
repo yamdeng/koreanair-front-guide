@@ -5,6 +5,7 @@ import AppCodeSelect from '@/components/common/AppCodeSelect';
 import { useState } from 'react';
 import Config from '@/config/Config';
 import CodeSerivce from '@/services/CodeService';
+import { useTranslation } from 'react-i18next';
 
 /*
 
@@ -15,10 +16,12 @@ import CodeSerivce from '@/services/CodeService';
 
 */
 function GuideLocaleCode() {
+  const { t } = useTranslation();
+
   const [columns, setColumns] = useState([
     {
       field: 'codeValue',
-      headerName: '코드값',
+      headerName: t('front.text.001'),
       cellRenderer: CodeLabelComponent,
       cellRendererParams: {
         codeGrpId: 'CODE_GRP_009',

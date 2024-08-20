@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import GridActionButtonComponent from './GridActionButtonComponent';
 import GridLinkComponent from './GridLinkComponent';
 
-const defaultColDef = {
+const basicDefaultColDef = {
   sortable: false,
   filter: false,
   flex: 1,
@@ -100,6 +100,7 @@ function AppTable(props) {
     hiddenPagination,
     hiddenTableHeader = false,
     readOnlyEdit = true,
+    defaultColDef = basicDefaultColDef,
   } = props;
 
   // store

@@ -149,7 +149,7 @@ function AppFileAttach(props) {
           const searchIndex = beforeList.findIndex(
             (beforeInfo) => beforeInfo.status === 'uploading' && info.origFilename === beforeInfo.name
           );
-          const searchInfo = { ...beforeList[searchIndex] };
+          const searchInfo = { ...beforeList[searchIndex], ...info };
           // searchInfo.url = info.s3Path;
           searchInfo.url = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;
           searchInfo.thumbUrl = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;

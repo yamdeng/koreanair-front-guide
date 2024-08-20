@@ -168,6 +168,7 @@ export default <%= fileName %>`;
 
 const formViewGenerateString = `import { useEffect } from 'react';
 import AppNavigation from '@/components/common/AppNavigation';
+import { useFormDirtyCheck } from '@/hooks/useFormDirtyCheck';
 import { useParams } from 'react-router-dom';<% importList.forEach((importString)=> { %>
 <%- importString %><% }) %><% if(checkedInnerFormStore) { %>
 import { create } from "zustand";
@@ -223,6 +224,7 @@ function <%= fileName %>() {
     getDetail,
     formType,
     formValue,
+    isDirty,
     save,
     remove,
     cancel,
@@ -232,6 +234,8 @@ function <%= fileName %>() {
   const { <% tableColumns.forEach((columnInfo)=> { %> <%= columnInfo.column_name %>,<% }) %> } = formValue;
 
   const { detailId } = useParams();
+
+  useFormDirtyCheck(isDirty);
 
   useEffect(() => {
     if (detailId && detailId !== 'add') {
@@ -454,6 +458,9 @@ export default <%= fileName %>;
 const detailViewGenerateString = `import { useEffect } from 'react';
 import AppNavigation from '@/components/common/AppNavigation';
 import { useParams } from 'react-router-dom';
+import { Viewer } from '@toast-ui/react-editor';
+import AppFileAttach from '@/components/common/AppFileAttach';
+
 /* TODO : store 경로를 변경해주세요. */
 import <%= storeName %> from '@/stores/guide/<%= storeName %>';
 
@@ -493,8 +500,14 @@ function <%= fileName %>() {
                   <li className="accumlate-list">
                     <label className="t-label">                        
                       <%= columnInfo.column_comment %>
-                    </label>
-                    <span className="text-desc">{<%= columnInfo.column_name %>}</span>
+                    </label><% if (columnInfo.componentType === 'file') { %>
+                    <span className="text-desc-type1">
+                        <AppFileAttach mode="view" fileGroupSeq={<%= columnInfo.column_name %>} workScope={'업무구문(A,O,S)'} onlyImageUpload={false} />
+                    </span><% } else if(columnInfo.componentType === 'editor') { %>
+                    <span className="text-desc-type1">
+                        <Viewer initialValue={<%= columnInfo.column_name %>} />
+                    </span><% } else { %>
+                    <span className="text-desc-type1">{<%= columnInfo.column_name %>}</span><% } %>
                   </li>
                 </ul>
               </div>
@@ -526,6 +539,8 @@ const detailViewGenerateNoStoreString = `import { useEffect, useState } from 're
 import AppNavigation from '@/components/common/AppNavigation';
 import { useParams } from 'react-router-dom';
 import ApiService from '@/services/ApiService';
+import { Viewer } from '@toast-ui/react-editor';
+import AppFileAttach from '@/components/common/AppFileAttach';
 
 /* TODO : 컴포넌트 이름을 확인해주세요 */
 function <%= fileName %>() {
@@ -566,8 +581,14 @@ function <%= fileName %>() {
                   <li className="accumlate-list">
                     <label className="t-label">                        
                       <%= columnInfo.column_comment %>
-                    </label>
-                    <span className="text-desc">{<%= columnInfo.column_name %>}</span>
+                    </label><% if (columnInfo.componentType === 'file') { %>
+                    <span className="text-desc-type1">
+                        <AppFileAttach mode="view" fileGroupSeq={<%= columnInfo.column_name %>} workScope={'업무구문(A,O,S)'} onlyImageUpload={false} />
+                    </span><% } else if(columnInfo.componentType === 'editor') { %>
+                    <span className="text-desc-type1">
+                        <Viewer initialValue={<%= columnInfo.column_name %>} />
+                    </span><% } else { %>
+                    <span className="text-desc-type1">{<%= columnInfo.column_name %>}</span><% } %>
                   </li>
                 </ul>
               </div>
@@ -1178,6 +1199,8 @@ export default <%= fileName %>;
 
 const detailModalGenerateString = `import { useEffect } from 'react';
 import Modal from 'react-modal';
+import { Viewer } from '@toast-ui/react-editor';
+import AppFileAttach from '@/components/common/AppFileAttach';
 
 /* TODO : 컴포넌트 이름을 확인해주세요 */
 function <%= fileName %>(props) {
@@ -1228,8 +1251,14 @@ function <%= fileName %>(props) {
                             <li className="accumlate-list">
                               <label className="t-label">                        
                                 <%= columnInfo.column_comment %>
-                              </label>
-                              <span className="text-desc">{<%= columnInfo.column_name %>}</span>
+                              </label><% if (columnInfo.componentType === 'file') { %>
+                              <span className="text-desc-type1">
+                                  <AppFileAttach mode="view" fileGroupSeq={<%= columnInfo.column_name %>} workScope={'업무구문(A,O,S)'} onlyImageUpload={false} />
+                              </span><% } else if(columnInfo.componentType === 'editor') { %>
+                              <span className="text-desc-type1">
+                                  <Viewer initialValue={<%= columnInfo.column_name %>} />
+                              </span><% } else { %>
+                              <span className="text-desc-type1">{<%= columnInfo.column_name %>}</span><% } %>
                             </li>
                           </ul>
                         </div>

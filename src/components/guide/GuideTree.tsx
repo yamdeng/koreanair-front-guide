@@ -27,6 +27,7 @@ function GuideTree() {
       pageSize: 100000,
     });
     const list = apiResult.data;
+    // [], 키, 상위폴더키, root 상위 기준 키
     const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', '0');
     setTreeData(treeData);
   };
