@@ -161,42 +161,6 @@ function GuideHome() {
         >
           Router
         </a>
-        <a
-          href={''}
-          onClick={(event) => {
-            event.preventDefault();
-            changeLeftMenu('form');
-          }}
-        >
-          Form
-        </a>
-        <a
-          href={''}
-          onClick={(event) => {
-            event.preventDefault();
-            changeLeftMenu('component');
-          }}
-        >
-          기타 컴포넌트
-        </a>
-        <a
-          href={''}
-          onClick={(event) => {
-            event.preventDefault();
-            changeLeftMenu('modal');
-          }}
-        >
-          Modal
-        </a>
-        <a
-          href={''}
-          onClick={(event) => {
-            event.preventDefault();
-            changeLeftMenu('template');
-          }}
-        >
-          Template
-        </a>
       </div>
       <div style={{ padding: 10, marginBottom: 10, marginLeft: 216 }}>
         이름/파일명 :{' '}
