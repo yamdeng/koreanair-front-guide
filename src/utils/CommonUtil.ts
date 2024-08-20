@@ -4,8 +4,8 @@ import {
   DATE_PICKER_TYPE_QUARTER,
   DATE_PICKER_TYPE_YEAR,
 } from '@/config/CommonConstant';
-import _ from 'lodash';
 import dayjs from 'dayjs';
+import _ from 'lodash';
 import { nanoid } from 'nanoid';
 
 const convertEnterStringToBrTag = function (value) {
@@ -239,6 +239,14 @@ const getNowByServerTime = (dateType = 'dateTime') => {
   return null;
 };
 
+const convertNumberFormat = (numberValue) => {
+  const result = '';
+  if (numberValue !== null && numberValue !== undefined) {
+    return Number(numberValue).toLocaleString();
+  }
+  return result;
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -257,4 +265,5 @@ export default {
   getUUID,
   validateYupForm,
   getNowByServerTime,
+  convertNumberFormat,
 };
