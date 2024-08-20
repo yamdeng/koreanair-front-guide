@@ -1,3 +1,37 @@
+1.publish aviation 반영
+
+2.yup 정리
+
+3.file 삭제시 목록 refresh 않된 현상 확인
+
+4.autosize 전략 확인 
+
+5.로그인 및 appStore 사용 가이드
+
+6.상수
+ -FileAttach mode 상수로 분류
+
+7.yarn lint 전달
+
+8.zustand store 파일 사용법 가이드
+ -store readonly 되는 부분 확인
+
+9.a href prevent event
+
+10.에디터 마무리
+ -이미지 hook
+ -copy & paste
+ -editor disabled 않먹음
+ -viewer 확인
+
+11.Logger 및 console 모두 제거
+
+12.테이블 전체 확인
+
+99.관리자 기능 개발
+
+
+
 /* zustand store 생성 */
 const useSysMessageFormStore = create((set, get) => {
   // 생성자와 유사한 초기화 로직
@@ -22,83 +56,3 @@ const useSysMessageFormStore = create((set, get) => {
     },
   };
 });
-
-
-#.<AppSelect isRemote={true} apiUrl='' />
-
-#.AgGrid에서 CodeLabelComponent
-
-#.local navigation
-<Navigation />
-  1.menuId 추출
-  2.title recursive 하게 추출
-  3.진입시 권한 체크도 같이 함
-
-#.홈에 로그인 페이지 생성
- -콤보박스 : 항공안전, 산업안전
- -로그인 id : input
- -[로그인]
-
-#.다국어
- -yup 다국어 : 선언위치 체크 필요
- -파리미터를 받는 경우 체크
-
-#.yarn lint, build 한꺼번에 체크하기
-
-#.관리자 기능 bug fix 하기
-
-
-
-
-
-@.기타
- 1.generate : 직접 개발해보면서 generate fix 하기
-  -modal 구조 fix 
-  -store을 안에 넣을지 여부 체크박스 적용할지 말지 결정 필요
-
- 2.AppEditor : 이미지 업로드 hook
-
- 3.store 사용방법 일관적이게 가이드
-  -store readonly 되는 부분 확인
-
-
-
-
-
-var clientNowString = dayjs().format('YYYY-MM-DD HH:mm:ss'); 
-var serverNowString = '2024-08-19 11:36:01';
-
-// dayjs 객체로 변환
-var clientDate = dayjs(clientNowString);
-var serverDate = dayjs(serverNowString);
-
-// 초 단위 차이 계산
-var diffInSeconds = clientDate.diff(serverDate, 'second');
-
-// 45초를 뺀 시간
-var resultTime = dayjs().subtract(diffInSeconds, 'second');
-var resultDisplay = resultTime.format('YYYY-MM-DD HH:mm:ss');
-
-
-
-const now = dayjs();
-
-// 120초를 더한 시간
-const futureTime = now.add(diffInSeconds, 'second');
-
-
-// new
-
-var clientNowString = dayjs().format('YYYY-MM-DD HH:mm:ss'); 
-var serverNowString = '2024-08-19 11:36:01';
-
-// dayjs 객체로 변환
-var clientDate = dayjs(clientNowString);
-var serverDate = dayjs(serverNowString);
-
-// 초 단위 차이 계산
-var diffInSeconds = serverDate.diff(clientDate, 'second');
-
-// 45초를 뺀 시간
-var resultTime = dayjs().add(diffInSeconds, 'second');
-var resultDisplay = resultTime.format('YYYY-MM-DD HH:mm:ss');
