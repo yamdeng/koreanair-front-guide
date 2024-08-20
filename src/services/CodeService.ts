@@ -89,7 +89,7 @@ export const convertOptionsByCurrentLocale = (options) => {
   return [];
 };
 
-const CodeSerivce = {
+const CodeService = {
   getCodeListByCodeGrpId,
   getCodeInfo,
   getOptions,
@@ -97,4 +97,4 @@ const CodeSerivce = {
   convertOptionsByCurrentLocale,
 };
 
-export default CodeSerivce;
+export default CodeService;

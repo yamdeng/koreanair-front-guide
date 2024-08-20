@@ -4,7 +4,7 @@ import CodeLabelComponent from '../common/CodeLabelComponent';
 import AppCodeSelect from '@/components/common/AppCodeSelect';
 import { useState } from 'react';
 import Config from '@/config/Config';
-import CodeSerivce from '@/services/CodeService';
+import CodeService from '@/services/CodeService';
 import { useTranslation } from 'react-i18next';
 
 /*
@@ -60,7 +60,7 @@ function GuideLocaleCode() {
         <hr className="line"></hr>
         <div className="form-table">
           <div className="form-cell wid100">
-            <div className="form-group wid100">{CodeSerivce.getCodeLabelByValue('CODE_GRP_009', '100001110')}</div>
+            <div className="form-group wid100">{CodeService.getCodeLabelByValue('CODE_GRP_009', '100001110')}</div>
           </div>
         </div>
       </div>
