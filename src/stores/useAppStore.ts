@@ -14,6 +14,7 @@ const useAppStore = createStore<any>((set, get) => ({
 
   accessToken: CommonUtil.getByLocalStorage('accessToken') || '',
   refreshToken: CommonUtil.getByLocalStorage('refreshToken') || '',
+  isAuthError: false,
   profile: null,
   displayLoadingBar: false,
   isInitComplete: false,
@@ -112,13 +113,13 @@ const useAppStore = createStore<any>((set, get) => ({
   },
 
   handleUnauthorizedError: (error) => {
-    set({ profile: null });
+    set({ isAuthError: true });
     console.error(error);
   },
   logout: () => {
-    set({ profile: null });
     CommonUtil.saveInfoToLocalStorage('accessToken', '');
     CommonUtil.saveInfoToLocalStorage('refreshToken', '');
+    set({ isAuthError: true });
   },
 }));
 

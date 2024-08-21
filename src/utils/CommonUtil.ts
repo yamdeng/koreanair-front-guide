@@ -46,6 +46,8 @@ const formatString = (template, ...args) => {
 const saveInfoToLocalStorage = (key, value) => {
   if (value) {
     localStorage.setItem(key, JSON.stringify(value));
+  } else {
+    localStorage.setItem(key, '');
   }
 };
 

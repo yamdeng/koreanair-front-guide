@@ -18,9 +18,11 @@ const isFirstOnline = navigator.onLine;
 
 function App() {
   const [isNetworkOnline, setIsNetworkOnline] = useState(isFirstOnline);
-  const { profile, initApp } = useStore(useAppStore, (state) => state) as any;
-  let mainComponent = <LoginTemp />;
-  if (profile) {
+  const { profile, initApp, isAuthError } = useStore(useAppStore, (state) => state) as any;
+  let mainComponent = null;
+  if (isAuthError) {
+    mainComponent = <LoginTemp />;
+  } else if (profile) {
     mainComponent = <UserMainLayout />;
   }
 
