@@ -26,6 +26,7 @@ export default function AviationLayout() {
     changeWorkScope,
     goHomePortal,
     changeLocale,
+    logout,
   } = useStore(useAppStore, (state) => state) as any;
 
   useEffect(() => {
@@ -79,7 +80,13 @@ export default function AviationLayout() {
                   </a>
                 </li>
                 <li>
-                  <a href="" onClick={(e) => e.preventDefault()}>
+                  <a
+                    href=""
+                    onClick={(e) => {
+                      e.preventDefault();
+                      logout();
+                    }}
+                  >
                     <img src={iconAlarmImage} />
                   </a>
                 </li>

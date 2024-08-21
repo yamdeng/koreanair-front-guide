@@ -1,7 +1,7 @@
 import axios from 'axios';
 import LoadingBar from '@/utils/LoadingBar';
 import ModalService from '@/services/ModalService';
-// import useAppStore from '@/stores/useAppStore';
+import useAppStore from '@/stores/useAppStore';
 
 /*
 
@@ -25,13 +25,13 @@ Api.defaults.headers.post['Content-Type'] = 'application/json';
 // 요청 인터셉터
 Api.interceptors.request.use(
   function (config: any) {
-    // TODO : 로그인 토큰 반영
-    // const { loginToken } = useAppStore.getState();
+    const { accessToken, refreshToken } = useAppStore.getState();
     if (!config.disableLoadingBar) {
       LoadingBar.show();
     }
-    // const AuthorizationValue = loginToken;
-    // config.headers['Authorization'] = AuthorizationValue;
+    const AuthorizationValue = `Bearer ${accessToken}`;
+    config.headers['Authorization'] = AuthorizationValue;
+    config.headers['Refresh-token'] = refreshToken;
     return config;
   },
   function (error) {
@@ -44,7 +44,9 @@ Api.interceptors.request.use(
 Api.interceptors.response.use(
   function (response: any) {
     LoadingBar.hide();
+    const { setAccessToken } = useAppStore.getState();
     const responseData = response.data;
+    const responseHeader = response.headers;
     if (!response.config.byPassError && responseData.successOrNot !== 'Y') {
       ModalService.alert({ body: responseData.HeaderMsg });
       return Promise.reject({ errorType: 'api', errorData: responseData });
@@ -52,10 +54,21 @@ Api.interceptors.response.use(
     if (response.config.applyOriginalResponse) {
       return response;
     }
+    if (responseHeader.newtoken) {
+      setAccessToken(responseHeader.newtoken);
+    }
     return response.data;
   },
   function (error) {
     LoadingBar.hide();
+    const { handleUnauthorizedError } = useAppStore.getState();
+    const errorResponse = error.response || {};
+    const status = errorResponse.status;
+    if (error && error.response) {
+      if (status === 401) {
+        handleUnauthorizedError(error);
+      }
+    }
     return Promise.reject(error);
   }
 );

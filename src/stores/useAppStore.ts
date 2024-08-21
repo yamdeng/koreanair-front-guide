@@ -1,18 +1,19 @@
-import { createStore } from 'zustand';
-import { createLeftMenuSlice } from '@/stores/slice/menuSlice';
 import ApiService from '@/services/ApiService';
-import ToastService from '@/services/ToastService';
-import LoadingBar from '@/utils/LoadingBar';
-import _ from 'lodash';
-import CommonUtil from '@/utils/CommonUtil';
-import dayjs from 'dayjs';
 import i18n, { initializeI18n } from '@/services/i18n';
+import ToastService from '@/services/ToastService';
+import { createLeftMenuSlice } from '@/stores/slice/menuSlice';
+import CommonUtil from '@/utils/CommonUtil';
+import LoadingBar from '@/utils/LoadingBar';
+import dayjs from 'dayjs';
+import _ from 'lodash';
+import { createStore } from 'zustand';
 
 // currentLocale : 'ko', 'en'
 const useAppStore = createStore<any>((set, get) => ({
   ...createLeftMenuSlice(set, get),
 
-  loginToken: CommonUtil.getByLocalStorage('loginToken') || '',
+  accessToken: CommonUtil.getByLocalStorage('accessToken') || '',
+  refreshToken: CommonUtil.getByLocalStorage('refreshToken') || '',
   profile: null,
   displayLoadingBar: false,
   isInitComplete: false,
@@ -22,8 +23,15 @@ const useAppStore = createStore<any>((set, get) => ({
   currentLocale: 'en',
   apiCacheMap: {},
 
-  setLoginToke: (value) => {
-    set({ loginToken: value });
+  setAccessToken: (accessToken) => {
+    set({ accessToken: accessToken });
+    CommonUtil.saveInfoToLocalStorage('accessToken', accessToken);
+  },
+
+  setLoginToken: (accessToken, refreshToken) => {
+    CommonUtil.saveInfoToLocalStorage('accessToken', accessToken);
+    CommonUtil.saveInfoToLocalStorage('refreshToken', refreshToken);
+    set({ accessToken: accessToken, refreshToken: refreshToken });
   },
 
   getCacheData: (cacheKey) => {
@@ -44,6 +52,7 @@ const useAppStore = createStore<any>((set, get) => ({
 
   initApp: async () => {
     LoadingBar.show();
+    const { getProfile } = get();
 
     // TODO : 서버 시간 받기
     const clientNowString = dayjs().format('YYYY-MM-DD HH:mm:ss');
@@ -54,17 +63,15 @@ const useAppStore = createStore<any>((set, get) => ({
     CommonUtil.saveInfoToLocalStorage('serverTimeDiffSecondValue', diffInSeconds);
 
     try {
+      // 프로필 호출
+      const profile = getProfile();
       const codeApiResult = await ApiService.get('com/code-groups/codes/all', null, { disableLoadingBar: true });
       const messageApiResult = await ApiService.get('com/locales/translation', null, { disableLoadingBar: true });
       const messageAllList = messageApiResult.data ? JSON.parse(messageApiResult.data) : [];
       const codeAllList = codeApiResult.data || [];
       const codeAllMap = _.groupBy(codeAllList, 'codeGrpId');
-
       // locale 메시지 초기화
       initializeI18n(messageAllList);
-
-      // TODO : profile api 나왔을 경우 반영
-      const profile = null;
       set({
         isInitComplete: true,
         messageAllList: messageAllList || [],
@@ -95,12 +102,23 @@ const useAppStore = createStore<any>((set, get) => ({
   },
 
   getProfile: async () => {
-    // const data = await getProfile();
-    // set(() => ({ profile: data }));
+    const apiResult = await ApiService.get(import.meta.env.VITE_API_URL_PROFILE, null, { disableLoadingBar: true });
+    const data = apiResult.data;
+    return data;
   },
 
   setDisplayLoadingBar: (displayLoadingBar) => {
     set(() => ({ displayLoadingBar: displayLoadingBar }));
+  },
+
+  handleUnauthorizedError: (error) => {
+    set({ profile: null });
+    console.error(error);
+  },
+  logout: () => {
+    set({ profile: null });
+    CommonUtil.saveInfoToLocalStorage('accessToken', '');
+    CommonUtil.saveInfoToLocalStorage('refreshToken', '');
   },
 }));
 

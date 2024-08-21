@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useStore } from 'zustand';
-import { Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import HomePortal from '@/components/HomePortal';
 import useAppStore from '@/stores/useAppStore';
-import useAviationRoute from './routes/useAviationRoute';
-import useOccupationRoute from './routes/useOccupationRoute';
-import { StoreProvider } from './context/StoreContext';
-import LoadingBarContainer from './components/layout/LoadingBarContainer';
-import AlertModalContainer from './components/layout/AlertModalContainer';
 import localforage from 'localforage';
+import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { useStore } from 'zustand';
+import AlertModalContainer from './components/layout/AlertModalContainer';
+import LoadingBarContainer from './components/layout/LoadingBarContainer';
+import { StoreProvider } from './context/StoreContext';
+import LoginTemp from './components/LoginTemp';
+import UserMainLayout from './components/layout/UserMainLayout';
 
 localforage.config({
   driver: [localforage.INDEXEDDB, localforage.WEBSQL, localforage.LOCALSTORAGE],
@@ -20,20 +18,10 @@ const isFirstOnline = navigator.onLine;
 
 function App() {
   const [isNetworkOnline, setIsNetworkOnline] = useState(isFirstOnline);
-
-  const aviationRoute = useAviationRoute();
-  const occupationRoute = useOccupationRoute();
-  const { initApp, isInitComplete } = useStore(useAppStore, (state) => state) as any;
-  let routeAllComponent = null;
-
-  if (isInitComplete) {
-    routeAllComponent = (
-      <Routes>
-        <Route path="/" element={<HomePortal />} />
-        {aviationRoute}
-        {occupationRoute}
-      </Routes>
-    );
+  const { profile, initApp } = useStore(useAppStore, (state) => state) as any;
+  let mainComponent = <LoginTemp />;
+  if (profile) {
+    mainComponent = <UserMainLayout />;
   }
 
   useEffect(() => {
@@ -52,7 +40,7 @@ function App() {
   return (
     <StoreProvider>
       <div>
-        {routeAllComponent}
+        {mainComponent}
         <ToastContainer autoClose={3000} hideProgressBar={true} />
         <LoadingBarContainer />
         <AlertModalContainer />
