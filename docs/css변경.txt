@@ -11,3 +11,5 @@
 1.placeholder color 확인 필요
 2.textarea 전반적인 확인 필요
 3.label background color 적용 필요
+
+test1
