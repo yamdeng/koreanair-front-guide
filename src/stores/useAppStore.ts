@@ -65,7 +65,7 @@ const useAppStore = createStore<any>((set, get) => ({
 
     try {
       // 프로필 호출
-      const profile = getProfile();
+      getProfile();
       const codeApiResult = await ApiService.get('com/code-groups/codes/all', null, { disableLoadingBar: true });
       const messageApiResult = await ApiService.get('com/locales/translation', null, { disableLoadingBar: true });
       const messageAllList = messageApiResult.data ? JSON.parse(messageApiResult.data) : [];
@@ -78,7 +78,6 @@ const useAppStore = createStore<any>((set, get) => ({
         messageAllList: messageAllList || [],
         codeAllList: codeAllList,
         codeAllMap: codeAllMap,
-        profile: profile,
       });
     } catch (e) {
       //
@@ -105,6 +104,7 @@ const useAppStore = createStore<any>((set, get) => ({
   getProfile: async () => {
     const apiResult = await ApiService.get(import.meta.env.VITE_API_URL_PROFILE, null, { disableLoadingBar: true });
     const data = apiResult.data;
+    set({ profile: data });
     return data;
   },
 

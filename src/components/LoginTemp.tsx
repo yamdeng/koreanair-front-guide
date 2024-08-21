@@ -20,10 +20,15 @@ function LoginTemp() {
     CommonUtil.saveInfoToLocalStorage('accessToken', accessToken);
     CommonUtil.saveInfoToLocalStorage('refreshToken', refreshToken);
     setLoginToken(accessToken, refreshToken);
-    if (scope === 'A') {
-      location.href = '/aviation';
+    const mode = import.meta.env.MODE;
+    if (mode !== 'admin') {
+      if (scope === 'A') {
+        location.href = '/aviation';
+      } else {
+        location.href = '/occupation';
+      }
     } else {
-      location.href = '/occupation';
+      location.href = '/';
     }
   };
   return (

@@ -27,6 +27,7 @@ import GuideToastService from '@/components/guide/GuideToastService';
 import GuideTree from '@/components/guide/GuideTree';
 import GuideDetailPage from '@/components/guide/GuideDetailPage';
 import GuideFormUnload from '@/components/guide/GuideFormUnload';
+import GuideProfile from '@/components/guide/GuideProfile';
 
 const GuideRouteInfo: any = {};
 
@@ -146,6 +147,10 @@ GuideRouteInfo.list = [
   {
     Component: GuideFormUnload,
     path: 'guides/unload',
+  },
+  {
+    Component: GuideProfile,
+    path: 'guides/profile',
   },
 ];
 
