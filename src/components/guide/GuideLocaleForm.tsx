@@ -61,7 +61,7 @@ function GuideLocaleForm() {
         <div className="form-table">
           <div className="form-cell wid100">
             <div className="form-group wid100">
-              <AppTextInput label="msgKey" errorMessage={errors.msgKey} value={msgKey} />
+              <AppTextInput label="메시지키" errorMessage={errors.msgKey} value={msgKey} />
             </div>
           </div>
         </div>

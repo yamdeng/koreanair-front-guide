@@ -52,6 +52,7 @@ function GuideAppTextInput() {
                 value={textValue}
                 onChange={(value) => setTextValue(value)}
                 hiddenClearButton={false}
+                maxLength={5}
               />
             </div>
           </div>
@@ -63,6 +64,8 @@ function GuideAppTextInput() {
             <div className="form-group wid100">
               <AppTextInput
                 inputType="number"
+                min={1}
+                max={30}
                 label="AppTextInput(number)"
                 value={numberValue}
                 onChange={(value) => setNumberValue(value)}
