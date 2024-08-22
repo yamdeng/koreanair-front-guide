@@ -4,4 +4,8 @@
 
  2.기본 validation 값 확인 : label에 적용된 값이 적용됨
 
+ 3.Logger.ts
+
+ 4.api request, response 찍기
+
 

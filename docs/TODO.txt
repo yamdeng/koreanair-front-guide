@@ -1,14 +1,15 @@
-1.AppNaviagation 오류 확인
+1.yarn lint 한꺼번에 확인
+2.<ErrorBoundary/>
+3.전역로그 정리
 
-2.관리자 기능 개발 fix
 
-3.offline
 
-4.api request / response
+#.관리자 기능 개발 fix
 
-0.yarn lint 확인
+#.로그 정리
  -Logger 및 console 모두 제거
  -경고문 전체 제거
+ -a href prevent event
 
 
 
@@ -16,7 +17,6 @@
  -작업한 부분을 확인하기
  -viewer
  -fileattach 관련 사항 전달
- -a href prevent event
 
 2.전체 자동화 완성하기
 
