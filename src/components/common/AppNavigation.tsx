@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useStore } from 'zustand';
 import useAppStore from '@/stores/useAppStore';
 import { useLocation, useNavigate } from 'react-router-dom';
+import _ from 'lodash';
 
 function AppNavigation() {
   const { appWorkScope, toggleRootMenuExpand, clickSecondMenu, clickLastMenu, navationMenuList } = useStore(
@@ -25,22 +26,29 @@ function AppNavigation() {
   useEffect(() => {
     if (!searchInfoCheckedRef.current && navationMenuList && navationMenuList.length) {
       if (appWorkScope === navationMenuList[0].workScope) {
-        const searchMenuInfo = navationMenuList.find((info) => {
+        const filterList = navationMenuList.filter((info) => {
           const { menuUrl } = info;
-          // if (menuUrl && currentUrlPath.indexOf(menuUrl) !== -1) {
-          if (menuUrl && menuUrl.indexOf(currentUrlPath) !== -1) {
+          if (menuUrl && currentUrlPath.indexOf(menuUrl) !== -1) {
             return true;
           }
           return false;
         });
+
+        let searchMenuInfo = filterList[0];
+        if (filterList.length) {
+          searchMenuInfo = _.maxBy(filterList, (menuInfo) => {
+            return menuInfo.menuUrl.length;
+          });
+        }
+
         if (searchMenuInfo) {
           searchInfoCheckedRef.current = searchMenuInfo;
           if (searchMenuInfo.level === 1) {
-            toggleRootMenuExpand(searchMenuInfo);
+            toggleRootMenuExpand(searchMenuInfo, true);
           } else if (searchMenuInfo.level === 2) {
             clickSecondMenu(searchMenuInfo);
           } else if (searchMenuInfo.level === 3) {
-            clickLastMenu(searchMenuInfo);
+            clickLastMenu(searchMenuInfo, true);
           }
           setCurretMenuInfo(searchMenuInfo);
         }

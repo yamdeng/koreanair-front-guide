@@ -100,10 +100,12 @@ export const createLeftMenuSlice = (set, get) => ({
     );
   },
 
-  toggleRootMenuExpand: (rootDepthMenuInfo) => {
+  toggleRootMenuExpand: (rootDepthMenuInfo, skipMove) => {
     const { menuId, menuUrl } = rootDepthMenuInfo;
     if (menuUrl) {
-      history.push(menuUrl);
+      if (!skipMove) {
+        history.push(menuUrl);
+      }
       set(
         produce((state: any) => {
           state.leftMenuList.forEach((rootMenuInfo) => {
@@ -135,10 +137,12 @@ export const createLeftMenuSlice = (set, get) => ({
       );
     }
   },
-  clickSecondMenu: (secondDepthMenuInfo) => {
+  clickSecondMenu: (secondDepthMenuInfo, skipMove) => {
     const { menuId, menuUrl, treeType } = secondDepthMenuInfo;
     if (treeType === 'M') {
-      history.push(menuUrl);
+      if (!skipMove) {
+        history.push(menuUrl);
+      }
       set(
         produce((state: any) => {
           state.leftMenuList.forEach((rootMenuInfo) => {
@@ -171,10 +175,12 @@ export const createLeftMenuSlice = (set, get) => ({
       );
     }
   },
-  clickLastMenu: (lastDepthMenuInfo) => {
+  clickLastMenu: (lastDepthMenuInfo, skipMove) => {
     const { menuId, menuUrl, treeType } = lastDepthMenuInfo;
     if (treeType === 'M') {
-      history.push(menuUrl);
+      if (!skipMove) {
+        history.push(menuUrl);
+      }
       set(
         produce((state: any) => {
           let selecteSecondMenuId = null;
