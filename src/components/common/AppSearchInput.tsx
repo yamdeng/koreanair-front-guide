@@ -52,6 +52,7 @@ function AppSearchInput(props) {
   return (
     <>
       <input
+        {...props}
         id={id}
         type={inputType}
         style={style}
@@ -76,7 +77,7 @@ function AppSearchInput(props) {
         <button className="sch-btnClear" onClick={() => (clearHandler ? clearHandler() : onChange(''))}></button>
       ) : null}
       <button type="button" className="icon-sch" onClick={search}></button>
-      <CommonInputError errorMessage={errorMessage} />
+      <CommonInputError errorMessage={errorMessage} label={label} />
     </>
   );
 }

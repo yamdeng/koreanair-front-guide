@@ -238,7 +238,7 @@ function AppFileAttach(props) {
           {label} {required ? <span className="required">*</span> : null}
         </label>
       </div>
-      <CommonInputError errorMessage={errorMessage} />
+      <CommonInputError errorMessage={errorMessage} label={label} />
 
       <div
         className={errorMessage ? 'filebox error' : 'filebox'}

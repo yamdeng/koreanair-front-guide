@@ -130,6 +130,7 @@ const AppDatePicker = (props) => {
   return (
     <>
       <DatePicker
+        {...props}
         className={value || placeholder ? 'label-picker selected' : 'label-picker'}
         status={errorMessage ? 'error' : ''}
         style={style}
@@ -160,13 +161,11 @@ const AppDatePicker = (props) => {
         disabled={disabled}
         disabledDate={disabledDate}
         renderExtraFooter={showNow ? renderFooter : null}
-        // open={open}
-        // onOpenChange={(status) => setOpen(status)}
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
-      <CommonInputError errorMessage={errorMessage} />
+      <CommonInputError errorMessage={errorMessage} label={label} />
     </>
   );
 };

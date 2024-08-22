@@ -55,6 +55,7 @@ function AppTextInput(props) {
   return (
     <>
       <input
+        {...props}
         id={id}
         type={inputType}
         style={style}
@@ -73,7 +74,7 @@ function AppTextInput(props) {
       {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
         <button className="btnClear" onClick={() => onChange('')}></button>
       )}
-      <CommonInputError errorMessage={errorMessage} />
+      <CommonInputError errorMessage={errorMessage} label={label} />
     </>
   );
 }

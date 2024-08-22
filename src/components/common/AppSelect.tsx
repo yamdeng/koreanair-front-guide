@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Select } from 'antd';
-import CommonUtil from '@/utils/CommonUtil';
 import ApiService from '@/services/ApiService';
+import CommonUtil from '@/utils/CommonUtil';
+import { Select } from 'antd';
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 import CommonInputError from './CommonInputError';
 
 /*
@@ -117,7 +117,7 @@ function AppSelect(props) {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
-      <CommonInputError errorMessage={errorMessage} />
+      <CommonInputError errorMessage={errorMessage} label={label} />
     </>
   );
 }

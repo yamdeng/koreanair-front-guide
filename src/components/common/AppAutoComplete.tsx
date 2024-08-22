@@ -181,7 +181,7 @@ function AppAutoComplete(props) {
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
       </label>
-      <CommonInputError errorMessage={errorMessage} />
+      <CommonInputError errorMessage={errorMessage} label={label} />
     </>
   );
 }
