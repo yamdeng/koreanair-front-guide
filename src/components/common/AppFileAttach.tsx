@@ -24,6 +24,7 @@ function AppFileAttach(props) {
     accept = null,
     onlyImageUpload = false,
     maxSizeMb = 5,
+    maxCount = 100,
   } = props;
 
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -88,20 +89,28 @@ function AppFileAttach(props) {
       return false;
     },
 
-    beforeUpload(file, fileList) {
+    beforeUpload(file, newFileList) {
       let successFileSizeCheck = true;
-      fileList.forEach((fileInfo) => {
+      newFileList.forEach((fileInfo) => {
         if (fileInfo.size / 1024 / 1024 > maxSizeMb) {
           successFileSizeCheck = false;
         }
       });
+      const finalUploadCount = newFileList.length + fileList.length;
+      let uploadMaxCountCheck = true;
+      if (finalUploadCount > maxCount) {
+        uploadMaxCountCheck = false;
+      }
       if (!successFileSizeCheck) {
         ToastService.warn(`file max size :${maxSizeMb} MB`);
       }
-      if (successFileSizeCheck) {
-        if (fileList && fileList.length) {
-          if (fileList.filter((info) => info.uid).length === fileList.length) {
-            handleUploadMulti(fileList);
+      if (!uploadMaxCountCheck) {
+        ToastService.warn(`upload max count :${maxCount}`);
+      }
+      if (successFileSizeCheck && uploadMaxCountCheck) {
+        if (newFileList && newFileList.length) {
+          if (newFileList.filter((info) => info.uid).length === newFileList.length) {
+            handleUploadMulti(newFileList);
           }
         }
       }
