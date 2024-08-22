@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => {
     pluginList.push(basicSsl());
   }
   const VITE_API_LOCAL_URL = env.VITE_API_LOCAL_URL;
+  const VITE_API_URL = env.VITE_API_URL;
   const currentFolderPath = resolve(__dirname);
   console.log(`mode : ${mode}`);
   console.log(`currentFolderPath : ${currentFolderPath}`);
@@ -21,6 +22,7 @@ export default defineConfig(({ mode }) => {
   console.log(`enableProxyLog : ${env.ENABLE_PROXY_LOG}`);
   console.log(`enableHttps : ${env.ENABLE_HTTPS}`);
   console.log(`VITE_API_LOCAL_URL : ${VITE_API_LOCAL_URL}`);
+  console.log(`VITE_API_URL : ${VITE_API_URL}`);
 
   return {
     define: {
@@ -50,7 +52,7 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0', // 모든 IP에서 접근 가능하도록 설정
       proxy: {
         '/api/v1': {
-          target: VITE_API_LOCAL_URL,
+          target: VITE_API_LOCAL_URL ? VITE_API_LOCAL_URL : VITE_API_URL,
           changeOrigin: false,
           configure: (proxy: any, _options: any) => {
             proxy.on('error', (err: any, _req: any, _res: any) => {
