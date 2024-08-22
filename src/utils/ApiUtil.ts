@@ -12,6 +12,8 @@ import useAppStore from '@/stores/useAppStore';
 
 */
 
+const enableApiLog = import.meta.env.VITE_ENABLE_API_LOG && import.meta.env.VITE_ENABLE_API_LOG === 'true';
+
 const Api = axios.create({
   headers: { 'Content-Type': 'application/json' },
   disableLoadingBar: false,
@@ -32,6 +34,16 @@ Api.interceptors.request.use(
     const AuthorizationValue = `Bearer ${accessToken}`;
     config.headers['Authorization'] = AuthorizationValue;
     config.headers['Refresh-token'] = refreshToken;
+    if (enableApiLog) {
+      const { url, params, data } = config;
+      console.log(`api requset url : ${url}`);
+      if (params) {
+        console.log(`api requset params : ${JSON.stringify(params)}`);
+      }
+      if (config.data) {
+        console.log(`api requset data : ${JSON.stringify(data)}`);
+      }
+    }
     return config;
   },
   function (error) {
@@ -56,6 +68,11 @@ Api.interceptors.response.use(
     }
     if (responseHeader.newtoken) {
       setAccessToken(responseHeader.newtoken);
+    }
+    if (enableApiLog) {
+      const { url } = response.config;
+      console.log(`api response url : ${url}`);
+      console.log(`api requset data : ${JSON.stringify(response.data)}`);
     }
     return response.data;
   },
