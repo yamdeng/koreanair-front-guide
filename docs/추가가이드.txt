@@ -1,0 +1,7 @@
+### 추가가이드 ###
+
+ 1.min, max, maxLength로 주입하십시요
+
+ 2.기본 validation 값 확인 : label에 적용된 값이 적용됨
+
+

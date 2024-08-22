@@ -1,58 +1,48 @@
-1.publish aviation 반영
+1.AppNaviagation 오류 확인
 
-2.yup 정리
+2.관리자 기능 개발 fix
 
-3.file 삭제시 목록 refresh 않된 현상 확인
+3.offline
 
-4.autosize 전략 확인 
+4.api request / response
 
-5.로그인 및 appStore 사용 가이드
+0.yarn lint 확인
+ -Logger 및 console 모두 제거
+ -경고문 전체 제거
 
-6.상수
+
+
+1.css 공통 컴포넌트 포팅
+ -작업한 부분을 확인하기
+ -viewer
+ -fileattach 관련 사항 전달
+ -a href prevent event
+
+2.전체 자동화 완성하기
+
+
+
+2.상수 사용방법 확인
  -FileAttach mode 상수로 분류
 
-7.yarn lint 전달
-
-8.zustand store 파일 사용법 가이드
- -store readonly 되는 부분 확인
-
-9.a href prevent event
-
-10.에디터 마무리
+5.에디터 마무리
  -이미지 hook
  -copy & paste
  -editor disabled 않먹음
  -viewer 확인
 
-11.Logger 및 console 모두 제거
+
+
+
+4.autosize 전략 확인
+
+8.zustand store 파일 사용법 가이드
+ -store readonly 되는 부분 확인
 
 12.테이블 전체 확인
 
 99.관리자 기능 개발
 
+#.가이드 변경사항
 
 
-/* zustand store 생성 */
-const useSysMessageFormStore = create((set, get) => {
-  // 생성자와 유사한 초기화 로직
-  const initializeState = () => {
-    // 초기화할 상태나 로직 작성
-    set({ count: 0, initialized: true });
-  };
-
-  debugger;
-  // 초기화 로직 실행
-  initializeState();
-
-  return {
-    ...createFormSliceYup(set, get),
-
-    ...initFormData,
-
-    yupFormSchema: yupFormSchema,
-
-    clear: () => {
-      set(initFormData);
-    },
-  };
-});

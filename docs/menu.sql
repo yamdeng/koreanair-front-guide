@@ -48,3 +48,9 @@ VALUES('front.text.001', '테스트01', 'test01', '', '', '', '', CURRENT_TIMEST
 ('front.common.modal.close', '닫기', 'close', '', '', '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('front.validation.validation.required', '필수값입니다.', 'required field', '', '', '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
+
+-- validate 필수값
+INSERT INTO tb_sys_message
+(msg_key, msg_kor, msg_eng, msg_chn, msg_jpn, msg_etc, reg_user_id, reg_dttm, upd_user_id, upd_dttm)
+VALUES('validation.required', '필수값입니다.', 'required.', '', '', '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('validation.required.label', '{{label}} 필수값입니다.', '{{label}} is a required.', '', '', '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);

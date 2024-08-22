@@ -25,6 +25,7 @@ function AppFileAttach(props) {
     onlyImageUpload = false,
     maxSizeMb = 5,
     maxCount = 100,
+    disabled = false,
   } = props;
 
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -32,7 +33,6 @@ function AppFileAttach(props) {
 
   const [fileList, setFileList] = useImmer([]);
   const fileGroupSeqRef = useRef(null);
-  const isFileListLoadedRef = useRef(null);
 
   let applyAccept = accept;
   if (!accept) {
@@ -119,7 +119,6 @@ function AppFileAttach(props) {
   };
 
   const handleUploadMulti = async (newFileList) => {
-    isFileListLoadedRef.current = true;
     // 파일 기본 업로드 상태로 반영
     newFileList.forEach((info) => {
       info.status = 'uploading';
@@ -184,7 +183,6 @@ function AppFileAttach(props) {
   };
 
   const getFileList = async (isRemoveAcation = false) => {
-    isFileListLoadedRef.current = true;
     const fileGroupSeq = fileGroupSeqRef.current;
     const apiResult = await ApiService.get(`${import.meta.env.VITE_API_URL_FIEL_GROUPS}/${fileGroupSeq}`);
     const data = apiResult.data;
@@ -208,8 +206,7 @@ function AppFileAttach(props) {
 
   useEffect(() => {
     if (fileGroupSeq) {
-      const isFileListLoaded = isFileListLoadedRef.current;
-      if (!isFileListLoaded) {
+      if (fileGroupSeqRef.current !== fileGroupSeq) {
         fileGroupSeqRef.current = fileGroupSeq;
         getFileList();
       }
@@ -231,11 +228,11 @@ function AppFileAttach(props) {
         style={{ display: mode === 'view' && !fileList.length ? 'none' : '' }}
       >
         {isDragUpload ? (
-          <Dragger {...baseProps} fileList={fileList}>
+          <Dragger {...baseProps} fileList={fileList} disabled={disabled}>
             <p className="ant-upload-text ">+ 이 곳을 클릭하거나 마우스로 업로드할 파일을 끌어서 놓으세요.</p>
           </Dragger>
         ) : (
-          <Upload {...baseProps} fileList={fileList}>
+          <Upload {...baseProps} fileList={fileList} disabled={disabled}>
             <div className="btn-area" style={{ display: mode === 'edit' ? '' : 'none' }}>
               <button type="button" name="button" className="btn-big btn_text btn-darkblue-line mg-n">
                 + Upload
