@@ -1,23 +1,14 @@
 import useAppStore from '@/stores/useAppStore';
-import localforage from 'localforage';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { useStore } from 'zustand';
+import LoginTemp from './components/LoginTemp';
 import AlertModalContainer from './components/layout/AlertModalContainer';
 import LoadingBarContainer from './components/layout/LoadingBarContainer';
-import { StoreProvider } from './context/StoreContext';
-import LoginTemp from './components/LoginTemp';
 import UserMainLayout from './components/layout/UserMainLayout';
-
-localforage.config({
-  driver: [localforage.INDEXEDDB, localforage.WEBSQL, localforage.LOCALSTORAGE],
-  name: 'offline-storage',
-});
-
-const isFirstOnline = navigator.onLine;
+import { StoreProvider } from './context/StoreContext';
 
 function App() {
-  const [isNetworkOnline, setIsNetworkOnline] = useState(isFirstOnline);
   const { profile, initApp, isAuthError } = useStore(useAppStore, (state) => state) as any;
   let mainComponent = null;
   if (isAuthError) {
@@ -28,15 +19,6 @@ function App() {
 
   useEffect(() => {
     initApp();
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('online', () => {
-      setIsNetworkOnline(true);
-    });
-    window.addEventListener('offline', () => {
-      setIsNetworkOnline(false);
-    });
   }, []);
 
   return (

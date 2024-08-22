@@ -12,6 +12,7 @@ import { createStore } from 'zustand';
 const useAppStore = createStore<any>((set, get) => ({
   ...createLeftMenuSlice(set, get),
 
+  isOffline: false,
   accessToken: CommonUtil.getByLocalStorage('accessToken') || '',
   refreshToken: CommonUtil.getByLocalStorage('refreshToken') || '',
   isAuthError: false,
@@ -23,6 +24,12 @@ const useAppStore = createStore<any>((set, get) => ({
   codeAllMap: {},
   currentLocale: 'en',
   apiCacheMap: {},
+
+  setIsOffline: (value) => {
+    set({
+      isOffline: value,
+    });
+  },
 
   setAccessToken: (accessToken) => {
     set({ accessToken: accessToken });

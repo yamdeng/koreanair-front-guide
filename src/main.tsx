@@ -1,4 +1,5 @@
 import './yupLocale';
+import localforage from 'localforage';
 import ReactDOM from 'react-dom/client';
 import { unstable_HistoryRouter as Router } from 'react-router-dom';
 import App from './App.tsx';
@@ -6,6 +7,8 @@ import history from './utils/history.ts';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import quarterOfYear from 'dayjs/plugin/quarterOfYear';
+import useAppStore from '@/stores/useAppStore';
+import PwaChecker from './PwaChecker';
 
 dayjs.extend(quarterOfYear);
 dayjs.extend(advancedFormat);
@@ -21,8 +24,20 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import 'tui-color-picker/dist/tui-color-picker.css';
 import './resources/css/import.scss';
 
+// pwa mobile & offliine setting
+
+localforage.config({
+  driver: [localforage.INDEXEDDB, localforage.WEBSQL, localforage.LOCALSTORAGE],
+  name: 'offline-storage',
+});
+
+const isOnline = navigator.onLine;
+useAppStore.getState().setIsOffline(isOnline);
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Router history={history as any}>
-    <App />
+    <PwaChecker>
+      <App />
+    </PwaChecker>
   </Router>
 );
