@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import Select, { components } from 'react-select';
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
@@ -34,6 +34,7 @@ function AppAutoComplete(props) {
     value,
     onChange,
     placeholder = '',
+    defaultOptions = [],
     required = false,
     errorMessage,
     style = { width: '100%' },
@@ -47,6 +48,7 @@ function AppAutoComplete(props) {
     isValueString = false,
   } = props;
 
+  const isServerLoaded = useRef(false);
   const [isFocused, setIsFocused] = useState(false);
   const [selectOptions, setSelectOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +68,7 @@ function AppAutoComplete(props) {
       setIsLoading(true);
 
       try {
+        isServerLoaded.current = true;
         const apiResult = await ApiService.get(
           `${apiUrl}`,
           {
@@ -138,6 +141,12 @@ function AppAutoComplete(props) {
   if (isValueString) {
     applyValue = selectOptions.find((option) => option.value === value);
   }
+  let applyOptions = selectOptions;
+  if (defaultOptions && defaultOptions.length) {
+    if (!isServerLoaded.current) {
+      applyOptions = defaultOptions;
+    }
+  }
 
   return (
     <>
@@ -152,7 +161,7 @@ function AppAutoComplete(props) {
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleOnChange}
-          options={selectOptions}
+          options={applyOptions}
           isMulti={isMultiple}
           isLoading={isLoading}
           classNames={{

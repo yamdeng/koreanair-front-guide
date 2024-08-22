@@ -52,11 +52,12 @@ function GuideAppAutoComplete() {
               <AppAutoComplete
                 label="AppAutoComplete(single)"
                 apiUrl="com/users"
+                defaultOptions={[beforeSingleValue]}
                 value={selectSingleValue}
                 labelKey="nameKor"
                 valueKey="userId"
                 onChange={(value) => setSelectSingleValue(value)}
-                isMultiple={true}
+                isMultiple={false}
               />
             </div>
           </div>

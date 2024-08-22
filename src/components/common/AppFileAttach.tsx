@@ -64,7 +64,7 @@ function AppFileAttach(props) {
         ModalService.confirm({
           body: '파일 삭제시 즉시 삭제됩니다.\n삭제하시겠습니까?',
           ok: async () => {
-            await ApiService.delete(`${import.meta.env.VITE_API_URL_FIEL_GROUPS}}/file/${fileSeq}`);
+            await ApiService.delete(`${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${fileSeq}`);
             getFileList(true);
             ToastService.info('파일이 삭제되었습니다.');
           },
