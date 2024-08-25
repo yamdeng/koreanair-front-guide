@@ -56,7 +56,6 @@ function RoleManage() {
     groupUsage,
     auditAdminYn,
     reportType,
-    groupAdminYn,
   } = formValue;
 
   useEffect(() => {
@@ -300,23 +299,6 @@ function RoleManage() {
                               onChange={(value) => changeInput('auditAdminYn', value)}
                               required
                               errorMessage={errors.auditAdminYn}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <hr className="line"></hr>
-                      <div className="form-table">
-                        <div className="form-cell wid50">
-                          <div className="form-group wid100">
-                            <AppSelect
-                              id="useSysGroupFormStoregroupAdminYn"
-                              name="groupAdminYn"
-                              options={Code.useYn}
-                              label="ADMIN(Y/N)"
-                              value={groupAdminYn}
-                              onChange={(value) => changeInput('groupAdminYn', value)}
-                              required
-                              errorMessage={errors.groupAdminYn}
                             />
                           </div>
                         </div>

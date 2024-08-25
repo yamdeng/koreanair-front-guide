@@ -1,3 +1,22 @@
+### bat 파일 ###
+
+1.css 프로젝트는 1시간 마다 변경 이력이 존재하면 최신화 시키기게끔 했음 : css-start.bat
+ -local.note:61000
+
+2.관리자 화면 : 않띄워도 됩니다. : admin-front-start.bat
+ -local:noteboot:8082
+ -관리자만 해시라우터를 적용해서 메뉴 이동되도 동작되게끔 설정
+
+3.admin 서버 프로젝트 : admin-back-start.bat
+ -local.notebook:8084
+
+4.generate-server : front-generate-start.bat
+ -local.noteboot:3010
+
+
+
+
+
 1.yarn lint 한꺼번에 확인
 2.<ErrorBoundary/>
 3.전역로그 정리

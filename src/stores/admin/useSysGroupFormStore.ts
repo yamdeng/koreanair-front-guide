@@ -37,7 +37,6 @@ const yupFormSchema = yup.object({
   groupUsage: yup.string().required(),
   auditAdminYn: yup.string().required(),
   reportType: yup.string(),
-  groupAdminYn: yup.string().required(),
 });
 
 /* form 초기화 */
@@ -353,7 +352,7 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     const { formApiPath } = get();
     const apiResult = await ApiService.get(`${formApiPath}/${groupCd}`);
     const groupInfo = apiResult.data;
-    set({ formValue: groupInfo, formType: FORM_TYPE_UPDATE, selectedGroupCd: groupCd });
+    set({ formValue: groupInfo, formType: FORM_TYPE_UPDATE, selectedGroupCd: groupCd, errors: {} });
   },
 
   init: async () => {
