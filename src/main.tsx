@@ -1,5 +1,6 @@
 import './yupLocale';
 import localforage from 'localforage';
+
 import ReactDOM from 'react-dom/client';
 import { unstable_HistoryRouter as Router } from 'react-router-dom';
 import App from './App.tsx';
@@ -32,7 +33,7 @@ localforage.config({
 });
 
 const isOnline = navigator.onLine;
-useAppStore.getState().setIsOffline(isOnline);
+useAppStore.getState().setIsOffline(!isOnline);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Router history={history as any}>

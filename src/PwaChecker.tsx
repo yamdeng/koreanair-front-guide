@@ -1,9 +1,10 @@
 import useAppStore from '@/stores/useAppStore';
 import { useEffect } from 'react';
 import { useStore } from 'zustand';
+import OfflineApp from './OfflineApp';
 
 const PwaChecker = ({ children }) => {
-  const isOffline = useStore(useAppStore, (state) => state.profile);
+  const isOffline = useStore(useAppStore, (state) => state.isOffline);
   const setIsOffline = useStore(useAppStore, (state) => state.setIsOffline);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const PwaChecker = ({ children }) => {
   }, []);
 
   if (isOffline) {
-    return <div>현재 오프라인 상태입니다.</div>;
+    return <OfflineApp />;
   }
 
   return children;

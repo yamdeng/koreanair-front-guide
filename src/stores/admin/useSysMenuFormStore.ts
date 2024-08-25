@@ -161,6 +161,7 @@ const useSysMenuFormStore = create<any>((set, get) => ({
       ModalService.alert({
         body: '저장되었습니다.',
         ok: async () => {
+          set({ formType: FORM_TYPE_UPDATE });
           await getMenuTree();
           await getParentMenuTree(apiParam.workScope);
         },

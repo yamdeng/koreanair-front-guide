@@ -16,22 +16,28 @@ const initFormValue = {
   nameJpn: '',
   nameEtc: '',
   remark: '',
-  useYn: '',
+  useYn: 'Y',
   groupUsage: 'MENU',
+  auditAdminYn: 'N',
+  reportType: '',
+  groupAdminYn: 'N',
 };
 
 /* yup validation */
 const yupFormSchema = yup.object({
   groupCd: yup.string().required(),
-  workScope: yup.string(),
-  nameKor: yup.string(),
+  workScope: yup.string().required(),
+  nameKor: yup.string().required(),
   nameEng: yup.string(),
   nameChn: yup.string(),
   nameJpn: yup.string(),
   nameEtc: yup.string(),
   remark: yup.string(),
-  useYn: yup.string(),
-  groupUsage: yup.string(),
+  useYn: yup.string().required(),
+  groupUsage: yup.string().required(),
+  auditAdminYn: yup.string().required(),
+  reportType: yup.string(),
+  groupAdminYn: yup.string().required(),
 });
 
 /* form 초기화 */
@@ -40,7 +46,7 @@ const initFormData = {
 
   menuTreeData: [],
   virtualGroupList: [],
-  selectedGroupInfo: null,
+  selectedGroupCd: null,
   treeWorkScope: 'A',
 
   selectManagerList: [],
@@ -72,12 +78,19 @@ const useSysGroupFormStore = create<any>((set, get) => ({
       ...initFormValue,
       workScope: treeWorkScope,
     };
-    set({ formValue: formValue, formType: FORM_TYPE_ADD });
+    set({
+      formValue: formValue,
+      formType: FORM_TYPE_ADD,
+      selectedGroupCd: null,
+      selectManagerList: [],
+      selectMemberList: [],
+      selectMenuKeyList: [],
+    });
   },
 
   save: async () => {
-    const { validate, getApiParam, formType, formApiPath, formValue, getGroupList, getMenuTree } = get();
-    const { workScope, groupCd } = formValue;
+    const { validate, getApiParam, formType, formApiPath, formValue, getGroupList, getDetail } = get();
+    const { groupCd } = formValue;
     const isValid = await validate();
     if (isValid) {
       const apiParam = getApiParam();
@@ -86,8 +99,7 @@ const useSysGroupFormStore = create<any>((set, get) => ({
         ModalService.alert({
           body: '저장되었습니다.',
           ok: async () => {
-            set({ formType: FORM_TYPE_UPDATE });
-            await getMenuTree(workScope);
+            await getDetail(groupCd);
             await getGroupList();
           },
         });
@@ -96,6 +108,7 @@ const useSysGroupFormStore = create<any>((set, get) => ({
         ModalService.alert({
           body: '저장되었습니다.',
           ok: async () => {
+            await getDetail(groupCd);
             await getGroupList();
           },
         });
@@ -151,12 +164,14 @@ const useSysGroupFormStore = create<any>((set, get) => ({
   },
 
   handleTreeSelect: async (selectedKeys, info) => {
-    const { getDetailListAll, getMenuTree } = get();
-    const groupInfo = info.node;
-    const workScope = groupInfo.workScope;
-    set({ formValue: groupInfo, formType: FORM_TYPE_UPDATE });
-    await getDetailListAll();
-    await getMenuTree(workScope);
+    if (selectedKeys && selectedKeys.length) {
+      const { getDetailListAll, getMenuTree, getDetail } = get();
+      const groupInfo = info.node;
+      const workScope = groupInfo.workScope;
+      await getDetail(selectedKeys[0]);
+      await getDetailListAll();
+      await getMenuTree(workScope);
+    }
   },
 
   getDetailListAll: async () => {
@@ -200,13 +215,13 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     set({ menuTreeData: treeData });
   },
 
-  handleMenuTreeSelect: async (selectedKeys) => {
-    set({ selectMenuKeyList: selectedKeys });
+  handleMenuTreeSelect: async (selectedInfoList) => {
+    set({ selectMenuKeyList: selectedInfoList.map((info) => info.value) });
   },
 
   changeTreeWorkScope: (workScope) => {
     const { getGroupList } = get();
-    set({ treeWorkScope: workScope });
+    set({ treeWorkScope: workScope, selectedGroupCd: null });
     getGroupList();
   },
 
@@ -261,11 +276,20 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     const { modalHandleType, selectManagerList, selectMemberList } = get();
     if (modalHandleType === 'A') {
       // 관리자 선택일 경우에
-      const filterManagerList = selectedList.filter((info: any) => {
-        const searchInfo = selectManagerList.find((beforeInfo) => beforeInfo.userId === info.userId);
-        if (!searchInfo) {
+      const filterManagerList = selectedList.filter((selectedInfo: any) => {
+        const adminSearchInfo = selectManagerList.find((beforeInfo) => beforeInfo.userId === selectedInfo.userId);
+        const memberSearchInfo = selectMemberList.find((beforeInfo) => {
+          if (selectedInfo.selectedType === 'U' && beforeInfo.selectedType === 'U') {
+            if (selectedInfo.userId === beforeInfo.userId) {
+              return true;
+            }
+          }
+          return false;
+        });
+        if (!adminSearchInfo && !memberSearchInfo) {
           return true;
         }
+
         return false;
       });
       set(
@@ -276,7 +300,8 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     } else {
       // 멤버 선택일 경우에
       const filterMemberList = selectedList.filter((selectedInfo: any) => {
-        const searchInfo = selectMemberList.find((beforeInfo) => {
+        const adminSearchInfo = selectManagerList.find((beforeInfo) => beforeInfo.userId === selectedInfo.userId);
+        const memberSearchInfo = selectMemberList.find((beforeInfo) => {
           if (selectedInfo.selectedType === 'U' && beforeInfo.selectedType === 'U') {
             if (selectedInfo.userId === beforeInfo.userId) {
               return true;
@@ -289,7 +314,7 @@ const useSysGroupFormStore = create<any>((set, get) => ({
           }
           return false;
         });
-        if (!searchInfo) {
+        if (!adminSearchInfo && !memberSearchInfo) {
           return true;
         }
         return false;
@@ -322,6 +347,13 @@ const useSysGroupFormStore = create<any>((set, get) => ({
         });
       },
     });
+  },
+
+  getDetail: async (groupCd) => {
+    const { formApiPath } = get();
+    const apiResult = await ApiService.get(`${formApiPath}/${groupCd}`);
+    const groupInfo = apiResult.data;
+    set({ formValue: groupInfo, formType: FORM_TYPE_UPDATE, selectedGroupCd: groupCd });
   },
 
   init: async () => {

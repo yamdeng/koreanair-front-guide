@@ -112,6 +112,7 @@ const useAppStore = createStore<any>((set, get) => ({
     const apiResult = await ApiService.get(import.meta.env.VITE_API_URL_PROFILE, null, { disableLoadingBar: true });
     const data = apiResult.data;
     set({ profile: data });
+    CommonUtil.saveInfoToLocalStorage('profile', data);
     return data;
   },
 

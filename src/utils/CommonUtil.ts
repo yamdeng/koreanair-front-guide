@@ -140,6 +140,20 @@ function listToTreeData(items, treeKey, treeParentKey, rootValue) {
   return rootItems;
 }
 
+function convertTreeData(treeData, titleColumn, valueColumn) {
+  treeData.forEach((treeInfo) => {
+    if (titleColumn) {
+      treeInfo.title = treeInfo[titleColumn];
+    }
+    if (valueColumn) {
+      treeInfo.value = treeInfo[valueColumn];
+    }
+    if (treeInfo.children && treeInfo.children.length) {
+      convertTreeData(treeInfo.children, titleColumn, valueColumn);
+    }
+  });
+}
+
 const getDateFormatByPickerType = (pickerType, useWithTimePicker, excludeSecondsTime) => {
   if (pickerType === DATE_PICKER_TYPE_DATE) {
     if (useWithTimePicker) {
@@ -268,4 +282,5 @@ export default {
   validateYupForm,
   getNowByServerTime,
   convertNumberFormat,
+  convertTreeData,
 };

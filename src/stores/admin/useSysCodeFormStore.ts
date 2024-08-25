@@ -8,7 +8,7 @@ import _ from 'lodash';
 const yupFormSchema = yup.object({
   codeId: yup.string().required(),
   codeNameKor: yup.string().required(),
-  codeNameEng: yup.string().nullable(),
+  codeNameEng: yup.string().required(),
   codeField1: yup.string().nullable(),
   codeField2: yup.string().nullable(),
   codeField3: yup.string().nullable(),
