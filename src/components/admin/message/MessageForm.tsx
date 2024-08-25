@@ -24,7 +24,7 @@ function MessageForm() {
       <div className="conts-title">
         <h2>메시지 폼</h2>
       </div>
-      <div className="boxForm">
+      <div className="editbox">
         <div className="form-table">
           <div className="form-cell wid50">
             <div className="form-group wid100">

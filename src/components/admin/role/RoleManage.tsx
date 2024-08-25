@@ -7,7 +7,7 @@ import useSysGroupFormStore from '@/stores/admin/useSysGroupFormStore';
 import { Tree, TreeSelect } from 'antd';
 import AppTreeSelect from '@/components/common/AppTreeSelect';
 import { useEffect } from 'react';
-const { SHOW_PARENT } = TreeSelect;
+const { SHOW_ALL } = TreeSelect;
 
 function RoleManage() {
   const {
@@ -19,6 +19,7 @@ function RoleManage() {
     formType,
     virtualGroupList,
     handleTreeSelect,
+    selectedGroupCd,
     selectMenuKeyList,
     selectMemberList,
     selectManagerList,
@@ -42,7 +43,21 @@ function RoleManage() {
     clear,
   } = useSysGroupFormStore();
 
-  const { groupCd, workScope, nameKor, nameEng, nameChn, nameJpn, nameEtc, remark, useYn, groupUsage } = formValue;
+  const {
+    groupCd,
+    workScope,
+    nameKor,
+    nameEng,
+    nameChn,
+    nameJpn,
+    nameEtc,
+    remark,
+    useYn,
+    groupUsage,
+    auditAdminYn,
+    reportType,
+    groupAdminYn,
+  } = formValue;
 
   useEffect(() => {
     init();
@@ -77,9 +92,10 @@ function RoleManage() {
             {virtualGroupList && virtualGroupList.length ? (
               <Tree
                 className="draggable-tree bg"
-                fieldNames={{ title: 'nameKor', key: 'menuId' }}
+                fieldNames={{ title: 'nameKor', key: 'groupCd' }}
                 treeData={virtualGroupList}
                 onSelect={handleTreeSelect}
+                selectedKeys={selectedGroupCd ? [selectedGroupCd] : []}
               />
             ) : (
               <div>가상그룹을 추가해주세요.</div>
@@ -97,7 +113,7 @@ function RoleManage() {
                 </dt>
                 <dd className="tg-conts">
                   <div className="edit-area">
-                    <div className="boxForm tog">
+                    <div className="editbox tog">
                       <div className="form-table">
                         <div className="form-cell wid50">
                           <div className="form-group wid100">
@@ -147,6 +163,7 @@ function RoleManage() {
                               value={nameKor}
                               onChange={(value) => changeInput('nameKor', value)}
                               errorMessage={errors.nameKor}
+                              required
                             />
                           </div>
                         </div>
@@ -270,6 +287,55 @@ function RoleManage() {
                         </div>
                       </div>
                       <hr className="line"></hr>
+
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppSelect
+                              id="useSysGroupFormStoreauditAdminYn"
+                              name="auditAdminYn"
+                              options={Code.useYn}
+                              label="Audit(Y/N)"
+                              value={auditAdminYn}
+                              onChange={(value) => changeInput('auditAdminYn', value)}
+                              required
+                              errorMessage={errors.auditAdminYn}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <hr className="line"></hr>
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppSelect
+                              id="useSysGroupFormStoregroupAdminYn"
+                              name="groupAdminYn"
+                              options={Code.useYn}
+                              label="ADMIN(Y/N)"
+                              value={groupAdminYn}
+                              onChange={(value) => changeInput('groupAdminYn', value)}
+                              required
+                              errorMessage={errors.groupAdminYn}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <hr className="line"></hr>
+                      <div className="form-table">
+                        <div className="form-cell wid50">
+                          <div className="form-group wid100">
+                            <AppTextInput
+                              id="useSysGroupFormStorereportType"
+                              name="reportType"
+                              label="리포트유형"
+                              value={reportType}
+                              onChange={(value) => changeInput('reportType', value)}
+                              errorMessage={errors.reportType}
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </dd>
@@ -304,10 +370,14 @@ function RoleManage() {
                         <div className="form-cell wid50">
                           <div className="form-group wid100">
                             <AppTreeSelect
+                              showSearch
+                              treeNodeFilterProp="nameKor"
+                              treeCheckStrictly
+                              showCheckedStrategy={SHOW_ALL}
                               treeCheckable
-                              showCheckedStrategy={SHOW_PARENT}
                               treeData={menuTreeData}
                               fieldNames={{ label: 'nameKor', value: 'menuId' }}
+                              maxTagCount={10}
                               treeDefaultExpandAll
                               value={selectMenuKeyList}
                               onChange={handleMenuTreeSelect}

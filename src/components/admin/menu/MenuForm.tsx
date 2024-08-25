@@ -86,7 +86,7 @@ function MenuForm() {
               <dl className="tg-item">
                 <dd className="tg-conts">
                   <div className="edit-area">
-                    <div className="boxForm tog">
+                    <div className="editbox tog">
                       <div className="form-table">
                         <div className="form-cell wid50">
                           <div className="form-group wid100">

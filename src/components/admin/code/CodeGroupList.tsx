@@ -11,7 +11,7 @@ const initListData = {
   ...listBaseState,
   disablePaging: true,
   listApiPath: 'sys/code-groups',
-  baseRoutePath: 'codes',
+  baseRoutePath: '/codes',
 };
 
 /* zustand store 생성 */
