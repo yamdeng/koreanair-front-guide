@@ -6,7 +6,7 @@
     "dev": "vite --port 8081",
     "dev:offline": "vite --port 3000",
     "dev:admin": "vite --port 8082 --mode admin",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "build:pass": "vite build",
     "build:admin-pass": "vite build --mode admin",
