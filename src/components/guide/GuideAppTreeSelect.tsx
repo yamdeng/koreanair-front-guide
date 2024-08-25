@@ -58,7 +58,9 @@ function GuideAppTreeSelect() {
           <div className="form-cell wid100">
             <div className="form-group wid100">
               <AppTreeSelect
+                showSearch
                 label="AppTreeSelect(single)"
+                treeNodeFilterProp="nameKor"
                 treeData={treeData}
                 fieldNames={{ label: 'nameKor', value: 'menuId' }}
                 treeDefaultExpandAll={false}

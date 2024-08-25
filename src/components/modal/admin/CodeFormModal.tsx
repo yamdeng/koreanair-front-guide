@@ -91,6 +91,7 @@ function CodeFormModal(props) {
                         value={codeNameEng}
                         onChange={(value) => changeInput('codeNameEng', value)}
                         errorMessage={errors.codeNameEng}
+                        required
                       />
                     </div>
                   </div>

@@ -46,7 +46,7 @@ function AppNavigation() {
           if (searchMenuInfo.level === 1) {
             toggleRootMenuExpand(searchMenuInfo, true);
           } else if (searchMenuInfo.level === 2) {
-            clickSecondMenu(searchMenuInfo);
+            clickSecondMenu(searchMenuInfo, true);
           } else if (searchMenuInfo.level === 3) {
             clickLastMenu(searchMenuInfo, true);
           }

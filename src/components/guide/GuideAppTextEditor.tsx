@@ -40,12 +40,7 @@ function GuideAppTextEditor() {
         <div className="form-table">
           <div className="form-cell wid100">
             <div className="form-group wid100">
-              <AppTextArea
-                label="AppTextArea"
-                value={textValue}
-                onChange={(value) => setTextValue(value)}
-                maxLength={5}
-              />
+              <AppTextArea label="AppTextArea" value={textValue} onChange={(value) => setTextValue(value)} />
             </div>
           </div>
         </div>

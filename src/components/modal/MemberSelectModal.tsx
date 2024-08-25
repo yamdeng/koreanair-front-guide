@@ -95,8 +95,7 @@ function MemberSelectModal(props) {
     setFinalSelectList([...filterAllList, ...finalSelectList]);
   }, [checkedDeptList, userList]);
 
-  const changeUserSearchInputValue = (event) => {
-    const value = event.target.value;
+  const changeUserSearchInputValue = (value) => {
     setUserSearchInputValue(value);
   };
 
