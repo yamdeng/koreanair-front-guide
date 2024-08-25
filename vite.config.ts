@@ -4,12 +4,81 @@ import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, resolve(__dirname, './env'), '');
   const enableHttps = env.ENABLE_HTTPS && env.ENABLE_HTTPS === 'true';
   const enableProxyLog = env.ENABLE_PROXY_LOG && env.ENABLE_PROXY_LOG === 'true';
-  const pluginList = [react(), tsconfigPaths(), nodePolyfills()];
+  const pluginList = [react(), tsconfigPaths(), nodePolyfills(), VitePWA({
+    registerType: 'autoUpdate',
+    includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+    manifest: {
+      name: 'My React App',
+      short_name: 'ReactApp',
+      description: 'My Awesome React App with PWA',
+      theme_color: '#ffffff',
+      icons: [
+        {
+          src: 'pwa-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: 'pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+        {
+          src: 'pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any maskable',
+        },
+      ],
+    },
+      workbox: {
+        // 특정 파일을 캐시하는 방법
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/.*\/.*\.(js|css|html|png|jpg)$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'my-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              }
+            }
+          },
+          {
+            urlPattern: ({ request }) => request.destination === 'document',
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'html-cache',
+              expiration: {
+                maxEntries: 10
+              }
+            }
+          },
+          {
+            urlPattern: /\/api\/.*\/data/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'api-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 days
+              }
+            }
+          }
+        ],
+        // 기본적으로 포함할 파일 지정
+        globPatterns: [
+          '**/*.{js,css,html,png,jpg,wasm}'
+        ],
+      }
+  })];
   if (enableHttps) {
     pluginList.push(basicSsl());
   }
