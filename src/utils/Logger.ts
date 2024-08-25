@@ -1,18 +1,14 @@
 const Logger = {
   debug: function (message) {
-    // eslint-disable-next-line
     console.debug(message);
   },
   info: function (message) {
-    // eslint-disable-next-line
     console.info(message);
   },
   warn: function (message) {
-    // eslint-disable-next-line
     console.warn(message);
   },
   error: function (message) {
-    // eslint-disable-next-line
     console.error(message);
     try {
       //   const appStore = rootStore.appStore;
@@ -27,12 +23,10 @@ const Logger = {
       //   errorDoc.userAgent = navigator.userAgent || '';
       //   errorDoc.message = message.substr(0, 2500);
     } catch (e) {
-      // eslint-disable-next-line
       console.error('Logger error : ' + JSON.stringify(e));
     }
   },
   log: function (message) {
-    // eslint-disable-next-line
     console.log(message);
   },
 };
