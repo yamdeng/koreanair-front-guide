@@ -1,8 +1,10 @@
-import { Route } from 'react-router-dom';
-import AviationRouteInfo from './AviationRouteInfo';
-import AviationLayout from '@/components/layout/AviationLayout';
 import AviationPortal from '@/components/aviation/AviationPortal';
+import AviationLayout from '@/components/layout/AviationLayout';
+import { Route } from 'react-router-dom';
+import AssuranceRouteInfo from './AssuranceRouteInfo';
+import AviationRouteInfo from './AviationRouteInfo';
 import GuideRouteInfo from './GuideRouteInfo';
+import AuditRouteInfo from './AuditRouteInfo';
 
 const useAviationRoute = () => {
   const routes = (
@@ -21,12 +23,31 @@ const useAviationRoute = () => {
       })}
     </>
   );
+  const assuranceRoutes = (
+    <>
+      {AssuranceRouteInfo.list.map((menuInfo, index) => {
+        const { Component, path } = menuInfo;
+        return <Route key={index} path={path} element={<Component menuInfo={menuInfo} />} />;
+      })}
+    </>
+  );
+
+  const auditRoutes = (
+    <>
+      {AuditRouteInfo.list.map((menuInfo, index) => {
+        const { Component, path } = menuInfo;
+        return <Route key={index} path={path} element={<Component menuInfo={menuInfo} />} />;
+      })}
+    </>
+  );
 
   return (
     <Route path="/aviation" element={<AviationLayout />}>
       <Route path="" index element={<AviationPortal />} />
       {routes}
       {guideRoutes}
+      {assuranceRoutes}
+      {auditRoutes}
     </Route>
   );
 };
