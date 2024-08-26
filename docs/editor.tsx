@@ -94,3 +94,18 @@ const editor = new toastui.Editor({
     },
   },
 });
+
+
+.toastui-editor-contents table {
+  /* 기본 테이블 테마를 덮어씁니다 */
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.toastui-editor-contents th,
+.toastui-editor-contents td {
+  /* 셀 간의 간격과 폰트 스타일을 조정합니다 */
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
