@@ -92,6 +92,7 @@ export const createFormSliceYup = (set, get) => ({
           } else {
             await ApiService.put(`${formApiPath}/${formDetailId}`, apiParam);
           }
+          await set({ isDirty: false });
           ToastService.success('저장되었습니다.');
           history.push(`${baseRoutePath}`);
         },
@@ -108,7 +109,7 @@ export const createFormSliceYup = (set, get) => ({
         await ApiService.delete(`${formApiPath}/${formDetailId}`);
         ModalService.alert({
           body: '삭제되었습니다.',
-          ok: () => {
+          ok: async () => {
             history.replace(`${baseRoutePath}`);
           },
         });
