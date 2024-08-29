@@ -39,7 +39,8 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990083', 'A', '상세(첨부,에디터)', '상세(첨부,에디터)', '', '', '', 'M', 'A990080', 99, '/aviation/guides/detailpage-editor', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990084', 'A', 'useFormDirtyCheck', 'useFormDirtyCheck', '', '', '', 'M', 'A990080', 99, '/aviation/guides/unload', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990085', 'A', 'profile', 'profile', '', '', '', 'M', 'A990080', 99, '/aviation/guides/profile', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990086', 'A', 'auth', 'auth', '', '', '', 'M', 'A990080', 99, '/aviation/guides/auth', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+('A990086', 'A', 'auth', 'auth', '', '', '', 'M', 'A990080', 99, '/aviation/guides/auth', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990087', 'A', '라우트', '라우트', '', '', '', 'M', 'A990080', 99, '/aviation/guides/route', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
 -- 다국어
 INSERT INTO tb_sys_message
