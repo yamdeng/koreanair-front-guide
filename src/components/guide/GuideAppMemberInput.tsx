@@ -5,26 +5,16 @@ import AppUserSelectInput from '../common/AppUserSelectInput';
 import AppDeptSelectInput from '../common/AppDeptSelectInput';
 
 function GuideAppMemberInput() {
-  const [deptSelectValue, setDeptSelectValue] = useState({
-    deptCd: 'BOD',
-    nameKor: '사외이사실',
-    nameEng: '사외이사실_en',
-  });
-  const [userSelectValue, setUserSelectValue] = useState({
-    userId: '23312',
-    nameKor: '김석동',
-    nameEng: '김석동_en',
-  });
+  const [deptSelectValue, setDeptSelectValue] = useState('BOD');
+  const [userSelectValue, setUserSelectValue] = useState('23312');
 
-  const handleDeptSelectInput = (selectedValue, deptCd) => {
+  const handleDeptSelectInput = (selectedValue) => {
     console.log(selectedValue);
-    console.log(deptCd);
     setDeptSelectValue(selectedValue);
   };
 
-  const handleUserSelectInput = (selectedValue, userId) => {
+  const handleUserSelectInput = (selectedValue) => {
     console.log(selectedValue);
-    console.log(userId);
     setUserSelectValue(selectedValue);
   };
 
@@ -46,8 +36,8 @@ function GuideAppMemberInput() {
               <AppDeptSelectInput
                 label="부서선택"
                 value={deptSelectValue}
-                onChange={(value, deptCd) => {
-                  handleDeptSelectInput(value, deptCd);
+                onChange={(value) => {
+                  handleDeptSelectInput(value);
                 }}
               />
             </div>
@@ -58,8 +48,8 @@ function GuideAppMemberInput() {
                 withOrgTree={false}
                 label="사용자선택"
                 value={userSelectValue}
-                onChange={(value, userId) => {
-                  handleUserSelectInput(value, userId);
+                onChange={(value) => {
+                  handleUserSelectInput(value);
                 }}
               />
             </div>
@@ -70,8 +60,8 @@ function GuideAppMemberInput() {
                 withOrgTree={true}
                 label="사용자선택(부서트리)"
                 value={userSelectValue}
-                onChange={(value, userId) => {
-                  handleUserSelectInput(value, userId);
+                onChange={(value) => {
+                  handleUserSelectInput(value);
                 }}
               />
             </div>

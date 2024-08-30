@@ -76,11 +76,13 @@ function GuideAppTreeSelect() {
           <div className="form-cell wid100">
             <div className="form-group wid100">
               <AppTreeSelect
+                showSearch
                 label="AppTreeSelect(multiple)"
                 treeData={treeData}
                 fieldNames={{ label: 'nameKor', value: 'menuId' }}
                 treeDefaultExpandAll={false}
                 treeCheckable={true}
+                maxTagCount={5}
                 value={multipleSelectValue}
                 onChange={handleMultipleTreeSelect}
               />

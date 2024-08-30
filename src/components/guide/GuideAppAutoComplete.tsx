@@ -56,6 +56,7 @@ function GuideAppAutoComplete() {
                 value={selectSingleValue}
                 labelKey="nameKor"
                 valueKey="userId"
+                dataKey="data.list"
                 onChange={(value) => setSelectSingleValue(value)}
                 isMultiple={false}
               />
@@ -74,6 +75,7 @@ function GuideAppAutoComplete() {
                 value={selectMultipleValue}
                 labelKey="nameKor"
                 valueKey="userId"
+                dataKey="data.list"
                 onChange={(value) => setSelectMultipleValue(value)}
                 isMultiple={true}
               />
@@ -92,6 +94,7 @@ function GuideAppAutoComplete() {
                 value={selectUser}
                 labelKey="nameKor"
                 valueKey="userId"
+                dataKey="data.list"
                 onlySelect
                 onSelect={(value) => setSelectUser(value)}
               />
@@ -110,6 +113,7 @@ function GuideAppAutoComplete() {
                 value={onlyKeyValue}
                 labelKey="nameKor"
                 valueKey="userId"
+                dataKey="data.list"
                 onChange={(value) => {
                   setOnlyKeyValue(value);
                 }}

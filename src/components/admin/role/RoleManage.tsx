@@ -19,7 +19,7 @@ function RoleManage() {
     formType,
     virtualGroupList,
     handleTreeSelect,
-    selectedGroupCd,
+    selectedGroupId,
     selectMenuKeyList,
     selectMemberList,
     selectManagerList,
@@ -91,10 +91,10 @@ function RoleManage() {
             {virtualGroupList && virtualGroupList.length ? (
               <Tree
                 className="draggable-tree bg"
-                fieldNames={{ title: 'nameKor', key: 'groupCd' }}
+                fieldNames={{ title: 'nameKor', key: 'groupId' }}
                 treeData={virtualGroupList}
                 onSelect={handleTreeSelect}
-                selectedKeys={selectedGroupCd ? [selectedGroupCd] : []}
+                selectedKeys={selectedGroupId ? [selectedGroupId] : []}
               />
             ) : (
               <div>가상그룹을 추가해주세요.</div>

@@ -4,7 +4,7 @@ import useSysDeptFormStore from '@/stores/admin/useSysDeptFormStore';
 
 function AdminDeptList() {
   const { orgTreeData, getOrgTree, handleTreeSelect, selectedDeptInfo } = useSysDeptFormStore();
-  const { deptCd, nameKor, nameEng, nameChn, nameJpn, nameEtc } = selectedDeptInfo || {};
+  const { deptId, deptCd, nameKor, nameEng, nameChn, nameJpn, nameEtc } = selectedDeptInfo || {};
 
   useEffect(() => {
     getOrgTree();
@@ -42,8 +42,8 @@ function AdminDeptList() {
                           <div className="box-view-list">
                             <ul className="view-list">
                               <li className="accumlate-list">
-                                <label className="t-label">부서코드</label>
-                                <span className="text-desc">{deptCd}</span>
+                                <label className="t-label">부서ID</label>
+                                <span className="text-desc">{deptId}</span>
                               </li>
                             </ul>
                           </div>
@@ -60,6 +60,22 @@ function AdminDeptList() {
                               <li className="accumlate-list">
                                 <label className="t-label">명칭(한국어)</label>
                                 <span className="text-desc">{nameKor}</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr className="line"></hr>
+                    <div className="form-table">
+                      <div className="form-cell wid50">
+                        <div className="form-group wid100">
+                          <div className="box-view-list">
+                            <ul className="view-list">
+                              <li className="accumlate-list">
+                                <label className="t-label">부서코드</label>
+                                <span className="text-desc">{deptCd}</span>
                               </li>
                             </ul>
                           </div>

@@ -7,7 +7,6 @@ import AppSearchInput from '../common/AppSearchInput';
 
 const initListData = {
   ...listBaseState,
-  disablePaging: true,
   listApiPath: import.meta.env.VITE_API_URL_USERS,
 };
 

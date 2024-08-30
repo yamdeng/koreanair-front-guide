@@ -1,5 +1,6 @@
 import CommonUtil from '@/utils/CommonUtil';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -31,11 +32,13 @@ function AppTextArea(props) {
     errorMessage,
     style = { width: '100%', height: '200px' },
     disabled = false,
+    toolTipMessage = '',
+    ...rest
   } = props;
   return (
     <>
       <textarea
-        {...props}
+        {...rest}
         id={id}
         style={style}
         className={errorMessage ? 'form-tag error' : 'label-select form-tag'}
@@ -49,6 +52,7 @@ function AppTextArea(props) {
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       <CommonInputError errorMessage={errorMessage} label={label} />
     </>

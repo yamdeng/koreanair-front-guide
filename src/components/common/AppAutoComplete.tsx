@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import ApiService from '@/services/ApiService';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -46,6 +47,9 @@ function AppAutoComplete(props) {
     onlySelect = false,
     onSelect,
     isValueString = false,
+    toolTipMessage = '',
+    apiKeywordName = 'searchWord',
+    dataKey = 'data',
   } = props;
 
   const isServerLoaded = useRef(false);
@@ -72,11 +76,14 @@ function AppAutoComplete(props) {
         const apiResult = await ApiService.get(
           `${apiUrl}`,
           {
-            searchWord: input,
+            [apiKeywordName]: input,
+            pageNum: 1,
+            pageSize: 1000,
           },
           { disableLoadingBar: true }
         );
-        const data = apiResult.data || [];
+
+        const data = _.get(apiResult, dataKey) || [];
 
         setSelectOptions(data);
       } catch (error) {
@@ -85,7 +92,7 @@ function AppAutoComplete(props) {
         setIsLoading(false);
       }
     },
-    [apiUrl]
+    [apiUrl, apiKeywordName]
   );
 
   // debounce를 사용하여 입력 후 500ms 동안 추가 입력이 없을 때만 API 호출
@@ -138,7 +145,7 @@ function AppAutoComplete(props) {
     applyValue = null;
   }
 
-  if (isValueString) {
+  if (value && isValueString) {
     applyValue = selectOptions.find((option) => option.value === value);
   }
   let applyOptions = selectOptions;
@@ -180,6 +187,7 @@ function AppAutoComplete(props) {
       </div>
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       <CommonInputError errorMessage={errorMessage} label={label} />
     </>

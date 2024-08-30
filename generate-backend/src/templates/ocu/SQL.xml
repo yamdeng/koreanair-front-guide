@@ -22,13 +22,13 @@
   <!-- ${tableDescription} 입력 -->
 	<insert id="insert${Entity}" parameterType="${packageName}.dto.${Entity}Dto">
     INSERT INTO ${dbTableName} (${insertColumnNames}, reg_dttm, reg_user_id, upd_dttm, upd_user_id)
-    VALUES (${insertValues}, now(), #{regUserId}, now(), #{udpUserId})
+    VALUES (${insertValues}, now(), #{regUserId}, now(), #{updUserId})
   </insert>
 
   <!-- ${tableDescription} 수정 -->
 	<update id="update${Entity}" parameterType="${packageName}.dto.${Entity}Dto">
     UPDATE ${dbTableName}
-    SET ${updateSet}, upd_dttm = now(), upd_user_id = #{udpUserId}
+    SET ${updateSet}, upd_dttm = now(), upd_user_id = #{updUserId}
     WHERE ${primaryKeyConditions}
   </update>
 

@@ -48,6 +48,7 @@ function AppCodeSelect(props) {
     isRemote = false,
     codeGrpId = '',
     labelOnlyTop = false,
+    ...rest
   } = props;
 
   const [options, setOptions] = useState([]);
@@ -69,7 +70,7 @@ function AppCodeSelect(props) {
   return (
     <>
       <AppSelect
-        {...props}
+        {...rest}
         style={style}
         id={id}
         options={options}
@@ -86,6 +87,8 @@ function AppCodeSelect(props) {
         allValue={allValue}
         allLabel={allLabel}
         isMultiple={isMultiple}
+        labelKey="label"
+        valueKey="value"
       />
     </>
   );

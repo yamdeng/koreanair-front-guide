@@ -4,6 +4,7 @@ import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import { useCallback } from 'react';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -65,6 +66,7 @@ const AppDatePicker = (props) => {
     disabledHoiloday,
     disabledDates,
     style = { width: '100%' },
+    toolTipMessage = '',
   } = props;
 
   // const [open, setOpen] = useState(false);
@@ -164,6 +166,7 @@ const AppDatePicker = (props) => {
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       <CommonInputError errorMessage={errorMessage} label={label} />
     </>

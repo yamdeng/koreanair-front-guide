@@ -1,27 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import UserSelectModal from '../modal/UserSelectModal';
 import UserSelectWithOrgTreeModal from '../modal/UserSelectWithOrgTreeModal';
 import AppSearchInput from './AppSearchInput';
+import ApiService from '@/services/ApiService';
 
 function AppUserSelectInput(props) {
-  const { value, onChange, withOrgTree = false } = props;
+  const { value, onChange, withOrgTree = false, ...rest } = props;
   const [isUserSelectModalopen, setIsUserSelectModalopen] = useState(false);
+  const [selectUserInfo, setSelectUserInfo] = useState(null);
 
   const clearHandler = () => {
     onChange(null);
+    setSelectUserInfo(null);
   };
 
   const handleOrgSelectModal = (selectedValue) => {
-    onChange(selectedValue, selectedValue ? selectedValue.userId : '');
+    if (selectedValue) {
+      setSelectUserInfo(selectedValue);
+      onChange(selectedValue.userId);
+    }
     setIsUserSelectModalopen(false);
   };
 
-  const searchInputValue = value ? value.nameKor : '';
+  const searchInputValue = selectUserInfo ? selectUserInfo.nameKor : '';
+
+  const searchUser = useCallback(
+    async (userId) => {
+      const apiUrl = import.meta.env.VITE_API_URL_USERS + '/' + userId;
+      const apiResult = await ApiService.get(apiUrl);
+      const data = apiResult.data;
+      setSelectUserInfo(data);
+    },
+    [value]
+  );
+
+  useEffect(() => {
+    if (value) {
+      searchUser(value);
+    }
+  }, [value]);
 
   return (
     <>
       <AppSearchInput
-        {...props}
+        {...rest}
         disabled
         search={() => setIsUserSelectModalopen(true)}
         clearHandler={clearHandler}

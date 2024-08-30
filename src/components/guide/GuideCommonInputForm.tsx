@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import AppNavigation from '../common/AppNavigation';
 import AppAutoComplete from '@/components/common/AppAutoComplete';
-import AppSearchInput from '../common/AppSearchInput';
 import AppCheckbox from '@/components/common/AppCheckbox';
 import AppCheckboxGroup from '@/components/common/AppCheckboxGroup';
 import AppCodeSelect from '@/components/common/AppCodeSelect';
@@ -14,13 +11,17 @@ import AppSelect from '@/components/common/AppSelect';
 import AppTextArea from '@/components/common/AppTextArea';
 import AppTextInput from '@/components/common/AppTextInput';
 import AppTimePicker from '@/components/common/AppTimePicker';
-import AppRangeDatePicker from '../common/AppRangeDatePicker';
 import AppTreeSelect from '@/components/common/AppTreeSelect';
 import AppUserSelectInput from '@/components/common/AppUserSelectInput';
+import Config from '@/config/Config';
 import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { create } from 'zustand';
-import Config from '@/config/Config';
+import AppNavigation from '../common/AppNavigation';
+import AppRangeDatePicker from '../common/AppRangeDatePicker';
+import AppSearchInput from '../common/AppSearchInput';
 
 /* yup validation */
 const yupFormSchema = yup.object({
@@ -90,11 +91,13 @@ const useSysDeptFormStore = create<any>((set, get) => ({
 
 /* TODO : 컴포넌트 이름을 확인해주세요 */
 function SysDeptForm() {
+  const navigate = useNavigate();
   const [checkedRequired, setCheckedRequired] = useState(false);
   const [checkedDisabled, setCheckedDisabled] = useState(false);
   const [checkedErrorMessage, setCheckedErrorMessage] = useState(false);
   const [checkedPlaceHolder, setCheckedPlaceHolder] = useState(false);
   const [checkedValue, setCheckedValue] = useState(false);
+  const [checkedToolTip, setCheckedToolTip] = useState(false);
   const [stringValue, setStringValue] = useState('aaa');
   const [numberValue, setNumberValue] = useState(0);
 
@@ -106,7 +109,12 @@ function SysDeptForm() {
   return (
     <>
       <AppNavigation />
-      <div className="conts-title">
+      <div
+        className="conts-title"
+        onClick={() => {
+          navigate('/aviation/guides/details/1');
+        }}
+      >
         <h2>
           app-input 공통 속성 :{' '}
           <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideCommonInputForm.tsx`}>
@@ -171,6 +179,17 @@ function SysDeptForm() {
               />
             </div>
           </div>
+          <div className="form-cell wid50">
+            <div className="group-box-wrap wid100">
+              <AppCheckbox
+                label="toolTip"
+                value={checkedToolTip}
+                onChange={(value) => {
+                  setCheckedToolTip(value);
+                }}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="form-table">
@@ -188,6 +207,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -205,6 +225,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -227,6 +248,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -246,6 +268,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -265,6 +288,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -283,6 +307,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -321,6 +346,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -339,6 +365,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -356,6 +383,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -372,6 +400,7 @@ function SysDeptForm() {
                 errorMessage={checkedErrorMessage ? 'error' : ''}
                 required={checkedRequired}
                 disabled={checkedDisabled}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -394,6 +423,7 @@ function SysDeptForm() {
                 errorMessage={checkedErrorMessage ? 'error' : ''}
                 required={checkedRequired}
                 disabled={checkedDisabled}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -420,6 +450,7 @@ function SysDeptForm() {
                 errorMessage={checkedErrorMessage ? 'error' : ''}
                 required={checkedRequired}
                 disabled={checkedDisabled}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -436,6 +467,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 errorMessage={checkedErrorMessage ? 'error' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -454,6 +486,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -472,6 +505,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -492,6 +526,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>
@@ -515,6 +550,7 @@ function SysDeptForm() {
                 required={checkedRequired}
                 disabled={checkedDisabled}
                 placeholder={checkedPlaceHolder ? '선택해주세요' : ''}
+                toolTipMessage={checkedToolTip ? 'aaa\nbbb\ncccc' : ''}
               />
             </div>
           </div>

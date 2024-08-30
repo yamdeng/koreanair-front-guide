@@ -10,7 +10,6 @@ import CommonUtil from '@/utils/CommonUtil';
 
 const initListData = {
   ...listBaseState,
-  disablePaging: true,
   listApiPath: import.meta.env.VITE_API_URL_USERS,
 };
 
@@ -74,7 +73,7 @@ function UserSelectWithOrgTreeModal(props) {
       const apiUrl = import.meta.env.VITE_API_URL_USERS;
       const apiParam = { deptCd: selectedKeys[0], searchWord: searchWord };
       const apiResult = await ApiService.get(apiUrl, apiParam);
-      const list = apiResult.data || [];
+      const list = apiResult.data.list;
       list.forEach((listInfo) => {
         listInfo.checked = false;
         listInfo.selectedType = 'U';
@@ -128,7 +127,7 @@ function UserSelectWithOrgTreeModal(props) {
       pageSize: 100000,
     });
     const list = apiResult.data;
-    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', '0');
+    const treeData = CommonUtil.listToTreeData(list, 'deptId', 'upperDeptCd', '-1');
     setTreeData(treeData);
   }, [isOpen]);
 

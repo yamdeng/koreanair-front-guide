@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -39,6 +40,7 @@ function AppCheckboxGroup(props) {
     labelKey = 'label',
     valueKey = 'value',
     noBorder = false,
+    toolTipMessage = '',
   } = props;
   const selectedValue = value;
   const applyClassName = classNames('radio-wrap', { error: errorMessage, 'border-no': noBorder });
@@ -62,6 +64,7 @@ function AppCheckboxGroup(props) {
     <>
       <span className="txt" style={{ display: !noBorder && label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </span>
       <div id={id} className={applyClassName}>
         {options.map((info) => {

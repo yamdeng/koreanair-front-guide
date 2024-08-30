@@ -1,6 +1,7 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -35,6 +36,7 @@ function AppCheckbox(props) {
     disabled = false,
     checkboxTitle = '',
     noBorder = false,
+    toolTipMessage = '',
   } = props;
   const applyClassName = classNames('radio-wrap', { error: errorMessage, 'border-no': noBorder });
 
@@ -42,6 +44,7 @@ function AppCheckbox(props) {
     <>
       <span className="txt" style={{ display: !noBorder && label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </span>
       <div id={id} className={applyClassName}>
         <label key={label}>

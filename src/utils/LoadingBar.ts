@@ -1,4 +1,4 @@
-import useAppStore from '@/stores/useAppStore';
+import useUIStore from '@/stores/useUIStore';
 
 /*
 
@@ -8,13 +8,13 @@ import useAppStore from '@/stores/useAppStore';
 
 // 로딩바 show
 const show = () => {
-  const { setDisplayLoadingBar } = useAppStore.getState();
+  const { setDisplayLoadingBar } = useUIStore.getState();
   setDisplayLoadingBar(true);
 };
 
 // 로딩바 hide
 const hide = () => {
-  const { setDisplayLoadingBar } = useAppStore.getState();
+  const { setDisplayLoadingBar } = useUIStore.getState();
   setDisplayLoadingBar(false);
 };
 

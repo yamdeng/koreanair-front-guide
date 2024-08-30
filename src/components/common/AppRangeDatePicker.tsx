@@ -3,6 +3,7 @@ import CommonUtil from '@/utils/CommonUtil';
 import { DatePicker } from 'antd';
 import { useCallback } from 'react';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 const { RangePicker } = DatePicker;
 
@@ -36,6 +37,7 @@ const AppRangeDatePicker = (props) => {
     disabledDates,
     style = { width: '100%' },
     placeholder = ['', ''],
+    toolTipMessage = '',
   } = props;
 
   let applyDateValueFormat = CommonUtil.getDateFormatByPickerType(pickerType, showTime, excludeSecondsTime);
@@ -131,6 +133,7 @@ const AppRangeDatePicker = (props) => {
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       <CommonInputError errorMessage={errorMessage} label={label} />
     </>

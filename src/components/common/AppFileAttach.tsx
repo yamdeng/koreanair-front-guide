@@ -5,7 +5,10 @@ import CommonUtil from '@/utils/CommonUtil';
 import { Image, Upload } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useImmer } from 'use-immer';
+import classNames from 'classnames';
+
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 const { Dragger } = Upload;
 
@@ -26,6 +29,8 @@ function AppFileAttach(props) {
     maxSizeMb = 5,
     maxCount = 100,
     disabled = false,
+    useDetail = false,
+    toolTipMessage = '',
   } = props;
 
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -214,26 +219,32 @@ function AppFileAttach(props) {
   }, [fileGroupSeq]);
 
   let isDragUpload = false;
-  if (mode === 'edit') {
+  if (!useDetail && mode === 'edit') {
     if (onlyImageUpload || isDragType) {
       isDragUpload = true;
     }
   }
 
+  const applyClassName = classNames('filebox', {
+    error: errorMessage,
+    view: useDetail,
+  });
+
+  let applyDisabled = disabled;
+  if (mode === 'view' || useDetail) {
+    applyDisabled = true;
+  }
+
   return (
     <>
-      <div
-        className={errorMessage ? 'filebox error' : 'filebox'}
-        id={id}
-        style={{ display: mode === 'view' && !fileList.length ? 'none' : '' }}
-      >
+      <div className={applyClassName} id={id} style={{ display: mode === 'view' && !fileList.length ? 'none' : '' }}>
         {isDragUpload ? (
-          <Dragger {...baseProps} fileList={fileList} disabled={disabled}>
+          <Dragger {...baseProps} fileList={fileList} disabled={applyDisabled}>
             <p className="ant-upload-text ">+ 이 곳을 클릭하거나 마우스로 업로드할 파일을 끌어서 놓으세요.</p>
           </Dragger>
         ) : (
-          <Upload {...baseProps} fileList={fileList} disabled={disabled}>
-            <div className="btn-area" style={{ display: mode === 'edit' ? '' : 'none' }}>
+          <Upload {...baseProps} fileList={fileList} disabled={applyDisabled}>
+            <div className="btn-area" style={{ display: !useDetail && mode === 'edit' ? '' : 'none' }}>
               <button type="button" name="button" className="btn-big btn_text btn-darkblue-line mg-n">
                 + Upload
               </button>
@@ -242,6 +253,7 @@ function AppFileAttach(props) {
         )}
         <label htmlFor="file" className="file-label">
           {label} {required ? <span className="required">*</span> : null}
+          <CommonInputToolTip toolTipMessage={toolTipMessage} />
         </label>
       </div>
       <CommonInputError errorMessage={errorMessage} label={label} />

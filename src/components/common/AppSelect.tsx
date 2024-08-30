@@ -4,6 +4,7 @@ import { Select } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -54,6 +55,8 @@ function AppSelect(props) {
     valueKey = 'value',
     showSearch = true,
     labelOnlyTop = false,
+    toolTipMessage = '',
+    ...rest
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
@@ -95,7 +98,7 @@ function AppSelect(props) {
   return (
     <>
       <Select
-        {...props}
+        {...rest}
         mode={isMultiple ? 'multiple' : ''}
         status={!isFocused && errorMessage ? 'error' : ''}
         style={style}
@@ -116,6 +119,7 @@ function AppSelect(props) {
       ></Select>
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       <CommonInputError errorMessage={errorMessage} label={label} />
     </>

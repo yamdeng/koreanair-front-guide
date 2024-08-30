@@ -45,7 +45,7 @@ public class ${Entity}Controller {
 
     @Operation(summary = "${tableDescription} 목록 조회", description = "${tableDescription} 목록 조회 API")
     @GetMapping("${apiPathDetail}")
-    public ResponseEntity<?> getDeptList(
+    public ResponseEntity<?> select${Entity}List(
         @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum
         ,@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize){
   

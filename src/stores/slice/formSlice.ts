@@ -79,7 +79,7 @@ export const createFormSliceYup = (set, get) => ({
   },
 
   save: async () => {
-    const { validate, getApiParam, formType, formDetailId, formApiPath, baseRoutePath } = get();
+    const { validate, getApiParam, formType, formDetailId, formApiPath, cancel } = get();
     const isValid = await validate();
     if (isValid) {
       ModalService.confirm({
@@ -94,7 +94,7 @@ export const createFormSliceYup = (set, get) => ({
           }
           await set({ isDirty: false });
           ToastService.success('저장되었습니다.');
-          history.push(`${baseRoutePath}`);
+          await cancel();
         },
       });
     }

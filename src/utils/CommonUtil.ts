@@ -263,6 +263,13 @@ const convertNumberFormat = (numberValue) => {
   return result;
 };
 
+// 오늘날짜 가져오기 (EX: 2024-08-28)
+const getToDate = () => {
+  const now = new Date();
+  const formattedDate = now.toISOString().split('T')[0];
+  return formattedDate;
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -283,4 +290,5 @@ export default {
   getNowByServerTime,
   convertNumberFormat,
   convertTreeData,
+  getToDate,
 };

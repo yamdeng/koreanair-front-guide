@@ -19,7 +19,7 @@ function MemberSelectModal(props) {
       const apiUrl = import.meta.env.VITE_API_URL_USERS;
       const apiParam = { deptCd: selectedKeys[0] };
       const response = await ApiService.get(apiUrl, apiParam);
-      const list = response.data || [];
+      const list = response.data.list;
       list.forEach((listInfo) => {
         listInfo.checked = false;
         listInfo.selectedType = 'U';
@@ -45,7 +45,7 @@ function MemberSelectModal(props) {
       const apiParam = { searchWord: userSearchInputValue };
       const apiUrl = import.meta.env.VITE_API_URL_USERS;
       const response = await ApiService.get(apiUrl, apiParam);
-      const list = response.data || [];
+      const list = response.data.list;
       list.forEach((listInfo) => {
         listInfo.checked = false;
         listInfo.selectedType = 'U';
@@ -71,7 +71,7 @@ function MemberSelectModal(props) {
       pageSize: 100000,
     });
     const list = apiResult.data;
-    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', '0');
+    const treeData = CommonUtil.listToTreeData(list, 'deptId', 'upperDeptCd', '-1');
     setTreeData(treeData);
   }, []);
 

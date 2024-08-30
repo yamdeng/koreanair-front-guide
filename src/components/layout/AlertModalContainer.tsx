@@ -10,7 +10,7 @@ function AlertModalContainer() {
   const { modalType, isOpen, modalData, hideModal } = useModalStore();
 
   let contentClassName = '';
-  overlayClassName = 'alert-modal-overlay';
+  overlayClassName = 'global-alert-modal-overlay';
   contentClassName = modalType + '-content';
 
   switch (modalType) {

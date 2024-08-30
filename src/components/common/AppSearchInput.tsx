@@ -1,6 +1,7 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -40,6 +41,8 @@ function AppSearchInput(props) {
     inputType = 'text',
     clearHandler = null,
     search = () => {},
+    toolTipMessage = '',
+    ...rest
   } = props;
   let isActiveClass = false;
   if (placeholder) {
@@ -52,13 +55,13 @@ function AppSearchInput(props) {
   return (
     <>
       <input
-        {...props}
+        {...rest}
         id={id}
         type={inputType}
         style={style}
         className={applyClassName}
         name={name}
-        value={value}
+        value={value ? value : ''}
         onChange={(event) => {
           onChange(event.target.value, event);
         }}
@@ -72,6 +75,7 @@ function AppSearchInput(props) {
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       {value ? (
         <button className="sch-btnClear" onClick={() => (clearHandler ? clearHandler() : onChange(''))}></button>

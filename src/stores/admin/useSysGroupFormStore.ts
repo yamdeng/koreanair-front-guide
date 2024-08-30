@@ -8,6 +8,7 @@ import ModalService from '@/services/ModalService';
 import ToastService from '@/services/ToastService';
 
 const initFormValue = {
+  groupId: null,
   groupCd: '',
   workScope: '',
   nameKor: '',
@@ -45,7 +46,7 @@ const initFormData = {
 
   menuTreeData: [],
   virtualGroupList: [],
-  selectedGroupCd: null,
+  selectedGroupId: null,
   treeWorkScope: 'A',
 
   selectManagerList: [],
@@ -80,7 +81,7 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     set({
       formValue: formValue,
       formType: FORM_TYPE_ADD,
-      selectedGroupCd: null,
+      selectedGroupId: null,
       selectManagerList: [],
       selectMemberList: [],
       selectMenuKeyList: [],
@@ -89,25 +90,26 @@ const useSysGroupFormStore = create<any>((set, get) => ({
 
   save: async () => {
     const { validate, getApiParam, formType, formApiPath, formValue, getGroupList, getDetail } = get();
-    const { groupCd } = formValue;
+    const { groupId } = formValue;
     const isValid = await validate();
     if (isValid) {
       const apiParam = getApiParam();
       if (formType === FORM_TYPE_ADD) {
-        await ApiService.post(`${formApiPath}`, apiParam);
+        const apiReuslt = await ApiService.post(`${formApiPath}`, apiParam);
+        const detailInfo = apiReuslt.data;
         ModalService.alert({
           body: '저장되었습니다.',
           ok: async () => {
-            await getDetail(groupCd);
+            await getDetail(detailInfo.groupId);
             await getGroupList();
           },
         });
       } else {
-        await ApiService.put(`${formApiPath}/${groupCd}`, apiParam);
+        await ApiService.put(`${formApiPath}/${groupId}`, apiParam);
         ModalService.alert({
           body: '저장되었습니다.',
           ok: async () => {
-            await getDetail(groupCd);
+            await getDetail(groupId);
             await getGroupList();
           },
         });
@@ -117,11 +119,11 @@ const useSysGroupFormStore = create<any>((set, get) => ({
 
   saveDetail: async () => {
     const { formValue, selectManagerList, selectMemberList, selectMenuKeyList } = get();
-    const { groupCd } = formValue;
+    const { groupId } = formValue;
     let usersApiParam = selectManagerList.map((info) => {
       return {
         userId: info.userId,
-        groupCd: groupCd,
+        groupId: groupId,
         groupAdminYn: 'Y',
       };
     });
@@ -129,22 +131,22 @@ const useSysGroupFormStore = create<any>((set, get) => ({
       selectMemberList
         .filter((info) => info.selectedType === 'U')
         .map((info) => {
-          return { userId: info.userId, groupCd: groupCd, groupAdminYn: 'N' };
+          return { userId: info.userId, groupId: groupId, groupAdminYn: 'N' };
         })
     );
 
     const deptsApiParam = selectMemberList
       .filter((info) => info.selectedType === 'D')
       .map((info) => {
-        return { deptCd: info.deptCd, groupCd: groupCd };
+        return { deptCd: info.deptCd, groupId: groupId };
       });
-    await ApiService.put(`sys/virtual-groups/${groupCd}/users`, usersApiParam);
-    await ApiService.put(`sys/virtual-groups/${groupCd}/depts`, deptsApiParam);
+    await ApiService.put(`sys/virtual-groups/${groupId}/users`, usersApiParam);
+    await ApiService.put(`sys/virtual-groups/${groupId}/depts`, deptsApiParam);
     await ApiService.put(
-      `sys/virtual-groups/${groupCd}/menus`,
+      `sys/virtual-groups/${groupId}/menus`,
       selectMenuKeyList.map((menuKey) => {
         return {
-          groupCd: groupCd,
+          groupId: groupId,
           menuId: menuKey,
         };
       })
@@ -175,10 +177,10 @@ const useSysGroupFormStore = create<any>((set, get) => ({
 
   getDetailListAll: async () => {
     const { formValue } = get();
-    const { groupCd } = formValue;
-    const usersResponse = await ApiService.get(`sys/virtual-groups/${groupCd}/users`);
-    const deptsResponse = await ApiService.get(`sys/virtual-groups/${groupCd}/depts`);
-    const menusResponse = await ApiService.get(`sys/virtual-groups/${groupCd}/menus`);
+    const { groupId } = formValue;
+    const usersResponse = await ApiService.get(`sys/virtual-groups/${groupId}/users`);
+    const deptsResponse = await ApiService.get(`sys/virtual-groups/${groupId}/depts`);
+    const menusResponse = await ApiService.get(`sys/virtual-groups/${groupId}/menus`);
     const userList = usersResponse.data || [];
     const deptList = deptsResponse.data || [];
     const menuList = menusResponse.data || [];
@@ -220,7 +222,7 @@ const useSysGroupFormStore = create<any>((set, get) => ({
 
   changeTreeWorkScope: (workScope) => {
     const { getGroupList } = get();
-    set({ treeWorkScope: workScope, selectedGroupCd: null });
+    set({ treeWorkScope: workScope, selectedGroupId: null });
     getGroupList();
   },
 
@@ -333,11 +335,11 @@ const useSysGroupFormStore = create<any>((set, get) => ({
 
   remove: async () => {
     const { formValue, formApiPath, init } = get();
-    const { groupCd } = formValue;
+    const { groupId } = formValue;
     ModalService.confirm({
       body: '삭제하시겠습니까?',
       ok: async () => {
-        await ApiService.delete(`${formApiPath}/${groupCd}`);
+        await ApiService.delete(`${formApiPath}/${groupId}`);
         ModalService.alert({
           body: '삭제되었습니다.',
           ok: () => {
@@ -348,11 +350,11 @@ const useSysGroupFormStore = create<any>((set, get) => ({
     });
   },
 
-  getDetail: async (groupCd) => {
+  getDetail: async (groupId) => {
     const { formApiPath } = get();
-    const apiResult = await ApiService.get(`${formApiPath}/${groupCd}`);
+    const apiResult = await ApiService.get(`${formApiPath}/${groupId}`);
     const groupInfo = apiResult.data;
-    set({ formValue: groupInfo, formType: FORM_TYPE_UPDATE, selectedGroupCd: groupCd, errors: {} });
+    set({ formValue: groupInfo, formType: FORM_TYPE_UPDATE, selectedGroupId: groupId, errors: {} });
   },
 
   init: async () => {

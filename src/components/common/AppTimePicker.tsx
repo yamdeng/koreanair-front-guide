@@ -2,6 +2,7 @@ import CommonUtil from '@/utils/CommonUtil';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 function AppTimePicker(props) {
   const {
@@ -24,6 +25,7 @@ function AppTimePicker(props) {
     needConfirm = null,
     disabled,
     style = { width: '100%' },
+    toolTipMessage = '',
   } = props;
 
   let applyDateValueFormat = 'HH:mm:ss';
@@ -67,6 +69,7 @@ function AppTimePicker(props) {
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       <CommonInputError errorMessage={errorMessage} label={label} />
     </>

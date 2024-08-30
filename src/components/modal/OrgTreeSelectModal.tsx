@@ -41,7 +41,7 @@ function OrgTreeSelectModal(props) {
       pageSize: 100000,
     });
     const list = apiResult.data;
-    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', '0');
+    const treeData = CommonUtil.listToTreeData(list, 'deptId', 'upperDeptCd', '-1');
     setTreeData(treeData);
   }, []);
 

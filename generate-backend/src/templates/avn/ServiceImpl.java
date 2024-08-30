@@ -14,6 +14,7 @@ import ${packageName}.dto.${Entity}Dto;
 @Service
 public class ${Entity}ServiceImpl extends AbstractBaseService implements ${Entity}Service {
 
+    @Override
     public ${Entity}Dto select${Entity}(int id) {
         return commonSql.selectOne("${Entity}.select${Entity}", id);
     }

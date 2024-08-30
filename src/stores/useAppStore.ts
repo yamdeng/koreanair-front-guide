@@ -22,7 +22,7 @@ const useAppStore = createStore<any>((set, get) => ({
   messageAllList: [],
   codeAllList: [],
   codeAllMap: {},
-  currentLocale: 'en',
+  currentLocale: 'ko',
   apiCacheMap: {},
 
   setIsOffline: (value) => {
@@ -61,14 +61,6 @@ const useAppStore = createStore<any>((set, get) => ({
   initApp: async () => {
     LoadingBar.show();
     const { getProfile } = get();
-
-    // TODO : 서버 시간 받기
-    const clientNowString = dayjs().format('YYYY-MM-DD HH:mm:ss');
-    const serverNowString = '2024-08-17 11:36:01';
-    const clientDate = dayjs(clientNowString);
-    const serverDate = dayjs(serverNowString);
-    const diffInSeconds = serverDate.diff(clientDate, 'second');
-    CommonUtil.saveInfoToLocalStorage('serverTimeDiffSecondValue', diffInSeconds);
 
     try {
       // 프로필 호출
@@ -112,6 +104,12 @@ const useAppStore = createStore<any>((set, get) => ({
     const apiResult = await ApiService.get(import.meta.env.VITE_API_URL_PROFILE, null, { disableLoadingBar: true });
     const data = apiResult.data;
     set({ profile: data });
+    const clientNowString = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    const serverNowString = data.serverTime;
+    const clientDate = dayjs(clientNowString);
+    const serverDate = dayjs(serverNowString);
+    const diffInSeconds = serverDate.diff(clientDate, 'second');
+    CommonUtil.saveInfoToLocalStorage('serverTimeDiffSecondValue', diffInSeconds);
     CommonUtil.saveInfoToLocalStorage('profile', data);
     return data;
   },
@@ -124,6 +122,33 @@ const useAppStore = createStore<any>((set, get) => ({
     set({ isAuthError: true });
     console.error(error);
   },
+
+  checkAuth: (checkGroupCd, checkedAdmin = false) => {
+    const { profile } = get();
+    let success = false;
+    if (profile) {
+      const { groupInfo } = profile;
+      if (groupInfo && groupInfo.length) {
+        const searchInfo = groupInfo.find((info) => {
+          if (info.groupCd === checkGroupCd) {
+            if (checkedAdmin) {
+              if (info.groupAdminYn === 'Y') {
+                return true;
+              }
+            } else {
+              return true;
+            }
+          }
+          return false;
+        });
+        if (searchInfo) {
+          success = true;
+        }
+      }
+    }
+    return success;
+  },
+
   logout: () => {
     CommonUtil.saveInfoToLocalStorage('accessToken', '');
     CommonUtil.saveInfoToLocalStorage('refreshToken', '');

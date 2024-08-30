@@ -3,6 +3,7 @@ import { TreeSelect } from 'antd';
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -37,6 +38,8 @@ function AppTreeSelect(props) {
     labelOnlyTop = false,
     showSearch = false,
     treeCheckable = true,
+    toolTipMessage = '',
+    ...rest
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
@@ -67,7 +70,7 @@ function AppTreeSelect(props) {
   return (
     <>
       <TreeSelect
-        {...props}
+        {...rest}
         status={!isFocused && errorMessage ? 'error' : ''}
         style={style}
         className={applyClassName}
@@ -88,6 +91,7 @@ function AppTreeSelect(props) {
       ></TreeSelect>
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       <CommonInputError errorMessage={errorMessage} label={label} />
     </>

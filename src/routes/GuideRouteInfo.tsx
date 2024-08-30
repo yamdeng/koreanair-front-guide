@@ -1,7 +1,7 @@
+import GuideUbiReport from '@/components/guide/GuideUbiReport';
 import GuideAlertModal from '@/components/guide/GuideAlertModal';
 import GuideApiService from '@/components/guide/GuideApiService';
 import GuideAppAutoComplete from '@/components/guide/GuideAppAutoComplete';
-import GuideAppAutoCompleteRaw from '@/components/guide/GuideAppAutoCompleteRaw';
 import GuideAppCheckbox from '@/components/guide/GuideAppCheckbox';
 import GuideAppCodeSelect from '@/components/guide/GuideAppCodeSelect';
 import GuideAppDatePicker from '@/components/guide/GuideAppDatePicker';
@@ -28,6 +28,9 @@ import GuideTree from '@/components/guide/GuideTree';
 import GuideDetailPage from '@/components/guide/GuideDetailPage';
 import GuideFormUnload from '@/components/guide/GuideFormUnload';
 import GuideProfile from '@/components/guide/GuideProfile';
+import GuideAuth from '@/components/guide/GuideAuth';
+import GuideRoute from '@/components/guide/GuideRoute';
+import GuideSameRouteDetail from '@/components/guide/GuideSameRouteDetail';
 
 const GuideRouteInfo: any = {};
 
@@ -85,10 +88,6 @@ GuideRouteInfo.list = [
     path: 'guides/app-tree-select',
   },
   {
-    Component: GuideAppAutoCompleteRaw,
-    path: 'guides/app-auto-complete-raw',
-  },
-  {
     Component: GuideAppAutoComplete,
     path: 'guides/app-auto-complete',
   },
@@ -99,6 +98,10 @@ GuideRouteInfo.list = [
   {
     Component: GuideTree,
     path: 'guides/tree',
+  },
+  {
+    Component: GuideUbiReport,
+    path: 'guides/ubireport',
   },
   {
     Component: GuideAlertModal,
@@ -151,6 +154,18 @@ GuideRouteInfo.list = [
   {
     Component: GuideProfile,
     path: 'guides/profile',
+  },
+  {
+    Component: GuideAuth,
+    path: 'guides/auth',
+  },
+  {
+    Component: GuideRoute,
+    path: 'guides/route',
+  },
+  {
+    Component: GuideSameRouteDetail,
+    path: 'guides/route/:detailId',
   },
 ];
 

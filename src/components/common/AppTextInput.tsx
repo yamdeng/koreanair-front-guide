@@ -1,6 +1,7 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 import CommonInputError from './CommonInputError';
+import CommonInputToolTip from './CommonInputToolTip';
 
 /*
 
@@ -38,6 +39,8 @@ function AppTextInput(props) {
     style = {},
     hiddenClearButton = false,
     inputType = 'text',
+    toolTipMessage = '',
+    ...rest
   } = props;
   let isActiveClass = false;
   if (inputType === 'number') {
@@ -55,13 +58,13 @@ function AppTextInput(props) {
   return (
     <>
       <input
-        {...props}
+        {...rest}
         id={id}
         type={inputType}
         style={style}
         className={applyClassName}
         name={name}
-        value={value}
+        value={value ? value : ''}
         onChange={(event) => {
           onChange(event.target.value, event);
         }}
@@ -70,6 +73,7 @@ function AppTextInput(props) {
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
+        <CommonInputToolTip toolTipMessage={toolTipMessage} />
       </label>
       {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
         <button className="btnClear" onClick={() => onChange('')}></button>

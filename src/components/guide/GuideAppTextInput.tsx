@@ -48,6 +48,7 @@ function GuideAppTextInput() {
           <div className="form-cell wid100">
             <div className="form-group wid100">
               <AppTextInput
+                maxLength={10}
                 label="AppTextInput(text)"
                 value={textValue}
                 onChange={(value) => setTextValue(value)}
@@ -62,6 +63,8 @@ function GuideAppTextInput() {
           <div className="form-cell wid100">
             <div className="form-group wid100">
               <AppTextInput
+                min={0}
+                max={5}
                 inputType="number"
                 label="AppTextInput(number)"
                 value={numberValue}
@@ -76,11 +79,10 @@ function GuideAppTextInput() {
           <div className="form-cell wid100">
             <div className="form-group wid100">
               <AppSearchInput
-                label="AppSearchInput"
                 value={textValue}
                 onChange={(value) => setTextValue(value)}
                 search={search}
-                clearHandler2={clearHandler}
+                clearHandler={clearHandler}
               />
             </div>
           </div>
