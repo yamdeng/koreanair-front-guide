@@ -5,6 +5,7 @@ import { defineConfig, loadEnv } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { VitePWA } from 'vite-plugin-pwa';
+import checker from 'vite-plugin-checker'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, resolve(__dirname, './env'), '');
@@ -79,8 +80,13 @@ export default defineConfig(({ mode }) => {
         ],
       }
   })];
+  console.log('LOCAL_LINT : ' + env.LOCAL_LINT);
+  const enableLintChekcer = env.LOCAL_LINT && env.LOCAL_LINT === 'Y';
   if (enableHttps) {
     pluginList.push(basicSsl());
+  }
+  if(enableLintChekcer) {
+    pluginList.push(checker({typescript: true}));
   }
   const VITE_API_LOCAL_URL = env.VITE_API_LOCAL_URL;
   const VITE_API_URL = env.VITE_API_URL;
