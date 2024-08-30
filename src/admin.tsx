@@ -5,6 +5,7 @@ import history from './utils/history.ts';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import quarterOfYear from 'dayjs/plugin/quarterOfYear';
+import ErrorBoundary from './components/layout/ErrorBoundary.tsx';
 
 dayjs.extend(quarterOfYear);
 dayjs.extend(advancedFormat);
@@ -22,6 +23,8 @@ import './resources/css/importadmin.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Router history={history as any}>
-    <AdminApp />
+    <ErrorBoundary>
+      <AdminApp />
+    </ErrorBoundary>
   </Router>
 );

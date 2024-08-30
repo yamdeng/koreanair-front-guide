@@ -192,6 +192,23 @@ function GuideAppTextInput() {
             </div>
           </div>
         </div>
+        <hr className="line"></hr>
+        <div className="form-table">
+          <div className="form-cell wid100">
+            <div className="form-group wid100">
+              <AppCodeSelect
+                label="그룹멀티코드"
+                codeGrpIdList={['CODE_GRP_302', 'CODE_GRP_303']}
+                value={multipleCodeSelectValue}
+                isMultiple
+                isMultiGroupCode
+                onChange={(value) => {
+                  setMultipleCodeSelectValue(value);
+                }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
       {/* 하단 버튼 영역 */}
       <div className="contents-btns">

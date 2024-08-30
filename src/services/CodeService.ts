@@ -26,6 +26,17 @@ export const getCodeInfo = (codeGrpId, codeValue) => {
   return null;
 };
 
+// code그룹id 기준으로 코드그룹정보 가져오기
+export const getCodeGroupInfo = (searchCodeGrpId) => {
+  const { currentLocale } = useAppStore.getState();
+  const fistCodeInfo = getCodeListByCodeGrpId(searchCodeGrpId)[0];
+  const { codeGrpId, codeGrpNameEng, codeGrpNameKor } = fistCodeInfo;
+  return {
+    value: codeGrpId,
+    label: currentLocale === 'en' ? codeGrpNameEng : codeGrpNameKor,
+  };
+};
+
 // code그룹id + codeValue 기준으로 라벨 반환 : 다국어 반영
 export const getCodeLabelByValue = (codeGrpId, codeValue) => {
   const { codeAllMap, currentLocale } = useAppStore.getState();
@@ -92,6 +103,7 @@ export const convertOptionsByCurrentLocale = (options) => {
 const CodeService = {
   getCodeListByCodeGrpId,
   getCodeInfo,
+  getCodeGroupInfo,
   getOptions,
   getCodeLabelByValue,
   convertOptionsByCurrentLocale,

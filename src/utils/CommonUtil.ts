@@ -3,10 +3,12 @@ import {
   DATE_PICKER_TYPE_MONTH,
   DATE_PICKER_TYPE_QUARTER,
   DATE_PICKER_TYPE_YEAR,
+  ERROR_TYPE_CORE,
 } from '@/config/CommonConstant';
 import dayjs from 'dayjs';
 import _ from 'lodash';
 import { nanoid } from 'nanoid';
+import Logger from './Logger';
 
 const convertEnterStringToBrTag = function (value) {
   return value.replace(/\\r\\n|\r\n|\n|\\n/g, '<br/>');
@@ -270,6 +272,36 @@ const getToDate = () => {
   return formattedDate;
 };
 
+// 전역 오류 에러 handle
+const handleGlobalError = function (message, url, lineNumber, column, errorObject) {
+  if (errorObject && typeof errorObject === 'string') {
+    errorObject = {
+      message: errorObject,
+    };
+  }
+  if (message) {
+    errorObject.message = message;
+  }
+  let displayErrorMessage = '';
+  displayErrorMessage = displayErrorMessage + 'url : ' + url + '\n';
+  displayErrorMessage = displayErrorMessage + 'lineNumber : ' + lineNumber + '\n';
+  displayErrorMessage = displayErrorMessage + 'column : ' + column + '\n';
+  displayErrorMessage =
+    displayErrorMessage +
+    'message : ' +
+    (errorObject && errorObject.message ? errorObject.message : 'CSTALK_NO_MESSAGE') +
+    '\n';
+  errorObject = errorObject || {};
+  errorObject.message = displayErrorMessage;
+  const appErrorObject: any = { message: errorObject.message };
+  if (errorObject.stack) {
+    appErrorObject.statck = errorObject.stack;
+  }
+  appErrorObject.errorType = errorObject.errorType || ERROR_TYPE_CORE;
+  Logger.error('appErrorObject : ' + JSON.stringify(appErrorObject));
+  return false;
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -291,4 +323,5 @@ export default {
   convertNumberFormat,
   convertTreeData,
   getToDate,
+  handleGlobalError,
 };

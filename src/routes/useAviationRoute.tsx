@@ -5,6 +5,7 @@ import AssuranceRouteInfo from './AssuranceRouteInfo';
 import AviationRouteInfo from './AviationRouteInfo';
 import GuideRouteInfo from './GuideRouteInfo';
 import AuditRouteInfo from './AuditRouteInfo';
+import AviationNotFound from '@/components/layout/AviationNotFound';
 
 const useAviationRoute = () => {
   const routes = (
@@ -48,6 +49,7 @@ const useAviationRoute = () => {
       {guideRoutes}
       {assuranceRoutes}
       {auditRoutes}
+      <Route path="*" element={<AviationNotFound />} />
     </Route>
   );
 };

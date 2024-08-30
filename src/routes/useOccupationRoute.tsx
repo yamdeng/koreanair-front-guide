@@ -12,6 +12,7 @@ import OcuManagementRouteInfo from './OcuManagementRouteInfo';
 
 // HHC - 삭제? 예정
 import OccupationRouteInfo from './OccupationRouteInfo';
+import OccupationNotFound from '@/components/layout/OccupationNotFound';
 
 const useOccupationRoute = () => {
   const routeInfos = [
@@ -27,7 +28,13 @@ const useOccupationRoute = () => {
   const allRoutes = routeInfos.flatMap((routeInfo) =>
     routeInfo.list.map((menuInfo, index) => {
       const { Component, path } = menuInfo;
-      return <Route key={`${path}-${index}`} path={path} element={<Component menuInfo={menuInfo} />} />;
+      return (
+        <Route
+          key={`${path}-${index}`}
+          path={`${routeInfo.rootPath}${path}`}
+          element={<Component menuInfo={menuInfo} />}
+        />
+      );
     })
   );
 
@@ -35,6 +42,7 @@ const useOccupationRoute = () => {
     <Route path="/occupation" element={<OccupationLayout />}>
       <Route path="" index element={<OccupationPortal />} />
       {allRoutes}
+      <Route path="*" element={<OccupationNotFound />} />
     </Route>
   );
 };

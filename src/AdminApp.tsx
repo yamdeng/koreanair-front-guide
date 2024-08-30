@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import LoadingBarContainer from './components/layout/LoadingBarContainer';
 import { StoreProvider } from './context/StoreContext';
@@ -8,6 +8,8 @@ import useAppStore from './stores/useAppStore';
 import { useStore } from 'zustand';
 import AlertModalContainer from './components/layout/AlertModalContainer';
 import LoginTemp from './components/LoginTemp';
+import NotFound from './components/layout/NotFound';
+import CommonUtil from './utils/CommonUtil';
 
 function AdminApp() {
   const adminRoute = useAdminRoute();
@@ -17,10 +19,18 @@ function AdminApp() {
   if (isAuthError) {
     mainComponent = <LoginTemp />;
   } else if (profile) {
-    mainComponent = <Routes>{adminRoute}</Routes>;
+    mainComponent = (
+      <Routes>
+        {adminRoute}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    );
   }
 
   useEffect(() => {
+    // javascript core error handle
+    window.onerror = CommonUtil.handleGlobalError;
+
     getProfile();
     getLeftMenu();
   }, []);

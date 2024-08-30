@@ -84,7 +84,7 @@ const AppDatePicker = (props) => {
     applyTimeFormat = timeFormat;
   }
 
-  let applyDisplayFormat = applyDateValueFormat;
+  let applyDisplayFormat = CommonUtil.getDateFormatByPickerType(pickerType, showTime, excludeSecondsTime);
   if (displayFormat) {
     applyDisplayFormat = displayFormat;
   }

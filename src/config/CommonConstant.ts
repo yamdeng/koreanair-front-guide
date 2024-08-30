@@ -17,3 +17,7 @@ export const WORK_SCOPE_SYSTEM = 'S';
 
 export const LABEL_MODAL_OK = '확인';
 export const LABEL_MODAL_CANCEL = '취소';
+
+// error type
+export const ERROR_TYPE_CORE = 'core';
+export const ERROR_TYPE_REACT = 'react';

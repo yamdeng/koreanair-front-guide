@@ -24,6 +24,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import './resources/css/import.scss';
+import ErrorBoundary from './components/layout/ErrorBoundary.tsx';
 
 // pwa mobile & offliine setting
 
@@ -37,8 +38,10 @@ useAppStore.getState().setIsOffline(!isOnline);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Router history={history as any}>
-    <PwaChecker>
-      <App />
-    </PwaChecker>
+    <ErrorBoundary>
+      <PwaChecker>
+        <App />
+      </PwaChecker>
+    </ErrorBoundary>
   </Router>
 );

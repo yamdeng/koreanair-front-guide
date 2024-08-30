@@ -2,7 +2,7 @@ import AppSelect from '@/components/common/AppSelect';
 import CommonUtil from '@/utils/CommonUtil';
 import { useState, useEffect } from 'react';
 import ApiService from '@/services/ApiService';
-import { getOptions, convertOptionsByCurrentLocale } from '@/services/CodeService';
+import { getOptions, getCodeGroupInfo, convertOptionsByCurrentLocale } from '@/services/CodeService';
 
 /*
 
@@ -48,24 +48,38 @@ function AppCodeSelect(props) {
     isRemote = false,
     codeGrpId = '',
     labelOnlyTop = false,
+    isMultiGroupCode = false,
+    codeGrpIdList = [],
     ...rest
   } = props;
 
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    if (codeGrpId) {
-      if (isRemote) {
-        ApiService.get(`com/code-groups/${codeGrpId}/codes`).then((apiResult) => {
-          const data = apiResult.data;
-          const result = convertOptionsByCurrentLocale(data);
-          setOptions(result);
-        });
-      } else {
-        setOptions(getOptions(codeGrpId));
+    if (isMultiGroupCode) {
+      const options = codeGrpIdList.map((grpId) => {
+        const codeGroupInfo = getCodeGroupInfo(grpId);
+        return {
+          label: codeGroupInfo.label,
+          title: codeGroupInfo.label,
+          options: getOptions(grpId),
+        };
+      });
+      setOptions(options);
+    } else {
+      if (codeGrpId) {
+        if (isRemote) {
+          ApiService.get(`com/code-groups/${codeGrpId}/codes`).then((apiResult) => {
+            const data = apiResult.data;
+            const result = convertOptionsByCurrentLocale(data);
+            setOptions(result);
+          });
+        } else {
+          setOptions(getOptions(codeGrpId));
+        }
       }
     }
-  }, [isRemote, codeGrpId]);
+  }, [isRemote, codeGrpId, isMultiGroupCode]);
 
   return (
     <>

@@ -16,7 +16,6 @@ import AppUserSelectInput from '@/components/common/AppUserSelectInput';
 import Config from '@/config/Config';
 import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { create } from 'zustand';
 import AppNavigation from '../common/AppNavigation';
@@ -91,7 +90,6 @@ const useSysDeptFormStore = create<any>((set, get) => ({
 
 /* TODO : 컴포넌트 이름을 확인해주세요 */
 function SysDeptForm() {
-  const navigate = useNavigate();
   const [checkedRequired, setCheckedRequired] = useState(false);
   const [checkedDisabled, setCheckedDisabled] = useState(false);
   const [checkedErrorMessage, setCheckedErrorMessage] = useState(false);
@@ -109,12 +107,7 @@ function SysDeptForm() {
   return (
     <>
       <AppNavigation />
-      <div
-        className="conts-title"
-        onClick={() => {
-          navigate('/aviation/guides/details/1');
-        }}
-      >
+      <div className="conts-title">
         <h2>
           app-input 공통 속성 :{' '}
           <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideCommonInputForm.tsx`}>
