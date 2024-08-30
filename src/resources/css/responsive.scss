@@ -4,6 +4,9 @@
   .header .GNB  {display: none;}
   .checklist-contents {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .checklist-contents .checklist-row.list {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33%; padding-right: 0;}
+
+   /*위험레벨조회 팝업*/
+  .risk-level-search-content {width: 90%;}
 }
 
 
@@ -11,26 +14,50 @@
   .header .GNB  {display: none;} 
   .list-common-modal-content, .org-select-modal-content, .org-change-modal-content, .risk-level-search-content {width: 90%;}
   .boxForm .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
-  .boxForm .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 50%; /*padding-right: 0;*/}
+  .boxForm .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 50%}
   .boxForm .form-table .wid-300 {max-width: 100%;}
-  /*.boxForm .form-table .form-cell:nth-child(odd) {padding-right: 1.0rem;}*/
+  .detail-form .form-table .wid-300 {width: 100%;}
+  .editbox .form-table .wid-300{width: 100%;}
 
   .btn-area {width: 100%;}
-  .checklist-contents {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
-  .checklist-contents .checklist-row.list {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 50%; padding-right: 0; margin: 0;}
+  .checklist-contents{display:flex;justify-content:flex-start;flex-wrap:wrap;width:100%}
+  .checklist-contents .checklist-row.list{display:flex;justify-content:flex-start;flex-wrap:wrap;width:50%;padding-right:0;margin:0}
 
   .editbox .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
-  .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33.3%; /*padding: 0.5rem 1.0rem 0.5rem  0;*/}
+  .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33.3%}
   .editbox .form-table .form-cell:nth-child(3) {padding-right: 0;}
   .editbox .line .form-cell {border-bottom: 0.1rem solid var(--color-neutral-40);}
-  /*.editbox hr.line {margin: 1.0rem 0;}*/
   .dp-n {display: none;}
+
+
+  .editbox.report .form-table{align-items:normal}
+  .editbox.report .form-group{height:100%}
+
+  .editbox.edit-detile > .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%}
+  .editbox.edit-detile > .form-table .form-cell{width:50%}
 
   .contents-btns > button.btn-type01 {width: calc(50% - 0.2rem); margin: 1.0rem 0;}
   .contents-btns > button.btn-type01:nth-child(odd) {margin-right:0.2rem;}
+  /*위험레벨조회 팝업*/
   .RiskLevel-box{display:block}
   .RiskLevel-box .RiskLevel-list{width:100%}
-  .RiskLevel-box .RiskLevel-area{width:100%}
+  .RiskLevel-box .RiskLevel-area{width:100%;margin-top:3rem}
+
+  .left-box {width: 35%;}
+  .right-box {width: 65%;}
+
+  .left-box1{width: 60%;}
+  .right-box1{width: 40%}
+
+  .c-step-list.default>li:nth-child(1){min-width:16.5rem}
+  .c-step-list.default>li:nth-child(2){min-width:15.0rem}
+  .c-step-list.default>li:nth-child(3){min-width:9.0rem}
+  .c-step-list.default>li:nth-child(4){min-width:9.0rem}
+  .c-step-list.default>li:nth-child(5){min-width:7.0rem}
+  .c-step-list.default>li:nth-child(6){min-width:8.0rem}
+  .c-step-list.default>li:nth-child(7){min-width:9.0rem}
+  .c-step-list.default>li:nth-child(8){min-width:9.0rem}
+  .c-step-list.default>li:nth-child(9){min-width:14.5rem}
 
 
 }
@@ -39,25 +66,37 @@
 @media screen and (min-width: 768px) and (max-width: 1023px){
   .header .GNB  {display: none;}
   .LNB_bg.active {display: block;} 
-  .list-common-modal-content, .org-select-modal-content, .org-change-modal-content .risk-level-search-content {width: 90%;}
+  .list-common-modal-content, .org-select-modal-content, .org-change-modal-content {width: 90%;}
+  .risk-level-search-content{width:90%}
   .boxForm .form-table {display: block;}
   .boxForm .form-table .form-cell {width: 100%; padding-right:0;}
+  .boxForm .form-table .form-cell .form-group{width:100%}
   .boxForm .form-table .wid-300 {max-width: 100%;}
+  .detail-form .form-table .wid-300 {width: 100%;}
+  .editbox .form-table .wid-300{width: 100%;}
+  .detail-form .detail-list .form-table .form-cell .form-group{width: 100%;}
 
   .editbox .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
-  .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33.3%; padding:1.5rem 1.0rem 1.5rem 0;}
+  .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33.3%; padding:1.5rem 1.0rem 1.5rem 0}
   .editbox .form-table .form-cell:nth-child(3) {padding-right: 0;}
-  /*.editbox hr.line {margin: 1.0rem 0;}*/
   .editbox .line .form-cell {border-bottom: 0.1rem solid var(--color-neutral-40);}
   .dp-n {display: none;}
+  .editbox .form-table + .form-table.SelList{margin-top:-2.0rem}
+
+  .editbox.report .form-table{align-items:normal}
+  .editbox.report .form-group{height:100%}
+
+  .editbox.edit-detile > .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%}
+  .editbox.edit-detile > .form-table .form-cell{width:50%}
+  
   
   .btn-area {display:flex; width: 100%;}
   .btn-area .btn-sm {width: 100%;}
   .btn-area > button + button {width: 50%;}
   .btn-area > button {margin: 0;}
   
-  .checklist-contents {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
-  .checklist-contents .checklist-row.list {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 50%; padding-right: 0; margin: 0;}
+  .checklist-contents{display:flex;justify-content:flex-start;flex-wrap:wrap;width:100%}
+  .checklist-contents .checklist-row.list{display:flex;justify-content:flex-start;flex-wrap:wrap;width:50%;padding-right:0;margin:0}
 
   .contents {padding: 2.4rem 3.0rem;}
   .contents-btns > button.btn-type01 {padding:0.8rem 2.0rem !important; width: calc(50% - 0.2rem); margin: 1.0rem 0;}
@@ -65,17 +104,54 @@
 
   .group-box-wrap {display: block; height: auto !important;}
 
-  .c-step-wrap ol{position:relative;display:flex;width:100%;flex-wrap:nowrap;overflow:auto hidden;scroll-behavior:smooth;/*justify-content:center*/}
+  .c-step-wrap ol{position:relative;display:flex;width:100%;flex-wrap:nowrap;overflow:auto hidden;scroll-behavior:smooth}
   [class*=c-step-list-type][class*=-list-type-5]>li:before{display:block;position:static;content:"0" counter(stepCounter);font-weight:400;font-size:1.4rem;line-height:1.4rem}
   [class*=c-step-list-type][class*=-list-type-5] .info-title{font-weight:400;font-size:1.5rem !important;line-height:1.5rem}
 
   .detail-form .detail-list .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .detail-form .detail-list .form-table .form-cell {width: 33.3%;}
+
+   /*위험레벨조회 팝업*/
   .RiskLevel-box{display:block}
-  .RiskLevel-box .RiskLevel-list{position:relative;display:flex;width:100%}
+  .RiskLevel-box .RiskLevel-list{position:relative;width:100%}
   .RiskLevel-box .RiskLevel-area{width:100%}
 
+  .left-box {width: 35%;}
+  .right-box {width: 65%;}
 
+  .left-box1{width: 60%;}
+  .right-box1{width: 40%}
+
+  .c-step-list.default>li:nth-child(1){min-width:10.5rem}
+  .c-step-list.default>li:nth-child(2){min-width:15.0rem}
+  .c-step-list.default>li:nth-child(3){min-width:9.0rem}
+  .c-step-list.default>li:nth-child(4){min-width:9.0rem}
+  .c-step-list.default>li:nth-child(5){min-width:7.0rem}
+  .c-step-list.default>li:nth-child(6){min-width:8.0rem}
+  .c-step-list.default>li:nth-child(7){min-width:9.0rem}
+  .c-step-list.default>li:nth-child(8){min-width:9.0rem}
+  .c-step-list.default>li:nth-child(9){min-width:14.5rem}
+
+  .ant-col-md-2{display:block;flex:0 0 8.33333333%;max-width:11.33333333%}
+
+  .menu-tab a{display:inline-flex;font-size:1.3rem;line-height:1.3;min-height:4rem}
+
+  .ck-edit-box .ck-list {display: block; width: 100%; margin-bottom: 2.0rem;}
+  .ck-edit-box .ck-edit {display: block; width: 100%; margin-left: 0;}
+  .ck-edit-box .ck-edit .boxForm {padding: 0 1rem;}
+  .ck-edit-box .ck-edit .mg-top {margin: 1.2rem 0;}
+  .ck-edit-box .ck-edit .btn-area-type01 > button {width: 50%; margin:0;}
+  .ck-edit-box .ck-edit .btn-area-type01 > button + button {width: calc(50% - 0.5rem);}
+
+  .searchbox {display: block;}
+  .searchbox .left-box {width: 100%; padding-right:0; margin-bottom: 2.0rem;}
+  .searchbox .right-box {width: 100%;}
+  .left-box .tree-box .tree-list .list.active {display: none;}
+
+  .user-wrap{display:block;width:100%}
+  .user-wrap .user-box{display:block;width:100%}
+  .user-wrap .user-box .user-box-top{display:flex;align-items:flex-end;justify-content: flex-start;flex-wrap: wrap;width:100%}
+  .user-wrap .user-box .user-box-top:nth-child(2){margin:1rem 0 0.8rem}
 
 }
 
@@ -92,19 +168,28 @@
   .conts-title h2 {font-size: 2.4rem;}
 
   .list-common-modal-content, .org-select-modal-content, .org-change-modal-content, .risk-level-search-content{width: 100%; height: 100%; border-radius: 0 !important;}
-  .pop_full_cont_box {height: calc(100vh - 12.0rem); padding-bottom: 0;}
+  .pop_full_cont_box, .pop_lg_cont_box {height: calc(100vh - 12.0rem); padding-bottom: 0;}
   .pop_btns {width: 100%; position: absolute; left: 0; bottom: 0; display: flex;}
   .pop_btns > button {border-radius: 0 !important; margin: 0; flex-basis: auto; flex-grow: 1;}
+
 
   .table-header .btns-area {display: none;}
   .boxForm .form-table {display: block;}
   .boxForm .form-table .form-cell {width: 100%; padding-right:0;}
   .boxForm .form-table .wid-300 {max-width: 100%;}
+  .editbox .form-table .wid-300{width: 100%;}
+  .editbox .form-table + .form-table.SelList{margin-top:-2.0rem}
+  .detail-form .form-table .wid-300 {width: 100%;}
+  .detail-form .detail-list .form-table .form-cell .form-group{width:100%}
+  .SelectedList{width:100%}
+  .SelectedList > ul li{margin-bottom:1rem}
+  .SelectedList > ul li:last-child{margin-bottom:0}
+  .boxForm .form-table .form-cell .form-group{width:100%}
 
-  .btn-area {display:flex; width: 100%;}
-  .btn-area .btn-sm {width: 100%;}
-  .btn-area > button + button {width: 50%;}
-  .btn-area > button {margin: 0;}
+  .btn-area {display:block;width:100%}
+  .btn-area .btn-sm{width:100%}
+  .btn-area > button + button{width:50%;margin-left:0;margin-top:1rem}
+  .btn-area > button{margin:0}
 
   .contents-btns {display: block; width: 100%;}
   .contents-btns > button {width: 100%; margin: 1.0rem 0;}
@@ -112,8 +197,11 @@
   .contents-btns > button.btn-type01:nth-child(odd) {margin-right:0.2rem;}
 
 
-  .checklist-contents {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
-  .checklist-contents .checklist-row.list {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%; padding-right: 0; margin: 0;}
+  .checklist-contents{display:flex;justify-content:flex-start;flex-wrap:wrap;width:100%}
+  .checklist-contents .checklist-row.list{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:100%;padding-right:0;margin:0}
+
+
+  .DashBoardWrap .DashBoard-chart .DashBoard-row{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:100%;padding-right:0}
   
   .notice-board th, colgroup {display: none;}
   .notice-board tr {display: flex; flex-wrap: wrap; border-bottom: 0.1rem solid var(--color-neutral-30);}
@@ -128,9 +216,12 @@
   .editbox .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%; padding:1.5rem 0 1.5rem 0;}
   .editbox .form-table .form-cell:nth-child(even) {padding-right: 0;}
-  /*.editbox hr.line {margin: 1.0rem 0;}*/
   .editbox .line .form-cell {border-bottom: 0.1rem solid var(--color-neutral-40);}
   .dp-n {display: none;}
+
+  .editbox .form-table .form-cell .form-group.Position-w{width:65%}
+  .editbox .form-table .form-cell .Position-end{position:absolute;right:0;top:-5.5rem;width:15.0rem}
+
 
   .detail-form .detail-list .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .detail-form .detail-list .form-table .form-cell {width: 100%;}
@@ -143,16 +234,56 @@
   [class*=c-step-list-type][class*=-list-type-5] .info-title{font-weight:400;font-size:1.5rem !important;line-height:1.5rem}
 
   .Status-area .Status-chart{display:block;height: auto !important}
+  .Status-area .Status-chart .Status-col{width:100%}
 
-  .menu-tab a{display: inline-flex;font-size:1.4rem;line-height:1.4;min-height:4.4rem}
+
+
+   /*위험레벨조회 팝업*/
   .RiskLevel-box{display:block}
   .RiskLevel-box .RiskLevel-list{width:100%}
+  .RiskLevel-box .RiskLevel-top-box .boxlist-wrap{margin-bottom:2rem}
+  .RiskLevel-box .RiskLevel-list .df{width:100%}
   .RiskLevel-box .RiskLevel-area{width:100%}
   .RiskLevel-box .RiskLevel-area .Level-area{display:block}
   .RiskLevel-box .RiskLevel-area .Level-area .LevelLeft{width:100%}
   .RiskLevel-box .RiskLevel-area .Level-area .LevelRight{width:100%}
   .RiskLevel-area .h4-tit{display:block;margin-top:2.0rem}
+  .RiskLevel-box .RiskLevel-area .search-area{overflow:hidden}
+  .RiskLevel-box .RiskLevel-area .search-area .form-table{display:block;width:100%}
+  .RiskLevel-box .RiskLevel-area .search-area .form-table .form-cell{width:100%}
+  .RiskLevel-box .RiskLevel-area .search-area .form-table .form-area{display:block}
+  .RiskLevel-box .RiskLevel-area .search-area .form-table .form-area .flag-tag1:first-child{gap:0}
+  .RiskLevel-box .RiskLevel-area .search-area .form-table .form-area .flag-tag1 span + span{margin-left:0.2rem}
+  .RiskLevel-box .RiskLevel-area .search-area .form-table .form-area .form-group{display:block;margin:1rem 0 1.5rem 0}
 
+  
+  .left-box {display: block; width: 100%; margin-bottom: 3.0rem; padding-right: 0;}
+  .left-box .tree-box {height: 100%; max-height: 30.0rem; padding-right: 3.0rem;}
+  .right-box {width: 100%;}
+
+  .left-box1{display: block; width: 100%; padding-right: 0;}
+
+  .right-box1{width: 100%;}
+
+
+  .ant-col-md-2{display:block;flex:0 0 8.33333333%;max-width:11.33333333%}
+
+  .tooltip .tooltiptext {width:30rem !important;}
+  .ck-edit-box .ck-list {display: block; width: 100%; margin-bottom: 2.0rem;}
+  .ck-edit-box .ck-edit {display: block; width: 100%; margin-left: 0;}
+  .ck-edit-box .ck-edit .boxForm {padding: 0 1rem;}
+  .ck-edit-box .ck-edit .mg-top {margin: 1.2rem 0;}
+  .ck-edit-box .ck-edit .btn-area-type01 > button {width: 50%; margin:0;}
+  .ck-edit-box .ck-edit .btn-area-type01 > button + button {width: calc(50% - 0.5rem);}
+
+  .searchbox {display: block;}
+  .left-box .tree-box .tree-list .list.active {display: none;}
+  .searchlist {display: block;}
+
+  .user-wrap{display:block;width:100%}
+  .user-wrap .user-box{display:block;width:100%}
+  .user-wrap .user-box .user-box-top{display:flex;align-items:flex-end;justify-content: flex-start;flex-wrap: wrap;width:100%}
+  .user-wrap .user-box .user-box-top:nth-child(2){margin:1rem 0 0.8rem}
 }
 
 
@@ -171,8 +302,8 @@
   .Report-process li:before{ left: 50%;margin-left: -12px;transform: rotate(90deg);right: auto;bottom: -40px;top: auto;margin-top: 0; }
 
   .Report-process li span, .Report-process li span:first-child { font-size:18px;width:100%;height: 100px;padding: 0 5px; padding-top: 40px; border-radius:0}
-  .checklist-contents {display: flex; width: 100%;}
-  .checklist-contents .checklist-row {width: 100% !important; margin: 0 !important;}
+  .checklist-contents{display:flex;width:100%}
+  .checklist-contents .checklist-row{width:100% !important;margin:0 !important}
 
   .contents-btns > button.btn-type01 {width: 100% !important; margin: 1.0rem 0;}
 
@@ -184,7 +315,21 @@
   [class*=c-step-list-type][class*=-list-type-5] .info-title{font-weight:400;font-size:1.5rem !important;line-height:1.5rem}
 
   .Status-area .Status-chart{display:block;height: auto !important}
+
+   /*위험레벨조회 팝업*/
   .RiskLevel-box{display:block}
   .RiskLevel-box .RiskLevel-list{width:100%}
 
+  .menu-tab a{display:inline-flex;font-size:1.3rem;line-height:1.3;min-height:4rem}
+
+  .btn-area {display:block;width:100%}
+  .btn-area .btn-sm {width:100%}
+  .btn-area > button + button{width:50%;margin-left:0;margin-top:1rem}
+  .btn-area > button{margin:0}
+
+  .tooltip .tooltiptext {width:24rem !important;}
+
+  .checklist-contents.edit > .editbox.edit-detile .editarea-box{display:block}
+  .checklist-contents.edit > .editbox.edit-detile .editarea-box .form-group{width:100%}
+  .checklist-contents.edit > .editbox.edit-detile .editarea-box .label-box{margin-top:1rem}
 }
