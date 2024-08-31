@@ -59,6 +59,7 @@ body * {
 
 .contents legend{visibility:hidden;height:0;line-height:0}
 .required{color:var(--color-negative)}
+.table-tit .required {color:var(--color-negative); vertical-align: text-top;}
 .wid10{width:10%}
 .wid20{width:20%}
 .wid30{width:30%}
@@ -460,6 +461,7 @@ input, select{font-family:'KoreanAirSans'}
 }
 .editbox .form-table{display:flex;width:100%}
 .editbox .form-table .form-cell{position:relative; flex-grow:1; padding:2.0rem 1.0rem 2.0rem 0;}
+.editbox .form-table .form-cell1{position:relative; flex-grow:1; padding:2.0rem 1.0rem 0rem 0;}
 .editbox .form-table .form-cell:last-child{padding-right:0}
 .editbox.tog{margin-bottom:0rem; padding-top:0rem}
 .editbox.NoLine{border-top:0}
@@ -687,6 +689,8 @@ input, select{font-family:'KoreanAirSans'}
 .right-box {display: inline-block; height: 100vh; width: calc(100% - 32.0rem); vertical-align: top;}
 .mb-10 {margin-bottom: 1.0rem;}
 .mb-20 {margin-bottom: 2.0rem;}
+.mt-10 {margin-top: 1.0rem;}
+.mt-20 {margin-top: 2.0rem;}
 .mt-30 {margin-top: 3.0rem;}
 .pt-20 {padding-top: 2.0rem;}
 .sm-txt {display: block; padding: 0.5rem 0 0; font-size: 1.2rem;}

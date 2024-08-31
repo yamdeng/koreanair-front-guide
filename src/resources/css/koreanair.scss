@@ -412,12 +412,27 @@
       padding-bottom: 1.0rem;
     }
     .graph {
+      display: flex;
       width: 100%;
       padding: 2.0rem;
       margin-bottom: 2.0rem;
       text-align: center;
       overflow: auto;
+      justify-content: center;
+      align-items: center; 
     }
+    .graph .graph-lt {
+      width: 100%;
+      display: inline-block;
+    }
+    .graph .graph-lt h3{font-size: 1.8rem; font-weight: 500; text-align: left;}
+    .graph .graph-lt .graphbox {vertical-align: top; padding: 1.0rem;}
+    .graph .graph-rt {
+      width: 100%;
+      display: inline-block;
+    }
+    .graph .graph-rt h3{font-size: 1.8rem; font-weight: 500; text-align: left;}
+    .graph .graph-rt .graphbox {vertical-align: top; padding: 1.0rem;}
     .ck-box-tit {
       color: var(--color-darkblue-100);
       font-size: 1.6rem;
@@ -539,5 +554,29 @@
 
 .txt-guide {display: inline-block; width: 100%; font-size: 1.2rem;}
 .ck-guide { background-color: var(--color-neutral-20); border-radius: 0.8rem; padding: 1.0rem 1.5rem; margin-top: 1.0rem;}
-.ck-guide li {font-size: 1.2rem; color: var(--color-neutral-70); padding-left: 1.0rem;}
+.ck-guide li {font-size: 1.3 rem; color: var(--color-neutral-70); padding-left: 1.0rem; line-height: 180%;}
 .ck-guide li::marker {content: "-"; color: var(--color-neutral-130); font-size: 1rem;}
+
+.toggle_switch-tit {display: inline-block; vertical-align: top; line-height: 2.5rem; font-size: 1.6rem; padding-right: 1.0rem;}
+.toggle_switch { display: inline-block; position: relative; width: 5.0rem; height: 2.5rem; } 
+.toggle_switch input[type="checkbox"] { overflow: hidden; position: absolute; width: 0.1rem; height: 0.1rem; margin: -0.1rem; font-size: initial; clip: rect(0 0 0 0); } 
+.toggle_switch .slider { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-color: var(--color-neutral-40); border-radius: 2.5rem; cursor: pointer; transition: 0.4s; } 
+.toggle_switch input[type="checkbox"]:checked + .slider { background-color: var(--color-lightblue-100); } 
+.toggle_switch .slider::before { content: ""; position: absolute; top: 0.4rem; left: 0.4rem; width: 1.7rem; height: 1.7rem; background-color: var(--color-neutral-10); border-radius: 50%; transition: 0.4s; } 
+.toggle_switch input[type="checkbox"]:checked + .slider::before { transform:translateX(2.5rem); } 
+
+
+
+.accordion-btn-tit {position:relative;font-family:"KoreanAirSans";font-size:1.8rem;color:var(--color-darkblue-100);text-align:left;width:100%;padding:0; }
+.accordion-btn-tit span {display:inline-block;float:right;background:url(../images/arrow-down.svg)center right no-repeat;background-size:3.2rem;width:3.2rem;height:3.2rem;vertical-align:middle}
+.accordion-btn-tit span.active {transform: rotate(180deg);}
+.accordion-btn-tit:after{content:'';display:inline-block;position:absolute;top:50%;right:0;margin:0 0 0 1.3rem;-webkit-transform: translateY(-50%) rotate(45deg);-webkit-transform-origin: center;transform-origin:center}
+.accordion-btn-tit .active .accordion-btn-tit:after{-webkit-transform:translateY(-50%) rotate(-135deg);transform:translateY(-50%) rotate(-135deg)}
+
+.checklistbox {display: block; height: 19rem; overflow-y: auto;}
+.check-list {width: 100%; border-top: 0.1rem solid var(--color-darkblue-100); }
+.check-list th, .check-list td {padding: 1.0rem; font-size: 1.4rem; text-align: center;}
+.check-list th {background-color: var(--color-neutral-20);}
+.check-list tr {border-bottom: 0.1rem solid var(--color-neutral-40);}
+.check-list td:first-child {text-align: left;}
+.check-list tr:hover {background-color: var(--color-lightblue-10);}

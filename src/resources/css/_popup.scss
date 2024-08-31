@@ -234,6 +234,8 @@
   margin-top: 1.2rem;
   line-height:1.4;
   padding-bottom: 3.0rem;
+  overflow-y: auto;
+  max-height: 65.0rem;
   @include mobile {
     padding: 0 2.0rem 7.0rem 2.0rem;
   }
