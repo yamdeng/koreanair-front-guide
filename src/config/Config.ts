@@ -6,7 +6,7 @@ const Config = {
   appVersion: '0.1',
   reactFileExtension: '.tsx',
   hrefBasePath: hrefBasePath,
-  defaultGridHeight: 550,
+  defaultGridHeight: 460,
   defaultGridNoDataMessage: '데이터가 존재하지 않습니다.',
   defaultGridPageSize: 10,
   defaultPageSizeList: [10, 50, 100],
