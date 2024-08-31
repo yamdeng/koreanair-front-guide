@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import _ from 'lodash';
 import { nanoid } from 'nanoid';
 import Logger from './Logger';
+import useUIStore from '@/stores/useUIStore';
 
 const convertEnterStringToBrTag = function (value) {
   return value.replace(/\\r\\n|\r\n|\n|\\n/g, '<br/>');
@@ -273,31 +274,40 @@ const getToDate = () => {
 };
 
 // 전역 오류 에러 handle
-const handleGlobalError = function (message, url, lineNumber, column, errorObject) {
+const handleGlobalError = function (message, sourceUrl, lineNumber, column, errorObject) {
+  if (sourceUrl && sourceUrl.includes('.vite')) {
+    // Vite와 관련된 에러는 무시
+    return true;
+  }
+  const { lastErrorMessage, lastSourceUrl } = useUIStore.getState();
+  if (message && sourceUrl) {
+    if (lastErrorMessage === message && sourceUrl === lastSourceUrl) {
+      return true;
+    }
+    useUIStore.getState().changeErrorInfo(message, sourceUrl);
+  }
+  errorObject = errorObject || {};
   if (errorObject && typeof errorObject === 'string') {
     errorObject = {
       message: errorObject,
     };
   }
-  if (message) {
-    errorObject.message = message;
+  if (!errorObject.message) {
+    errorObject.message = message || 'no_message';
   }
+
+  // full error message
   let displayErrorMessage = '';
-  displayErrorMessage = displayErrorMessage + 'url : ' + url + '\n';
+  displayErrorMessage = displayErrorMessage + 'url : ' + sourceUrl + '\n';
   displayErrorMessage = displayErrorMessage + 'lineNumber : ' + lineNumber + '\n';
   displayErrorMessage = displayErrorMessage + 'column : ' + column + '\n';
-  displayErrorMessage =
-    displayErrorMessage +
-    'message : ' +
-    (errorObject && errorObject.message ? errorObject.message : 'CSTALK_NO_MESSAGE') +
-    '\n';
-  errorObject = errorObject || {};
-  errorObject.message = displayErrorMessage;
-  const appErrorObject: any = { message: errorObject.message };
+  displayErrorMessage = displayErrorMessage + 'message : ' + errorObject.message + '\n';
+
+  // message, stack, errorType
+  const appErrorObject: any = { errorType: errorObject.errorType || ERROR_TYPE_CORE, message: displayErrorMessage };
   if (errorObject.stack) {
     appErrorObject.statck = errorObject.stack;
   }
-  appErrorObject.errorType = errorObject.errorType || ERROR_TYPE_CORE;
   Logger.error('appErrorObject : ' + JSON.stringify(appErrorObject));
   return false;
 };

@@ -3,6 +3,7 @@ const profileFolderPath = __PROJECT_FOLDER_PATH;
 const hrefBasePath = `vscode://file/${profileFolderPath}${baseFilePath}`;
 
 const Config = {
+  appVersion: '0.1',
   reactFileExtension: '.tsx',
   hrefBasePath: hrefBasePath,
   defaultGridHeight: 550,

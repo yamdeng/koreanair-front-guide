@@ -1,8 +1,6 @@
-import React from 'react';
-// import Constant from 'config/Constant';
-// import Logger from 'utils/Logger';
-import Logger from '@/utils/Logger';
 import { ERROR_TYPE_REACT } from '@/config/CommonConstant';
+import useUIStore from '@/stores/useUIStore';
+import React from 'react';
 
 /*
 
@@ -24,8 +22,7 @@ class ErrorBoundary extends React.Component<any, any> {
     this.refreshPage = this.refreshPage.bind(this);
   }
 
-  static getDerivedStateFromError(error) {
-    Logger.error(error);
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
@@ -40,16 +37,15 @@ class ErrorBoundary extends React.Component<any, any> {
     }
     if (info && info.componentStack) {
       errorObject.componentStack = info.componentStack;
+      error.componentStack = info.componentStack;
     }
     this.setState({
       errorObject: errorObject,
     });
-    Logger.error(JSON.stringify(errorObject));
   }
 
   refreshPage() {
-    // this.props.appStore.reloadApp();
-    alert('refresh');
+    useUIStore.getState().reloadApp();
   }
 
   render() {
