@@ -1,5 +1,6 @@
 import { useRef, useEffect, useCallback } from 'react';
 import { Editor } from '@toast-ui/react-editor';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import CommonUtil from '@/utils/CommonUtil';
 import CommonInputError from './CommonInputError';
 import Config from '@/config/Config';
@@ -103,6 +104,7 @@ function AppEditor(props) {
         hooks={{
           addImageBlobHook: onAddImageBlob,
         }}
+        plugins={[colorSyntax]}
       />
       {/* <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}
