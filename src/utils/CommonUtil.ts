@@ -65,7 +65,7 @@ const getByLocalStorage = (key) => {
       return null;
     }
   } catch (e) {
-    // TODO : 에러로그
+    Logger.error(`localStorage getByLocalStorage error : ${key}`);
   }
   return null;
 };

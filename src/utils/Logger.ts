@@ -8,6 +8,7 @@ const Logger = {
     console.debug(message);
   },
   info: function (message) {
+    // TODO : front info log 서버 api로 전달
     console.info(message);
   },
   warn: function (message) {
@@ -19,20 +20,26 @@ const Logger = {
         console.error(message);
       }
       try {
+        let applyMessage = message.toString();
+        if (message instanceof Error) {
+          if (message.message) {
+            applyMessage = message.message;
+          }
+        }
         const { accessToken } = useAppStore.getState();
         const { beforePath, currentPath } = useUIStore.getState();
         const errorDoc: any = {};
         errorDoc.token = accessToken;
         errorDoc.version = Config.appVersion;
-        errorDoc.message = message;
+        errorDoc.message = applyMessage;
         errorDoc.created = dayjs().format('YYYY-MM-DD HH:mm:ss');
         errorDoc.currentRouteUrl = currentPath || '';
         errorDoc.beforeRouteUrl = beforePath || '';
         errorDoc.userAgent = navigator.userAgent || '';
-        errorDoc.message = message.substr(0, 2500);
-        // TODO : front error 서버 api로 전달
+        errorDoc.message = applyMessage.substr(0, 2500);
+        // TODO : front error log 서버 api로 전달
       } catch (e) {
-        console.error('Logger error : ' + JSON.stringify(e));
+        console.error(`Logger error : ${e}`);
       }
     }
   },

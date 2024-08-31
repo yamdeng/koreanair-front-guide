@@ -86,8 +86,6 @@ function AppAutoComplete(props) {
         const data = _.get(apiResult, dataKey) || [];
 
         setSelectOptions(data);
-      } catch (error) {
-        console.error('Failed to fetch options:', error);
       } finally {
         setIsLoading(false);
       }
