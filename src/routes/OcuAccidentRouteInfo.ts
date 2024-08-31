@@ -1,10 +1,5 @@
 const RouteInfo: any = {};
 
-RouteInfo.list = [
-  {
-    Component: null,
-    path: 'null',
-  },
-];
+RouteInfo.list = [];
 
 export default RouteInfo;
