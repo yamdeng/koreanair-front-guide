@@ -4,7 +4,7 @@ import AppSearchInput from './AppSearchInput';
 import ApiService from '@/services/ApiService';
 
 function AppDeptSelectInput(props) {
-  const { value, onChange, ...rest } = props;
+  const { value, onChange, useIdColumn = false, ...rest } = props;
   const [isOrgSelectModalopen, setIsOrgSelectModalopen] = useState(false);
   const [selectDeptInfo, setSelectDeptInfo] = useState(null);
 
@@ -16,7 +16,7 @@ function AppDeptSelectInput(props) {
   const handleOrgSelectModal = (selectedValue) => {
     if (selectedValue) {
       setSelectDeptInfo(selectedValue);
-      onChange(selectedValue.deptCd);
+      onChange(useIdColumn ? selectedValue.deptId : selectedValue.deptCd);
     }
     setIsOrgSelectModalopen(false);
   };
@@ -25,12 +25,12 @@ function AppDeptSelectInput(props) {
 
   const searchDept = useCallback(
     async (deptCd) => {
-      const apiUrl = import.meta.env.VITE_API_URL_DEPTS + '/code/' + deptCd;
+      const apiUrl = import.meta.env.VITE_API_URL_DEPTS + `/${useIdColumn ? 'id' : 'code'}/` + deptCd;
       const apiResult = await ApiService.get(apiUrl);
       const data = apiResult.data;
       setSelectDeptInfo(data);
     },
-    [value]
+    [value, useIdColumn]
   );
 
   useEffect(() => {
