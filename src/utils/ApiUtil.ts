@@ -1,7 +1,7 @@
-import axios from 'axios';
-import LoadingBar from '@/utils/LoadingBar';
 import ModalService from '@/services/ModalService';
 import useAppStore from '@/stores/useAppStore';
+import LoadingBar from '@/utils/LoadingBar';
+import axios from 'axios';
 
 /*
 
@@ -54,14 +54,14 @@ Api.interceptors.request.use(
 
 // 응답 인터셉터
 Api.interceptors.response.use(
-  function (response: any) {
+  (response: any) => {
     LoadingBar.hide();
     const { setAccessToken } = useAppStore.getState();
     const responseData = response.data;
     const responseHeader = response.headers;
     if (!response.config.byPassError && responseData.successOrNot !== 'Y') {
       ModalService.alert({ body: responseData.HeaderMsg });
-      return Promise.reject({ errorType: 'api', errorData: responseData });
+      return Promise.reject({ errorType: 'api', message: responseData.HeaderMsg, config: response.config });
     }
     if (response.config.applyOriginalResponse) {
       return response;
@@ -76,7 +76,7 @@ Api.interceptors.response.use(
     }
     return response.data;
   },
-  function (error) {
+  (error) => {
     LoadingBar.hide();
     const { handleUnauthorizedError } = useAppStore.getState();
     const errorResponse = error.response || {};

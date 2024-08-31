@@ -15,12 +15,17 @@ const PwaChecker = ({ children }) => {
       setIsOffline(!navigator.onLine);
     };
 
+    // promise error catch
+    const handleUnhandledrejection = CommonUtil.handleGlobalUnhandledRejection;
+
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
+    window.addEventListener('unhandledrejection', handleUnhandledrejection);
 
     return () => {
       window.removeEventListener('online', updateOnlineStatus);
       window.removeEventListener('offline', updateOnlineStatus);
+      window.removeEventListener('unhandledrejection', handleUnhandledrejection);
     };
   }, []);
 

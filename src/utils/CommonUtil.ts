@@ -10,6 +10,7 @@ import _ from 'lodash';
 import { nanoid } from 'nanoid';
 import Logger from './Logger';
 import useUIStore from '@/stores/useUIStore';
+import { AxiosError } from 'axios';
 
 const convertEnterStringToBrTag = function (value) {
   return value.replace(/\\r\\n|\r\n|\n|\\n/g, '<br/>');
@@ -273,6 +274,32 @@ const getToDate = () => {
   return formattedDate;
 };
 
+// 전역 promise 에러 handle
+const handleGlobalUnhandledRejection = function (event) {
+  const reason = event.reason;
+  if (reason) {
+    const errorType = reason.errorType || '';
+    if (reason instanceof AxiosError || errorType === 'api') {
+      const apiConfig = reason.config || {};
+      const appErrorObject = {
+        errorType: 'api',
+        message: reason.message,
+        url: apiConfig.url || '',
+        method: apiConfig.method || '',
+        stack: reason.stack ? reason.stack : '',
+      };
+      Logger.error('appErrorObject : ' + JSON.stringify(appErrorObject));
+    } else {
+      const appErrorObject = {
+        errorType: 'otherpromis',
+        message: reason.message || reason.toString(),
+        stack: reason.stack ? reason.stack : '',
+      };
+      Logger.error('appErrorObject : ' + JSON.stringify(appErrorObject));
+    }
+  }
+};
+
 // 전역 오류 에러 handle
 const handleGlobalError = function (message, sourceUrl, lineNumber, column, errorObject) {
   if (sourceUrl && sourceUrl.includes('.vite')) {
@@ -334,4 +361,5 @@ export default {
   convertTreeData,
   getToDate,
   handleGlobalError,
+  handleGlobalUnhandledRejection,
 };
