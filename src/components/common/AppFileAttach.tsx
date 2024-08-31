@@ -164,8 +164,8 @@ function AppFileAttach(props) {
           );
           const searchInfo = { ...beforeList[searchIndex], ...info };
           // searchInfo.url = info.s3Path;
-          searchInfo.url = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;
-          searchInfo.thumbUrl = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;
+          searchInfo.url = `${import.meta.env.VITE_API_URL}/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;
+          searchInfo.thumbUrl = `${import.meta.env.VITE_API_URL}/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${searchInfo.fileSeq}`;
 
           searchInfo.fileSeq = info.fileSeq;
           searchInfo.name = info.origFilename;
@@ -196,8 +196,8 @@ function AppFileAttach(props) {
       info.uid = info.fileSeq;
       info.name = info.origFilename;
       // info.url = info.s3Path;
-      info.url = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${info.fileSeq}`;
-      info.thumbUrl = `/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${info.fileSeq}`;
+      info.url = `${import.meta.env.VITE_API_URL}/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${info.fileSeq}`;
+      info.thumbUrl = `${import.meta.env.VITE_API_URL}/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${info.fileSeq}`;
       return info;
     });
     setFileList(fileList);

@@ -1,7 +1,10 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import CommonUtil from '@/utils/CommonUtil';
 import CommonInputError from './CommonInputError';
+import Config from '@/config/Config';
+import ModalService from '@/services/ModalService';
+import ApiService from '@/services/ApiService';
 
 function AppEditor(props) {
   const editorRef: any = useRef();
@@ -24,6 +27,36 @@ function AppEditor(props) {
     const htmlValue = editorInstance.getHTML();
     onChange(htmlValue);
   };
+
+  const validateFileSize = useCallback((fileObject) => {
+    const fileSize = fileObject.size;
+    if (fileSize > Config.maxEditorImageFileUploadSize) {
+      ModalService.alert({
+        body: '업로드 가능한 파일사이즈는 5MB 입니다',
+      });
+      return false;
+    }
+    return true;
+  }, []);
+
+  const fileUpload = async (fileObject, uploadCallback) => {
+    if (validateFileSize(fileObject)) {
+      const fileFormData = new FormData();
+      fileFormData.append('files', fileObject);
+      const apiResult = await ApiService.fileUpload(fileFormData, { workScope: 'S' });
+      uploadCallback(apiResult);
+    }
+  };
+
+  const onAddImageBlob = useCallback((file, callback) => {
+    fileUpload(file, (apiResult) => {
+      const data = apiResult.data;
+      const { fileList } = data;
+      const fileSeq = fileList[0].fileSeq;
+      const imageUrl = `${import.meta.env.VITE_API_URL}/api/v1/${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/${fileSeq}`;
+      callback(imageUrl, 'editer-image');
+    });
+  }, []);
 
   useEffect(() => {
     if (editorRef && editorRef.current) {
@@ -66,6 +99,9 @@ function AppEditor(props) {
               ];
             },
           },
+        }}
+        hooks={{
+          addImageBlobHook: onAddImageBlob,
         }}
       />
       {/* <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>

@@ -652,6 +652,13 @@ input, select{font-family:'KoreanAirSans'}
   border: 1px solid red !important;
 }
 
+/* 에디터 이미지 max-width 설정 */
+.toastui-editor-contents img {
+  max-width: 500px;
+  height: auto; /* 높이를 자동으로 조정 */
+}
+
+
 /* autocomplete 공통 컴포넌트 유효성 체크 실패시 border red 적용 */
 .select-in-valid {
   border: 1px solid red !important;

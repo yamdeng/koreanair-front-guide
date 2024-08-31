@@ -37,11 +37,11 @@ class ApiService {
   }
 
   // file upload
-  fileUpload(formData: any, params: any, onUploadProgress) {
+  fileUpload(formData: any, params: any, onUploadProgress = null) {
     return ApiUtil.post(prefixUrl + `${import.meta.env.VITE_API_URL_FIEL_GROUPS}/file/upload`, formData, {
       params: params,
       headers: { 'Content-Type': 'multipart/form-data' },
-      disableLoadingBar: true,
+      disableLoadingBar: onUploadProgress ? true : false,
       onUploadProgress: onUploadProgress,
     } as any);
   }

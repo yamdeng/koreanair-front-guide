@@ -11,6 +11,7 @@ const Config = {
   defaultGridPageSize: 10,
   defaultPageSizeList: [10, 50, 100],
   defaultGridTotalCountTemplate: '{0}',
+  maxEditorImageFileUploadSize: 5242880,
 };
 
 export default Config;
