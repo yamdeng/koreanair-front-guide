@@ -40,7 +40,14 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990084', 'A', 'useFormDirtyCheck', 'useFormDirtyCheck', '', '', '', 'M', 'A990080', 99, '/aviation/guides/unload', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990085', 'A', 'profile', 'profile', '', '', '', 'M', 'A990080', 99, '/aviation/guides/profile', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990086', 'A', 'auth', 'auth', '', '', '', 'M', 'A990080', 99, '/aviation/guides/auth', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990087', 'A', '라우트', '라우트', '', '', '', 'M', 'A990080', 99, '/aviation/guides/route', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+('A990087', 'A', '라우트', '라우트', '', '', '', 'M', 'A990080', 99, '/aviation/guides/route', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990034', 'A', '파일모달', '파일모달', '', '', '', 'M', 'A990030', 99, '/aviation/guides/modal/file', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990088', 'A', 'yup-case1', 'yup-case1', '', '', '', 'M', 'A990080', 99, '/aviation/guides/yup/case1', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990089', 'A', 'yup-case2', 'yup-case2', '', '', '', 'M', 'A990080', 99, '/aviation/guides/yup/case2', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+
+INSERT INTO public.tb_sys_menu(menu_id, work_scope, name_kor, name_eng, name_chn, name_jpn, name_etc, tree_type, upper_menu_id, sort_order, menu_url, use_yn, remark, reg_user_id, reg_dttm, upd_user_id, upd_dttm)
+VALUES('A990088', 'A', 'yup-case1', 'yup-case1', '', '', '', 'M', 'A990080', 99, '/aviation/guides/yup/case1', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990089', 'A', 'yup-case2', 'yup-case2', '', '', '', 'M', 'A990080', 99, '/aviation/guides/yup/case2', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
 -- 다국어
 INSERT INTO tb_sys_message
