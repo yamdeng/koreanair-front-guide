@@ -1,0 +1,20 @@
+schema.validate(data, { abortEarly: false }).catch((err) => {
+  // 배열에서 발생한 에러들의 인덱스 추출
+  const errorIndices = err.inner
+    .filter((error) => error.path.startsWith('arrayField'))
+    .map((error) => {
+      const match = error.path.match(/arrayField\[(\d+)\]/);
+      return match ? parseInt(match[1], 10) : null;
+    })
+    .filter((index) => index !== null);
+
+  console.log('에러 발생한 인덱스 목록:', errorIndices);
+
+  // 첫 번째 에러와 해당 경로 추출
+  if (errorIndices.length > 0) {
+    const firstErrorIndex = errorIndices[0];
+    const firstError = err.inner.find((error) => error.path === `arrayField[${firstErrorIndex}].name`);
+    console.log('첫 번째 에러 인덱스:', firstErrorIndex);
+    console.log('첫 번째 에러 상세 경로:', firstError.path);
+  }
+});
