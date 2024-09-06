@@ -8,6 +8,7 @@ import LoadingBarContainer from './components/layout/LoadingBarContainer';
 import UserMainLayout from './components/layout/UserMainLayout';
 import { StoreProvider } from './context/StoreContext';
 import RouteChecker from './components/layout/RouteChecker';
+import CommonUtil from './utils/CommonUtil';
 
 function App() {
   const { profile, initApp, isAuthError } = useStore(useAppStore, (state) => state) as any;
@@ -19,7 +20,17 @@ function App() {
   }
 
   useEffect(() => {
+    // javascript core error handle
+    window.onerror = CommonUtil.handleGlobalError;
+
+    // promise error catch
+    const handleUnhandledrejection = CommonUtil.handleGlobalUnhandledRejection;
+    window.addEventListener('unhandledrejection', handleUnhandledrejection);
+
     initApp();
+    return () => {
+      window.removeEventListener('unhandledrejection', handleUnhandledrejection);
+    };
   }, []);
 
   return (

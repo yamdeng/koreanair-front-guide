@@ -4,8 +4,6 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --port 8081",
-    "dev:lint": "cross-env LOCAL_LINT=Y vite --port 8081",
-    "dev:offline": "vite --port 3000",
     "dev:admin": "vite --port 8082 --mode admin",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -37,7 +35,6 @@
     "fs": "^0.0.1-security",
     "history": "^5.3.0",
     "i18next": "^23.14.0",
-    "idb-keyval": "^6.2.1",
     "immer": "^10.1.1",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
@@ -91,7 +88,6 @@
     "sass": "^1.77.5",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vite-plugin-checker": "^0.7.2",
     "vite-plugin-node-polyfills": "^0.22.0",
     "vite-plugin-pwa": "^0.20.1",
     "vite-tsconfig-paths": "^4.3.2"
