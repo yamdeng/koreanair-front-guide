@@ -1,14 +1,13 @@
-import { Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useStore } from 'zustand';
-import iconMenuFriesImage from '@/resources/images/icon-menu-fries.svg';
-import koreanairSymbolImage from '@/resources/images/koreanair-symbol.svg';
-import iconSearchImage from '@/resources/images/icon_search.svg';
-import iconAlarmImage from '@/resources/images/icon_alram.svg';
-import iconSettingImage from '@/resources/images/icon_setting.svg';
 import closeImage from '@/resources/images/close.svg';
+import iconMenuFriesImage from '@/resources/images/icon-menu-fries.svg';
+import iconAlarmImage from '@/resources/images/icon_alram.svg';
+import iconSearchImage from '@/resources/images/icon_search.svg';
+import iconSettingImage from '@/resources/images/icon_setting.svg';
+import koreanairSymbolImage from '@/resources/images/koreanair-symbol.svg';
 import useAppStore from '@/stores/useAppStore';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useStore } from 'zustand';
 
 export default function AviationLayout() {
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ export default function AviationLayout() {
     toggleRootMenuExpand,
     clickSecondMenu,
     clickLastMenu,
-    expandRootMenuInfo,
     changeWorkScope,
     goHomePortal,
     changeLocale,
@@ -50,7 +48,7 @@ export default function AviationLayout() {
           </div>
         </div>
 
-        <div className="GNB">
+        {/* <div className="GNB">
           <ul className="gnb-list">
             {leftMenuList.map((rootMenuInfo) => {
               const { nameKor } = rootMenuInfo;
@@ -69,7 +67,7 @@ export default function AviationLayout() {
               );
             })}
           </ul>
-        </div>
+        </div> */}
         <div className="util">
           <ul className="util-list">
             <li className="util-icon">

@@ -920,7 +920,7 @@ import { useImmer } from 'use-immer';
 import CommonUtil from '@/utils/CommonUtil';<% importList.forEach((importString)=> { %>
 <%- importString %><% }) %>
 
-const formName = '<%= storeName %>';
+const formName = '<%= formName %>';
 
 /* yup validation */
 const yupFormSchema = yup.object({<% tableColumns.forEach((columnInfo)=> { %>

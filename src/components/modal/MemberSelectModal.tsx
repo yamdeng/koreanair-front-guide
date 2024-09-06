@@ -71,7 +71,7 @@ function MemberSelectModal(props) {
       pageSize: 100000,
     });
     const list = apiResult.data;
-    const treeData = CommonUtil.listToTreeData(list, 'deptId', 'upperDeptCd', '-1');
+    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', null);
     setTreeData(treeData);
   }, []);
 

@@ -4,7 +4,7 @@ import useAppStore from '@/stores/useAppStore';
 import { useLocation, useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 
-function AppNavigation() {
+function AppNavigation({ appendTitleList = [] }) {
   const { appWorkScope, toggleRootMenuExpand, clickSecondMenu, clickLastMenu, navationMenuList } = useStore(
     useAppStore,
     (state) => state
@@ -69,6 +69,13 @@ function AppNavigation() {
       <li className="breadcrumb-item">
         <a href={undefined}>홈</a>
       </li>
+      {appendTitleList.map((appendTitle) => {
+        return (
+          <li className="breadcrumb-item" key={appendTitle}>
+            <a href={undefined}>{appendTitle}</a>
+          </li>
+        );
+      })}
     </ol>
   );
   if (curretMenuInfo) {
@@ -88,6 +95,13 @@ function AppNavigation() {
         <li className="breadcrumb-item">
           <a href={undefined}>{curretMenuInfo.nameKor}</a>
         </li>
+        {appendTitleList.map((appendTitle) => {
+          return (
+            <li className="breadcrumb-item" key={appendTitle}>
+              <a href={undefined}>{appendTitle}</a>
+            </li>
+          );
+        })}
       </ol>
     );
   }

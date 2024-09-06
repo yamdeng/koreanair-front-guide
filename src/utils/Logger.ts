@@ -2,6 +2,7 @@ import useAppStore from '@/stores/useAppStore';
 import useUIStore from '@/stores/useUIStore';
 import Config from '@/config/Config';
 import dayjs from 'dayjs';
+import ApiService from '@/services/ApiService';
 
 const Logger = {
   debug: function (message) {
@@ -14,7 +15,7 @@ const Logger = {
   warn: function (message) {
     console.warn(message);
   },
-  error: function (message, consoleByPass = false) {
+  error: async (message, consoleByPass = false) => {
     if (message) {
       if (!consoleByPass) {
         console.error(message);
@@ -31,13 +32,12 @@ const Logger = {
         const errorDoc: any = {};
         errorDoc.token = accessToken;
         errorDoc.version = Config.appVersion;
-        errorDoc.message = applyMessage;
         errorDoc.created = dayjs().format('YYYY-MM-DD HH:mm:ss');
         errorDoc.currentRouteUrl = currentPath || '';
         errorDoc.beforeRouteUrl = beforePath || '';
         errorDoc.userAgent = navigator.userAgent || '';
         errorDoc.message = applyMessage.substr(0, 2500);
-        // TODO : front error log 서버 api로 전달
+        await ApiService.post('com/receive-fe-error', errorDoc);
       } catch (e) {
         console.error(`Logger error : ${e}`);
       }

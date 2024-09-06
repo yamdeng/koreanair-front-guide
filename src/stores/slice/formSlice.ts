@@ -16,8 +16,6 @@ export const formBaseState = {
   errors: {},
   isDirty: false,
   isValid: false,
-  requiredFields: [],
-  excludeApiKeys: [],
   formDetailId: null,
   formType: FORM_TYPE_ADD,
   formValue: {},
@@ -36,8 +34,15 @@ export const createFormSliceYup = (set, get) => ({
   },
 
   getApiParam: () => {
-    const state = get();
-    const apiParam = state.formValue;
+    const { formValue, excludeApiKeys } = get();
+    const apiParam = { ...formValue };
+    if (excludeApiKeys && excludeApiKeys.length) {
+      excludeApiKeys.forEach((keyName) => {
+        if (apiParam[keyName]) {
+          delete apiParam[keyName];
+        }
+      });
+    }
     return apiParam;
   },
 
@@ -64,9 +69,14 @@ export const createFormSliceYup = (set, get) => ({
 
     if (firstErrorFieldKey) {
       success = false;
-      // alert(`firstErrorFieldKey : ${firstErrorFieldKey}`);
-      if (document.getElementById(formName + firstErrorFieldKey)) {
-        document.getElementById(formName + firstErrorFieldKey).focus();
+      const applyFormName = formName ? formName : '';
+      const applyFirstErrorFieldKey = applyFormName + firstErrorFieldKey;
+      try {
+        if (document.getElementById(applyFirstErrorFieldKey)) {
+          document.getElementById(applyFirstErrorFieldKey).focus();
+        }
+      } catch (e) {
+        // 로그를 찍을 필요가 없는 에러 catch
       }
     }
 
@@ -101,7 +111,7 @@ export const createFormSliceYup = (set, get) => ({
   },
 
   remove: async () => {
-    const { formDetailId, formApiPath, baseRoutePath } = get();
+    const { formDetailId, formApiPath, removeAfterNavigation } = get();
     // ModalService.alert({ body: '삭제하시겠습니까?' });
     ModalService.confirm({
       body: '삭제하시겠습니까?',
@@ -110,7 +120,7 @@ export const createFormSliceYup = (set, get) => ({
         ModalService.alert({
           body: '삭제되었습니다.',
           ok: async () => {
-            history.replace(`${baseRoutePath}`);
+            removeAfterNavigation();
           },
         });
       },
@@ -153,8 +163,14 @@ export const createFormSliceYup = (set, get) => ({
 
   changeErrors: (errorKey, errorMessage) => {
     const { errors } = get();
-    errors[errorKey] = errorMessage;
-    set({ errors: errors });
+    const newErrors = { ...errors };
+    newErrors[errorKey] = errorMessage;
+    set({ errors: newErrors });
+  },
+
+  removeAfterNavigation: () => {
+    const { baseRoutePath } = get();
+    history.replace(`${baseRoutePath}`);
   },
 
   cancel: () => {

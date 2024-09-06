@@ -170,7 +170,7 @@ export const createListSlice = (set, get) => ({
   addRow: () =>
     set(
       produce((state: any) => {
-        state.list.push({
+        state.list.unshift({
           updated: true,
         });
       })

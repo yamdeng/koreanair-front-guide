@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import { useCallback } from 'react';
 import CommonInputError from './CommonInputError';
 import CommonInputToolTip from './CommonInputToolTip';
+import classNames from 'classnames';
 
 /*
 
@@ -67,6 +68,8 @@ const AppDatePicker = (props) => {
     disabledDates,
     style = { width: '100%' },
     toolTipMessage = '',
+    hidden = false,
+    ...rest
   } = props;
 
   // const [open, setOpen] = useState(false);
@@ -129,18 +132,22 @@ const AppDatePicker = (props) => {
     </button>
   );
 
+  const applyClassName = classNames('label-select', {
+    selected: value || placeholder,
+    hidden: hidden,
+  });
+
   return (
     <>
       <DatePicker
-        {...props}
-        className={value || placeholder ? 'label-picker selected' : 'label-picker'}
+        className={applyClassName}
         status={errorMessage ? 'error' : ''}
         style={style}
         id={id}
         name={name}
         placeholder={placeholder}
         onChange={(dayjsDate: any) => {
-          let valueString = dayjsDate.format(applyDateValueFormat);
+          let valueString = dayjsDate ? dayjsDate.format(applyDateValueFormat) : '';
           // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
           if (pickerType === DATE_PICKER_TYPE_QUARTER) {
             valueString = dayjsDate.format('YYYY-MM') + '-01';
@@ -163,6 +170,7 @@ const AppDatePicker = (props) => {
         disabled={disabled}
         disabledDate={disabledDate}
         renderExtraFooter={showNow ? renderFooter : null}
+        {...rest}
       />
       <label className="f-label" htmlFor={id} style={{ display: label ? '' : 'none' }}>
         {label} {required ? <span className="required">*</span> : null}

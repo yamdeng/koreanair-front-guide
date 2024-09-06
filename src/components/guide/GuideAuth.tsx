@@ -7,7 +7,8 @@ import useAuthCheck from '@/hooks/useAuthCheck';
 function GuideAuth() {
   // 개별적으로 select 해서 사용
   const isAuth = useAuthCheck('GROUP_AVN_DEV_ALL', false);
-  const isAuth2 = useAuthCheck('SYSTEM_ADMIN', true);
+  const isAuth2 = useAuthCheck('SYSTEM_ADMIN', false);
+  const isAuth3 = useAuthCheck(['SYSTEM_ADMIN', 'GROUP_AVN_DEV_ALL'], true);
 
   return (
     <>
@@ -22,6 +23,7 @@ function GuideAuth() {
       </div>
       <p>isAuth : {isAuth ? '권한O' : '권한 X'}</p>
       <p>isAuth2 : {isAuth2 ? '권한O' : '권한 X'}</p>
+      <p>isAuth3 : {isAuth3 ? '권한O' : '권한 X'}</p>
     </>
   );
 }

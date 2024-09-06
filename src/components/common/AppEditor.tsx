@@ -12,7 +12,7 @@ function AppEditor(props) {
 
   const {
     name = '',
-    height = '500px',
+    height = '300px',
     id = CommonUtil.getUUID(),
     label,
     value,

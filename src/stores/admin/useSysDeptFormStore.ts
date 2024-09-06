@@ -18,7 +18,7 @@ const useSysDeptFormStore = create<any>((set) => ({
       pageSize: 100000,
     });
     const list = response.data.list;
-    const treeData = CommonUtil.listToTreeData(list, 'deptId', 'upperDeptCd', '-1') || [];
+    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', null) || [];
     let selectedDeptInfo = null;
     if (treeData[0]) {
       selectedDeptInfo = treeData[0];

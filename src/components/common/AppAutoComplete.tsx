@@ -1,9 +1,9 @@
-import { useState, useRef, useCallback } from 'react';
-import Select, { components } from 'react-select';
+import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 import _ from 'lodash';
-import ApiService from '@/services/ApiService';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import Select, { components } from 'react-select';
 import CommonInputError from './CommonInputError';
 import CommonInputToolTip from './CommonInputToolTip';
 
@@ -50,6 +50,7 @@ function AppAutoComplete(props) {
     toolTipMessage = '',
     apiKeywordName = 'searchWord',
     dataKey = 'data',
+    defaultInputValue,
   } = props;
 
   const isServerLoaded = useRef(false);
@@ -84,7 +85,6 @@ function AppAutoComplete(props) {
         );
 
         const data = _.get(apiResult, dataKey) || [];
-
         setSelectOptions(data);
       } finally {
         setIsLoading(false);
@@ -144,7 +144,7 @@ function AppAutoComplete(props) {
   }
 
   if (value && isValueString) {
-    applyValue = selectOptions.find((option) => option.value === value);
+    applyValue = selectOptions.find((option) => option[valueKey] === value);
   }
   let applyOptions = selectOptions;
   if (defaultOptions && defaultOptions.length) {
@@ -152,6 +152,25 @@ function AppAutoComplete(props) {
       applyOptions = defaultOptions;
     }
   }
+
+  useEffect(() => {
+    if (defaultInputValue) {
+      if (!isServerLoaded.current) {
+        ApiService.get(
+          `${apiUrl}`,
+          {
+            [apiKeywordName]: defaultInputValue,
+            pageNum: 1,
+            pageSize: 1000,
+          },
+          { disableLoadingBar: true }
+        ).then((apiResult) => {
+          const data = _.get(apiResult, dataKey) || [];
+          setSelectOptions(data);
+        });
+      }
+    }
+  }, [defaultInputValue]);
 
   return (
     <>

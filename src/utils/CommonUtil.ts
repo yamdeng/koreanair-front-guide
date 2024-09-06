@@ -281,6 +281,10 @@ const handleGlobalUnhandledRejection = function (event) {
     const errorType = reason.errorType || '';
     if (reason instanceof AxiosError || errorType === 'api') {
       const apiConfig = reason.config || {};
+      if (reason.response && reason.response.status === 401) {
+        return;
+      }
+
       const appErrorObject = {
         errorType: 'api',
         message: reason.message,
@@ -339,6 +343,62 @@ const handleGlobalError = function (message, sourceUrl, lineNumber, column, erro
   return false;
 };
 
+// report 페이지 handle 공통 함수
+const openReportPage = (fileName, reportArg) => {
+  window.open(
+    `${import.meta.env.VITE_API_URL}/api/v1/ubihtml?reportFile=${fileName}&reportArg=${encodeURIComponent(reportArg)}`,
+    '_blank',
+    'status=no,titlebar=no,menubar=no'
+  );
+};
+
+// yup error 기준으로 오류가 난 list index 추출, 첫번째 에러 정보 반환(row의 어떤 컬럼이 오류가 났는지)
+const getYupListErrorInfo = (yupErrors, firstErrorPath, listKey = 'list') => {
+  const validResult: any = {
+    firstListErrorPath: '',
+    firstErrorIndex: -1,
+    isListFirstError: false,
+    listErrorIndexList: [],
+  };
+  const listErrorIndexList = yupErrors
+    .filter((error) => error.path.startsWith(listKey))
+    .map((error) => {
+      // const match = error.path.match(/list\[(\d+)\]/);
+      const regex = listKey ? new RegExp(`${listKey}\\[(\\d+)\\]`) : new RegExp(`\\[(\\d+)\\]`);
+      const match = error.path.match(regex);
+      return match ? parseInt(match[1], 10) : null;
+    })
+    .filter((index) => index !== null);
+
+  // 첫 번째 에러와 해당 경로 추출
+  if (listErrorIndexList.length > 0) {
+    const applyListErrorIndexList = _.uniq(listErrorIndexList);
+    const firstErrorIndex = applyListErrorIndexList[0];
+    const firstError = yupErrors.find((error) => error.path.indexOf(`${listKey}[${firstErrorIndex}]`) !== -1);
+    validResult.listErrorIndexList = applyListErrorIndexList;
+    validResult.firstListErrorPath = firstError.path;
+    validResult.firstErrorIndex = firstErrorIndex;
+    // 첫번째 에러가 list 에러면은 flag 반영
+    if (firstErrorPath === validResult.firstListErrorPath) {
+      validResult.isListFirstError = true;
+    }
+  }
+  return validResult;
+};
+
+const getNowMonthString = () => {
+  return dayjs().format('YYYY-MM');
+};
+
+// date value를 custom한 format으로 변환
+const convertDate = (value, valueFormat, displayFormat) => {
+  let displayDate = '';
+  if (value) {
+    displayDate = dayjs(value, valueFormat).format(displayFormat);
+  }
+  return displayDate;
+};
+
 export default {
   convertEnterStringToBrTag,
   replaceHighlightMarkup,
@@ -362,4 +422,8 @@ export default {
   getToDate,
   handleGlobalError,
   handleGlobalUnhandledRejection,
+  openReportPage,
+  getYupListErrorInfo,
+  getNowMonthString,
+  convertDate,
 };

@@ -1,14 +1,18 @@
 import ReactDOM from 'react-dom/client';
+import { setAutoFreeze } from 'immer';
+setAutoFreeze(false);
 import { unstable_HistoryRouter as Router } from 'react-router-dom';
 import AdminApp from './AdminApp.tsx';
 import history from './utils/history.ts';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import quarterOfYear from 'dayjs/plugin/quarterOfYear';
 import ErrorBoundary from './components/layout/ErrorBoundary.tsx';
 
 dayjs.extend(quarterOfYear);
 dayjs.extend(advancedFormat);
+dayjs.locale('ko');
 
 // third lib css import
 import 'ag-grid-community/styles/ag-grid.css';

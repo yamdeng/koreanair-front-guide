@@ -28,7 +28,7 @@ function GuideTree() {
     });
     const list = apiResult.data;
     // [], 키, 상위폴더키, root 상위 기준 키
-    const treeData = CommonUtil.listToTreeData(list, 'deptId', 'upperDeptCd', '-1');
+    const treeData = CommonUtil.listToTreeData(list, 'deptCd', 'upperDeptCd', null);
     setTreeData(treeData);
   };
 

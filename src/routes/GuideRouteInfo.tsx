@@ -31,6 +31,13 @@ import GuideProfile from '@/components/guide/GuideProfile';
 import GuideAuth from '@/components/guide/GuideAuth';
 import GuideRoute from '@/components/guide/GuideRoute';
 import GuideSameRouteDetail from '@/components/guide/GuideSameRouteDetail';
+import GuideFileAttachModal from '@/components/guide/GuideFileAttachModal';
+import GuideYupCase1 from '@/components/guide/GuideYupCase1';
+import GuideYupCase2 from '@/components/guide/GuideYupCase2';
+import GuideTableCase1 from '@/components/guide/GuideTableCase1';
+import GuideTableFormCase1 from '@/components/guide/GuideTableFormCase1';
+import GuideTableFormCase2 from '@/components/guide/GuideTableFormCase2';
+import GuideTableCase2 from '@/components/guide/GuideTableCase2';
 
 const GuideRouteInfo: any = {};
 
@@ -166,6 +173,34 @@ GuideRouteInfo.list = [
   {
     Component: GuideSameRouteDetail,
     path: 'guides/route/:detailId',
+  },
+  {
+    Component: GuideFileAttachModal,
+    path: 'guides/modal/file',
+  },
+  {
+    Component: GuideYupCase1,
+    path: 'guides/yup/case1',
+  },
+  {
+    Component: GuideYupCase2,
+    path: 'guides/yup/case2',
+  },
+  {
+    Component: GuideTableCase1,
+    path: 'guides/table/case1',
+  },
+  {
+    Component: GuideTableFormCase1,
+    path: 'guides/table/case2',
+  },
+  {
+    Component: GuideTableFormCase2,
+    path: 'guides/table/case3',
+  },
+  {
+    Component: GuideTableCase2,
+    path: 'guides/table/case4',
   },
 ];
 
