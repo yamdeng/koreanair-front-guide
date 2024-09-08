@@ -16,23 +16,11 @@ import TaxonomyDetail from '@/components/aviation/admin/hazardmanage/TaxonomyDet
 import EventTypeList from '@/components/aviation/admin/EventTypeList';
 import EventTypeDetail from '@/components/aviation/admin/EventTypeDetail';
 import EventTypeEdit from '@/components/aviation/admin/EventTypeEdit';
-import MyReportList from '@/components/aviation/report/MyReportList';
-import MyReportEdit from '@/components/aviation/report/MyReportEdit';
 import '/src/report.css';
 
 const AviationRouteInfo: any = {};
 
 AviationRouteInfo.list = [
-  // My Report > List
-  {
-    Component: MyReportList,
-    path: 'myreport/list',
-  },
-  // My Report > Edit
-  {
-    Component: MyReportEdit,
-    path: 'myreport/write',
-  },
   // 관리자 > 게시판 관리 > 안전정책 목록
   {
     Component: SafetyList,
