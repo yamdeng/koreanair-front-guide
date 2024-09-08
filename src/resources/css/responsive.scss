@@ -2,11 +2,23 @@
 
 @media screen and (min-width: 1280px) and (max-width: 1600px){
   .header .GNB  {display: none;}
-  .checklist-contents {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
+  .checklist-contents {display: flex; /*align-items: flex-end;*/ justify-content: flex-start;flex-flow:row wrap; width: 100%;}
   .checklist-contents .checklist-row.list {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33%; padding-right: 0;}
 
    /*위험레벨조회 팝업*/
-  .risk-level-search-content {width: 90%;}
+  .risk-level-search-content {width:90%}
+
+  .RiskLevel-box{display:block}
+  .RiskLevel-box .RiskLevel-list{width:100%;padding:0 1.5rem}
+  .RiskLevel-box .RiskLevel-area{width:100%;margin-top:3rem}
+
+  .left-box {width: 35%;}
+  .right-box {width: 65%;}
+
+  .left-box1{width: 60%;}
+  .right-box1{width: 40%}
+
+  .Notification-wrap{width:100%}
 }
 
 
@@ -18,7 +30,8 @@
   .boxForm .form-table .wid-300 {max-width: 100%;}
   .detail-form .form-table .wid-300 {width: 100%;}
   .editbox .form-table .wid-300{width: 100%;}
-
+  .detail-form .form-table .form-cell{width: 100%;}
+  .radio-wrap{width: 100%;}
   .btn-area {width: 100%;}
   .checklist-contents{display:flex;justify-content:flex-start;flex-wrap:wrap;width:100%}
   .checklist-contents .checklist-row.list{display:flex;justify-content:flex-start;flex-wrap:wrap;width:50%;padding-right:0;margin:0}
@@ -40,7 +53,7 @@
   .contents-btns > button.btn-type01:nth-child(odd) {margin-right:0.2rem;}
   /*위험레벨조회 팝업*/
   .RiskLevel-box{display:block}
-  .RiskLevel-box .RiskLevel-list{width:100%}
+  .RiskLevel-box .RiskLevel-list{width:100%;padding:0 1.5rem}
   .RiskLevel-box .RiskLevel-area{width:100%;margin-top:3rem}
 
   .left-box {width: 35%;}
@@ -59,7 +72,19 @@
   .c-step-list.default>li:nth-child(8){min-width:9.0rem}
   .c-step-list.default>li:nth-child(9){min-width:14.5rem}
 
+  .Notification-wrap{width:100%}
 
+
+  .calendar-box .calendar-wrap {width: 100%;}
+  .calendar-box .calendar-list {width: 100%;}
+
+  /*보고서분석:관련자 세부정보 삭제버튼*/
+  .detail-form .detail-list .form-table .form-cell .form-group .tabs-tab-remove.Mob{width: 100%;border-radius:0.8rem;padding:0.6rem 4.8rem;border:solid 0.1rem var(--color-neutral-40);height:3.8rem}
+  .detail-form .detail-list .form-table .form-cell .form-group .tabs-tab-remove.Mob > .btn-del.delete{position:relative;width: 100%;top:0;background:none;font-size:1.4rem;color:var(--color-neutral-40)}
+  
+
+  .calendar-box .calendar-wrap {width: 65%;}
+  .calendar-box .calendar-list {width: 35%;}
 }
 
 
@@ -75,6 +100,8 @@
   .detail-form .form-table .wid-300 {width: 100%;}
   .editbox .form-table .wid-300{width: 100%;}
   .detail-form .detail-list .form-table .form-cell .form-group{width: 100%;}
+  .detail-form .detail-list .form-table .form-cell .group-box-wrap{width: 100%;}
+
 
   .editbox .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 33.3%; padding:1.5rem 1.0rem 1.5rem 0}
@@ -102,7 +129,7 @@
   .contents-btns > button.btn-type01 {padding:0.8rem 2.0rem !important; width: calc(50% - 0.2rem); margin: 1.0rem 0;}
   .contents-btns > button.btn-type01:nth-child(odd) {margin-right:0.2rem;}
 
-  .group-box-wrap {display: block; height: auto !important;}
+  .group-box-wrap {display:block;height: auto !important;}
 
   .c-step-wrap ol{position:relative;display:flex;width:100%;flex-wrap:nowrap;overflow:auto hidden;scroll-behavior:smooth}
   [class*=c-step-list-type][class*=-list-type-5]>li:before{display:block;position:static;content:"0" counter(stepCounter);font-weight:400;font-size:1.4rem;line-height:1.4rem}
@@ -111,9 +138,12 @@
   .detail-form .detail-list .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .detail-form .detail-list .form-table .form-cell {width: 33.3%;}
 
+  .ant-input-group-addon1{position: absolute;left: 0; width: 5.0rem; top:-2.0rem; line-height: 3.8rem; padding-left: 1.0rem; border: 0.1rem solid var(--color-neutral-40);border-radius:0.6rem}
+  .ant-input-group-addon1-input {position: absolute; left: 4.5rem; top:-2.0rem}
+
    /*위험레벨조회 팝업*/
   .RiskLevel-box{display:block}
-  .RiskLevel-box .RiskLevel-list{position:relative;width:100%}
+  .RiskLevel-box .RiskLevel-list{width:100%;padding:0 1.5rem}
   .RiskLevel-box .RiskLevel-area{width:100%}
 
   .left-box {width: 35%;}
@@ -136,6 +166,7 @@
 
   .menu-tab a{display:inline-flex;font-size:1.3rem;line-height:1.3;min-height:4rem}
 
+  .ck-edit-box {display: block;}
   .ck-edit-box .ck-list {display: block; width: 100%; margin-bottom: 2.0rem;}
   .ck-edit-box .ck-edit {display: block; width: 100%; margin-left: 0;}
   .ck-edit-box .ck-edit .boxForm {padding: 0 1rem;}
@@ -150,9 +181,36 @@
 
   .user-wrap{display:block;width:100%}
   .user-wrap .user-box{display:block;width:100%}
-  .user-wrap .user-box .user-box-top{display:flex;align-items:flex-end;justify-content: flex-start;flex-wrap: wrap;width:100%}
+  .user-wrap .user-box .user-box-top{display:flex;align-items:flex-end;justify-content: flex-start;flex-wrap:wrap;width:100%}
   .user-wrap .user-box .user-box-top:nth-child(2){margin:1rem 0 0.8rem}
 
+  .detail-form .detail-list .form-table .form-cell .btn-area.inbtn{display:block;width:100%}
+
+  .division {display: block;}
+  .division .check {display: block; width: 100%;}
+  .division .list {display: block;width: 100%;}
+  .center-btn {width: 100%; padding:2.0rem; transform: rotate(90deg);}
+
+  .Notification-wrap{width:100%}
+
+  .calendar-box {display: block;}
+  .calendar-box .calendar-wrap {width: 100%;}
+  .calendar-box .calendar-list {width: 100%;}
+
+  /*보고서분석:관련자 세부정보 삭제버튼*/
+  .detail-form .detail-list .form-table .form-cell .form-group .tabs-tab-remove.Mob{width: 100%;border-radius:0.8rem;padding:0.6rem 4.8rem;border:solid 0.1rem var(--color-neutral-70);height:3.8rem}
+  .detail-form .detail-list .form-table .form-cell .form-group .tabs-tab-remove.Mob > .btn-del.delete{position:relative;width: 100%;top:0;background:none;font-size:1.4rem;color: var(--color-neutral-70)}
+
+  .calendar-box {height: auto;}
+  .calendar-box .calendar-wrap .calendar-table {height: auto;}
+  .calendar-box .calendar-list {margin-left: 0; margin-top: 1.0rem;}
+  .calendar-box .calendar-list .list-table {height: 20.0rem;}
+
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df{display:block;margin-top:1rem}
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df .type1{width:100%;}
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df .type2{display:block;width:100%;margin-left:0;margin-top:1rem}
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df .type6{width:100%;margin-left:0}
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df .type6 + .type6{margin-top:1rem}
 }
 
 
@@ -181,15 +239,25 @@
   .editbox .form-table + .form-table.SelList{margin-top:-2.0rem}
   .detail-form .form-table .wid-300 {width: 100%;}
   .detail-form .detail-list .form-table .form-cell .form-group{width:100%}
+  .detail-form .detail-list .form-table .form-cell .group-box-wrap{width: 100%;}
+  .detail-form .detail-list .form-table .form-cell .btn-area.inbtn{display:block;width:100%}
+  .detail-form .detail-list .form-table .form-cell .btn-area.inbtn > .btn-x-sm{padding:0.6rem 2.8rem;}
+
+
   .SelectedList{width:100%}
   .SelectedList > ul li{margin-bottom:1rem}
   .SelectedList > ul li:last-child{margin-bottom:0}
   .boxForm .form-table .form-cell .form-group{width:100%}
 
-  .btn-area {display:block;width:100%}
+  .btn-area {display:block;width:100%;}
   .btn-area .btn-sm{width:100%}
   .btn-area > button + button{width:50%;margin-left:0;margin-top:1rem}
+  .btn-area.inbtn > button + button{width:50%;margin-left:0;margin-top:0rem}
   .btn-area > button{margin:0}
+
+
+
+
 
   .contents-btns {display: block; width: 100%;}
   .contents-btns > button {width: 100%; margin: 1.0rem 0;}
@@ -197,21 +265,36 @@
   .contents-btns > button.btn-type01:nth-child(odd) {margin-right:0.2rem;}
 
 
-  .checklist-contents{display:flex;justify-content:flex-start;flex-wrap:wrap;width:100%}
+  .checklist-contents{display:flex;justify-content:flex-start;flex-flow:row wrap;width:100%}
   .checklist-contents .checklist-row.list{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:100%;padding-right:0;margin:0}
 
 
   .DashBoardWrap .DashBoard-chart .DashBoard-row{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;width:100%;padding-right:0}
   
   .notice-board th, colgroup {display: none;}
-  .notice-board tr {display: flex; flex-wrap: wrap; border-bottom: 0.1rem solid var(--color-neutral-30);}
+  .notice-board tr {/*display: flex; flex-wrap: wrap; */border-bottom: 0.1rem solid var(--color-neutral-30);}
   .notice-board tr:nth-child(2) {border-top: 0.1rem solid var(--color-darkblue-100);}
-  .notice-board td {display: inline-block; border-bottom: 0;}
+  .notice-board td {display: inline-block; border-bottom: 0; padding: 0.5rem 1.0rem; text-align: left;}
+  .notice-board td .delete{position:absolute;top:-0.8rem;right:-28rem;background: url(/src/resources/images/delete-text.svg) center center no-repeat;font-size: 0;width: 2rem;height: 2rem}
+
   .notice-board tr.fix-bg .fix {background-size: 2.0rem;}
-  .notice-board td:nth-child(1) {width: 5.0rem; position: relative; top: 1.8rem; padding:0;}
-  .notice-board td:nth-child(2) {width: calc(100% - 5.0rem); padding: 1.0rem 0 0 0;}
+  .notice-board td.bot-left{/*display: inline-block;*/}
+  .notice-board td:nth-child(1) {position: relative; display: table-cell; width: 3.0rem; padding: 0; text-align: center;}
+  .notice-board td:nth-child(4) {position: relative; width:100%; height: 100%;}
+
+  .notice-board.Air td.plus{width:5%}
+  .notice-board.Air td.left{width:75%}
+  .notice-board.Air td.right{width:20%;text-align:right;padding-right:0.8rem}
+  .notice-board.Air td:nth-child(1){text-align:left;padding:0 0.6rem}
+  /*.notice-board td:nth-child(1) {width: 5.0rem; height: 100%; position: relative; top: 1.8rem; padding:0;}
+  .notice-board td:nth-child(2) {width: 50%; padding: 1.0rem 0 0 0;}
   .notice-board td:nth-child(3) {font-size: 1.4rem; padding: 0 1.0rem 1.0rem 5.0rem;}
-  .notice-board td:nth-child(4) {font-size: 1.4rem; padding: 0 0 1.0rem;}
+  .notice-board td:nth-child(4) {width: calc(100% - 5.0rem); font-size: 1.4rem; padding: 0 0 1.0rem;}
+  .notice-board td:nth-child(5) {font-size: 1.4rem; padding: 0 0 1.0rem;}
+  .notice-board td:nth-child(6) {font-size: 1.4rem; padding: 0 0 1.0rem;}
+  .notice-board td:nth-child(7) {font-size: 1.4rem; padding: 0 0 1.0rem;}
+  .notice-board td:nth-child(8) {font-size: 1.4rem; padding: 0 0 1.0rem;}*/
+
 
   .editbox .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .editbox .form-table .form-cell {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%; padding:1.5rem 0 1.5rem 0;}
@@ -226,7 +309,8 @@
   .detail-form .detail-list .form-table {display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; width: 100%;}
   .detail-form .detail-list .form-table .form-cell {width: 100%;}
 
-  .group-box-wrap {display: block; height: auto !important;}
+  .group-box-wrap {display: block; height: auto !important;width:100%}
+  .edit-area .list .tg-item.rbox01 .tg-conts .edit-area .editbox .form-table .form-cell .form-group{width:100%}
   .file-link {height: auto !important; line-height: auto !important;}
 
   .c-step-wrap ol{position:relative;display:flex;width:100%;flex-wrap:nowrap;overflow:auto hidden;scroll-behavior:smooth}
@@ -235,12 +319,14 @@
 
   .Status-area .Status-chart{display:block;height: auto !important}
   .Status-area .Status-chart .Status-col{width:100%}
-
+  .ant-input-group-addon1{position: absolute;left: 0; width: 5.0rem; top:-0.5rem; line-height: 3.8rem; padding-left: 1.0rem; border: 0.1rem solid var(--color-neutral-40);border-radius:0.6rem}
+  .ant-input-group-addon1-input {position: absolute; left: 4.5rem; top:-0.5rem}
+  .detail-form .detail-list .form-table .form-cell .form-group.ant-input{padding: 1.5rem 0.5rem;}
 
 
    /*위험레벨조회 팝업*/
   .RiskLevel-box{display:block}
-  .RiskLevel-box .RiskLevel-list{width:100%}
+  .RiskLevel-box .RiskLevel-list{width:100%;padding:0 1.5rem}
   .RiskLevel-box .RiskLevel-top-box .boxlist-wrap{margin-bottom:2rem}
   .RiskLevel-box .RiskLevel-list .df{width:100%}
   .RiskLevel-box .RiskLevel-area{width:100%}
@@ -269,6 +355,7 @@
   .ant-col-md-2{display:block;flex:0 0 8.33333333%;max-width:11.33333333%}
 
   .tooltip .tooltiptext {width:30rem !important;}
+  .ck-edit-box {display: block;}
   .ck-edit-box .ck-list {display: block; width: 100%; margin-bottom: 2.0rem;}
   .ck-edit-box .ck-edit {display: block; width: 100%; margin-left: 0;}
   .ck-edit-box .ck-edit .boxForm {padding: 0 1rem;}
@@ -284,6 +371,59 @@
   .user-wrap .user-box{display:block;width:100%}
   .user-wrap .user-box .user-box-top{display:flex;align-items:flex-end;justify-content: flex-start;flex-wrap: wrap;width:100%}
   .user-wrap .user-box .user-box-top:nth-child(2){margin:1rem 0 0.8rem}
+
+  .list-input-box li {display: block; padding: 0.5rem 0;}
+  .list-input-box li .list-tit {padding-bottom: 0.5rem;}
+
+  .division {display: block;}
+  .division .check {display: block; width: 100%;}
+  .division .list {display: block;width: 100%;}
+  .center-btn {width: 100%; padding:2.0rem; transform: rotate(90deg);}
+
+  .Notification-wrap{width:100%}
+  .UserChicebox.Fax .form-group{padding:1.0rem 0.5rem}
+
+
+  .calendar-box .calendar-wrap .calendar-table {height: auto;}
+  .calendar-box .calendar-list .list-table {height: 20.0rem;}
+
+  .calendar-box {display: block; height: auto;}
+  .calendar-box .calendar-wrap {width: 100%;}
+  .calendar-box .calendar-wrap .calendar-tit .datetitle span {font-size: 1.8rem;}
+  .calendar-box .calendar-list {width: 100%; padding: 1.5rem; margin-left: 0; margin-top: 1.0rem;}
+  .calendar-box .calendar-wrap .calendar-table thead th, .calendar-box .calendar-wrap .calendar-table tbody td {font-size: 1.4rem;}
+  .calendar-box .calendar-wrap .calendar-table tbody td {height: 5.0rem; min-height: 65.0rem;}
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li {margin: 0 0.2rem !important; display: inline-flex; }
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.ing, 
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.expected, 
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.wait, 
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.complete {
+    font-size: 0; 
+    width: 0.6rem; 
+    height: 0.6rem; 
+    padding: 0;
+    border-radius: 99.9rem;
+  }
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.ing {background-color: var(--color-positive);}
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.expected {background-color: var(--color-darkblue-100);}
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.wait {background-color: var(--color-Warning);}
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.complete {background-color: var(--color-neutral-70);}
+
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.ing span,
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.expected span,
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.wait span,
+  .calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.complete span {display: none;}
+
+  /*보고서분석:관련자 세부정보 삭제버튼*/
+  .detail-form .detail-list .form-table .form-cell .form-group .tabs-tab-remove.Mob{width: 100%;border-radius:0.8rem;padding:0.6rem 4.8rem;border:solid 0.1rem var(--color-neutral-70);height:3.5rem}
+  .detail-form .detail-list .form-table .form-cell .form-group .tabs-tab-remove.Mob > .btn-del.delete{position:relative;width:100%;top:0;background:none;font-size:1.4rem;color:var(--color-neutral-70)}
+
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df{display:block;margin-top:1rem}
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df .type1{width:100%;}
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df .type2{display:block;width:100%;margin-left:0;margin-top:1rem}
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df .type6{width:100%;margin-left:0}
+  .detail-form .detail-list .form-table .form-cell .form-group .UserChicebox .form-group .df .type6 + .type6{margin-top:1rem}
+
 }
 
 
@@ -318,7 +458,10 @@
 
    /*위험레벨조회 팝업*/
   .RiskLevel-box{display:block}
-  .RiskLevel-box .RiskLevel-list{width:100%}
+  .RiskLevel-box .RiskLevel-list{width:100%;padding:0 1.5rem}
+  .RiskLevel-box .RiskLevel-top-box .RiskLevel-Left{width:40%}
+  .RiskLevel-box .RiskLevel-top-box .RiskLevel-Right{width:40%}
+  .RiskLevel-box .RiskLevel-top-box .h4-tit{font-size:1.6rem;line-height:1.4;margin-bottom:1.0rem}
 
   .menu-tab a{display:inline-flex;font-size:1.3rem;line-height:1.3;min-height:4rem}
 
@@ -332,4 +475,8 @@
   .checklist-contents.edit > .editbox.edit-detile .editarea-box{display:block}
   .checklist-contents.edit > .editbox.edit-detile .editarea-box .form-group{width:100%}
   .checklist-contents.edit > .editbox.edit-detile .editarea-box .label-box{margin-top:1rem}
+
+  /*보고서분석:관련자 세부정보 삭제버튼*/
+  .detail-form .detail-list .form-table .form-cell .form-group .tabs-tab-remove.Mob{width: 100%;border-radius:0.8rem;padding:0.6rem 4.8rem;border:solid 0.1rem var(--color-neutral-70);height:3.8rem}
+  .detail-form .detail-list .form-table .form-cell .form-group .tabs-tab-remove.Mob > .btn-del.delete{position:relative;width:100%;top:0;background:none;font-size:1.4rem;color: var(--color-neutral-70)}
 }

@@ -27,7 +27,7 @@
   --color-positive: #28794E;
   --color-positive-bg:#F0FFF4;
   --color-Warning:#C84300;
-  --color-Warning-BG:#FEF4E6;
+  --color-Warning-bg:#FEF4E6;
   --color-negative:#DA291C;
   --color-negative-bg:#FFF5F5;
   --color-ag-header-row:#f8f9fc;
@@ -36,7 +36,8 @@
   --color-Leve2:#FF8902;
   --color-Leve3:#FFDD33;
   --color-Leve4:#02C27F;
-
+  --color-Leve5: #cef761;
+  --color-Leve6: #ffb533;
  }
 
  html {
@@ -71,8 +72,11 @@ body * {
 .pr10{padding-right:1rem !important}
 .ptb10{padding:1rem 0 1rem 0 !important}
 
-
+.ml-0 {margin-left: 0 !important;}
 .mr5{margin-right:0.5rem !important}
+.mt10{margin-top:1.0rem !important}
+.mt15{margin-top:1.5rem !important}
+.mb5{margin-bottom:0.5rem !important}
 
 button, input, textarea, select, label{font-family:'KoreanAirSans';font-weight:400}
 .df{display:flex;/*width:100%*/}
@@ -93,7 +97,7 @@ input[type=checkbox],input[type=radio]{padding:0;vertical-align:middle;margin-to
 [class^="chk-wrap"] > label > input {position:absolute;top:0;left:0;width:0;height:0;opacity:0}
 
 /* 기본형 */
-.radio-wrap{position:relative;line-height:0;border:0.1rem solid var(--color-neutral-40);border-radius:0.5rem;padding:0.4rem 1rem 0.3rem}
+.radio-wrap{position:relative;line-height:0;border:0.1rem solid var(--color-neutral-40);border-radius:0.5rem;padding:0.6rem 1rem 0.3rem}
 .radio-wrap.border-no{border:0}
 .radio-wrap.pd-style {padding: 0.5rem 0 0 0 !important;}
 .radio-wrap .input-box{position:relative}
@@ -147,7 +151,19 @@ input[type=checkbox],input[type=radio]{padding:0;vertical-align:middle;margin-to
 .chk-wrap > label.text-no {padding:0rem 0.9rem 0.2rem;margin:0;}
 .chk-wrap > label > input + span.text-no {height: 1.8rem;}
 
+.radio-wrap.center {vertical-align: middle;border:0;padding:0}
+.radio-wrap > label.text-no {padding:0rem 0.9rem 0.2rem;margin:0;overflow: hidden;}
+.radio-wrap > label > input + span.text-no {height:1.8rem;}
 
+/*아코디언 텍스트 바로 옆 툴팁*/
+.tag-info-wrap{position:relative;display:inline-flex;justify-content:flex-end}
+.tag-info-wrap .tooltip{float:inline-end;top:0.8rem;background: url(/src/resources/images/tooltip.svg) left center no-repeat;background-size: 3.0rem;font-size: 0;width: 3.0rem;height: 3.0rem;cursor:pointer}
+
+/*아코디언 텍스트 맨 끝에 위치*/
+.tag-info-wrap-end{position:absolute;right:5rem;display:inline-flex;justify-content:flex-end}
+.tag-info-wrap-end .tip{background:url(/src/resources/images/tooltip.svg) left center no-repeat;background-size:3.0rem;font-size:0;height:3.0rem;line-height:3.0rem;cursor:pointer}
+.tag-info-wrap-end .tip a.txt{display: inline-block;font-size:1.5rem;margin-left:3.0rem}
+.tag-info-wrap-end .tip + .tip{margin-left:0.5rem}
 /*input*/
 input[type=file], input[type=search], input[type=text]{padding:0.4rem 0 0.4rem 0.4rem}
 [role=button],a,area,button,input:not([type=range]),label,select,summary,textarea {touch-action: manipulation}
@@ -178,11 +194,11 @@ input, select{font-family:'KoreanAirSans'}
 .filebox .file-label{display:inline-block;
   position:absolute;
   left: 1rem;
-  top: -1.4rem;
+  top: -1rem;
   background: var(--color-neutral-10);
   padding: 0 0.4rem;
-  line-height: 1.4em;
-  font-size: 1.4rem !important;
+  line-height: 1.3em;
+  font-size: 1.3rem !important;
   transition: all 0.2s ease}
 .filebox input[type="file"] {
   position: absolute;
@@ -201,6 +217,13 @@ input, select{font-family:'KoreanAirSans'}
   .btn-darkblue-line{border:solid 0.2rem var(--color-darkblue-100);color:var(--color-darkblue-100)}
 }
 
+.UserChicebox{border:0.1rem solid var(--color-neutral-40);border-radius:1.0rem;padding:2.0rem 1.0rem 1.0rem}
+.UserChicebox.error{border:0.1rem solid var(--color-negative);border-radius:1.0rem;padding:2.0rem 1.0rem 1.0rem}
+.UserChicebox.view{border:none;}
+.UserChicebox .file-label{display:inline-block;position:absolute;left: 1rem;top: -2.9rem;background: var(--color-neutral-10);padding: 0 0.4rem;line-height: 1.4em;font-size: 1.4rem !important;transition: all 0.2s ease}
+.UserChicebox.Flight .form-group:nth-child(1){margin-top:0}
+.UserChicebox.Flight .form-group + .form-group{margin-top:1.0rem}
+
 /*컨텐츠상단버튼*/
 .btn-area{
   > button{margin:0 0.5rem}
@@ -210,6 +233,7 @@ input, select{font-family:'KoreanAirSans'}
   .btn_confirm{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-darkblue-100)}
   .btn-lightblue{border:solid 0.1rem var(--color-lightblue-40);background-color:var(--color-lightblue-40);color:var(--color-darkblue-100)}
   .btn-sm{padding:0.6rem 4.8rem;border-radius:99.9rem;align-items:center}
+  .btn-x-sm{padding:0.6rem 2.8rem;border-radius:99.9rem;align-items:center}
   .btn-big{display:block;width:100%;text-align:center;height:3.5rem;border-radius:0.8rem;align-items:center;box-sizing:border-box}
   text-align:right;padding-top:1.2rem;
 }
@@ -329,47 +353,11 @@ input, select{font-family:'KoreanAirSans'}
     .btn-area {padding: 0;}
   }
 
-  .group-box-wrap{position: relative; display: inline-block; /*padding:0 1.0rem;*/height:4.0rem;/*border: 0.1rem solid var(--color-neutral-40);border-radius: 0.5rem*/}
-  .group-box-wrap .txt {position:absolute;left:1.0rem;top: -1.0rem;background:var(--color-neutral-10);padding: 0 0.5rem;font-size:1.3rem; display: flex;}
-  // .tooltip {background: url(../images/tooltip.svg) left center no-repeat; background-size: 2.4rem; display: block; font-size: 0; width: 2.4rem; position: relative; cursor: pointer;}
-  // .tooltip .tooltiptext {
-  //   visibility: hidden; 
-  //   width: 50.0rem; 
-  //   font-size: 1.2rem;
-  //   background-color: var(--color-neutral-80); 
-  //   color: var(--color-neutral-10);
-  //   text-align: left; 
-  //   border-radius: 0.8rem; 
-  //   padding: 1.5rem 2.0rem; 
-  //   position: absolute; 
-  //   z-index: 1;
-  // }
-  // .tooltip .tooltiptext ul {
-    
-  // }
-  // .tooltip .tooltiptext li::marker {
-  //   content: "-"; 
-  //   color: var(--color-neutral-10);
-  //   font-size: 1rem;
-  // }
-  // .tooltip .tooltiptext ul li {font-size: 1.2rem; color: var(--color-neutral-10);  display: list-item; padding-left: 0.6rem;}
-  // .tooltip:hover .tooltiptext {visibility: visible;}
-  // .tooltip .tooltiptext::after {
-  //   content: " ";
-  //   position: absolute;
-  //   border-style: solid;
-  //   border-width: 0.5rem;
-  // }
-  // .tooltip .tooltip-right {
-  //   top: -0.6rem;
-  //   left: 155%;
-  // }
-  // .tooltip .tooltip-right::after {
-  //   top: 1.6rem;                
-  //   right: 100%;             
-  //   margin-top: -0.5rem;
-  //   border-color: transparent var(--color-neutral-80) transparent transparent;
-  // }
+  .group-box-wrap{position: relative; display: inline-block;height:4.0rem}
+  .group-box-wrap .txt {position:absolute;left:1.0rem;top: -1.0rem;background:var(--color-neutral-10);padding: 0 0.5rem;font-size:1.3rem;display:flex}
+  .group-box-wrap1{position:relative;display:inline-block}
+  .group-box-wrap1 .txt{position:absolute;left:1rem;top:-1rem;display:flex;background: var(--color-neutral-10);padding: 0 0.5rem;font-size: 1.3rem;z-index: 1}
+  
 }
 .detail-form{
   .detail-list .form-table{display:flex;width:100%}
@@ -430,7 +418,7 @@ input, select{font-family:'KoreanAirSans'}
 
 /*탭*/
 .menu-tab-nav{display:flex;position:relative;width:100%}
-.menu-tab{display:flex;flex-wrap:nowrap;border:0.1rem solid var(--color-neutral-40);border-radius:0.8rem;overflow:auto hidden;scroll-behavior:smooth;gap:1.2rem 0;margin:0.4rem 0 1.5rem}
+.menu-tab{display:flex;flex-wrap:nowrap;border:0.1rem solid var(--color-neutral-40);border-radius:0.8rem;overflow:auto hidden;scroll-behavior:smooth;gap:1.2rem 0;margin:0rem 0 1.5rem}
 .menu-tab:after{content:'';display:block;clear:both}
 .menu-tab a:nth-child(n){border-right:0.1rem solid var(--color-neutral-40)}
 .menu-tab a:last-child{border-right:0}
@@ -545,11 +533,11 @@ input, select{font-family:'KoreanAirSans'}
 .form-group .img{width:100%;height:100%;margin:0 auto;overflow:hidden}
 .form-group .img .img-thumbnail{width:100%;height:100%;object-fit:cover}
 
-.ant-input-group{position:relative;display:table;margin:0;padding:0;color:var(--color-neutral-90);font-size:1.4rem;line-height:1.5715;list-style:none;width:100%;border-collapse:separate;border-spacing:0;box-sizing:border-box}
+/*.ant-input-group{position:relative;display:table;margin:0;padding:0;color:var(--color-neutral-90);font-size:1.4rem;line-height:1.5715;list-style:none;width:100%;border-collapse:separate;border-spacing:0;box-sizing:border-box}
 .ant-input-group-addon:first-child{border-right:0}
 .ant-input-group-addon:first-child, .ant-input-group-addon:first-child{border-top-left-radius:0.8rem;border-bottom-left-radius:0.8rem;border-top-right-radius:0;border-bottom-right-radius:0}
 .ant-input-group-addon{position:relative;padding:0 1.1rem;color:var(--color-neutral-90);font-weight:400;font-size:1.4rem;text-align:center;background-color:var(--color-neutral-10);border:0.1rem solid var(--color-neutral-40);border-radius:0.8rem;transition: all .3s}
-.ant-input-group-addon, .ant-input-group-wrap{display:table-cell;width:0.1rem;white-space:nowrap;vertical-align:middle}
+.ant-input-group-addon, .ant-input-group-wrap{display:table-cell;width:0.1rem;white-space:nowrap;vertical-align:middle}*/
 
 
 /*상세리스트*/
@@ -575,7 +563,7 @@ input, select{font-family:'KoreanAirSans'}
 
 /*toggle*/
 .info-wrap{border-top:0rem solid var(--color-darkblue-100);background-color:var(--color-neutral-10)}
-.info-wrap > dl > dt{padding:1.8rem 1.2rem 1.5rem;border-bottom:0.1rem solid #ccc}
+.info-wrap > dl > dt{position:relative;padding:1.0rem 0rem 1.0rem;border-bottom:0.1rem solid #ccc}
 .info-wrap > dl > dt .btn-tg{font-family:"KoreanAirSans";font-weight:600;font-size:2.0rem;color:var(--color-darkblue-100)}
 .info-wrap > dl > dd{/*margin:0 -2.0rem 1.0rem*/}
 .info-wrap .edit-area{border-top:0.1rem solid var(--color-darkblue-100);/*border-bottom:0.1rem solid var(--color-neutral-30);background-color:var(--color-neutral-20);*/color:var(--color-neutral-80);line-height:2.0rem;font-size:1.6rem}
@@ -585,10 +573,13 @@ input, select{font-family:'KoreanAirSans'}
 .toggle .btn-tg:after{content:'';display:inline-block;position:absolute;top:50%;right:0;/*width:0.7rem;height:0.7rem;transform: translateY(-50%) rotate(45deg);*/margin:0 0 0 1.3rem;-webkit-transform: translateY(-50%) rotate(45deg);-webkit-transform-origin: center;transform-origin:center}
 .toggle .active .btn-tg:after{-webkit-transform:translateY(-50%) rotate(-135deg);transform:translateY(-50%) rotate(-135deg)}
 .toggle .active .tg-conts{display:block}
-.toggle .active .tg-conts > .edit-area .detailForm{padding:2.5rem 3.5rem 2.5rem}
-.info-wrap.toggle .tg-item.active >  dt{box-shadow: 0 3px 6px rgba(0, 0, 0, .1);border-bottom:0}
+.toggle .active .tg-conts > .edit-area .detailForm{padding:2.5rem 1.5rem 2.5rem}
+.info-wrap.toggle .tg-item.active >  dt{border-bottom:0}
+
+
 
 .info-wrap .edit-area .detailForm > .editbox.report + .editbox.report{margin-top:4rem}
+.edit-area .form-table .form-cell{position:relative;flex-grow: 1;padding: 1.5rem 0.5rem;border-bottom: 0.1rem solid var(--color-neutral-40)}
 
 /*pagination*/
 .pagination{margin:3.0rem 0 0 0;text-align:center}
@@ -608,7 +599,7 @@ input, select{font-family:'KoreanAirSans'}
 
 /*scrollbar color*/
 .ag-root-wrapper{border-radius:0;border:none}
-::-webkit-scrollbar{width:0.3em;height:0.3em}
+::-webkit-scrollbar{width:0.5em;height:0.3em}
 ::-webkit-scrollbar-track{border-radius:0;background:var(--color-neutral-20)}
 ::-webkit-scrollbar-thumb{border-radius:1.0rem;background:var(--color-neutral-40)}
 
@@ -634,6 +625,7 @@ input, select{font-family:'KoreanAirSans'}
 
 .ant-picker{height:4rem}
 .ant-picker{padding:4px 20px 4px !important;width: 100%;}
+.ant-picker.hidden{padding:0px !important;}
 .ant-select{min-height:4rem !important}
 .ant-select-selector {
   min-height:4rem !important
@@ -657,7 +649,6 @@ input, select{font-family:'KoreanAirSans'}
   max-width: 500px;
   height: auto; /* 높이를 자동으로 조정 */
 }
-
 
 /* autocomplete 공통 컴포넌트 유효성 체크 실패시 border red 적용 */
 .select-in-valid {
@@ -688,20 +679,31 @@ input, select{font-family:'KoreanAirSans'}
 .ant-upload.ant-upload-select.ant-upload-disabled { display: none;}
 
 /*공통컴포넌트 그리드 row컬러*/
-.ag-theme-quartz .ag-root-wrapper .ag-row-odd{background-color:var(--color-neutral-20) !important}
+.ag-theme-quartz .ag-root-wrapper .ag-row-odd{background-color:var(--color-neutral-20)}
 
 
 .left-box {display: inline-block; width: 32.0rem; vertical-align: top; padding-right: 3.0rem;}
 .left-box .tree-box {height: 100vh; width: 100%; overflow: auto; background: var(--color-lightblue-10); border-radius: 0.8rem; padding: 2.0rem 01.0rem;}
 .right-box {display: inline-block; height: 100vh; width: calc(100% - 32.0rem); vertical-align: top;}
+.pd-t0 {padding-top: 0 !important;}
+.pd-l0 {padding-left: 0 !important;}
+.mgn-0 {margin: 0 !important;}
+.mb-0 {margin-bottom: 0 !important;}
 .mb-10 {margin-bottom: 1.0rem;}
 .mb-20 {margin-bottom: 2.0rem;}
 .mt-10 {margin-top: 1.0rem;}
 .mt-20 {margin-top: 2.0rem;}
 .mt-30 {margin-top: 3.0rem;}
+.pb_0 {padding-bottom: 0 !important;}
+.pb_10 {padding-bottom: 1.0rem;}
 .pt-20 {padding-top: 2.0rem;}
 .sm-txt {display: block; padding: 0.5rem 0 0; font-size: 1.2rem;}
 
 /*버튼*/
 .btn-togo{border:solid 0.1rem var(--color-darkblue-100);border-radius:0.31rem;font-size:1.4rem;color:var(--color-darkblue-100)}
 .btn-togo:hover{background-color:var(--color-lightblue-100);color:var(--color-lightblue-10)}
+
+
+.va-t{vertical-align: top !important}
+.ant-input-group-addon1{position: absolute;left: 0; width: 5.0rem; top: 0; line-height: 3.8rem; padding-left: 1.0rem; border: 0.1rem solid var(--color-neutral-40);border-radius:0.6rem}
+.ant-input-group-addon1-input{position:absolute;left:4.5rem;top:0;width:calc(100% - 50px)}

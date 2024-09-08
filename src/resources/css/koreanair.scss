@@ -375,17 +375,16 @@
     width: auto; 
     height: 100%; 
     /*line-height: 4.0rem;*/ 
-    padding: 0.7rem 1.0rem;
+    padding: 0.8rem 1.0rem;
     .link-box {
       display: inline-block;
       position: relative;
       padding-right: 2.5rem;
       margin:0 1.5rem 0 0.5rem;
-      .close-btn {display: block; position: absolute; top: 0.4rem; right: 0; font-size: 0; background: url(../images/delete-text.svg) left center no-repeat; width: 2.0rem; height: 2.0rem;}
+      .close-btn {display: block; position: absolute; top: 0.1rem; right: 0; font-size: 0; background: url(../images/delete-text.svg) left center no-repeat; width: 2.0rem; height: 2.0rem;}
     }
     .link-box a {font-size: 1.4rem; color: var(--color-darkblue-100);}
     .link-box a:hover {text-decoration: underline;}
-    
     }
     .btn-plus {position: absolute; right: 0; background: url(../images/plus-btn.svg) center center no-repeat; width: 4.0rem; height: 4.0rem; background-size: 2.4rem; font-size: 0; margin-left: 1.0rem; }
     .number {
@@ -395,14 +394,32 @@
       .wd-300 {width: 100%; max-width: 30.0rem;}
     }
     .table-box {
-      display: block;
+      display: inline-flex;
+      /*justify-content: flex-end; 
+      flex-direction: row;*/
       width: 100%;
-      
-    .left-table {width: auto; vertical-align: top;}
-    .left-table table {display: block; width: 100%;}
-    .left-table th, td {padding: 1.0rem 2.4rem; text-align: center;}
-    .right-table {display: inline-block; width: auto; vertical-align: top; background-color: brown;}
-    }
+      height: calc(100% - 22.2rem);
+      text-align: left;
+    .left-table { width: 100%; overflow-y: auto; vertical-align: top;}
+    
+  
+    .left-table .group {width: 100%;}
+    .left-table .group .group-box {border: 0.1rem solid var(--color-neutral-40); box-sizing: border-box; margin: 0.2rem;}
+    .left-table .group .group-box li {text-align: center; width: 100%; min-width: 20.0rem; padding: 1.0rem;}
+    .left-table .group .group-box li:first-child {background-color: var(--color-neutral-20);}
+    /*.left-table .group .group-box li:last-child{ border-top: 0.1rem solid var(--color-neutral-40);}*/
+    .left-table .group .group-box:hover li {background-color: var(--color-lightblue-10);}
+ 
+
+    .right-table {display: inline-block; width: 100%; vertical-align: top; height: 100%; overflow-y: auto;}
+    .right-table .group-box {border: 0.1rem solid var(--color-neutral-40); border-radius: 0.8rem; padding: 2.0rem; }
+    .right-table .group-box:first-child {margin-bottom: 2.0rem;}
+    .right-table .group-box table {border-top: 0.1rem solid var(--color-darkblue-100); width: 100%;}
+    .right-table .group-box table th {background-color: var(--color-neutral-20);}
+    .right-table .group-box table th, .right-table .group-box table td {font-size: 1.4rem; padding: 0.5rem 1.0rem; border-bottom: 0.1rem solid var(--color-neutral-40); width: 100%;}
+    .right-table .group-box table th:nth-child(1) , .right-table .group-box table td:nth-child(1) {width: 30%;}
+    .right-table .group-box table th:nth-child(2), .right-table .group-box table td:nth-child(2) {width: 70%;}
+  }
 
 
     .table-tit {
@@ -449,16 +466,25 @@
       width: 100%; 
       padding: 1.0rem 0 0;
       /*height: 100%;*/
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
       .ck-list {
         display: inline-block;
-        width: 50%;
+        width: 100%;
         vertical-align: top;
-        height: max-content;
+      }
+      .ck-list-grid {height: 100%; overflow-y: auto;}
+      .ck-right-list {
+        display: inline-block;
+        width: calc(100% - 2.0rem);
+        margin-left: 2.0rem;
         height: 100%;
+        vertical-align: top;
       }
       .ck-edit {
         display: inline-block;
-        width: calc(50% - 2.0rem);
+        width: calc(100% - 2.0rem);
         height: 100%;
         vertical-align: top;
         border: 0.1rem solid var(--color-neutral-40);
@@ -481,8 +507,24 @@
 
         }
       }
+      .before-after-table {width: 100%;}
+      .before-after-table thead th:nth-child(1), .before-after-table tbody td:nth-child(1) {width: 50%;}
+      .before-after-table thead th:nth-child(2), .before-after-table tbody td:nth-child(2) {width: 50%; border-left: 0.1rem solid var(--color-neutral-40);}
+      .before-after-table thead th, .before-after-table tbody td {padding: 1.0rem 2.0rem;}
+      .before-after-table thead th {border-top: 0.1rem solid var(--color-darkblue-100); color: var(--color-neutral-100); background-color: var(--color-neutral-20); font-weight: 500; font-size: 1.6rem; color: var(--color-darkblue-100);}
+      .before-after-table tr { border-bottom: 0.1rem solid var(--color-neutral-40); }
 
     }
+.btn-area-listpg {
+      text-align:center;
+        > button{margin:0 0.5rem}
+        button + button{margin-left:0.5rem}
+        .btn_text{font-family:'KoreanAirSans';font-weight:700;font-size:1.6rem}
+        .btn_confirm{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-darkblue-100); color: var(--color-neutral-10);}
+        .btn_close{padding:0.6rem 2.8rem;border-radius:99.9rem;background: var(--color-neutral-30); color: var(--color-neutral-70);}}
+.center-btn {height: auto; display: flex; align-items: center; justify-content:center; padding: 0 2.0rem;}
+.center-btn button {background: url(../images/pagination-last.svg) center center no-repeat; background-size: 3.0rem; width: 5.0rem; height: 5.0rem; font-size: 0; border: 0.1rem solid var(--color-darkblue-100); border-radius: 0.8rem;}
+
 .division {width: 100%; display: inline-flex;}
 .division .check {width: 100%;}
 .division .list {
@@ -500,7 +542,7 @@
 .left-box .tree-box .tree {min-width: 25.0rem; max-height: 58rem; overflow-y: scroll;}
 .left-box .tree-box .tree-list {display: flex;}
 .left-box .tree-box .tree-list .list {display: none;}
-.left-box .tree-box .tree-list .list.active {display: block; height: 100%; width: 100%; vertical-align: top; min-width: 30.0rem; margin-left: 2.0rem;
+.left-box .tree-box .tree-list .list.active {display: block; height: 100%; width: 100%; vertical-align: top; min-width: 26.0rem; margin-left: 2.0rem;
   .list-table {width: 100%;}
   .list-table thead tr, .list-table tbody tr, .list-table tfoot tr {display: table; width: 100%;}
   .list-table th, .list-table td {padding: 1.0rem 0;border-bottom: 0.1rem solid var(--color-neutral-40); text-align:center;}
@@ -521,18 +563,18 @@
   .list-table {width: 100%;}
   .list-table thead tr, .list-table tbody tr {display: table; width: 100%;}
   .list-table th, .list-table td {padding: 1.0rem 0;border-bottom: 0.1rem solid var(--color-neutral-40); text-align:center;}
-  .list-table th:nth-child(1), .list-table td:nth-child(1){width: 6%;}
-  .list-table th:nth-child(2), .list-table td:nth-child(2){width: 10%;}
-  .list-table th:nth-child(3), .list-table td:nth-child(3){width: 10%;}
-  .list-table th:nth-child(4), .list-table td:nth-child(4){width: 10%;}
-  .list-table th:nth-child(5), .list-table td:nth-child(5){width: 10%;}
-  .list-table th:nth-child(6), .list-table td:nth-child(6){width: 10%;}
-  .list-table th:nth-child(7), .list-table td:nth-child(7){width: 10%;}
-  .list-table th:nth-child(8), .list-table td:nth-child(8){width: 10%;}
-  .list-table th:nth-child(9), .list-table td:nth-child(9){width: 10%;}
-  .list-table th:nth-child(10), .list-table td:nth-child(10){width: 14%;}
+  .list-table th:nth-child(1), .list-table td:nth-child(1){width: 4%;}
+  .list-table th:nth-child(2), .list-table td:nth-child(2){width: 12%;}
+  .list-table th:nth-child(3), .list-table td:nth-child(3){width: 12%;}
+  .list-table th:nth-child(4), .list-table td:nth-child(4){width: 12%;}
+  .list-table th:nth-child(5), .list-table td:nth-child(5){width: 12%;}
+  .list-table th:nth-child(6), .list-table td:nth-child(6){width: 12%;}
+  .list-table th:nth-child(7), .list-table td:nth-child(7){width: 12%;}
+  .list-table th:nth-child(8), .list-table td:nth-child(8){width: 8%;}
+  .list-table th:nth-child(9), .list-table td:nth-child(9){width: 7%;}
+  .list-table th:nth-child(10), .list-table td:nth-child(10){width: 9%;}
   .list-table th {border-top: 0.1rem solid var(--color-darkblue-100); color: var(--color-darkblue-100); background-color: var(--color-neutral-20); font-weight: 500;}
-  .list-table td {color: var(--color-neutral-70);}
+  .list-table td {color: var(--color-neutral-70); font-size: 1.2rem;}
   .list-table tbody {display: block; height: 16rem; overflow-y: scroll;}
   .list-table tbody tr:hover, .list-table tbody tr:active {width:100%;background-color: var(--color-lightblue-10); cursor: pointer;}
 }
@@ -553,8 +595,39 @@
 .agree {border: 0.1rem solid var(--color-neutral-40); border-radius: 0.8rem; background-color: var(--color-neutral-20); padding: 2.0rem; line-height: 180%; font-size: 1.4rem;}
 
 .txt-guide {display: inline-block; width: 100%; font-size: 1.2rem;}
+.txt-guide-list {margin-bottom: 1.0rem;}
+.txt-guide-list li {font-size: 1.4rem; line-height: 150%; padding-left: 0.5rem;} 
+.txt-guide-list li::marker {content: "-"; color: var(--color-neutral-130); font-size: 1rem;}
+
+.guide-list { background-color: var(--color-neutral-20); border-radius: 0.8rem; padding: 1.0rem 1.5rem; margin-top: 1.0rem;}
+.guide-list .tit {display: block; padding-bottom: 0.5rem; color: var(--color-darkblue-100);}
+.guide-list li {font-size: 1.3rem; color: var(--color-neutral-70); padding-left: 1.0rem; line-height: 180%;}
+.guide-list li::marker {content: ""; color: var(--color-neutral-130); font-size: 1rem;}
+.guide-list li ol {padding: 0.5rem 0;}
+.guide-list li ol li {font-size: 1.2rem;}
+
+.guide-table-box {height: 100%;}
+.guide-table {width: 100%; border: 0.1rem solid var(--color-neutral-40);}
+.guide-table thead th, .guide-table tbody td {text-align: center; padding: 1.0rem; border: 0.1rem solid var(--color-neutral-40); vertical-align: middle;}
+.guide-table thead th {background-color: var(--color-neutral-20);}
+.guide-table tbody td:nth-child(4){text-align: left;}
+.guide-table tbody td span.tit {font-size: 1.5rem; font-weight: 700;}
+.guide-table tbody td span.red {color: var(--color-Warning);}
+
+
+.guidetable-type01 {width: 100%; border: 0.2rem solid var(--color-neutral-40);}
+.guidetable-type01 thead th, .guidetable-type01 tbody th, .guidetable-type01 tbody td {text-align: center; padding: 1.0rem; vertical-align: middle; border: 0.1rem solid var(--color-neutral-10);}
+.guidetable-type01 thead th, .guidetable-type01 tbody th {background-color: var(--color-neutral-20); border: 0.1rem solid var(--color-neutral-40);}
+
+.guidetable-type01 .veryhigh {background-color: var(--color-Level);}
+.guidetable-type01 .high {background-color: var(--color-Leve2);}
+.guidetable-type01 .borderlinehigh {background-color: var(--color-Leve6);}
+.guidetable-type01 .middle {background-color: var(--color-Leve3);}
+.guidetable-type01 .low {background-color: var(--color-Leve5);}
+.guidetable-type01 .verylow {background-color: var(--color-Leve4);}
+
 .ck-guide { background-color: var(--color-neutral-20); border-radius: 0.8rem; padding: 1.0rem 1.5rem; margin-top: 1.0rem;}
-.ck-guide li {font-size: 1.3 rem; color: var(--color-neutral-70); padding-left: 1.0rem; line-height: 180%;}
+.ck-guide li {font-size: 1.3rem; color: var(--color-neutral-70); padding-left: 1.0rem; line-height: 180%;}
 .ck-guide li::marker {content: "-"; color: var(--color-neutral-130); font-size: 1rem;}
 
 .toggle_switch-tit {display: inline-block; vertical-align: top; line-height: 2.5rem; font-size: 1.6rem; padding-right: 1.0rem;}
@@ -574,9 +647,129 @@
 .accordion-btn-tit .active .accordion-btn-tit:after{-webkit-transform:translateY(-50%) rotate(-135deg);transform:translateY(-50%) rotate(-135deg)}
 
 .checklistbox {display: block; height: 19rem; overflow-y: auto;}
-.check-list {width: 100%; border-top: 0.1rem solid var(--color-darkblue-100); }
-.check-list th, .check-list td {padding: 1.0rem; font-size: 1.4rem; text-align: center;}
+.check-list {width: 100%; border-top: 0.1rem solid var(--color-darkblue-100);}
+.check-list th, .check-list td {padding: 1.0rem; font-size: 1.4rem; text-align: center; line-height: 3.8rem;}
+.check-list th:nth-child(1), .check-list td:nth-child(1){width: 80%;}
+.check-list th:nth-child(2), .check-list td:nth-child(2){width: 20%;}
 .check-list th {background-color: var(--color-neutral-20);}
 .check-list tr {border-bottom: 0.1rem solid var(--color-neutral-40);}
 .check-list td:first-child {text-align: left;}
 .check-list tr:hover {background-color: var(--color-lightblue-10);}
+
+.stit-btn {display: block; position: relative; width: 100%; overflow: hidden; height: 3.0rem; line-height: 3.0rem; margin-bottom: 1.0rem;}
+.stit-btn h3 {display: inline-block; font-size: 1.8rem; font-weight: 500; color: var(--color-darkblue-100);}
+.stit-btn button {position: absolute; right: 0; background-color: var(--color-darkblue-100); padding: 0.5rem 1.5rem; border-radius: 3.0rem; color: var(--color-neutral-10);}
+
+.check-table {clear: both; width: 100%; box-sizing: border-box;}
+.check-table th, .check-table td {padding: 1.0rem; font-size: 1.4rem; text-align: center; line-height: 150%; border: 0.1rem solid var(--color-neutral-40); vertical-align:middle;}
+.check-table th:nth-child(1), .check-table td:nth-child(1){width: 15%;}
+.check-table th:nth-child(2), .check-table td:nth-child(2){width: 15%;}
+.check-table th:nth-child(3), .check-table td:nth-child(3){width: 30%;}
+.check-table th:nth-child(4), .check-table td:nth-child(4){width: 5%;}
+.check-table th:nth-child(5), .check-table td:nth-child(5){width: 5%;}
+.check-table th:nth-child(6), .check-table td:nth-child(6){width: 30%;}
+.check-table th {background-color: var(--color-neutral-20); border-top: 0.1rem solid var(--color-darkblue-100); }
+.check-table tr {border-bottom: 0.1rem solid var(--color-neutral-40);}
+
+
+.tg-tit {position: relative; font-size: 1.8rem; font-weight: 700; color: var(--color-darkblue-100);}
+
+.tooltip.tabbox {margin: 0.4rem 1.0rem 1.5rem; padding: 2.2rem 0;}
+.tooltip{position:relative;display:block;float:inline-start;background: url(../images/tooltip.svg) left center no-repeat; background-size: 3.0rem;font-size:0;width: 3.0rem;height: 3.0rem;cursor:pointer}
+.tooltip .tooltiptext h3 {font-size: 1.3rem; color: var(--color-neutral-10); font-weight: 700;}
+.tooltip .tooltiptext{visibility:hidden;position:absolute;z-index:1;width:30.0rem;font-size:1.2rem;background-color: var(--color-neutral-80);color: var(--color-neutral-10);text-align:left;border-radius:0.8rem;padding:1.5rem 2.0rem}
+.tooltip .tooltiptext li::marker{content:'-';color: var(--color-neutral-10);font-size:1rem}
+.tooltip .tooltiptext ul li{font-size: 1.2rem; color: var(--color-neutral-10);  display: list-item; padding-left: 0.6rem;}
+.tooltip:hover .tooltiptext{visibility:visible}
+.tooltip .tooltiptext::after{content:'';position:absolute;border-style:solid;border-width:0.5rem}
+.tooltip .tooltip-right{top:-0.6rem;left:155%}
+.tooltip .tooltip-right::after{top:2.6rem;right:100%;margin-top:-0.5rem;border-color: transparent var(--color-neutral-80) transparent transparent}
+
+.tooltip .tooltip-bottom {width: 12.0rem; top: 150%; left: 50%; margin-left: -6.0rem}
+.tooltip .tooltip-bottom::after {bottom: 100%; left: 50%; margin-left: -0.5rem; border-color: transparent transparent var(--color-neutral-80) transparent;}
+
+.list-input-box {display: block; width: 100%;}
+.list-input-box li {width: 100%; display: inline-flex; line-height: 150%; margin: 0.2rem 0; align-items:center;}
+.list-input-box li .list-tit {display: inline-block; width: 100%;}
+
+
+.round-wrap .icon_report{display:block;width:3rem;height:3rem;padding:2.5rem 1rem 1rem;background:url(/src/resources/images/icon-documents.svg) no-repeat center center;border:0;cursor:pointer}
+
+.checkitems-table {width: 100%; height: 100%;}
+.checkitems-table thead tr, .checkitems-table tbody tr, .checkitems-table tfoot tr {display: table; width: 100%;}
+.checkitems-table th, .checkitems-table td {padding: 1.0rem 0;border-bottom: 0.1rem solid var(--color-neutral-40); text-align:center;}
+.checkitems-table thead th:nth-child(1), .checkitems-table tbody td:nth-child(1), .checkitems-table tfoot td:nth-child(1) {width: 20%;}
+.checkitems-table thead th:nth-child(2), .checkitems-table tbody td:nth-child(2), .checkitems-table tfoot td:nth-child(2) {width: 80%;}
+.checkitems-table tbody td:nth-child(2) {text-align: left;}
+.checkitems-table th {border-top: 0.1rem solid var(--color-darkblue-100); color: var(--color-neutral-100); background-color: var(--color-neutral-20); font-weight: 500;}
+.checkitems-table td {color: var(--color-neutral-70);}
+.checkitems-table tbody {display: block; height: calc(100% - 4.0rem); overflow-y: auto;}
+.checkitems-table tfoot td {color: var(--color-darkblue-100); background-color: var(--color-neutral-30); font-weight: 500;}
+.checkitems-table tbody tr:hover, .lcheckitems-table tbody tr:active {width:100%;background-color: var(--color-lightblue-10); cursor: pointer;}
+
+.check-list-table {clear: both; width: 100%; box-sizing: border-box;}
+.check-list-table thead tr, .check-list-table tbody tr, .check-list-table tfoot tr {display: table; width: 100%;}
+.check-list-table th, .check-list-table td {padding: 1.0rem; font-size: 1.4rem; text-align: center; line-height: 150%; vertical-align:middle;}
+.check-list-table th:nth-child(1), .check-list-table td:nth-child(1){width: 30%;}
+.check-list-table th:nth-child(2), .check-list-table td:nth-child(2){width: 50%;}
+.check-list-table th:nth-child(3), .check-list-table td:nth-child(3){width: 20%;}
+.check-list-table th {background-color: var(--color-neutral-20); border-top: 0.1rem solid var(--color-darkblue-100); }
+.check-list-table tr {border-bottom: 0.1rem solid var(--color-neutral-40);}
+.check-list-table tbody {display: block; height: 100%; overflow-y: auto;}
+
+
+.icon {display: flex; position: absolute; top: 0.8rem; right: 3.0rem; font-size: 0; background: url(../images/tooltip.svg) center center no-repeat; background-size: 2.6rem; width: 2.6rem; height: 2.6rem; cursor: pointer;}
+
+.calendar-box {display: inline-flex; justify-content: flex-end; flex-direction: row; width: 100%; height: 100%; padding: 0 0 2.0rem 0;}
+.calendar-box .calendar-wrap { display: block; width: 75%; height: 100%;}
+.calendar-box .calendar-wrap .calendar-tit {display: inline-flex; width: 100%; justify-content: center; align-items: center; padding-bottom: 1.5rem;}
+.calendar-box .calendar-wrap .calendar-tit .prevday {background: url(../images/arrow-left.svg)center center no-repeat; border: 0.1rem solid var(--color-neutral-40); border-radius: 0.4rem; background-size: 2.4rem; width: 3.0rem; height: 3.0rem; font-size: 0;}
+.calendar-box .calendar-wrap .calendar-tit .datetitle span {font-size: 2.4rem; color: var(--color-darkblue-100); font-weight: 700; line-height: 150%; padding: 0 3.0rem;}
+.calendar-box .calendar-wrap .calendar-tit .nextday {background: url(../images/arrow-right.svg)center center no-repeat; border: 0.1rem solid var(--color-neutral-40); border-radius: 0.4rem; background-size: 2.4rem; width: 3.0rem; height: 3.0rem; font-size: 0;}
+.calendar-box .calendar-wrap .calendar-table {width: 100%; height: calc(100% - 5.1rem);}
+.calendar-box .calendar-wrap .calendar-table thead th, .calendar-box .calendar-wrap .calendar-table tbody td {line-height: 100%; text-align: center; border-bottom: 0.1rem solid var(--color-neutral-40); padding: 1.0rem; font-size: 1.6rem;}
+.calendar-box .calendar-wrap .calendar-table thead th:nth-child(1), .calendar-box .calendar-wrap .calendar-table tbody td:nth-child(1) {width: 15%;}
+.calendar-box .calendar-wrap .calendar-table thead th:nth-child(2), .calendar-box .calendar-wrap .calendar-table tbody td:nth-child(2) {width: 14%;}
+.calendar-box .calendar-wrap .calendar-table thead th:nth-child(3), .calendar-box .calendar-wrap .calendar-table tbody td:nth-child(3) {width: 14%;}
+.calendar-box .calendar-wrap .calendar-table thead th:nth-child(4), .calendar-box .calendar-wrap .calendar-table tbody td:nth-child(4) {width: 14%;}
+.calendar-box .calendar-wrap .calendar-table thead th:nth-child(5), .calendar-box .calendar-wrap .calendar-table tbody td:nth-child(5) {width: 14%;}
+.calendar-box .calendar-wrap .calendar-table thead th:nth-child(6), .calendar-box .calendar-wrap .calendar-table tbody td:nth-child(6) {width: 14%;}
+.calendar-box .calendar-wrap .calendar-table thead th:nth-child(7), .calendar-box .calendar-wrap .calendar-table tbody td:nth-child(7) {width: 15%;}
+
+.calendar-box .calendar-wrap .calendar-table thead th {background-color: var(--color-neutral-10); border-top: 0.1rem solid var(--color-darkblue-100);}
+.calendar-box .calendar-wrap .calendar-table tbody td {height: 10rem; min-height: 10rem; text-align: left;}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date {position: relative; left: 0; top: 0;}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .cld_day {font-weight: 700;}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .cld_day.active {background-color: var(--color-darkblue-100); color: var(--color-neutral-10); width: 2.5rem; height: 2.5rem; border-radius: 99.9rem; display: flex; justify-content: center; align-items: center;}
+
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .cld_day.s_day {color: #E35B4F;}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li {margin: 0.5rem 0;}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a {font-size: 1.2rem;}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li:hover {text-decoration: underline;}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.ing {padding: 0.2rem 0.5rem; background-color: var(--color-positive-bg); color: var(--color-positive); border-radius: 0.8rem; width: 100%; display: flex;}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.ing span {font-size: 1.2rem; font-weight: 700; color: var(--color-positive);}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.expected {padding: 0.3rem 0.5rem; background-color: var(--color-lightblue-20); color: var(--color-darkblue-100); border-radius: 0.8rem; width: 100%; display: flex}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.expected span {font-size: 1.2rem; font-weight: 700; color: var(--color-darkblue-100);}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.wait {padding: 0.3rem 0.5rem; background-color: var(--color-Warning-bg); color: var(--color-Warning); border-radius: 0.8rem; width: 100%; display: flex}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.wait span {font-size: 1.2rem; font-weight: 700; color: var(--color-Warning);}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.complete {padding: 0.3rem 0.5rem; background-color: var(--color-neutral-30); color: var(--color-neutral-70); border-radius: 0.8rem; width: 100%; display: flex}
+.calendar-box .calendar-wrap .calendar-table tbody td .cld_date .schedule li a.complete span {font-size: 1.2rem; font-weight: 700; color: var(--color-neutral-70);}
+
+.calendar-box .calendar-wrap .calendar-table tbody td:hover, .calendar-box .calendar-wrap .calendar-table tbody td:active {background-color: var(--color-lightblue-10); cursor: pointer;}
+.calendar-box .calendar-list {display: inline-table; width: 25%; height: 100%; padding: 2.0rem; border: 0.1rem solid var(--color-neutral-40); border-radius: 0.8rem; margin-left: 2.0rem;}
+.calendar-box .calendar-list .table-tit {color: var(--color-darkblue-100); font-size: 1.8rem; font-weight: normal; padding: 0;}
+.calendar-box .calendar-list .schedule-guide {margin: 0.5rem 0;}
+.calendar-box .calendar-list .schedule-guide li {display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem; padding: 0 0.5rem;}
+.calendar-box .calendar-list .schedule-guide li:first-child {padding-left: 0;}
+.calendar-box .calendar-list .schedule-guide li .expected {width: 0.8rem; height: 0.8rem; border-radius: 99.9rem; background-color: var(--color-darkblue-100); font-size: 0; margin-right: 0.3rem;}
+.calendar-box .calendar-list .schedule-guide li .ing {width: 0.8rem; height: 0.8rem; border-radius: 99.9rem; background-color: var(--color-positive); font-size: 0; margin-right: 0.3rem;}
+.calendar-box .calendar-list .schedule-guide li .complete {width: 0.8rem; height: 0.8rem; border-radius: 99.9rem; background-color: var(--color-neutral-70); font-size: 0; margin-right: 0.3rem;}
+.calendar-box .calendar-list .schedule-guide li .wait {width: 0.8rem; height: 0.8rem; border-radius: 99.9rem; background-color: var(--color-Warning); font-size: 0; margin-right: 0.3rem;}
+
+.calendar-box .calendar-list .list-table {width: 100%; height: calc(100% - 7.1rem);border-top: 0.1rem solid var(--color-darkblue-100);}
+.calendar-box .calendar-list .list-table thead tr, .calendar-box .calendar-list .list-table tbody tr, .calendar-box .calendar-list .list-table tfoot tr {display: flex; width: 100%;}
+.calendar-box .calendar-list .list-table th:nth-child(1), .calendar-box .calendar-list .list-table td:nth-child(1){width: 35%; color: var(--color-neutral-60);}
+.calendar-box .calendar-list .list-table th:nth-child(2), .calendar-box .calendar-list .list-table td:nth-child(2){width: 75%;}
+.calendar-box .calendar-list .list-table thead th, .calendar-box .calendar-list .list-table tbody td {text-align: left; border-bottom: 0.1rem solid var(--color-neutral-40); padding: 1.0rem; font-size: 1.4rem;}
+.calendar-box .calendar-list .list-table thead th {background-color: var(--color-neutral-10); border-top: 0.1rem solid var(--color-darkblue-100);}
+.calendar-box .calendar-list .list-table tbody {display: block; height: 100%; overflow-y: auto;}
