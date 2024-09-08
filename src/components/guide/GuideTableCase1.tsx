@@ -4,6 +4,7 @@ import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
 import { useState } from 'react';
 import { create } from 'zustand';
 import AppCheckbox from '../common/AppCheckbox';
+import Config from '@/config/Config';
 
 const initListData = {
   ...listBaseState,
@@ -84,7 +85,7 @@ function AuditorListComponent(props) {
   );
 }
 
-function SysMessageList() {
+function GuideTableCase1() {
   const state = SysMessageListStore();
   const { list, toggleExpand, expanded } = state;
   const [columns, setColumns] = useState([
@@ -104,7 +105,12 @@ function SysMessageList() {
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>테이블 case1(펼치기/닫기)</h2>
+        <h2>
+          테이블 case1(펼치기/닫기)
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideTableCase1.tsx`}>
+            GuideTableCase1
+          </a>
+        </h2>
       </div>
       <div className="editbox">
         <div className="form-table">
@@ -134,4 +140,4 @@ function SysMessageList() {
   );
 }
 
-export default SysMessageList;
+export default GuideTableCase1;

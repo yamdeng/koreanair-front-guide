@@ -1,9 +1,11 @@
+import { produce } from 'immer';
 import AppNavigation from '@/components/common/AppNavigation';
 import AppTable from '@/components/common/AppTable';
+import Config from '@/config/Config';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
 import { useState } from 'react';
 import { create } from 'zustand';
-import AppCheckbox from '../common/AppCheckbox';
+import _ from 'lodash';
 
 const initListData = {
   ...listBaseState,
@@ -19,24 +21,66 @@ const SysMessageListStore = create<any>((set, get) => ({
 
   expanded: true,
 
+  toggleRepresentReport: (index, expanded) => {
+    set(
+      produce((state: any) => {
+        const list = state.list;
+        const children = list[index].children || [];
+        const applyChildren = _.cloneDeep(children);
+        if (expanded) {
+          list.splice(index + 1, 0, ...applyChildren);
+        } else {
+          list.splice(index + 1, applyChildren.length);
+        }
+        list[index].expanded = expanded;
+        state.list = list;
+      })
+    );
+  },
+
   list: [
     {
-      name: 'aaa',
-      reportTitle: 'bbb',
-      auditors: [
-        { color: 'red', name: '신상훈1-1', dutyTitle: '사장1-1' },
-        { name: '신상훈1-2', dutyTitle: '사장1-2' },
-        { name: '신상훈1-3', dutyTitle: '사장1-3' },
+      name: 'report1',
+      reportTitle: 'aaa1',
+      createUserName: '안용성',
+      children: [
+        { name: 'report1-1', reportTitle: 'aaa1-1', isChild: true, createUserName: '안용성-child' },
+        { name: 'report1-2', reportTitle: 'aaa1-2', isChild: true, createUserName: '안용성-child' },
+        { name: 'report1-3', reportTitle: 'aaa1-3', isChild: true, createUserName: '안용성-child' },
       ],
+      hasChildren: true,
+      expanded: false,
     },
     {
-      name: 'aaa',
-      reportTitle: 'bbb',
-      auditors: [
-        { color: 'blue', name: '신상훈2-1', dutyTitle: '사장2-1' },
-        { name: '신상훈2-2', dutyTitle: '사장2-2' },
-        { name: '신상훈2-3', dutyTitle: '사장2-3' },
+      name: 'report2',
+      reportTitle: 'aaa2',
+      createUserName: '안용성',
+      children: [
+        { name: 'report2-1', reportTitle: 'aaa2-1', isChild: true, createUserName: '안용성-child' },
+        { name: 'report2-2', reportTitle: 'aaa2-2', isChild: true, createUserName: '안용성-child' },
+        { name: 'report2-3', reportTitle: 'aaa2-3', isChild: true, createUserName: '안용성-child' },
       ],
+      hasChildren: true,
+      expanded: false,
+    },
+    {
+      name: 'report3',
+      reportTitle: 'aaa3',
+      createUserName: '안용성',
+      children: [],
+      hasChildren: false,
+    },
+    {
+      name: 'report4',
+      reportTitle: 'aaa4',
+      createUserName: '안용성',
+      children: [
+        { name: 'report4-1', reportTitle: 'aaa4-1', isChild: true, createUserName: '안용성-child' },
+        { name: 'report4-2', reportTitle: 'aaa4-2', isChild: true, createUserName: '안용성-child' },
+        { name: 'report4-3', reportTitle: 'aaa4-3', isChild: true, createUserName: '안용성-child' },
+      ],
+      hasChildren: true,
+      expanded: false,
     },
   ],
 
@@ -46,80 +90,58 @@ const SysMessageListStore = create<any>((set, get) => ({
   },
 }));
 
-function AuditorListComponent(props) {
-  const state = SysMessageListStore();
-  const { expanded } = state;
-  const { value } = props;
-  let applyAuditorList = [];
-  if (value && value.length) {
-    value && expanded ? value : value[0];
+function HasChildrenCheckComponent(props) {
+  const { store, rowIndex } = props;
+  const { toggleRepresentReport } = store;
+  const { value, data } = props;
+  const { isChild, expanded } = data;
+
+  // +, -, ''
+  const expandedComponent = <span></span>;
+  // 묶음 하위 보고서인 경우
+  if (isChild) {
+    return <span>ㄴ</span>;
+  } else if (value) {
+    // 자식이 존재하는 경우
+    // 펼쳐져 있을 경우
     if (expanded) {
-      applyAuditorList = value;
+      return <span onClick={() => toggleRepresentReport(rowIndex, false)}>-</span>;
     } else {
-      applyAuditorList = [value[0]];
+      return <span onClick={() => toggleRepresentReport(rowIndex, true)}>+</span>;
     }
   }
-
-  const onClick = (auditorInfo) => {
-    alert(`auditorInfo : ${JSON.stringify(auditorInfo)}`);
-  };
-
-  return (
-    <span>
-      {applyAuditorList.map((info) => {
-        const { name, dutyTitle } = info;
-        const applyStyle: any = {};
-        if (info.color) {
-          applyStyle.color = info.color;
-        }
-        return (
-          <>
-            <span key={name} onClick={() => onClick(info)} style={applyStyle}>
-              {name} / {dutyTitle}
-            </span>
-          </>
-        );
-      })}
-    </span>
-  );
+  return <span>{expandedComponent}</span>;
 }
 
-function SysMessageList() {
+function GuideTableCase2() {
   const state = SysMessageListStore();
-  const { list, toggleExpand, expanded } = state;
+  const { list } = state;
   const [columns, setColumns] = useState([
-    { field: 'name', headerName: '이름' },
-    { field: 'reportTitle', headerName: '보고서명' },
     {
-      field: 'auditors',
-      headerName: '감시자들',
-      cellRenderer: AuditorListComponent,
+      field: 'hasChildren',
+      headerName: '묶음',
+      cellRenderer: HasChildrenCheckComponent,
       cellRendererParams: {
-        expanded: SysMessageListStore.getState().expanded,
+        store: state,
       },
     },
+    { field: 'name', headerName: '이름' },
+    { field: 'reportTitle', headerName: '보고서명' },
+    { field: 'creator', headerName: '등록자' },
   ]);
 
   return (
     <>
       <AppNavigation />
       <div className="conts-title">
-        <h2>테이블 case1(펼치기/닫기)</h2>
+        <h2>
+          테이블 case2(대표보고서 처리)
+          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideTableCase2.tsx`}>
+            GuideTableCase2
+          </a>
+        </h2>
       </div>
       <div className="editbox">
-        <div className="form-table">
-          <div className="form-cell wid50">
-            <div className="group-box-wrap wid100">
-              <AppCheckbox
-                label="펼치기/닫기"
-                value={expanded}
-                onChange={(value) => {
-                  toggleExpand(value);
-                }}
-              />
-            </div>
-          </div>
-        </div>
         <div className="btn-area">
           <button type="button" name="button" className="btn-sm btn_text btn-darkblue-line">
             조회
@@ -134,4 +156,4 @@ function SysMessageList() {
   );
 }
 
-export default SysMessageList;
+export default GuideTableCase2;
