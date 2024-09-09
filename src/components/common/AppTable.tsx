@@ -190,25 +190,25 @@ function AppTable(props) {
     setDynamicApplyColumnList(newDynamicApplyColumnList);
   };
 
-  const searchEnableRowSpanColumnInfo = columns.find((info) => info.enableRowSpan);
-  const enableRowSpanColumnName = searchEnableRowSpanColumnInfo ? searchEnableRowSpanColumnInfo.field : '';
+  // const searchEnableRowSpanColumnInfo = columns.find((info) => info.enableRowSpan);
+  // const enableRowSpanColumnName = searchEnableRowSpanColumnInfo ? searchEnableRowSpanColumnInfo.field : '';
 
-  const onPaginationChanged = useCallback(
-    (params) => {
-      // pageSize가 변경되었을 경우
-      if (params.newPageSize) {
-        const newPageSize = params.api.paginationGetPageSize();
-        if (newPageSize) {
-          if (enableRowSpanColumnName) {
-            params.api.setRowData(
-              CommonUtil.applyGroupingRowSpanByPageSize(rowData, enableRowSpanColumnName, newPageSize)
-            );
-          }
-        }
-      }
-    },
-    [rowData, enableRowSpanColumnName]
-  );
+  // const onPaginationChanged = useCallback(
+  //   (params) => {
+  //     // pageSize가 변경되었을 경우
+  //     if (params.newPageSize) {
+  //       const newPageSize = params.api.paginationGetPageSize();
+  //       if (newPageSize) {
+  //         if (enableRowSpanColumnName) {
+  //           params.api.setRowData(
+  //             CommonUtil.applyGroupingRowSpanByPageSize(rowData, enableRowSpanColumnName, newPageSize)
+  //           );
+  //         }
+  //       }
+  //     }
+  //   },
+  //   [rowData, enableRowSpanColumnName]
+  // );
 
   useEffect(() => {
     if (gridRef && gridRef.current && gridRef.current.api) {
@@ -293,7 +293,6 @@ function AppTable(props) {
           paginationPageSizeSelector={pageSizeList}
           pagination={enablePagination}
           suppressRowTransform={searchRowSpanIndex !== -1 ? true : false}
-          onPaginationChanged={onPaginationChanged}
           defaultColDef={defaultColDef}
           tooltipShowDelay={100}
           tooltipHideDelay={1000}
@@ -310,7 +309,7 @@ function AppTable(props) {
               getGridRef(params);
             }
             // params.api.sizeColumnsToFit();
-            params.api.autoSizeAllColumns();
+            // params.api.autoSizeAllColumns();
           }}
         />
       </div>

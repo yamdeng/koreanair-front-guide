@@ -391,10 +391,74 @@ const getNowMonthString = () => {
 };
 
 // date value를 custom한 format으로 변환
-const convertDate = (value, valueFormat, displayFormat) => {
+const convertDate = (value, valueFormat, displayFormat = '') => {
   let displayDate = '';
+  const applyDisplayFormat = displayFormat ? displayFormat : valueFormat;
   if (value) {
-    displayDate = dayjs(value, valueFormat).format(displayFormat);
+    displayDate = dayjs(value, valueFormat).format(applyDisplayFormat);
+  }
+  return displayDate;
+};
+
+const getDateListByMonth = (searchMonth) => {
+  const result = [];
+  const monthFormat = 'YYYYMM';
+  const dateFormat = 'YYYYMMDD';
+  const firstDateString = dayjs(searchMonth, monthFormat).startOf('month').format(dateFormat);
+  const endDateString = dayjs(searchMonth, monthFormat).endOf('month').format(dateFormat);
+
+  // dateString : '20240901'
+  // date : 1 ~ 31
+  // weekday : 0 ~ 6
+
+  let dayPlusIndex = 0;
+
+  while (dayPlusIndex < 32) {
+    const nextDate = dayjs(firstDateString, dateFormat).add(dayPlusIndex, 'day');
+    const nextDateString = nextDate.format(dateFormat);
+    const weekday = nextDate.day();
+    result.push({
+      dateString: nextDateString,
+      date: nextDate.date(),
+      weekday: nextDate.day(),
+      isHoliday: weekday === 0,
+      isSaturday: weekday === 6,
+    });
+    if (nextDateString === endDateString) {
+      break;
+    }
+    dayPlusIndex++;
+  }
+
+  return result;
+};
+
+const convertWeekDayList = (dataList) => {
+  const result = [];
+  // 0 ~ 6 : 일 ~ 토
+  let weekDayList = [null, null, null, null, null, null, null];
+  // for : 1~31일 반복함
+  for (let index = 0; index < dataList.length; index++) {
+    // 해당 일에 요일 정보를 가져옴 : 일 ~ 토
+    const dayInfo = dataList[index];
+    weekDayList[dayInfo.weekday] = dayInfo;
+    // 토요일이면 초기화 넣고 초기화
+    if (dayInfo.weekday === 6 || index === dataList.length - 1) {
+      result.push(weekDayList);
+      // 마지막일이 아닌 경우만 변수 초기화 셋팅
+      if (index !== dataList.length - 1) {
+        weekDayList = [null, null, null, null, null, null, null];
+      }
+    }
+  }
+  return result;
+};
+
+const calculateDate = (value, valueFormat, dateKind, calculateNumber, displayFormat = '') => {
+  let displayDate = '';
+  const applyDisplayFormat = displayFormat ? displayFormat : valueFormat;
+  if (value) {
+    displayDate = dayjs(value, valueFormat).add(calculateNumber, dateKind).format(applyDisplayFormat);
   }
   return displayDate;
 };
@@ -426,4 +490,7 @@ export default {
   getYupListErrorInfo,
   getNowMonthString,
   convertDate,
+  getDateListByMonth,
+  convertWeekDayList,
+  calculateDate,
 };
