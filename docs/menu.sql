@@ -52,7 +52,9 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990054', 'A', '대표보고서 묶음 처리 case', '대표보고서 묶음 처리 case', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case4', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990026', 'A', '사용자 검색(단건)', '사용자 검색(단건)', '', '', '', 'M', 'A990010', 99, '/aviation/guides/user-search-single', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990027', 'A', '부서 검색(단건)', '부서 검색(단건)', '', '', '', 'M', 'A990010', 99, '/aviation/guides/dept-search-single', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990028', 'A', '공항검색', '공항검색', '', '', '', 'M', 'A990010', 99, '/aviation/guides/avn-airport-search', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+('A990028', 'A', '공항검색', '공항검색', '', '', '', 'M', 'A990010', 99, '/aviation/guides/avn-airport-search', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990055', 'A', 'rowSpan', 'rowSpan', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case5', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990056', 'A', '동적컬럼', '동적컬럼', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case6', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
 -- 다국어
 INSERT INTO tb_sys_message
