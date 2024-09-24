@@ -54,7 +54,10 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990027', 'A', '부서 검색(단건)', '부서 검색(단건)', '', '', '', 'M', 'A990010', 99, '/aviation/guides/dept-search-single', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990028', 'A', '공항검색', '공항검색', '', '', '', 'M', 'A990010', 99, '/aviation/guides/avn-airport-search', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990055', 'A', 'rowSpan', 'rowSpan', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case5', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990056', 'A', '동적컬럼', '동적컬럼', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case6', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+('A990056', 'A', '동적컬럼', '동적컬럼', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case6', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990057', 'A', 'checkbox(multiple)', 'checkbox(multiple)', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case7', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990058', 'A', '2 checkbox', '2 checkbox', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case8', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990029', 'A', '트리검색', '트리검색', '', '', '', 'M', 'A990010', 99, '/aviation/guides/tree2', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
 -- 다국어
 INSERT INTO tb_sys_message
