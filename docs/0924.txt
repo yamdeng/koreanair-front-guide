@@ -23,3 +23,32 @@ dotsClass: 'slick-dots vertical-dots',
 .vertical-dots li.slick-active button:before {
   color: black; /* 활성화된 dot 색상 */
 }
+
+===
+
+
+.vertical-dots {
+  position: absolute;
+  top: 0;
+  right: 0; /* 우측 끝에 정확히 배치 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%; /* 슬라이더 높이와 일치 */
+  padding-right: 10px; /* 우측 끝과의 약간의 여백 */
+}
+
+.vertical-dots li {
+  margin: 5px 0; /* 세로로 간격 추가 */
+}
+
+.vertical-dots li button:before {
+  font-size: 12px; /* dot 크기 조정 */
+  color: gray;
+}
+
+.vertical-dots li.slick-active button:before {
+  color: black; /* 활성화된 dot 색상 */
+}
+
+style={{ position: 'relative', maxWidth: '800px', margin: '0 auto' }}
