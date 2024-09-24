@@ -1,0 +1,26 @@
+1._popup.scss
+.columntable tbody td {text-align: center; font-size: 1.4rem; border-bottom: 0.1rem solid var(--color-neutral-40); padding: 7px}
+
+2.textarea 좌측에 공간있음
+
+3.common.scss
+/* 하이라이트 공통 */
+.highlight {
+  font-weight: 700;
+  color: #000;
+  background-color: #f3ff64;
+}
+
+ag-header-cell-label{display:inline;text-align:center;flex: 1 auto;align-self:auto}
+
+4.tree.scss
+.ant-tree-title {
+  .current-find {
+    font-style: italic;
+    font-weight: bold;
+  }
+  span {
+    display: block;
+    white-space: nowrap;
+  }
+}
