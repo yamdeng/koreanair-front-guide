@@ -7,7 +7,8 @@ INSERT INTO public.tb_sys_menu(menu_id, work_scope, name_kor, name_eng, name_chn
 VALUES('A990010', 'A', '공통 input 컴포넌트', '공통 input 컴포넌트_en', '', '', '', 'F', 'A990000', 99, '', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990030', 'A', '공통모달', '공통모달_en', '', '', '', 'F', 'A990000', 99, '', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990040', 'A', '다국어', '다국어_en', '', '', '', 'F', 'A990000', 99, '', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990080', 'A', '기타', '기타_en', '', '', '', 'F', 'A990000', 99, '', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+('A990080', 'A', '기타', '기타_en', '', '', '', 'F', 'A990000', 99, '', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990050', 'A', '테이블', '테이블', '', '', '', 'F', 'A990000', 99, '', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
 
 -- 실제 메뉴들 : input
@@ -45,7 +46,6 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990034', 'A', '파일모달', '파일모달', '', '', '', 'M', 'A990030', 99, '/aviation/guides/modal/file', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990088', 'A', 'yup-case1', 'yup-case1', '', '', '', 'M', 'A990080', 99, '/aviation/guides/yup/case1', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990089', 'A', 'yup-case2', 'yup-case2', '', '', '', 'M', 'A990080', 99, '/aviation/guides/yup/case2', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990050', 'A', '테이블', '테이블', '', '', '', 'F', 'A990000', 99, '', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990051', 'A', '테이블(펼치기/닫기)', '테이블(펼치기/닫기)', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case1', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990052', 'A', 'yup table case1', 'yup table case1', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case2', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990053', 'A', 'yup table case2', 'yup table case2', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case3', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
@@ -57,7 +57,10 @@ VALUES('A990011', 'A', '공통속성(form)', '공통속성(form)_en', '', '', ''
 ('A990056', 'A', '동적컬럼', '동적컬럼', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case6', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990057', 'A', 'checkbox(multiple)', 'checkbox(multiple)', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case7', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
 ('A990058', 'A', '2 checkbox', '2 checkbox', '', '', '', 'M', 'A990050', 99, '/aviation/guides/table/case8', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
-('A990029', 'A', '트리검색', '트리검색', '', '', '', 'M', 'A990010', 99, '/aviation/guides/tree2', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
+('A990029', 'A', '트리검색', '트리검색', '', '', '', 'M', 'A990010', 99, '/aviation/guides/tree2', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990090', 'A', '인쇄/pdf', '인쇄/pdf', '', '', '', 'M', 'A990080', 99, '/aviation/guides/print', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990129', 'A', 'mask-input', 'mask-input', '', '', '', 'M', 'A990010', 99, '/aviation/guides/app-mask-input', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP),
+('A990091', 'A', 'slide', 'slide', '', '', '', 'M', 'A990080', 99, '/aviation/guides/slide-simple', 'Y'::character varying, '', '', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP);
 
 -- 다국어
 INSERT INTO tb_sys_message
