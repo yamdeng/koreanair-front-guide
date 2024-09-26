@@ -20,3 +20,37 @@ private String issuerCd;
 // CODE_GRP_061, CODE_GRP_062, CODE_GRP_063, CODE_GRP_170, CODE_GRP_168, CODE_GRP_160
 // CODE_GRP_157, CODE_GRP_059, CODE_GRP_158, CODE_GRP_043
 
+
+
+
+"empNo": "ADMIN",
+"reportPhaseCd": "reporting",
+"reportStatusCd": "Draft",
+"regDt": "20240914",
+"changeDt": "20240914",
+"finalSubmittedYn": "N"
+
+#.양과장 문의사항
+
+1.CSR "불법방해행위" 유형이 누락되었는지 확인 필요 : CODE_GRP_155
+-TbAvnReportCsrDto.reportDtlTypeCd(CODE_GRP_155)
+
+2.CODE_GRP_003 코드값 가비지 데이터 들어가 있음
+
+3.TbAvnReportCsrDtlInfoDto.reportDtlInfoTypeCd도 CODE_GRP_155 코드를 사용하고 있던데 그냥 단순 분기 용도로 사용하기 위함인지?
+-ui에서도 단순 분기로 하드코딩이 들어가기는 함
+-2번과 3번이 다른 맥락인데 같은 코드를 쓰고 있어서 맞는지만 확인
+
+4.CSR에서 flightCrew 날릴 경우 crewTypeCd 코드를 선택하는 UI가 없어서 날리지 않고 있는데 기본값이 존재하는지?
+
+5.csr 상세 오류 : code 테이블 조인 누락
+
+6.reportDtl(csr)
+6-1.empNo인 경우는 사용자 정보 라벨 필요
+6-2.현재 code에 해당하는 라벨정보가 존재하지 않아보임
+
+7.TbAvnReportCsrDto.paxClsCd(승객클래스코드) : CODE_GRP_103 으로 주석 변경 필요한지 검토
+
+8.TbAvnReportCsrDto.actKindCd(행위종류코드) : CODE_GRP_029 으로 주석 변경 필요한지 검토
+
+9.TbAvnReportGsrDto code 라벨 속성이 존재하지 않음
