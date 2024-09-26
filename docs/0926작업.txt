@@ -1,0 +1,22 @@
+TbAvnReportCsrDtlInfoDto.java
+@Schema(description = "관련자코드 : CODE_GRP_040")
+private String involveCd;
+
+
+
+
+TbAvnReportRsrDto.java
+@Schema(description = "작업단계코드 : CODE_GRP_056")
+private String workPhaseCd;
+    
+@Schema(description = "주요클래스코드 : CODE_GRP_057")
+private String mainClsCd;
+    
+@Schema(description = "발급자코드 : CODE_GRP_058")
+private String issuerCd;
+
+
+// CODE_GRP_053, CODE_GRP_056, CODE_GRP_057, CODE_GRP_058, CODE_GRP_169
+// CODE_GRP_061, CODE_GRP_062, CODE_GRP_063, CODE_GRP_170, CODE_GRP_168, CODE_GRP_160
+// CODE_GRP_157, CODE_GRP_059, CODE_GRP_158, CODE_GRP_043
+
