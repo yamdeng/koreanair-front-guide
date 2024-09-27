@@ -1,0 +1,252 @@
+
+
+//////////////////레포트 입력//////////////////////////
+
+{
+"report" : {
+	  "reportTypeCd" : "ASR",
+	  "timezoneCd" : "kst",
+ 	  "subjectNm" : "테스트 제목",
+	  "occurTimezoneCd" : "kst",
+	  "occurPlaceNm" : "테스트 장소명",
+	  "occurAirportCd" : "ICN"
+  },
+  "reportAsr" : {
+  		"reportDtlTypeCd" : "ASR_01",
+        "runwayNm" : "277",
+        "altitudeCo" : 123,
+        "altitudeUnitCd" : "10",
+        "gustCo" : 55
+  },
+  "flight" : {
+  		"departureDt" : "20240904",
+        "flightNo" : "KE0036",
+        "regNo" : "HL7632",
+        "aircraftTypeCd" : "74H",
+        "arrivalAirportCd" : "ATL"
+  },
+  "flightCrew" : [{
+  		"empNo" : "0903324",
+        "crewTypeCd" : "PF"
+  },
+  {
+  		"empNo" : "1201340",
+        "crewTypeCd" : "PM"
+  }
+  ]
+}
+
+
+
+{
+"report" : {
+	  "reportTypeCd" : "CSR",
+	  "timezoneCd" : "kst",
+ 	  "subjectNm" : "테스트 CSR 제목",
+	  "occurTimezoneCd" : "kst",
+	  "occurTimezoneCd" : "kst",
+	  "occurPlaceNm" : "테스트 장소CSR 명",
+	  "occurAirportCd" : "GMP"
+  },
+  "reportCsr" : {
+  		"reportDtlTypeCd" : "CSR_01",
+		"patientTypeCd" : "10",
+		"occurTimeCd" : "20",
+		"mainSymptomCd" : "30",
+		"doctorTreatmentCd" : "40",
+		"documentCd" : "50",
+		"inflightOccurLocationCd" : "60"
+  },
+  "reportDtl" : [{
+  		"reportDtlInfoTypeCd" : "CSR_01",
+  		"involveCd" : "100004602",
+        "empNo" : "1201340"
+  },{
+  		"reportDtlInfoTypeCd" : "CSR_01",
+  		"involveCd" : "100004603",
+        "empNo" : "1201345"
+  },
+  {
+  		"reportDtlInfoTypeCd" : "CSR_02",
+  		"involveCd" : "100004601",
+        "paxNm" : "홍길동",
+        "genderCd" : "10",
+        "ageCo" : 22,
+        "nationNm" : "KOR",
+        "seatNm" : "3B"
+  }
+  ],
+  "flight" : {
+  		"departureDt" : "20240904",
+        "flightNo" : "KE0036",
+        "regNo" : "HL7632",
+        "aircraftTypeCd" : "74H",
+        "arrivalAirportCd" : "ATL"
+  },
+  "flightCrew" : [{
+  		"empNo" : "0903324",
+        "crewTypeCd" : "PF"
+  },
+  {
+  		"empNo" : "1201340",
+        "crewTypeCd" : "PM"
+  }
+  ]
+}
+
+//////////////////레포트 수정//////////////////////////
+{
+    "flight": {
+      "regUserId": "1",
+      "regUserNm": null,
+      "regDttm": "2024-09-05T15:00:00.000+00:00",
+      "updUserId": "1",
+      "updUserNm": null,
+      "updDttm": "2024-09-05T15:00:00.000+00:00",
+      "reportId": 115523,
+      "departureDt": "20240904",
+      "flightNo": "KE0036",
+      "regNo": "HL7632",
+      "aircraftTypeCd": "74H",
+      "departureAirportCd": null,
+      "arrivalAirportCd": "ATL",
+      "divertAirportCd": null,
+      "stdTime": null,
+      "staTime": null,
+      "atdTime": null,
+      "ataTime": null,
+      "delayedMinCo": 0,
+      "supplyNm": null,
+      "checkinNm": null,
+      "departureLocDttm": null,
+      "stdLocTime": null,
+      "staLocTime": null,
+      "atdLocTime": null,
+      "ataLocTime": null,
+      "fdmFileNoNm": null,
+      "takeoffRwyNm": null,
+      "landingRwyNm": null,
+      "pfDutyNm": null,
+      "pmDutyNm": null,
+      "pfFlightTimeCo": 0,
+      "pmFlightTimeCo": 0
+    },
+    "report": {
+      "regUserId": "1",
+      "regUserNm": "관리자",
+      "regDttm": null,
+      "updUserId": "1",
+      "updUserNm": null,
+      "updDttm": null,
+      "reportId": 1,
+      "reportDocno": "",
+      "reportTypeCd": "ASR",
+      "reportTypeKor": null,
+      "reportTypeEng": null,
+      "empNo": "ADMIN",
+      "subjectNm": "테스트 제목 업데이트 수정",
+      "timezoneCd": "kst",
+      "timezoneKor": "KST",
+      "timezoneEng": "KST",
+      "reportPhaseCd": "reporting",
+      "reportPhaseKor": "보고서 작성",
+      "reportPhaseEng": "Reporting",
+      "reportStatusCd": "Draft",
+      "reportStatusKor": null,
+      "reportStatusEng": null,
+      "regDt": "20240906",
+      "changeDt": "20240906",
+      "delDt": "",
+      "finalSubmittedYn": "N",
+      "finalSubmittedDt": "",
+      "viewSn": 0,
+      "occurDttm": null,
+      "occurTimezoneCd": "kst",
+      "occurTimezoneKor": "KST",
+      "occurTimezoneEng": "KST",
+      "occurPlaceNm": "테스트 장소명",
+      "occurAirportCd": "ICN",
+      "descriptionTxtcn": null,
+      "fileGroupSeq": 0
+    },
+    "flightCrew": [
+      {
+        "regUserId": "1",
+        "regUserNm": null,
+        "regDttm": "2024-09-05T15:00:00.000+00:00",
+        "updUserId": "1",
+        "updUserNm": null,
+        "updDttm": "2024-09-05T15:00:00.000+00:00",
+        "reportId": 1,
+        "empNo": "0903324",
+        "crewTypeCd": "PF"
+      },
+      {
+        "regUserId": "1",
+        "regUserNm": null,
+        "regDttm": "2024-09-05T15:00:00.000+00:00",
+        "updUserId": "1",
+        "updUserNm": null,
+        "updDttm": "2024-09-05T15:00:00.000+00:00",
+        "reportId": 1,
+        "empNo": "1201340",
+        "crewTypeCd": "PM"
+      }
+    ],
+    "reportAsr": {
+      "regUserId": "1",
+      "regUserNm": null,
+      "regDttm": null,
+      "updUserId": "1",
+      "updUserNm": null,
+      "updDttm": null,
+      "reportId": 1,
+      "reportDtlTypeCd": "ASR_01",
+      "runwayNm": "277",
+      "flightPhaseCd": null,
+      "altitudeCo": 333,
+      "altitudeUnitCd": "10",
+      "speedCo": 0,
+      "speedUnitCd": null,
+      "metCd": null,
+      "windOneCo": 444,
+      "windTwoCo": 555,
+      "gustCo": 222,
+      "visibilityNm": null,
+      "cloudNm": null,
+      "altimeterCo": 0,
+      "altimeterUnitCd": null,
+      "tempCo": 0,
+      "weatherCdarr": null,
+      "birdTypeNm": null,
+      "birdSizeCd": null,
+      "birdCoCd": null,
+      "struckBirdCoCd": null,
+      "timeTypeCd": null,
+      "landingLightYn": "Y",
+      "pilotWarnedYn": "Y",
+      "impactTimeNm": null,
+      "birdDescriptionCn": null
+    }
+  }
+
+
+//////////////////////레포트검색//////////////////////////
+{
+  "pageNum": 1,
+  "pageSize": 10,
+  "reportTypeCd": "ASR,CSR",
+  "reportStatusCd": "Draft",
+  "subjectNm": "테스트"
+}
+
+
+//////////////////////////끝//////////////////////////////
+
+
+
+
+
+RSR - 장소 테이블
+SELECT * FROM ke.ke_place
+

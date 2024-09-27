@@ -1,0 +1,30 @@
+AvnSafetyReportController.java
+
+AvnSafetyReportServiceImpl.java
+
+TbAvnReportDto.java : 'report'
+
+TbAvnReportFlightDto.java : 'flight'
+
+List<Map<String, Object>> flightCrewList : 'flightCrew'
+
+TbAvnReportAsrDto.java : 'asr'
+
+TbAvnReportCsrDto.java : 'csr'
+ -List<Map<String, Object>> reportDtlList : 'reportDtl'
+  => TbAvnReportCsrDtlInfoDto.java
+
+TbAvnReportMsrDto.java : 'msr'
+ -List<Map<String, Object>> reportDtlList : 'reportDtl'
+  => TbAvnReportMsrDtlInfoDto.java
+
+TbAvnReportGsrDto.java : 'gsr'
+ -List<Map<String, Object>> reportDtlList : 'reportDtl'
+  => TbAvnReportGsrDtlInfoDto.java
+
+TbAvnReportHzrDto.java : 'hzr'
+
+TbAvnReportDsrDto.java : 'dsr'
+
+TbAvnReportRsrDto.java : 'rsr'
+

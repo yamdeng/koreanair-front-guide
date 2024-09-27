@@ -1,0 +1,36 @@
+### 보고서작성 서버 문의사항 ###
+
+
+1.TbAvnReportCsrDto.smokeDetectorAlarmActivateCd 코드로 사용않함
+ -흡연에서는 Y / N 으로만 저장
+ -설비/정비에서는 Y / N / none로 저장
+
+
+
+
+// CODE_GRP_053, CODE_GRP_056, CODE_GRP_057, CODE_GRP_058, CODE_GRP_169
+// CODE_GRP_061, CODE_GRP_062, CODE_GRP_063, CODE_GRP_170, CODE_GRP_168, CODE_GRP_160
+// CODE_GRP_157, CODE_GRP_059, CODE_GRP_158, CODE_GRP_043
+
+"empNo": "ADMIN",
+"reportPhaseCd": "reporting",
+"reportStatusCd": "Draft",
+"regDt": "20240914",
+"changeDt": "20240914",
+"finalSubmittedYn": "N"
+
+4.CSR에서 flightCrew 날릴 경우 crewTypeCd 코드를 선택하는 UI가 없어서 날리지 않고 있는데 기본값이 존재하는지?
+
+5.csr 상세 오류 : code 테이블 조인 누락
+
+6.reportDtl(csr)
+6-1.empNo인 경우는 사용자 정보 라벨 필요
+6-2.현재 code에 해당하는 라벨정보가 존재하지 않아보임
+
+7.TbAvnReportCsrDto.paxClsCd(승객클래스코드) : CODE_GRP_103 으로 주석 변경 필요한지 검토
+
+8.TbAvnReportCsrDto.actKindCd(행위종류코드) : CODE_GRP_029 으로 주석 변경 필요한지 검토
+
+9.TbAvnReportGsrDto code 라벨 속성이 존재하지 않음
+
+
