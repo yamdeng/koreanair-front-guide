@@ -1,5 +1,75 @@
 -- public.v_1st_risk_assessment_viewlist source
 
+CREATE OR REPLACE VIEW public.v_report_group_list
+AS SELECT grinfo.group_id AS id,
+    grinfo.report_id,
+    grinfo.report_type,
+    grinfo.phase,
+    grinfo.state_type,
+    grinfo.assessment_notes,
+    grinfo.is_statistics_only,
+    grinfo.ear_no,
+    grinfo.is_hf,
+    grinfo.is_avn_hzd,
+    grinfo.is_ocu_hzd,
+    grinfo.is_sfty_hzd,
+    grinfo.is_lsc_close,
+    grinfo.is_ocu_close,
+    rpt.report_docno AS doc_no,
+    rpt.subject_nm AS subject,
+    rpt.emp_no,
+    rpt.work_scope_cd AS work_type,
+    rpt.report_phase_cd,
+    rpt.report_status_cd,
+    rpt.timezone_cd AS time_zone,
+    rpt.final_submitted_yn AS is_submitted,
+    rpt.final_submitted_dttm AS submitted_at,
+    rpt.del_dttm AS deleted_at,
+    rpt.view_sn AS view_order,
+    rpt.reg_dttm,
+    rpt.upd_dttm,
+    rpt.occur_dttm,
+    rpt.description_txtcn,
+    rpt.occur_place_nm,
+    rpt.occur_airport_cd,
+    rpt.reg_dt
+   FROM ( SELECT gr.id AS group_id,
+            grlist.report_id,
+            gr.report_type,
+            gr.phase,
+            gr.state_type,
+            gr.assessment_notes,
+            gr.is_statistics_only,
+            gr.ear_no,
+            gr.is_hf,
+            gr.is_avn_hzd,
+            gr.is_ocu_hzd,
+            gr.is_sfty_hzd,
+            gr.is_lsc_close,
+            gr.is_ocu_close,
+            gr.time_zone,
+            gr.reg_dttm,
+            gr.reg_user_id,
+            gr.upd_dttm,
+            gr.upd_user_id
+           FROM tb_avn_sm_group_list grlist
+             JOIN tb_avn_sm_group gr ON grlist.group_id = gr.id
+          WHERE grlist.is_main_report::text = 'Y'::text) grinfo,
+    tb_avn_report rpt
+  WHERE grinfo.report_id = rpt.report_id AND rpt.del_dttm IS NULL;
+
+-- public.v_lsc_member source
+
+CREATE OR REPLACE VIEW public.v_lsc_member
+AS SELECT sr.id AS group_id,
+    src.emp_no AS manager_emp_no,
+    sl.emp_no,
+    sl.member_type
+   FROM v_report_group_list sr
+     JOIN tb_avn_sm_reception src ON sr.id = src.group_id
+     JOIN tb_avn_sm_lsc sl ON src.id = sl.reception_id
+  WHERE sr.deleted_at IS NULL AND src.deleted_at IS NULL AND sl.deleted_at IS NULL;
+
 CREATE OR REPLACE VIEW public.v_1st_risk_assessment_viewlist
 AS SELECT sr.id,
     sr.id AS report_id,
@@ -63,6 +133,249 @@ AS SELECT sr.id,
      LEFT JOIN v_lsc_member vlm ON vlm.group_id = sr.id AND vlm.member_type::text = 'leader'::text
   WHERE sr.report_type::text <> 'rsr'::text AND smr.receipted_at IS NOT NULL AND sr.deleted_at IS NULL;
 
+
+-- public.v_sect_info source
+
+CREATE OR REPLACE VIEW public.v_sect_info
+AS WITH RECURSIVE high_tree(dept_id, upper_dept_cd, dept_cd, name_kor, name_eng, full_path, tree_type, sort_order, level, path, sort) AS (
+         SELECT a.dept_id,
+            a.upper_dept_cd,
+            a.dept_cd,
+            a.name_kor,
+            a.name_eng,
+            a.full_path,
+            a.tree_type,
+            a.sort_order,
+            0 AS level,
+            ARRAY[TRIM(BOTH FROM a.dept_cd::character varying)] AS "array",
+            '0'::text AS sort,
+            b.sect_cd
+           FROM tb_sys_dept a
+             JOIN ( SELECT tb_test.menu_id,
+                    tb_test.sect_cd,
+                    tb_test.hd_cd,
+                    tb_test.dept_cd
+                   FROM tb_test) b ON a.dept_cd::text = b.dept_cd::text
+        UNION ALL
+         SELECT a.dept_id,
+            a.upper_dept_cd,
+            a.dept_cd,
+            a.name_kor,
+            a.name_eng,
+            a.full_path,
+            a.tree_type,
+            a.sort_order,
+            t.level + 1 AS level,
+            t.path || TRIM(BOTH FROM a.sort_order::character varying::text || a.dept_cd::character varying::text) AS path,
+            t.sort || TRIM(BOTH FROM a.sort_order::character varying::text || a.dept_cd::character varying::text) AS sort,
+            t.sect_cd
+           FROM tb_sys_dept a
+             JOIN high_tree t ON a.dept_cd::text = t.upper_dept_cd::character varying::text
+          WHERE 1 = 1 AND NOT (EXISTS ( SELECT 1
+                   FROM tb_test b
+                  WHERE b.dept_cd::text = a.dept_cd::text AND t.sect_cd::text = b.sect_cd::text)) AND a.full_path::text ~~ '900|10000|10001|%'::text
+        ), high_data AS (
+         SELECT high_tree.dept_id,
+            high_tree.upper_dept_cd,
+            high_tree.dept_cd,
+            high_tree.name_kor,
+            high_tree.name_eng,
+            high_tree.full_path,
+            high_tree.tree_type,
+            high_tree.sort_order,
+            high_tree.level,
+            high_tree.path,
+            high_tree.sort,
+            high_tree.sect_cd
+           FROM high_tree
+        ), low_tree(dept_id, upper_dept_cd, dept_cd, name_kor, name_eng, full_path, tree_type, sort_order, level, path, sort) AS (
+         SELECT a.dept_id,
+            a.upper_dept_cd,
+            a.dept_cd,
+            a.name_kor,
+            a.name_eng,
+            a.full_path,
+            a.tree_type,
+            a.sort_order,
+            0 AS level,
+            ARRAY[TRIM(BOTH FROM a.dept_cd::character varying)] AS "array",
+            '0'::text AS sort,
+            b.sect_cd
+           FROM tb_sys_dept a
+             JOIN ( SELECT tb_test.menu_id,
+                    tb_test.sect_cd,
+                    tb_test.hd_cd,
+                    tb_test.dept_cd
+                   FROM tb_test) b ON a.dept_cd::text = b.dept_cd::text
+        UNION ALL
+         SELECT a.dept_id,
+            a.upper_dept_cd,
+            a.dept_cd,
+            a.name_kor,
+            a.name_eng,
+            a.full_path,
+            a.tree_type,
+            a.sort_order,
+            t.level + 1 AS level,
+            t.path || TRIM(BOTH FROM a.sort_order::character varying::text || a.dept_cd::character varying::text) AS path,
+            t.sort || TRIM(BOTH FROM a.sort_order::character varying::text || a.dept_cd::character varying::text) AS sort,
+            t.sect_cd
+           FROM tb_sys_dept a
+             JOIN low_tree t ON a.upper_dept_cd::text = t.dept_cd::character varying::text
+          WHERE 1 = 1 AND NOT (EXISTS ( SELECT 1
+                   FROM tb_test b
+                  WHERE b.dept_cd::text = a.dept_cd::text)) AND a.full_path::text ~~ '900|10000|10001|%'::text
+        ), low_data AS (
+         SELECT low_tree.dept_id,
+            low_tree.upper_dept_cd,
+            low_tree.dept_cd,
+            low_tree.name_kor,
+            low_tree.name_eng,
+            low_tree.full_path,
+            low_tree.tree_type,
+            low_tree.sort_order,
+            low_tree.level,
+            low_tree.path,
+            low_tree.sort,
+            low_tree.sect_cd
+           FROM low_tree
+        ), all_data AS (
+         SELECT low_data.dept_id,
+            low_data.upper_dept_cd,
+            low_data.dept_cd,
+            low_data.name_kor,
+            low_data.name_eng,
+            low_data.full_path,
+            low_data.tree_type,
+            low_data.sort_order,
+            low_data.level,
+            low_data.path,
+            low_data.sort,
+            low_data.sect_cd
+           FROM low_data
+        UNION
+         SELECT high_data.dept_id,
+            high_data.upper_dept_cd,
+            high_data.dept_cd,
+            high_data.name_kor,
+            high_data.name_eng,
+            high_data.full_path,
+            high_data.tree_type,
+            high_data.sort_order,
+            high_data.level,
+            high_data.path,
+            high_data.sort,
+            high_data.sect_cd
+           FROM high_data
+        ), w_data AS (
+         SELECT max(a.dept_id) AS dept_id,
+            max(a.upper_dept_cd::text) AS upper_dept_cd_gubun,
+            max(
+                CASE
+                    WHEN a.upper_dept_cd::text = 'COO'::text THEN a.sect_cd
+                    ELSE a.upper_dept_cd
+                END::text) AS upper_dept_cd,
+            max(a.dept_cd::text) AS dept_cd,
+            max(
+                CASE
+                    WHEN a.upper_dept_cd::text = 'COO'::text THEN a.sect_cd::text
+                    ELSE a.upper_dept_cd::text || a.sect_cd::text
+                END) AS upper_menu_id,
+            max(a.dept_cd::text) || a.sect_cd::text AS menu_id,
+            max(a.name_kor::text) AS name_kor,
+            max(a.name_eng::text) AS name_eng,
+            max(a.full_path::text) AS full_path,
+            max(a.tree_type::text) AS tree_type,
+            max(a.sort_order) AS sort_order,
+            max(a.level) AS level,
+            max(a.path) AS path,
+            max(a.sort) AS sort,
+            max(a.sect_cd::text) AS sect_cd
+           FROM all_data a
+             LEFT JOIN tb_test b ON a.dept_cd::text = b.hd_cd::text
+          GROUP BY a.dept_cd, a.full_path, a.sect_cd
+          ORDER BY a.full_path
+        ), dept_tree(dept_id, upper_dept_cd, dept_cd, name_kor, name_eng, full_path, tree_type, sort_order, level, path, sort) AS (
+         SELECT 1 AS dept_id,
+            'COO'::character varying AS upper_dept_cd,
+            a.code_id::character varying AS dept_cd,
+            a.code_name_kor AS name_kor,
+            a.code_name_kor AS name_eng,
+            '900|10000|10001'::character varying AS full_path,
+            'F'::character varying AS tree_type,
+            '999'::character varying AS sort_order,
+            0 AS level,
+            ARRAY[TRIM(BOTH FROM a.code_id::character varying)] AS "array",
+            a.code_id::character varying AS sort
+           FROM tb_sys_code a
+          WHERE a.code_grp_id::text = 'CODE_GRP_OC001'::text
+        UNION ALL
+         SELECT a.dept_id,
+            a.upper_dept_cd,
+            a.dept_cd,
+            a.name_kor,
+            a.name_eng,
+            a.full_path,
+            a.tree_type,
+            a.sort_order,
+            t.level + 1 AS level,
+            t.path || TRIM(BOTH FROM a.sort_order::text || a.dept_cd::character varying::text),
+            t.sort::text || TRIM(BOTH FROM a.sort_order::text || a.dept_cd::character varying::text) AS sort
+           FROM ( SELECT a_1.dept_id,
+                        CASE
+                            WHEN a_1.dept_cd::text = 'SELDF'::text THEN 'DF'::character varying
+                            WHEN a_1.dept_cd::text = 'SELDC'::text THEN 'DC'::character varying
+                            WHEN a_1.dept_cd::text = 'SELDB'::text THEN 'DB'::character varying
+                            WHEN a_1.dept_cd::text = 'SELDU'::text THEN 'DU'::character varying
+                            WHEN a_1.dept_cd::text = 'SELDM'::text THEN 'DM'::character varying
+                            ELSE a_1.upper_dept_cd
+                        END AS upper_dept_cd,
+                    a_1.dept_cd,
+                    a_1.name_kor,
+                    a_1.name_eng,
+                    a_1.full_path,
+                    a_1.tree_type,
+                    a_1.sort_order::character varying AS sort_order
+                   FROM tb_sys_dept a_1) a
+             JOIN dept_tree t ON a.upper_dept_cd::text = t.dept_cd::text
+          WHERE 1 = 1 AND NOT (EXISTS ( SELECT 1
+                   FROM tb_test aa
+                  WHERE a.dept_cd::text = aa.dept_cd::text))
+        )
+ SELECT dept_cd,
+    max(dept_id) AS dept_id,
+    max(name_kor::text) AS name_kor,
+    max("substring"(sort::text, 1, 2)) AS sect_cd,
+    max(fn_getcomcdnm('CODE_GRP_OC001'::character varying, "substring"(sort::text, 1, 2)::character varying)::text) AS sect_nm
+   FROM ( SELECT a.dept_id,
+            a.upper_dept_cd,
+            a.dept_cd,
+            a.upper_dept_cd AS upper_menu_id,
+            a.dept_cd AS menu_id,
+            a.name_kor,
+            a.name_eng,
+            a.full_path,
+            a.tree_type,
+            a.sort_order,
+            a.sort
+           FROM dept_tree a
+          WHERE 1 = 1
+        UNION ALL
+         SELECT w_data.dept_id,
+            w_data.upper_dept_cd,
+            w_data.dept_cd,
+            w_data.upper_menu_id,
+            w_data.menu_id,
+            w_data.name_kor,
+            w_data.name_eng,
+            w_data.full_path,
+            w_data.tree_type,
+            w_data.sort_order::character varying AS sort_order,
+            (w_data.sect_cd || '0'::text) || TRIM(BOTH FROM w_data.sort_order::character varying::text || w_data.dept_cd::character varying::text) AS sort
+           FROM w_data
+  ORDER BY 8) unnamed_subquery
+  WHERE 1 = 1
+  GROUP BY dept_cd;
 
 -- public.v_dept_tree source
 
@@ -456,19 +769,6 @@ AS SELECT sl.id,
   WHERE sl.deleted_at IS NULL;
 
 
--- public.v_lsc_member source
-
-CREATE OR REPLACE VIEW public.v_lsc_member
-AS SELECT sr.id AS group_id,
-    src.emp_no AS manager_emp_no,
-    sl.emp_no,
-    sl.member_type
-   FROM v_report_group_list sr
-     JOIN tb_avn_sm_reception src ON sr.id = src.group_id
-     JOIN tb_avn_sm_lsc sl ON src.id = sl.reception_id
-  WHERE sr.deleted_at IS NULL AND src.deleted_at IS NULL AND sl.deleted_at IS NULL;
-
-
 -- public.v_mitigation source
 
 CREATE OR REPLACE VIEW public.v_mitigation
@@ -739,66 +1039,6 @@ AS SELECT grinfo.group_id AS id,
   WHERE grinfo.report_id = rpt.report_id AND rpt.del_dttm IS NULL;
 
 
--- public.v_report_group_list source
-
-CREATE OR REPLACE VIEW public.v_report_group_list
-AS SELECT grinfo.group_id AS id,
-    grinfo.report_id,
-    grinfo.report_type,
-    grinfo.phase,
-    grinfo.state_type,
-    grinfo.assessment_notes,
-    grinfo.is_statistics_only,
-    grinfo.ear_no,
-    grinfo.is_hf,
-    grinfo.is_avn_hzd,
-    grinfo.is_ocu_hzd,
-    grinfo.is_sfty_hzd,
-    grinfo.is_lsc_close,
-    grinfo.is_ocu_close,
-    rpt.report_docno AS doc_no,
-    rpt.subject_nm AS subject,
-    rpt.emp_no,
-    rpt.work_scope_cd AS work_type,
-    rpt.report_phase_cd,
-    rpt.report_status_cd,
-    rpt.timezone_cd AS time_zone,
-    rpt.final_submitted_yn AS is_submitted,
-    rpt.final_submitted_dttm AS submitted_at,
-    rpt.del_dttm AS deleted_at,
-    rpt.view_sn AS view_order,
-    rpt.reg_dttm,
-    rpt.upd_dttm,
-    rpt.occur_dttm,
-    rpt.description_txtcn,
-    rpt.occur_place_nm,
-    rpt.occur_airport_cd,
-    rpt.reg_dt
-   FROM ( SELECT gr.id AS group_id,
-            grlist.report_id,
-            gr.report_type,
-            gr.phase,
-            gr.state_type,
-            gr.assessment_notes,
-            gr.is_statistics_only,
-            gr.ear_no,
-            gr.is_hf,
-            gr.is_avn_hzd,
-            gr.is_ocu_hzd,
-            gr.is_sfty_hzd,
-            gr.is_lsc_close,
-            gr.is_ocu_close,
-            gr.time_zone,
-            gr.reg_dttm,
-            gr.reg_user_id,
-            gr.upd_dttm,
-            gr.upd_user_id
-           FROM tb_avn_sm_group_list grlist
-             JOIN tb_avn_sm_group gr ON grlist.group_id = gr.id
-          WHERE grlist.is_main_report::text = 'Y'::text) grinfo,
-    tb_avn_report rpt
-  WHERE grinfo.report_id = rpt.report_id AND rpt.del_dttm IS NULL;
-
 
 -- public.v_report_hazard_list source
 
@@ -844,6 +1084,98 @@ AS SELECT smh.id,
            FROM tb_avn_sm_hazard_approval_log t1) shal ON shal.hazard_id = smh.id AND shal.rnum = 1
   WHERE smh.deleted_at IS NULL;
 
+
+-- public.v_viewlist_gsr source
+
+CREATE OR REPLACE VIEW public.v_viewlist_gsr
+AS SELECT DISTINCT vs.id,
+    vs.report_id,
+    vs.report_type,
+    vs.reported_by,
+    vs.created_at,
+    vs.doc_no,
+    vs.subject,
+    vs.phase,
+    vs.state,
+    vs.submitted_at,
+    vs.departure_dt,
+    vs.flight_no,
+    vs.reg_no,
+    vs.aircraft_type_cd,
+    vs.fleet_code,
+    vs.departure_airport_cd,
+    vs.arrival_airport_cd,
+    vs.divert_airport_cd,
+    vs.supply_nm,
+    vs.checkin_nm,
+    vs.ata_adapter_type,
+    vs.ata_chapter_name_ko,
+    vs.ata_chapter_name_en,
+    vs.control_dept_type,
+    vs.control_dept_name_ko,
+    vs.control_dept_name_en,
+    vs.classification,
+    vs.classification_name_ko,
+    vs.classification_name_en,
+    vs.event_id AS event_type_id,
+    vs.event_name_ko,
+    vs.event_name_en,
+    vs.event_summary,
+    vs.event_followup,
+    vs.receipted_at,
+    vs.timezone,
+    vs.occur_place_nm,
+    vs.occur_airport_cd AS occurrence_airport,
+    vs.occur_dttm,
+    vs.occur_timezone_cd,
+    ev.report_dtl_type_cd AS event_category,
+    vs.closed_at AS report_closed_at,
+    vs.reported_by_user_name_ko,
+    vs.reported_by_user_name_en,
+    vs.receipted_by,
+    vs.receipted_by_user_name_ko,
+    vs.receipted_by_user_name_en,
+    vs.status_ko,
+    vs.status_en,
+    vs.phase_name_ko,
+    vs.phase_name_en,
+    vs.departure_loc_dttm,
+    vs.reason,
+    vs.reception_id,
+    ev.occur_location_cd,
+    ev.find_notify_cd,
+    ev.find_type_cd,
+    ev.operation_phase_cd,
+    ev.ramp_handling_cd,
+    ev.aircraft_damage_cause_cd,
+    ev.ramp_status_cd,
+    ev.weather_cdarr,
+    ev.injury_yn,
+    ev.injury_cn,
+    ev.car_cn,
+    ev.check_kind_cd,
+    ev.control_authority_cd,
+    ev.reldept_cd,
+    ev.inspection_area_cd,
+    ev.inspection_result_cd,
+    ev.etc_cn,
+    ev.irre_type_cd,
+    ev.cgo_yn,
+    ev.awb_nbr_nm,
+    ev.pc_swt_nm,
+    ev.commondity_nm,
+    ev.dimension_nm,
+    ev.orgstn_nm,
+    ev.destination_nm,
+    ev.imp_code_nm,
+    ev.unid_nbr_nm,
+    ev.psn_nm,
+    ev.occur_cls_nm,
+    ev.uld_nbr_nm,
+    ev.loading_pos_nm,
+    ev.selft_auth_yn
+   FROM v_report_search_receipted_or_voided vs
+     JOIN tb_avn_report_gsr ev ON ev.report_id = vs.report_id;
 
 -- public.v_report_receipt_viewlist source
 
@@ -1046,6 +1378,97 @@ AS SELECT sr.id,
   WHERE ev.use_yn::text = 'Y'::text AND re.is_receipted::text = 'Y'::text AND re.receipted_at IS NOT NULL;
 
 
+-- public.v_viewlist_csr source
+
+CREATE OR REPLACE VIEW public.v_viewlist_csr
+AS SELECT vs.id,
+    vs.report_type,
+    vs.reported_by,
+    vs.doc_no,
+    vs.subject,
+    vs.phase,
+    vs.state,
+    vs.submitted_at,
+    vs.departure_dt,
+    vs.timezone,
+    vs.flight_no,
+    vs.reg_no,
+    vs.aircraft_type_cd,
+    vs.fleet_code,
+    vs.departure_airport_cd,
+    vs.arrival_airport_cd,
+    vs.divert_airport_cd,
+    vs.supply_nm,
+    vs.checkin_nm,
+    vs.ata_adapter_type,
+    vs.ata_chapter_name_ko,
+    vs.ata_chapter_name_en,
+    vs.control_dept_type,
+    vs.control_dept_name_ko,
+    vs.control_dept_name_en,
+    vs.classification,
+    vs.classification_name_ko,
+    vs.classification_name_en,
+    vs.event_followup,
+    vs.event_summary,
+    vs.event_name_ko,
+    vs.event_name_en,
+    vs.receipted_at,
+    vs.occur_dttm,
+    vs.occur_airport_cd AS occurrence_airport,
+    ev.report_dtl_type_cd AS event_category,
+    vs.closed_at AS report_closed_at,
+    vs.reported_by_user_name_ko,
+    vs.reported_by_user_name_en,
+    vs.receipted_by,
+    vs.receipted_by_user_name_ko,
+    vs.receipted_by_user_name_en,
+    vs.status_ko,
+    vs.status_en,
+    vs.phase_name_ko,
+    vs.phase_name_en,
+    vs.departure_loc_dttm,
+    vs.reason,
+    ev.patient_type_cd,
+    ev.occur_time_cd,
+    ev.main_symptom_cd,
+    ev.doctor_treatment_cd,
+    ev.document_cd,
+    ev.inflight_occur_location_cd,
+    ev.injury_part_cdarr,
+    ev.seatbelt_view_yn,
+    ev.main_cause_cd,
+    ev.act_kind_cd,
+    ev.pax_cls_cd,
+    ev.cabin_occur_time,
+    ev.cabin_occur_timezone_cd,
+    ev.safety_inspection_type_cd,
+    ev.check_authority_base_cd,
+    ev.check_authority_cd,
+    ev.finding_cd,
+    ev.inspector_nm,
+    ev.ciga_kind_cdarr,
+    ev.evidence_seized_yn,
+    ev.police_called_yn,
+    ev.clue_cd,
+    ev.smoke_detector_alarm_activate_cd,
+    ev.cabin_log_yn,
+    ev.voluntary_deplane_yn,
+    ev.deplane_cause_cd,
+    ev.accompanied_pax_yn,
+    ev.delayed_yn,
+    ev.maintenance_defect_kind_cd,
+    ev.etc_briefing_kind_cd,
+    ev.etc_briefing_item_cd,
+    ev.fire_smoke_smell_cd,
+    ev.etc_cause_cd,
+    ev.use_medical_equip_cdarr,
+    ev.car_cdarr,
+    ev.add_car_cdarr,
+    ev.use_emergency_equip_cdarr
+   FROM v_report_search_receipted_or_voided vs
+     JOIN tb_avn_report_csr ev ON ev.report_id = vs.report_id;
+     
 -- public.v_report_search_submitted source
 
 CREATE OR REPLACE VIEW public.v_report_search_submitted
@@ -1103,250 +1526,6 @@ AS SELECT sr.id,
      LEFT JOIN LATERAL fn_report_last_step(sr.id) st(log_id, group_id, state, phase, step_code, stepped_by, reason, timezone, stepped_at) ON st.group_id = sr.id
      LEFT JOIN tb_sys_user fu ON fu.emp_no::text = sr.emp_no::text
   WHERE sr.deleted_at IS NULL AND sr.is_submitted::text = 'Y'::text AND sr.submitted_at IS NOT NULL;
-
-
--- public.v_sect_info source
-
-CREATE OR REPLACE VIEW public.v_sect_info
-AS WITH RECURSIVE high_tree(dept_id, upper_dept_cd, dept_cd, name_kor, name_eng, full_path, tree_type, sort_order, level, path, sort) AS (
-         SELECT a.dept_id,
-            a.upper_dept_cd,
-            a.dept_cd,
-            a.name_kor,
-            a.name_eng,
-            a.full_path,
-            a.tree_type,
-            a.sort_order,
-            0 AS level,
-            ARRAY[TRIM(BOTH FROM a.dept_cd::character varying)] AS "array",
-            '0'::text AS sort,
-            b.sect_cd
-           FROM tb_sys_dept a
-             JOIN ( SELECT tb_test.menu_id,
-                    tb_test.sect_cd,
-                    tb_test.hd_cd,
-                    tb_test.dept_cd
-                   FROM tb_test) b ON a.dept_cd::text = b.dept_cd::text
-        UNION ALL
-         SELECT a.dept_id,
-            a.upper_dept_cd,
-            a.dept_cd,
-            a.name_kor,
-            a.name_eng,
-            a.full_path,
-            a.tree_type,
-            a.sort_order,
-            t.level + 1 AS level,
-            t.path || TRIM(BOTH FROM a.sort_order::character varying::text || a.dept_cd::character varying::text) AS path,
-            t.sort || TRIM(BOTH FROM a.sort_order::character varying::text || a.dept_cd::character varying::text) AS sort,
-            t.sect_cd
-           FROM tb_sys_dept a
-             JOIN high_tree t ON a.dept_cd::text = t.upper_dept_cd::character varying::text
-          WHERE 1 = 1 AND NOT (EXISTS ( SELECT 1
-                   FROM tb_test b
-                  WHERE b.dept_cd::text = a.dept_cd::text AND t.sect_cd::text = b.sect_cd::text)) AND a.full_path::text ~~ '900|10000|10001|%'::text
-        ), high_data AS (
-         SELECT high_tree.dept_id,
-            high_tree.upper_dept_cd,
-            high_tree.dept_cd,
-            high_tree.name_kor,
-            high_tree.name_eng,
-            high_tree.full_path,
-            high_tree.tree_type,
-            high_tree.sort_order,
-            high_tree.level,
-            high_tree.path,
-            high_tree.sort,
-            high_tree.sect_cd
-           FROM high_tree
-        ), low_tree(dept_id, upper_dept_cd, dept_cd, name_kor, name_eng, full_path, tree_type, sort_order, level, path, sort) AS (
-         SELECT a.dept_id,
-            a.upper_dept_cd,
-            a.dept_cd,
-            a.name_kor,
-            a.name_eng,
-            a.full_path,
-            a.tree_type,
-            a.sort_order,
-            0 AS level,
-            ARRAY[TRIM(BOTH FROM a.dept_cd::character varying)] AS "array",
-            '0'::text AS sort,
-            b.sect_cd
-           FROM tb_sys_dept a
-             JOIN ( SELECT tb_test.menu_id,
-                    tb_test.sect_cd,
-                    tb_test.hd_cd,
-                    tb_test.dept_cd
-                   FROM tb_test) b ON a.dept_cd::text = b.dept_cd::text
-        UNION ALL
-         SELECT a.dept_id,
-            a.upper_dept_cd,
-            a.dept_cd,
-            a.name_kor,
-            a.name_eng,
-            a.full_path,
-            a.tree_type,
-            a.sort_order,
-            t.level + 1 AS level,
-            t.path || TRIM(BOTH FROM a.sort_order::character varying::text || a.dept_cd::character varying::text) AS path,
-            t.sort || TRIM(BOTH FROM a.sort_order::character varying::text || a.dept_cd::character varying::text) AS sort,
-            t.sect_cd
-           FROM tb_sys_dept a
-             JOIN low_tree t ON a.upper_dept_cd::text = t.dept_cd::character varying::text
-          WHERE 1 = 1 AND NOT (EXISTS ( SELECT 1
-                   FROM tb_test b
-                  WHERE b.dept_cd::text = a.dept_cd::text)) AND a.full_path::text ~~ '900|10000|10001|%'::text
-        ), low_data AS (
-         SELECT low_tree.dept_id,
-            low_tree.upper_dept_cd,
-            low_tree.dept_cd,
-            low_tree.name_kor,
-            low_tree.name_eng,
-            low_tree.full_path,
-            low_tree.tree_type,
-            low_tree.sort_order,
-            low_tree.level,
-            low_tree.path,
-            low_tree.sort,
-            low_tree.sect_cd
-           FROM low_tree
-        ), all_data AS (
-         SELECT low_data.dept_id,
-            low_data.upper_dept_cd,
-            low_data.dept_cd,
-            low_data.name_kor,
-            low_data.name_eng,
-            low_data.full_path,
-            low_data.tree_type,
-            low_data.sort_order,
-            low_data.level,
-            low_data.path,
-            low_data.sort,
-            low_data.sect_cd
-           FROM low_data
-        UNION
-         SELECT high_data.dept_id,
-            high_data.upper_dept_cd,
-            high_data.dept_cd,
-            high_data.name_kor,
-            high_data.name_eng,
-            high_data.full_path,
-            high_data.tree_type,
-            high_data.sort_order,
-            high_data.level,
-            high_data.path,
-            high_data.sort,
-            high_data.sect_cd
-           FROM high_data
-        ), w_data AS (
-         SELECT max(a.dept_id) AS dept_id,
-            max(a.upper_dept_cd::text) AS upper_dept_cd_gubun,
-            max(
-                CASE
-                    WHEN a.upper_dept_cd::text = 'COO'::text THEN a.sect_cd
-                    ELSE a.upper_dept_cd
-                END::text) AS upper_dept_cd,
-            max(a.dept_cd::text) AS dept_cd,
-            max(
-                CASE
-                    WHEN a.upper_dept_cd::text = 'COO'::text THEN a.sect_cd::text
-                    ELSE a.upper_dept_cd::text || a.sect_cd::text
-                END) AS upper_menu_id,
-            max(a.dept_cd::text) || a.sect_cd::text AS menu_id,
-            max(a.name_kor::text) AS name_kor,
-            max(a.name_eng::text) AS name_eng,
-            max(a.full_path::text) AS full_path,
-            max(a.tree_type::text) AS tree_type,
-            max(a.sort_order) AS sort_order,
-            max(a.level) AS level,
-            max(a.path) AS path,
-            max(a.sort) AS sort,
-            max(a.sect_cd::text) AS sect_cd
-           FROM all_data a
-             LEFT JOIN tb_test b ON a.dept_cd::text = b.hd_cd::text
-          GROUP BY a.dept_cd, a.full_path, a.sect_cd
-          ORDER BY a.full_path
-        ), dept_tree(dept_id, upper_dept_cd, dept_cd, name_kor, name_eng, full_path, tree_type, sort_order, level, path, sort) AS (
-         SELECT 1 AS dept_id,
-            'COO'::character varying AS upper_dept_cd,
-            a.code_id::character varying AS dept_cd,
-            a.code_name_kor AS name_kor,
-            a.code_name_kor AS name_eng,
-            '900|10000|10001'::character varying AS full_path,
-            'F'::character varying AS tree_type,
-            '999'::character varying AS sort_order,
-            0 AS level,
-            ARRAY[TRIM(BOTH FROM a.code_id::character varying)] AS "array",
-            a.code_id::character varying AS sort
-           FROM tb_sys_code a
-          WHERE a.code_grp_id::text = 'CODE_GRP_OC001'::text
-        UNION ALL
-         SELECT a.dept_id,
-            a.upper_dept_cd,
-            a.dept_cd,
-            a.name_kor,
-            a.name_eng,
-            a.full_path,
-            a.tree_type,
-            a.sort_order,
-            t.level + 1 AS level,
-            t.path || TRIM(BOTH FROM a.sort_order::text || a.dept_cd::character varying::text),
-            t.sort::text || TRIM(BOTH FROM a.sort_order::text || a.dept_cd::character varying::text) AS sort
-           FROM ( SELECT a_1.dept_id,
-                        CASE
-                            WHEN a_1.dept_cd::text = 'SELDF'::text THEN 'DF'::character varying
-                            WHEN a_1.dept_cd::text = 'SELDC'::text THEN 'DC'::character varying
-                            WHEN a_1.dept_cd::text = 'SELDB'::text THEN 'DB'::character varying
-                            WHEN a_1.dept_cd::text = 'SELDU'::text THEN 'DU'::character varying
-                            WHEN a_1.dept_cd::text = 'SELDM'::text THEN 'DM'::character varying
-                            ELSE a_1.upper_dept_cd
-                        END AS upper_dept_cd,
-                    a_1.dept_cd,
-                    a_1.name_kor,
-                    a_1.name_eng,
-                    a_1.full_path,
-                    a_1.tree_type,
-                    a_1.sort_order::character varying AS sort_order
-                   FROM tb_sys_dept a_1) a
-             JOIN dept_tree t ON a.upper_dept_cd::text = t.dept_cd::text
-          WHERE 1 = 1 AND NOT (EXISTS ( SELECT 1
-                   FROM tb_test aa
-                  WHERE a.dept_cd::text = aa.dept_cd::text))
-        )
- SELECT dept_cd,
-    max(dept_id) AS dept_id,
-    max(name_kor::text) AS name_kor,
-    max("substring"(sort::text, 1, 2)) AS sect_cd,
-    max(fn_getcomcdnm('CODE_GRP_OC001'::character varying, "substring"(sort::text, 1, 2)::character varying)::text) AS sect_nm
-   FROM ( SELECT a.dept_id,
-            a.upper_dept_cd,
-            a.dept_cd,
-            a.upper_dept_cd AS upper_menu_id,
-            a.dept_cd AS menu_id,
-            a.name_kor,
-            a.name_eng,
-            a.full_path,
-            a.tree_type,
-            a.sort_order,
-            a.sort
-           FROM dept_tree a
-          WHERE 1 = 1
-        UNION ALL
-         SELECT w_data.dept_id,
-            w_data.upper_dept_cd,
-            w_data.dept_cd,
-            w_data.upper_menu_id,
-            w_data.menu_id,
-            w_data.name_kor,
-            w_data.name_eng,
-            w_data.full_path,
-            w_data.tree_type,
-            w_data.sort_order::character varying AS sort_order,
-            (w_data.sect_cd || '0'::text) || TRIM(BOTH FROM w_data.sort_order::character varying::text || w_data.dept_cd::character varying::text) AS sort
-           FROM w_data
-  ORDER BY 8) unnamed_subquery
-  WHERE 1 = 1
-  GROUP BY dept_cd;
 
 
 -- public.v_user_post source
@@ -1719,98 +1898,6 @@ AS SELECT vvc.id,
      LEFT JOIN tb_sys_code ms ON ms.code_id::text = vvc.main_symptom_cd::text AND ms.code_grp_id::text = 'CODE_GRP_015'::text;
 
 
--- public.v_viewlist_csr source
-
-CREATE OR REPLACE VIEW public.v_viewlist_csr
-AS SELECT vs.id,
-    vs.report_type,
-    vs.reported_by,
-    vs.doc_no,
-    vs.subject,
-    vs.phase,
-    vs.state,
-    vs.submitted_at,
-    vs.departure_dt,
-    vs.timezone,
-    vs.flight_no,
-    vs.reg_no,
-    vs.aircraft_type_cd,
-    vs.fleet_code,
-    vs.departure_airport_cd,
-    vs.arrival_airport_cd,
-    vs.divert_airport_cd,
-    vs.supply_nm,
-    vs.checkin_nm,
-    vs.ata_adapter_type,
-    vs.ata_chapter_name_ko,
-    vs.ata_chapter_name_en,
-    vs.control_dept_type,
-    vs.control_dept_name_ko,
-    vs.control_dept_name_en,
-    vs.classification,
-    vs.classification_name_ko,
-    vs.classification_name_en,
-    vs.event_followup,
-    vs.event_summary,
-    vs.event_name_ko,
-    vs.event_name_en,
-    vs.receipted_at,
-    vs.occur_dttm,
-    vs.occur_airport_cd AS occurrence_airport,
-    ev.report_dtl_type_cd AS event_category,
-    vs.closed_at AS report_closed_at,
-    vs.reported_by_user_name_ko,
-    vs.reported_by_user_name_en,
-    vs.receipted_by,
-    vs.receipted_by_user_name_ko,
-    vs.receipted_by_user_name_en,
-    vs.status_ko,
-    vs.status_en,
-    vs.phase_name_ko,
-    vs.phase_name_en,
-    vs.departure_loc_dttm,
-    vs.reason,
-    ev.patient_type_cd,
-    ev.occur_time_cd,
-    ev.main_symptom_cd,
-    ev.doctor_treatment_cd,
-    ev.document_cd,
-    ev.inflight_occur_location_cd,
-    ev.injury_part_cdarr,
-    ev.seatbelt_view_yn,
-    ev.main_cause_cd,
-    ev.act_kind_cd,
-    ev.pax_cls_cd,
-    ev.cabin_occur_time,
-    ev.cabin_occur_timezone_cd,
-    ev.safety_inspection_type_cd,
-    ev.check_authority_base_cd,
-    ev.check_authority_cd,
-    ev.finding_cd,
-    ev.inspector_nm,
-    ev.ciga_kind_cdarr,
-    ev.evidence_seized_yn,
-    ev.police_called_yn,
-    ev.clue_cd,
-    ev.smoke_detector_alarm_activate_cd,
-    ev.cabin_log_yn,
-    ev.voluntary_deplane_yn,
-    ev.deplane_cause_cd,
-    ev.accompanied_pax_yn,
-    ev.delayed_yn,
-    ev.maintenance_defect_kind_cd,
-    ev.etc_briefing_kind_cd,
-    ev.etc_briefing_item_cd,
-    ev.fire_smoke_smell_cd,
-    ev.etc_cause_cd,
-    ev.use_medical_equip_cdarr,
-    ev.car_cdarr,
-    ev.add_car_cdarr,
-    ev.use_emergency_equip_cdarr
-   FROM v_report_search_receipted_or_voided vs
-     JOIN tb_avn_report_csr ev ON ev.report_id = vs.report_id;
-
-
 -- public.v_viewlist_damage_gsr source
 
 CREATE OR REPLACE VIEW public.v_viewlist_damage_gsr
@@ -2147,99 +2234,6 @@ AS SELECT sfh.risk_mgmt_id,
      JOIN v_hazard_by_lv khl ON khl.lv3_id = sfh.hazard_id
   WHERE sfh.foqa_risk_level IS NOT NULL AND sfh.occur IS NOT NULL AND sfh.related_doc IS NOT NULL
   GROUP BY sfh.risk_mgmt_id;
-
-
--- public.v_viewlist_gsr source
-
-CREATE OR REPLACE VIEW public.v_viewlist_gsr
-AS SELECT DISTINCT vs.id,
-    vs.report_id,
-    vs.report_type,
-    vs.reported_by,
-    vs.created_at,
-    vs.doc_no,
-    vs.subject,
-    vs.phase,
-    vs.state,
-    vs.submitted_at,
-    vs.departure_dt,
-    vs.flight_no,
-    vs.reg_no,
-    vs.aircraft_type_cd,
-    vs.fleet_code,
-    vs.departure_airport_cd,
-    vs.arrival_airport_cd,
-    vs.divert_airport_cd,
-    vs.supply_nm,
-    vs.checkin_nm,
-    vs.ata_adapter_type,
-    vs.ata_chapter_name_ko,
-    vs.ata_chapter_name_en,
-    vs.control_dept_type,
-    vs.control_dept_name_ko,
-    vs.control_dept_name_en,
-    vs.classification,
-    vs.classification_name_ko,
-    vs.classification_name_en,
-    vs.event_id AS event_type_id,
-    vs.event_name_ko,
-    vs.event_name_en,
-    vs.event_summary,
-    vs.event_followup,
-    vs.receipted_at,
-    vs.timezone,
-    vs.occur_place_nm,
-    vs.occur_airport_cd AS occurrence_airport,
-    vs.occur_dttm,
-    vs.occur_timezone_cd,
-    ev.report_dtl_type_cd AS event_category,
-    vs.closed_at AS report_closed_at,
-    vs.reported_by_user_name_ko,
-    vs.reported_by_user_name_en,
-    vs.receipted_by,
-    vs.receipted_by_user_name_ko,
-    vs.receipted_by_user_name_en,
-    vs.status_ko,
-    vs.status_en,
-    vs.phase_name_ko,
-    vs.phase_name_en,
-    vs.departure_loc_dttm,
-    vs.reason,
-    vs.reception_id,
-    ev.occur_location_cd,
-    ev.find_notify_cd,
-    ev.find_type_cd,
-    ev.operation_phase_cd,
-    ev.ramp_handling_cd,
-    ev.aircraft_damage_cause_cd,
-    ev.ramp_status_cd,
-    ev.weather_cdarr,
-    ev.injury_yn,
-    ev.injury_cn,
-    ev.car_cn,
-    ev.check_kind_cd,
-    ev.control_authority_cd,
-    ev.reldept_cd,
-    ev.inspection_area_cd,
-    ev.inspection_result_cd,
-    ev.etc_cn,
-    ev.irre_type_cd,
-    ev.cgo_yn,
-    ev.awb_nbr_nm,
-    ev.pc_swt_nm,
-    ev.commondity_nm,
-    ev.dimension_nm,
-    ev.orgstn_nm,
-    ev.destination_nm,
-    ev.imp_code_nm,
-    ev.unid_nbr_nm,
-    ev.psn_nm,
-    ev.occur_cls_nm,
-    ev.uld_nbr_nm,
-    ev.loading_pos_nm,
-    ev.selft_auth_yn
-   FROM v_report_search_receipted_or_voided vs
-     JOIN tb_avn_report_gsr ev ON ev.report_id = vs.report_id;
 
 
 -- public.v_viewlist_hzr source
