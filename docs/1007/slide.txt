@@ -1,0 +1,25 @@
+/* 슬라이더 전체를 감싸는 컨테이너 */
+.slider-container {
+  position: relative;
+  width: 80%; /* 원하는 너비 설정 */
+  margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* slick-dots를 슬라이더 내부로 이동시키기 */
+.slider-container .slick-dots {
+  position: absolute;
+  bottom: 20px; /* 슬라이더 안쪽으로 위치 조정 */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.slider-container .slick-dots li button:before {
+  font-size: 12px;
+  color: white; /* dot 색상 설정 */
+}
+
+.slider-container .slick-dots li.slick-active button:before {
+  color: #ff6347; /* 선택된 dot 색상 */
+}
