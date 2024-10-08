@@ -1,0 +1,66 @@
+### 팝업 모음 ###
+ -사유 팝업 : TextArea 팝업 -> 17
+ -이메일 보내기 팝업 -> 23
+ -보고서 삭제 -> 23 
+ -보고서검색 -> 28, 39
+ -리포트찾기 -> 37
+ -LSC Group 정보 설정 -> 38
+ -우측에 댓글 영역 -> 79
+ -수행 담당 지정 -> 86
+ -경감조치 책임담당자 지정 -> 94
+ -위험평가팝업 -> 109
+
+
+### 페이지 목록 ###
+ -ReportViewContainer.tsx : 루트 리포트 상세 컴포넌트
+  : 아코디언 영역이 해당 소스에 존재함
+ -ReportViewTop.tsx : 상단 영역 컴포넌트
+ -ReportViewContent.tsx : 내용보기
+ -ReportViewAnalysContainer.tsx : 보고서분석 root container
+
+ -ReportViewReception.tsx : 1단계 보고서 접수
+
+ -ReportViewFirstRiskAssessment.tsx : 2단계 1차 위험도 평가
+ -ReportViewFirstRiskReview.tsx : 2단계 1차 위험도 SRC리뷰
+
+ -ReportViewMitigationAssign.tsx : 3단계 경감조치 > 경감지정
+ -ReportViewMitigationAccept.tsx : 3단계 경감조치 > 경감계획
+ -ReportViewMitigationResult.tsx : 3단계 경감조치 > 경감실행
+
+ -ReportViewSecondRiskAssessment.tsx : 4단계 2차 위험도 평가
+ -ReportViewSecondRiskReview.tsx : 4단계 2차 위험도 SRC리뷰
+
+ -ReportViewHazardClose.tsx : 5단계 종결
+
+
+
+### 각 분류별 상세 페이지 ###
+ -ReportDetailAsr.tsx : ASR 상세 페이지
+ -ReportDetailCsr.tsx : CSR 상세 페이지
+ ...
+
+
+
+### store 목록 ###
+ -ReportViewContainerStore.ts : root store
+  1.contentExpanded
+  2.analysExpaned
+
+ -ReportViewContentStore.ts : 내용 보기
+ -ReportAnalysContainerStore.ts : 보고서분석 root store
+
+ -ReportViewReceptionStore.ts : 보고서 접수 store
+
+ -ReportViewFirstRiskAssessmentStore.ts : 2단계 1차 위험도 평가 store
+ -ReportViewFirstRiskReviewStore.ts : 2단계 1차 위험도 SRC리뷰 store
+
+ -ReportViewMitigationAssignStore.ts : 3단계 경감조치 > 경감지정 store
+ -ReportViewMitigationAcceptStore.ts : 3단계 경감조치 > 경감계획 store
+ -ReportViewMitigationResultStore.ts : 3단계 경감조치 > 경감실행 store
+
+ -ReportViewSecondiskAssessmentStore.ts : 4단계 2차 위험도 평가 store
+ -ReportViewSecondRiskReviewStore.ts : 4단계 2차 위험도 SRC리뷰 store
+
+ -ReportViewHazardClose.ts : 5단계 종결
+
+

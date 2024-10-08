@@ -1,0 +1,26 @@
+### 보고서분석 단계 ###
+
+0.보고서 내용보기 : view-content
+
+0.보고서 분석 : view-analys
+
+
+
+1.접수 : view-reception
+ 1-1.보고서 접수 : view-reception-content
+
+2.1차 위험도 평가 : view-firstrisk
+ 2-1.위험평가 : view-firstrisk-assessment
+ 2-2.SRC 리뷰 : view-firstrisk-review
+
+3.경감조치 : view-mitigation
+ 3-1.경감지정 : view-mitigation_assign
+ 3-2.경감계획 : view-mitigation_accept
+ 3-3.경감실행 : view-mitigation_result
+
+4.2차 위험도 평가 : view-secondrisk
+ 4-1.위험평가 : view-secondrisk_assessment
+ 4-2.SRC리뷰 : view-secondrisk_review
+
+5.종결 view-hazard_close
+ 5-1.종결처리 : view-hazard_close-content
