@@ -15,6 +15,7 @@
  -ReportViewContainer.tsx : 루트 리포트 상세 컴포넌트
   : 아코디언 영역이 해당 소스에 존재함
  -ReportViewTop.tsx : 상단 영역 컴포넌트
+
  -ReportViewContent.tsx : 내용보기
  -ReportViewAnalysContainer.tsx : 보고서분석 root container
 
@@ -30,7 +31,7 @@
  -ReportViewSecondRiskAssessment.tsx : 4단계 2차 위험도 평가
  -ReportViewSecondRiskReview.tsx : 4단계 2차 위험도 SRC리뷰
 
- -ReportViewHazardClose.tsx : 5단계 종결
+ -ㅌ.tsx : 5단계 종결
 
 
 
@@ -47,7 +48,7 @@
   2.analysExpaned
 
  -ReportViewContentStore.ts : 내용 보기
- -ReportAnalysContainerStore.ts : 보고서분석 root store
+ -ReportViewAnalysContainerStore.ts : 보고서분석 root store
 
  -ReportViewReceptionStore.ts : 보고서 접수 store
 
@@ -58,7 +59,7 @@
  -ReportViewMitigationAcceptStore.ts : 3단계 경감조치 > 경감계획 store
  -ReportViewMitigationResultStore.ts : 3단계 경감조치 > 경감실행 store
 
- -ReportViewSecondiskAssessmentStore.ts : 4단계 2차 위험도 평가 store
+ -ReportViewSecondRiskAssessmentStore.ts : 4단계 2차 위험도 평가 store
  -ReportViewSecondRiskReviewStore.ts : 4단계 2차 위험도 SRC리뷰 store
 
  -ReportViewHazardClose.ts : 5단계 종결

@@ -1085,6 +1085,100 @@ AS SELECT smh.id,
   WHERE smh.deleted_at IS NULL;
 
 
+-- public.v_report_search_receipted_or_voided source
+
+CREATE OR REPLACE VIEW public.v_report_search_receipted_or_voided
+AS SELECT sr.id,
+    sr.report_id,
+    sr.doc_no,
+    sr.report_type,
+    sr.emp_no AS reported_by,
+    fu1.name_kor AS reported_by_user_name_ko,
+    fu1.name_eng AS reported_by_user_name_en,
+    sr.subject,
+    sr.time_zone,
+    sr.phase,
+    sr.state_type AS state,
+    sr.created_at,
+    sr.updated_at,
+    sr.submitted_at,
+    sr.assessment_notes,
+    sr.occur_dttm,
+    sr.occur_timezone_cd,
+    sr.occur_place_nm,
+    sr.occur_airport_cd,
+    sr.description_txtcn,
+    sf.report_id AS flight_id,
+    sf.departure_dt,
+    sf.flight_no,
+    sf.reg_no,
+    sf.aircraft_type_cd,
+    sf.departure_airport_cd,
+    sf.arrival_airport_cd,
+    sf.divert_airport_cd,
+    sf.std_time,
+    sf.sta_time,
+    sf.atd_time,
+    sf.ata_time,
+    sf.delayed_min_co,
+    sf.supply_nm,
+    sf.checkin_nm,
+    kf.fleet_code,
+    st.step_code,
+    st.stepped_at,
+    re.id AS reception_id,
+    re.emp_no AS receipted_by,
+    fu2.name_kor AS receipted_by_user_name_ko,
+    fu2.name_eng AS receipted_by_user_name_en,
+    re.ata_adapter_type,
+    re.event_followup,
+    re.control_dept_type,
+    re.event_summary,
+    re.classification,
+    re.is_spi,
+    re.reg_dttm AS reception_created_at,
+    re.upd_dttm AS reception_updated_at,
+    re.timezone,
+    re.receipted_at,
+    re.is_receipted,
+    ev.event_id,
+    ev.event_nm AS event_name_ko,
+    ev.event_nm AS event_name_en,
+    cd.co_name_ko AS control_dept_name_ko,
+    cd.co_name_en AS control_dept_name_en,
+    ac.co_name_ko AS ata_chapter_name_ko,
+    ac.co_name_en AS ata_chapter_name_en,
+    cl.co_name_ko AS classification_name_ko,
+    cl.co_name_ko AS classification_name_en,
+        CASE
+            WHEN sr.state_type::text = 'closed'::text THEN st.stepped_at
+            ELSE NULL::timestamp without time zone
+        END AS closed_at,
+    vrdv.phase_name_ko,
+    vrdv.phase_name_en,
+    vrdv.status_ko,
+    vrdv.status_en,
+    sf.departure_loc_dttm,
+    st.reason
+   FROM v_report_group_all_list sr
+     LEFT JOIN tb_sys_user fu1 ON fu1.emp_no::text = sr.emp_no::text
+     LEFT JOIN tb_avn_report_flight sf ON sf.report_id = sr.id
+     LEFT JOIN ( SELECT tsc.code_id AS aircraft_type,
+            tsc.code_field1 AS fleet_code,
+            tsc.use_yn
+           FROM tb_sys_code tsc
+          WHERE tsc.code_grp_id::text = 'CODE_GRP_159'::text) kf ON kf.aircraft_type::text = sf.aircraft_type_cd::text AND kf.use_yn::text = 'Y'::text
+     LEFT JOIN LATERAL fn_report_last_step(sr.id) st(log_id, group_id, state, phase, step_code, stepped_by, reason, timezone, stepped_at) ON st.group_id = sr.id
+     LEFT JOIN tb_avn_sm_reception re ON re.group_id = sr.id
+     LEFT JOIN tb_sys_user fu2 ON fu2.emp_no::text = re.emp_no::text
+     LEFT JOIN tb_avn_sm_reception_ke_event sk ON sk.reception_id = re.id
+     LEFT JOIN tb_avn_event ev ON ev.event_id = sk.event_id AND ev.use_yn::text = 'Y'::text
+     LEFT JOIN fn_codes('CODE_GRP_082'::character varying) cd(gr_id, gr_name_ko, gr_name_en, co_id, co_value, co_name_ko, co_name_en, co_view_order, code_field1_value) ON cd.co_value::text = re.control_dept_type::text
+     LEFT JOIN fn_codes('CODE_GRP_076'::character varying) ac(gr_id, gr_name_ko, gr_name_en, co_id, co_value, co_name_ko, co_name_en, co_view_order, code_field1_value) ON ac.co_value::text = re.ata_adapter_type::text
+     LEFT JOIN fn_codes('CODE_GRP_089'::character varying) cl(gr_id, gr_name_ko, gr_name_en, co_id, co_value, co_name_ko, co_name_en, co_view_order, code_field1_value) ON cl.co_value::text = re.classification::text
+     LEFT JOIN v_report_display_viewlist vrdv ON vrdv.phase::text = sr.phase::text AND vrdv.step_code::text = st.step_code::text
+  WHERE ev.use_yn::text = 'Y'::text AND re.is_receipted::text = 'Y'::text AND re.receipted_at IS NOT NULL;
+
 -- public.v_viewlist_gsr source
 
 CREATE OR REPLACE VIEW public.v_viewlist_gsr
@@ -1281,101 +1375,6 @@ AS SELECT vr.id,
             tb_sys_code.code_name_kor AS resource_name
            FROM tb_sys_code
           WHERE tb_sys_code.code_grp_id::text = 'CODE_GRP_RESOURCE'::text) kr ON krfr.resource_id::text = kr.code_id::text;
-
-
--- public.v_report_search_receipted_or_voided source
-
-CREATE OR REPLACE VIEW public.v_report_search_receipted_or_voided
-AS SELECT sr.id,
-    sr.report_id,
-    sr.doc_no,
-    sr.report_type,
-    sr.emp_no AS reported_by,
-    fu1.name_kor AS reported_by_user_name_ko,
-    fu1.name_eng AS reported_by_user_name_en,
-    sr.subject,
-    sr.time_zone,
-    sr.phase,
-    sr.state_type AS state,
-    sr.created_at,
-    sr.updated_at,
-    sr.submitted_at,
-    sr.assessment_notes,
-    sr.occur_dttm,
-    sr.occur_timezone_cd,
-    sr.occur_place_nm,
-    sr.occur_airport_cd,
-    sr.description_txtcn,
-    sf.report_id AS flight_id,
-    sf.departure_dt,
-    sf.flight_no,
-    sf.reg_no,
-    sf.aircraft_type_cd,
-    sf.departure_airport_cd,
-    sf.arrival_airport_cd,
-    sf.divert_airport_cd,
-    sf.std_time,
-    sf.sta_time,
-    sf.atd_time,
-    sf.ata_time,
-    sf.delayed_min_co,
-    sf.supply_nm,
-    sf.checkin_nm,
-    kf.fleet_code,
-    st.step_code,
-    st.stepped_at,
-    re.id AS reception_id,
-    re.emp_no AS receipted_by,
-    fu2.name_kor AS receipted_by_user_name_ko,
-    fu2.name_eng AS receipted_by_user_name_en,
-    re.ata_adapter_type,
-    re.event_followup,
-    re.control_dept_type,
-    re.event_summary,
-    re.classification,
-    re.is_spi,
-    re.reg_dttm AS reception_created_at,
-    re.upd_dttm AS reception_updated_at,
-    re.timezone,
-    re.receipted_at,
-    re.is_receipted,
-    ev.event_id,
-    ev.event_nm AS event_name_ko,
-    ev.event_nm AS event_name_en,
-    cd.co_name_ko AS control_dept_name_ko,
-    cd.co_name_en AS control_dept_name_en,
-    ac.co_name_ko AS ata_chapter_name_ko,
-    ac.co_name_en AS ata_chapter_name_en,
-    cl.co_name_ko AS classification_name_ko,
-    cl.co_name_ko AS classification_name_en,
-        CASE
-            WHEN sr.state_type::text = 'closed'::text THEN st.stepped_at
-            ELSE NULL::timestamp without time zone
-        END AS closed_at,
-    vrdv.phase_name_ko,
-    vrdv.phase_name_en,
-    vrdv.status_ko,
-    vrdv.status_en,
-    sf.departure_loc_dttm,
-    st.reason
-   FROM v_report_group_all_list sr
-     LEFT JOIN tb_sys_user fu1 ON fu1.emp_no::text = sr.emp_no::text
-     LEFT JOIN tb_avn_report_flight sf ON sf.report_id = sr.id
-     LEFT JOIN ( SELECT tsc.code_id AS aircraft_type,
-            tsc.code_field1 AS fleet_code,
-            tsc.use_yn
-           FROM tb_sys_code tsc
-          WHERE tsc.code_grp_id::text = 'CODE_GRP_159'::text) kf ON kf.aircraft_type::text = sf.aircraft_type_cd::text AND kf.use_yn::text = 'Y'::text
-     LEFT JOIN LATERAL fn_report_last_step(sr.id) st(log_id, group_id, state, phase, step_code, stepped_by, reason, timezone, stepped_at) ON st.group_id = sr.id
-     LEFT JOIN tb_avn_sm_reception re ON re.group_id = sr.id
-     LEFT JOIN tb_sys_user fu2 ON fu2.emp_no::text = re.emp_no::text
-     LEFT JOIN tb_avn_sm_reception_ke_event sk ON sk.reception_id = re.id
-     LEFT JOIN tb_avn_event ev ON ev.event_id = sk.event_id AND ev.use_yn::text = 'Y'::text
-     LEFT JOIN fn_codes('CODE_GRP_082'::character varying) cd(gr_id, gr_name_ko, gr_name_en, co_id, co_value, co_name_ko, co_name_en, co_view_order, code_field1_value) ON cd.co_value::text = re.control_dept_type::text
-     LEFT JOIN fn_codes('CODE_GRP_076'::character varying) ac(gr_id, gr_name_ko, gr_name_en, co_id, co_value, co_name_ko, co_name_en, co_view_order, code_field1_value) ON ac.co_value::text = re.ata_adapter_type::text
-     LEFT JOIN fn_codes('CODE_GRP_089'::character varying) cl(gr_id, gr_name_ko, gr_name_en, co_id, co_value, co_name_ko, co_name_en, co_view_order, code_field1_value) ON cl.co_value::text = re.classification::text
-     LEFT JOIN v_report_display_viewlist vrdv ON vrdv.phase::text = sr.phase::text AND vrdv.step_code::text = st.step_code::text
-  WHERE ev.use_yn::text = 'Y'::text AND re.is_receipted::text = 'Y'::text AND re.receipted_at IS NOT NULL;
 
 
 -- public.v_viewlist_csr source

@@ -23,4 +23,5 @@
  4-2.SRC리뷰 : view-secondrisk_review
 
 5.종결 view-hazard_close
- 5-1.종결처리 : view-hazard_close-content
+ 5-1.종결처리 : view-hazard_close-process
+ 5-2.유효성평가 : view-hazard_close-validation
