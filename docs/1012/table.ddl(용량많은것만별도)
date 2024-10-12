@@ -1,0 +1,40 @@
+-- public.tb_avn_sm_approval_log definition
+
+-- Drop table
+
+-- DROP TABLE public.tb_avn_sm_approval_log;
+
+CREATE TABLE public.tb_avn_sm_approval_log (
+	id serial4 NOT NULL,
+	group_id int4 NOT NULL,
+	state_type varchar(50) NOT NULL,
+	phase varchar(50) NOT NULL,
+	step_code varchar(50) NOT NULL,
+	emp_no varchar(10) NOT NULL,
+	reason varchar(255) NULL,
+	timezone varchar(50) NOT NULL,
+	reg_dttm timestamp NOT NULL,
+	reg_user_id varchar(10) NOT NULL,
+	upd_dttm timestamp NOT NULL,
+	upd_user_id varchar(10) NOT NULL,
+	CONSTRAINT pk_tb_avn_sm_approval_log PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX tb_avn_sm_approval_log_id ON public.tb_avn_sm_approval_log USING btree (id);
+CREATE INDEX tb_avn_sm_approval_log_report_id_idx ON public.tb_avn_sm_approval_log USING btree (group_id);
+
+
+-- public.tb_avn_sm_report_fr_account definition
+
+-- Drop table
+
+-- DROP TABLE public.tb_avn_sm_report_fr_account;
+
+CREATE TABLE public.tb_avn_sm_report_fr_account (
+	group_id int4 NOT NULL,
+	account_acnt_id numeric(19) NOT NULL,
+	role_type varchar(50) NOT NULL,
+	acnt_type varchar(1) NULL,
+	CONSTRAINT uk_tb_avn_sm_report_fr_account UNIQUE (group_id, account_acnt_id, role_type)
+);
+CREATE INDEX ix_tb_avn_sm_report_fr_account_account_acnt_id ON public.tb_avn_sm_report_fr_account USING btree (account_acnt_id);
+CREATE INDEX ix_tb_avn_sm_report_fr_account_reports_id ON public.tb_avn_sm_report_fr_account USING btree (group_id);
